@@ -20,7 +20,11 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
+      # fetch-depth: 0 — versiooninumber tuleb commitide arvust, aga vaikimisi
+      # kloonib checkout ainult viimase commiti ja loendur jääks igavesti 1 peale.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
