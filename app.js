@@ -6,9 +6,14 @@ import {
   holidayOn as holidayIn, isSchoolDay as isSchoolDayIn, defaultDate as defaultDateIn,
   relativeLabel, isFreshChange,
 } from './schedule.js';
+import {
+  DEFAULT_WALK_MIN, searchStops, idsByName, matchRoutes, parseSiri,
+  nextDepartures, fromSchedule, minutesUntil, leaveInMinutes, scheduleKeyForDay,
+} from './bus.js';
 
 const LS_CLASS = 'tp.klass';
 const LS_PICKS = 'tp.picks';
+const LS_BUS = 'tp.bus';
 
 /* ---------- Väikesed abifunktsioonid ---------- */
 
@@ -65,6 +70,8 @@ const state = {
   holidays: null,
   klass: store.get(LS_CLASS, null),
   picks: store.get(LS_PICKS, {}),
+  bus: store.get(LS_BUS, null),
+  busData: null,      // {stops, paths} — laetakse alles seadistamisel
   selected: null,   // valitud kuupäev (Date)
   now: new Date(),
 };
@@ -98,27 +105,49 @@ function changeText(c) {
   return `Muudetud${c.wasSubject ? ` · oli ${c.wasSubject}` : ''}`;
 }
 
-/* ---------- Rühmavalikud ---------- */
+/* ---------- Rühma- ja osalusvalikud ---------- */
 
 /* Rühma tunnus peab sisaldama ka õpetajat: 7A esimeses tunnis on kaks eri
    lastekoori (Õmblus ja Urbel), mille ainekood on mõlemal 'LAK'. */
 const entryKey = (e) => `${e.subject}·${e.teacher}`;
 const choiceKey = (cell) => cell.map(entryKey).sort().join('|');
 
-function chooseGroup(klass, cell, entry) {
-  const picks = { ...picksFor(klass), [choiceKey(cell)]: entryKey(entry) };
+/* Ained, kus käiakse ainult siis, kui ise soovid. Tugiõpe on vajaduspõhine,
+   ülejäänud on huvitegevus. Kontrollitud, et 82 aine seas vale vastet ei teki. */
+const OPTIONAL = /koor|^(tugiõpe|ansambel|orkestriõpe)$/i;
+const SKIP = '__ei__';
+
+const isOptional = (e) => OPTIONAL.test(e.subjectFull || e.subject || '');
+const cellIsOptional = (cell) => cell.length > 0 && cell.every(isOptional);
+
+function setPick(klass, cell, value) {
+  const picks = { ...picksFor(klass), [choiceKey(cell)]: value };
   state.picks = { ...state.picks, [klass]: picks };
   store.set(LS_PICKS, state.picks);
   render();
 }
 
-/** -> { chosen, alts, undecided } */
+const chooseGroup = (klass, cell, entry) => setPick(klass, cell, entryKey(entry));
+const skipCell = (klass, cell) => setPick(klass, cell, SKIP);
+
+/** -> { chosen, alts, undecided, optional, skipped } */
 function splitCell(klass, cell) {
-  if (cell.length <= 1) return { chosen: cell[0] ?? null, alts: [], undecided: false };
+  const optional = cellIsOptional(cell);
   const pick = picksFor(klass)[choiceKey(cell)];
+
+  if (optional && pick === SKIP) {
+    return { chosen: null, alts: [], undecided: false, optional, skipped: true };
+  }
+  if (cell.length <= 1) {
+    // Üksik valikuline tund vajab samuti vastust: käid või ei käi
+    if (optional && !pick) {
+      return { chosen: null, alts: cell, undecided: true, optional, skipped: false };
+    }
+    return { chosen: cell[0] ?? null, alts: [], undecided: false, optional, skipped: false };
+  }
   const chosen = cell.find((e) => entryKey(e) === pick);
-  if (!chosen) return { chosen: null, alts: cell, undecided: true };
-  return { chosen, alts: cell.filter((e) => e !== chosen), undecided: false };
+  if (!chosen) return { chosen: null, alts: cell, undecided: true, optional, skipped: false };
+  return { chosen, alts: cell.filter((e) => e !== chosen), undecided: false, optional, skipped: false };
 }
 
 /* ---------- Renderdamine ---------- */
@@ -186,6 +215,36 @@ function altRow(entry, onPick) {
   return b;
 }
 
+function choiceBlock(klass, cell, period, change) {
+  const box = el('section', 'choice');
+  const optional = cellIsOptional(cell);
+  const many = cell.length > 1;
+
+  const head = el('div', 'choice-head');
+  head.append(
+    el('span', 'choice-icon', optional ? '🙋' : '👥'),
+    el('b', null, optional
+      ? (many ? 'Kas käid? Vali oma rühm' : 'Kas käid selles tunnis?')
+      : 'Vali oma rühm')
+  );
+  box.append(head);
+
+  for (const entry of cell) {
+    const card = lessonCard(entry, period, { change });
+    card.classList.add('is-choice');
+    card.addEventListener('click', () => chooseGroup(klass, cell, entry));
+    box.append(card);
+  }
+
+  if (optional) {
+    const no = el('button', 'choice-no', many ? 'Ma ei käi üheski' : 'Ma ei käi siin');
+    no.type = 'button';
+    no.addEventListener('click', () => skipCell(klass, cell));
+    box.append(no);
+  }
+  return box;
+}
+
 function renderLessons() {
   const main = $('#lessons');
   main.textContent = '';
@@ -227,6 +286,8 @@ function renderLessons() {
   }
 
   let any = false;
+  let lastEndMin = null;      // viimase NÄHTAVA tunni lõpp — bussikaardi jaoks
+
   data.periods.forEach((period, i) => {
     const cell = grid[i]?.[day] ?? [];
     const change = changeFor(klass, i, day);
@@ -239,18 +300,15 @@ function renderLessons() {
       }
       return;
     }
-    any = true;
 
-    const { chosen, alts, undecided } = splitCell(klass, cell);
+    const { chosen, alts, undecided, skipped } = splitCell(klass, cell);
+    if (skipped) return;        // laps ei käi siin — kaarti ei näidata
+
+    any = true;
+    lastEndMin = minutesOf(period.end);
 
     if (undecided) {
-      main.append(el('p', 'group-hint', 'Vali oma rühm:'));
-      for (const entry of cell) {
-        const card = lessonCard(entry, period, { change });
-        card.style.cursor = 'pointer';
-        card.addEventListener('click', () => chooseGroup(klass, cell, entry));
-        main.append(card);
-      }
+      main.append(choiceBlock(klass, cell, period, change));
       return;
     }
 
@@ -262,7 +320,10 @@ function renderLessons() {
     const e = el('div', 'empty');
     e.append(el('span', 'big', '🎈'), el('div', null, 'Sel päeval tunde pole.'));
     main.append(e);
+    return;
   }
+
+  renderBusCard(main, { day, endMin: lastEndMin, isToday });
 }
 
 function renderWeekstrip() {
@@ -304,6 +365,184 @@ function render() {
   renderHeader();
   renderWeekstrip();
   renderLessons();
+}
+
+/* ---------- Bussiajad ---------- */
+
+const SIRI = 'https://transport.tallinn.ee/siri-stop-departures.php?stopid=';
+const hhmm = (secs) => {
+  const s = ((secs % 86400) + 86400) % 86400;
+  return `${String(Math.floor(s / 3600)).padStart(2, '0')}:${String(Math.floor(s / 60) % 60).padStart(2, '0')}`;
+};
+
+let busToken = 0;   // väldib seda, et aeglane päring kirjutaks uuema vaate üle
+
+function renderBusCard(main, { day, endMin, isToday }) {
+  const cfg = state.bus;
+
+  if (!cfg?.fromIds?.length) {
+    const add = el('button', 'bus-add', '🚌  Lisa bussiajad');
+    add.type = 'button';
+    add.addEventListener('click', openBusSetup);
+    main.append(add);
+    return;
+  }
+
+  const card = el('section', 'bus-card');
+  const head = el('div', 'bus-head');
+  const title = el('b');
+  title.append(el('span', 'bus-emoji', '🚌'), el('span', null, cfg.toName));
+  head.append(
+    title,
+    el('span', null, endMin != null ? `Tunnid lõpevad ${hhmm(endMin * 60)}` : '')
+  );
+  card.append(head);
+
+  const list = el('div', 'bus-list');
+  list.append(el('div', 'bus-note', 'Laen bussiaegu…'));
+  card.append(list);
+  main.append(card);
+
+  fillBus(list, cfg, { day, endMin, isToday, token: ++busToken });
+}
+
+async function fillBus(list, cfg, { day, endMin, isToday, token }) {
+  const key = scheduleKeyForDay(day);
+
+  const scheduled = [];
+  await Promise.all(cfg.fromIds.map(async (id) => {
+    const s = await loadJSON(`bus/stop/${id}.json`, null);
+    if (s?.[key]) scheduled.push(...s[key].map(fromSchedule));
+  }));
+
+  // Reaalaeg ainult tänase kohta — homsel pole see midagi väärt
+  let live = [];
+  let serverNow = null;
+  if (isToday) {
+    const texts = await Promise.all(cfg.fromIds.map((id) =>
+      fetch(SIRI + id).then((r) => (r.ok ? r.text() : null)).catch(() => null)));
+    for (const t of texts) {
+      if (!t) continue;
+      const p = parseSiri(t);
+      if (p.now != null) serverNow = p.now;
+      live.push(...p.rows);
+    }
+  }
+
+  if (token !== busToken) return;   // vahepeal renderdati uuesti
+
+  const walk = cfg.walk ?? DEFAULT_WALK_MIN;
+  const endSecs = (endMin ?? 0) * 60;
+  const clock = serverNow ?? (state.now.getHours() * 3600 + state.now.getMinutes() * 60);
+  const afterSecs = (isToday ? Math.max(endSecs, clock) : endSecs) + walk * 60;
+
+  const next = nextDepartures({ scheduled, live, routes: cfg.routes, afterSecs, limit: 3 });
+
+  list.textContent = '';
+  if (!next.length) {
+    list.append(el('div', 'bus-note', scheduled.length
+      ? 'Rohkem busse täna ei lähe.'
+      : 'Bussiaegu ei õnnestunud laadida.'));
+    return;
+  }
+
+  next.forEach((r, i) => {
+    const row = el('div', 'bus-row');
+    row.append(el('span', 'bus-num', r.route));
+    const mid = el('div', 'bus-mid');
+    mid.append(el('b', null, r.head));
+    if (i === 0 && isToday) {
+      const leave = leaveInMinutes(r.secs, clock, walk);
+      mid.append(el('span', null, leave > 0
+        ? `Pead väljuma ${leave} min pärast`
+        : 'Mine kohe!'));
+    }
+    row.append(mid);
+    const right = el('div', 'bus-when');
+    right.append(el('b', null, hhmm(r.secs)));
+    if (isToday) right.append(el('span', null, `${Math.max(0, minutesUntil(r.secs, clock))} min`));
+    if (r.live) right.append(el('span', 'bus-live', '● reaalajas'));
+    row.append(right);
+    list.append(row);
+  });
+}
+
+/* ---------- Bussi seadistamine ---------- */
+
+async function openBusSetup() {
+  $('#sheet').close();
+  if (!state.busData) {
+    const [stops, paths] = await Promise.all([
+      loadJSON('bus/stops.json', null),
+      loadJSON('bus/routes.json', null),
+    ]);
+    if (!stops || !paths) {
+      alertBox('Bussiandmeid ei õnnestunud laadida. Proovi internetiühendusega.');
+      return;
+    }
+    state.busData = { stops, paths };
+  }
+
+  const draft = { from: state.bus?.fromName ?? '', to: state.bus?.toName ?? '', walk: state.bus?.walk ?? DEFAULT_WALK_MIN };
+  const dlg = $('#bus-setup');
+
+  const bind = (inputSel, listSel, field) => {
+    const input = $(inputSel);
+    const list = $(listSel);
+    input.value = draft[field];
+    const refresh = () => {
+      list.textContent = '';
+      if (input.value === draft[field]) return;   // juba valitud
+      for (const name of searchStops(state.busData.stops, input.value)) {
+        const b = el('button', 'stop-hit', name);
+        b.type = 'button';
+        b.addEventListener('click', () => { draft[field] = name; input.value = name; list.textContent = ''; });
+        list.append(b);
+      }
+    };
+    input.oninput = refresh;
+  };
+  bind('#bus-from', '#bus-from-hits', 'from');
+  bind('#bus-to', '#bus-to-hits', 'to');
+  $('#bus-walk').value = draft.walk;
+
+  $('#bus-save').onclick = () => {
+    const from = $('#bus-from').value.trim();
+    const to = $('#bus-to').value.trim();
+    const walk = Math.max(0, Math.min(60, Number($('#bus-walk').value) || 0));
+    const fromIdsAll = idsByName(state.busData.stops, from);
+    const toIds = idsByName(state.busData.stops, to);
+
+    if (!fromIdsAll.length || !toIds.length) {
+      $('#bus-error').textContent = 'Vali mõlemad peatused nimekirjast.';
+      return;
+    }
+    const { routes, fromIds } = matchRoutes(state.busData.paths, fromIdsAll, toIds);
+    if (!routes.length) {
+      $('#bus-error').textContent = `Otseliini ${from} → ${to} ei leidnud. Proovi mõnda lähedast peatust.`;
+      return;
+    }
+    state.bus = { fromName: from, toName: to, fromIds, routes, walk };
+    store.set(LS_BUS, state.bus);
+    dlg.close();
+    render();
+  };
+
+  $('#bus-remove').onclick = () => {
+    state.bus = null;
+    store.set(LS_BUS, null);
+    dlg.close();
+    render();
+  };
+
+  $('#bus-error').textContent = '';
+  $('#bus-remove').hidden = !state.bus;
+  dlg.showModal();
+}
+
+function alertBox(msg) {
+  const e = $('#bus-error');
+  if (e) e.textContent = msg;
 }
 
 /* ---------- Klassi valik ---------- */
@@ -409,6 +648,8 @@ async function init() {
   $('#class-btn').addEventListener('click', showPicker);
   $('#info-btn').addEventListener('click', openSheet);
   $('#close-sheet').addEventListener('click', () => $('#sheet').close());
+  $('#bus-setup-open').addEventListener('click', openBusSetup);
+  $('#bus-close').addEventListener('click', () => $('#bus-setup').close());
   $('#change-class').addEventListener('click', () => { $('#sheet').close(); showPicker(); });
   $('#reset-picks').addEventListener('click', () => {
     state.picks = { ...state.picks, [state.klass]: {} };

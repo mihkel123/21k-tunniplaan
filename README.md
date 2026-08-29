@@ -16,6 +16,10 @@ See rakendus on ainult **lugeja** — kooli leht jääb ainsaks tõeallikaks.
 - **Rühmavalik.** Kus käib mitu rühma korraga (vene/prantsuse/saksa keel, koorid),
   valib laps korra oma rühma ja see jääb meelde. Teised jäävad hallilt nähtavale.
 - **Koolivaheajad** ja riigipühad on arvestatud, sh 12. klassi erandid.
+- **Valikulised tunnid.** Tugiõpe, koorid, ansambel ja orkester on huvitegevus —
+  laps vastab korra „kas käid?" ja kui ei käi, siis kaarti enam ei näidata.
+- **Bussiajad päeva lõpus.** Laps valib kooli- ja kodupoolse peatuse; app näitab
+  kolme järgmist väljumist õiges suunas ja seda, millal peab välja minema.
 - **Töötab võrguta.** Teenusetöötleja hoiab kõik vajaliku vahemälus.
 
 ## Käivitamine kohapeal
@@ -28,8 +32,12 @@ Teenusetöötleja vajab päris aadressi — `file://` alt avades see ei tööta.
 
 ```sh
 npm run scrape    # laeb kooli lehelt värske plaani -> data.json + changes.json
-npm test          # päevaloogika ja muudatuste tuvastamise testid
+npm run bus       # laeb Tallinna GTFS-i -> bus/ (vajalik bussiaegade jaoks)
+npm test          # 54 testi: päevaloogika, muudatused, bussiloogika
 ```
+
+Esmakordsel kohapeal käivitamisel jooksuta `npm run bus`, muidu jäävad bussiajad
+laadimata (kaust `bus/` on `.gitignore`-is, sest need on tuletatud andmed).
 
 ## Telefoni kodukuvale (iOS)
 
@@ -65,6 +73,8 @@ Käsitsi saab käivitada GitHubis: Actions → *Uuenda tunniplaan* → *Run work
 | `changes.json` | Viimase 14 päeva muudatused. Genereeritud. |
 | `holidays.json` | Koolivaheajad ja riigipühad. **Käsitsi hooldatav** — vt allpool. |
 | `make-icons.py` | Genereerib ikoonid (`python3 make-icons.py`). |
+| `bus.js` | Suunatuvastus, reaalaja parsimine, väljumiste valik. |
+| `bus-data.mjs` | Laeb Tallinna GTFS-i ja kirjutab `bus/`. Genereeritud, ei commitita. |
 
 ## Koolivaheaegade uuendamine
 
@@ -83,6 +93,22 @@ suvevaheaeg ei kehti lõpuklassidele.
 - **Ei näita ärajäänud tunde.** Asendused ja tühistused käivad eKooli kaudu,
   mis nõuab sisselogimist. Vt allpool.
 - **Ei tea koolisiseseid erisusi** (üritused, ekskursioonid, aktused).
+
+### Bussiajad — kust andmed tulevad
+
+Graafik küpsetatakse ehitusel Tallinna GTFS-ist
+(`transport.tallinn.ee/data/gtfs.zip`), nii et ajad on olemas ka võrguta ja
+kõigil nädalapäevadel. Tänase päeva kohta pärib rakendus lisaks reaalaja
+(`siri-stop-departures.php`), mis näitab hilinemisi — see teenus lubab
+päringuid otse brauserist.
+
+Suund tuvastatakse liinide peatuste järjekorrast: näidatakse ainult neid liine,
+mis läbivad **esmalt** lähtepeatust ja **seejärel** sihtpeatust. Seetõttu ei pea
+laps teadma, kummal pool teed seista — õige platvorm leitakse ise.
+
+Teadaolev piirang: graafik ei arvesta erandpäevi (`calendar_dates.txt`), vaid
+kasutab tavalist E–N ja reede mustrit. Riigipühadel võib graafikuaeg eksida;
+tänase päeva reaalaeg on siiski õige.
 
 ### eKool ja ärajäänud tunnid
 

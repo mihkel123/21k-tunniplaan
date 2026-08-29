@@ -1,11 +1,11 @@
 /* Offline-tugi. Rakenduse failid vahemälust, andmed võrgust (vahemälu varuks). */
 
-const VERSION = 'v1';
+const VERSION = 'v2';
 const SHELL = `tp-shell-${VERSION}`;
 const DATA = `tp-data-${VERSION}`;
 
 const SHELL_FILES = [
-  '.', 'index.html', 'styles.css', 'app.js', 'schedule.js', 'manifest.webmanifest',
+  '.', 'index.html', 'styles.css', 'app.js', 'schedule.js', 'bus.js', 'manifest.webmanifest',
   'icons/apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/favicon-32.png',
 ];
 const DATA_FILES = ['data.json', 'changes.json', 'holidays.json'];
@@ -52,6 +52,8 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
+  // Bussigraafikud (/bus/) satuvad siia samuti: vahemälust kohe, taustal uuenda.
+  // Reaalajapäring läheb teise päritolu pihta ja on juba ülal välja filtreeritud.
   // Rakenduse failid: vahemälust kohe, taustal uuenda.
   e.respondWith((async () => {
     const hit = await caches.match(request);

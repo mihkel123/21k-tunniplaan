@@ -58,8 +58,43 @@
     <dl id="sheet-info" class="info"></dl>
     <div class="sheet-actions">
       <button id="change-class" class="btn" type="button">Vaheta klassi</button>
+      <button id="bus-setup-open" class="btn btn-quiet" type="button">🚌 Bussiajad</button>
       <button id="reset-picks" class="btn btn-quiet" type="button">Lähtesta rühmavalikud</button>
       <button id="close-sheet" class="btn btn-quiet" type="button">Sulge</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Bussiaegade seadistamine -->
+<dialog id="bus-setup" class="sheet">
+  <div class="sheet-inner">
+    <h2>Bussiajad</h2>
+    <p class="sheet-lead">Vali, kust sa pärast tunde bussile lähed ja kuhu sõidad.
+      Õige peatuse pool leiame ise.</p>
+
+    <label class="field">
+      <span>Kust lähed (kooli juurest)</span>
+      <input id="bus-from" type="search" placeholder="nt Viru" autocomplete="off" enterkeyhint="search">
+      <div id="bus-from-hits" class="stop-hits"></div>
+    </label>
+
+    <label class="field">
+      <span>Kuhu sõidad (kodu juurde)</span>
+      <input id="bus-to" type="search" placeholder="nt Balti jaam" autocomplete="off" enterkeyhint="search">
+      <div id="bus-to-hits" class="stop-hits"></div>
+    </label>
+
+    <label class="field">
+      <span>Jalutusaeg peatusesse (min)</span>
+      <input id="bus-walk" type="number" min="0" max="60" step="1" inputmode="numeric">
+    </label>
+
+    <p id="bus-error" class="field-error"></p>
+
+    <div class="sheet-actions">
+      <button id="bus-save" class="btn" type="button">Salvesta</button>
+      <button id="bus-remove" class="btn btn-quiet" type="button">Eemalda bussiajad</button>
+      <button id="bus-close" class="btn btn-quiet" type="button">Sulge</button>
     </div>
   </div>
 </dialog>

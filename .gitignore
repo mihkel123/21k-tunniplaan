@@ -2,3 +2,6 @@
 node_modules/
 _site/
 *.log
+
+# Tuletatud bussiandmed — tekivad iga deploy'ga (vt bus-data.mjs)
+bus/
