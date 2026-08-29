@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="et">
+<head>
+<meta charset="utf-8">
+<title>Tunniplaan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Tallinna 21. Kooli tunniplaan telefonis.">
+
+<!-- Kodukuvale lisamine (iOS) -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tunniplaan">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#2563eb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Klassi valik (esimesel avamisel) -->
+<section id="picker" class="picker" hidden>
+  <div class="picker-head">
+    <h1>Vali oma klass</h1>
+    <p>Valik jääb meelde. Saad seda hiljem muuta.</p>
+  </div>
+  <div id="picker-grid" class="picker-grid"></div>
+</section>
+
+<!-- Põhivaade -->
+<div id="app" hidden>
+  <header class="top">
+    <div class="top-row">
+      <button id="class-btn" class="class-chip" type="button" aria-label="Vaheta klassi"></button>
+      <button id="info-btn" class="icon-btn" type="button" aria-label="Info ja seaded">☰</button>
+    </div>
+    <div class="day-head">
+      <h1 id="day-title"></h1>
+      <span id="day-badge" class="badge" hidden></span>
+    </div>
+    <nav id="weekstrip" class="weekstrip" aria-label="Nädalapäevad"></nav>
+  </header>
+
+  <main id="lessons" class="lessons"></main>
+
+  <footer class="foot">
+    <span id="source-note"></span>
+  </footer>
+</div>
+
+<!-- Seaded -->
+<dialog id="sheet" class="sheet">
+  <div class="sheet-inner">
+    <h2>Info</h2>
+    <dl id="sheet-info" class="info"></dl>
+    <div class="sheet-actions">
+      <button id="change-class" class="btn" type="button">Vaheta klassi</button>
+      <button id="reset-picks" class="btn btn-quiet" type="button">Lähtesta rühmavalikud</button>
+      <button id="close-sheet" class="btn btn-quiet" type="button">Sulge</button>
+    </div>
+  </div>
+</dialog>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

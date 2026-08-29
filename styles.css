@@ -1,0 +1,369 @@
+/* Tunniplaan — telefonile, hele ja tume teema */
+
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --ink: #16202e;
+  --ink-soft: #5b6b80;
+  --ink-faint: #8895a7;
+  --line: #e3e8f0;
+  --brand: #2563eb;
+  --brand-ink: #ffffff;
+  --accent: #f59e0b;
+  --now: #16a34a;
+  --shadow: 0 1px 2px rgba(16, 32, 60, .06), 0 6px 16px rgba(16, 32, 60, .06);
+  --r: 18px;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1220;
+    --card: #151d2c;
+    --ink: #eaf0f8;
+    --ink-soft: #9fb0c6;
+    --ink-faint: #718095;
+    --line: #24304a;
+    --brand: #3b82f6;
+    --accent: #fbbf24;
+    --now: #34d399;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 6px 18px rgba(0, 0, 0, .35);
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+body { padding-bottom: calc(var(--safe-b) + 8px); }
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+[hidden] { display: none !important; }
+
+/* ---------- Klassi valik ---------- */
+
+.picker {
+  padding: calc(var(--safe-t) + 28px) 18px 32px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.picker-head h1 { margin: 0 0 6px; font-size: 26px; letter-spacing: -.02em; }
+.picker-head p { margin: 0 0 22px; color: var(--ink-soft); }
+
+.picker-grid { display: grid; gap: 18px; }
+.grade-row h2 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--ink-faint);
+}
+.grade-row .row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.class-btn {
+  min-width: 62px;
+  min-height: 50px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  font-weight: 650;
+  font-size: 17px;
+  box-shadow: var(--shadow);
+  transition: transform .08s ease;
+}
+.class-btn:active { transform: scale(.95); }
+.class-btn[aria-pressed="true"] {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--brand-ink);
+}
+
+/* ---------- Päis ---------- */
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: calc(var(--safe-t) + 10px) 16px 0;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.top-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+
+.class-chip {
+  border: 0;
+  background: var(--brand);
+  color: var(--brand-ink);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  min-height: 36px;
+}
+.class-chip:active { opacity: .8; }
+
+.icon-btn {
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.day-head { display: flex; align-items: baseline; gap: 10px; margin: 12px 0 10px; }
+.day-head h1 { margin: 0; font-size: 27px; letter-spacing: -.02em; }
+
+.badge {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--brand) 14%, transparent);
+  color: var(--brand);
+}
+
+/* ---------- Nädalariba ---------- */
+
+.weekstrip { display: flex; gap: 6px; padding-bottom: 10px; }
+
+.wd {
+  flex: 1;
+  position: relative;
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 13px;
+  padding: 7px 0 8px;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+.wd b { font-size: 15px; font-weight: 700; }
+.wd span { font-size: 11px; color: var(--ink-faint); }
+.wd[aria-pressed="true"] {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--brand-ink);
+}
+.wd[aria-pressed="true"] span { color: color-mix(in srgb, var(--brand-ink) 78%, transparent); }
+.wd.is-off { opacity: .45; }
+.wd .dot {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---------- Tunnid ---------- */
+
+.lessons { padding: 14px 16px 8px; display: grid; gap: 10px; max-width: 640px; margin: 0 auto; }
+
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 12px;
+  align-items: start;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 13px 14px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: var(--stripe, var(--line));
+}
+
+.when { text-align: center; padding-left: 4px; }
+.when b { display: block; font-size: 19px; font-weight: 750; line-height: 1.1; }
+.when span { display: block; font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+
+.what { min-width: 0; }
+.subject { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 680; letter-spacing: -.01em; }
+.subject .emoji { font-size: 19px; line-height: 1; }
+.meta { margin-top: 3px; color: var(--ink-soft); font-size: 14px; }
+.room {
+  display: inline-block;
+  margin-top: 7px;
+  padding: 3px 9px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+/* Praegu käiv / järgmine tund */
+.card.is-now { border-color: var(--now); box-shadow: 0 0 0 2px color-mix(in srgb, var(--now) 35%, transparent), var(--shadow); }
+.card.is-next { border-color: color-mix(in srgb, var(--brand) 45%, var(--line)); }
+
+.pill {
+  position: absolute;
+  top: 11px;
+  right: 12px;
+  font-size: 11px;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.pill.now { background: var(--now); color: #fff; }
+.pill.next { background: color-mix(in srgb, var(--brand) 14%, transparent); color: var(--brand); }
+
+/* Muudatused */
+.card.is-changed { border-color: var(--accent); }
+.changed {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--accent) 72%, var(--ink));
+}
+
+/* Paralleelrühmad */
+.group-hint {
+  margin: 2px 0 -2px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding: 0 2px;
+}
+.alt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 9px 12px;
+  color: var(--ink-soft);
+  min-height: 44px;
+}
+.alt:active { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.alt .swap { margin-left: auto; font-size: 12px; color: var(--ink-faint); }
+
+/* Bännerid ja tühi olek */
+.banner {
+  border-radius: var(--r);
+  padding: 14px 16px;
+  font-size: 15px;
+  border: 1px solid;
+}
+.banner.holiday {
+  background: color-mix(in srgb, var(--now) 12%, var(--card));
+  border-color: color-mix(in srgb, var(--now) 35%, transparent);
+}
+.banner.notice {
+  background: color-mix(in srgb, var(--accent) 12%, var(--card));
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.banner b { display: block; margin-bottom: 2px; }
+
+.empty { text-align: center; padding: 44px 20px; color: var(--ink-soft); }
+.empty .big { font-size: 40px; display: block; margin-bottom: 10px; }
+
+.foot {
+  padding: 14px 18px calc(var(--safe-b) + 16px);
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-faint);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ---------- Infoleht ---------- */
+
+.sheet {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  width: 100%;
+  max-width: 520px;
+  margin: auto auto 0;
+}
+.sheet::backdrop { background: rgba(6, 12, 24, .5); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); }
+.sheet-inner {
+  background: var(--card);
+  border-radius: 22px 22px 0 0;
+  padding: 20px 20px calc(var(--safe-b) + 20px);
+}
+.sheet h2 { margin: 0 0 14px; font-size: 20px; }
+
+.info { margin: 0 0 18px; display: grid; gap: 9px; }
+.info div { display: flex; justify-content: space-between; gap: 14px; font-size: 14px; }
+.info dt { color: var(--ink-soft); flex: none; }
+.info dd { margin: 0; text-align: right; }
+
+.sheet-actions { display: grid; gap: 8px; }
+.btn {
+  border: 1px solid var(--brand);
+  background: var(--brand);
+  color: var(--brand-ink);
+  border-radius: 14px;
+  padding: 13px;
+  font-weight: 650;
+  min-height: 48px;
+}
+.btn-quiet { background: transparent; color: var(--ink); border-color: var(--line); }
+
+@media (min-width: 560px) {
+  .top { padding-left: max(16px, calc((100% - 640px) / 2)); padding-right: max(16px, calc((100% - 640px) / 2)); }
+}
+
+/* Alternatiivse rühma rida: aine + õpetaja üksteise all */
+.alt-label { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.alt-label b { font-weight: 620; color: var(--ink-soft); }
+.alt-label span { font-size: 12px; color: var(--ink-faint); }
+
+/* Kuupäev, kui päev pole täna ega homme */
+.badge.is-date { background: color-mix(in srgb, var(--ink) 8%, transparent); color: var(--ink-soft); }
+
+/* Kadunud tund: näidatakse kahvatuna, et muudatus oleks näha */
+.card.is-ghost { background: color-mix(in srgb, var(--card) 70%, var(--bg)); box-shadow: none; }
+.card.is-ghost .subject { color: var(--ink-soft); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.card.is-ghost .subject .emoji { text-decoration: none; }
+
+/* Valitud päev peab jääma loetavaks ka siis, kui see on vaba päev */
+.wd.is-off[aria-pressed="true"] {
+  opacity: 1;
+  background: color-mix(in srgb, var(--brand) 55%, var(--bg));
+  border-color: transparent;
+}

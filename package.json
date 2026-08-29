@@ -1,0 +1,12 @@
+{
+  "name": "tunniplaan",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Tallinna 21. Kooli tunniplaan telefonis (PWA).",
+  "scripts": {
+    "scrape": "node scrape.mjs",
+    "test": "node test-schedule.mjs && node test-diff.mjs",
+    "serve": "python3 -m http.server 8765"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "_comment": "Koolivaheajad ja riigipühad. KÄSITSI HOOLDATAV — vaheajad kinnitab haridus- ja teadusminister määrusega umbes iga 3 aasta tagant. Kontrolli allikast ja uuenda siis.",
+  "source": "https://www.riigiteataja.ee/akt/119032025005",
+  "verifiedAgainst": "https://www.hm.ee/uudised/haridus-ja-teadusministeerium-kohendab-20252026-ja-20262027-oppeaasta-talve-ja",
+  "checkedOn": "2026-08-29",
+  "schoolYears": [
+    {
+      "year": "2026/2027",
+      "start": "2026-09-01",
+      "end": "2027-06-08",
+      "breaks": [
+        { "name": "Sügisvaheaeg",  "from": "2026-10-26", "to": "2026-11-01" },
+        { "name": "Jõuluvaheaeg",  "from": "2026-12-21", "to": "2027-01-03" },
+        { "name": "Talvevaheaeg",  "from": "2027-02-22", "to": "2027-02-28" },
+        { "name": "Kevadvaheaeg",  "from": "2027-04-12", "to": "2027-04-18", "exceptGrades": [12] },
+        { "name": "Suvevaheaeg",   "from": "2027-06-09", "to": "2027-08-31", "exceptGrades": [9, 12] }
+      ]
+    }
+  ],
+  "publicHolidays": [
+    { "name": "Suur reede", "date": "2027-03-26" },
+    { "name": "Kevadpüha",  "date": "2027-05-01" }
+  ]
+}
