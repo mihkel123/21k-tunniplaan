@@ -331,6 +331,17 @@ async function main() {
   }
   await writeFile(CHANGES, JSON.stringify(ledger, null, 2) + '\n', 'utf8');
 
+  // Kui sisuliselt midagi ei muutunud, hoia vana ajatempel alles. Muidu erineks
+  // fail iga kraapimisega ainult 'scrapedAt' poolest ja workflow teeks iga öö
+  // tühja commiti.
+  if (previousData) {
+    const same = (a, b) => JSON.stringify({ ...a, scrapedAt: 0 }) === JSON.stringify({ ...b, scrapedAt: 0 });
+    if (same(payload, previousData)) {
+      payload.scrapedAt = previousData.scrapedAt;
+      console.log('Sisu ei muutunud — ajatemplit ei uuendata.');
+    }
+  }
+
   await writeFile(OUT, JSON.stringify(payload), 'utf8');
   const lessons = sorted.reduce(
     (n, k) => n + data[k].grid.flat(2).length, 0);
