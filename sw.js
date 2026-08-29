@@ -1,6 +1,10 @@
 /* Offline-tugi. Rakenduse failid vahemälust, andmed võrgust (vahemälu varuks). */
 
-const VERSION = 'v4';
+// Töövoog asendab selle väljalaske numbriga. Kohapeal jääb 'dev'.
+// Number muutub iga commitiga, seega uus väljalase kustutab vana vahemälu
+// ja kest (app.js, styles.css) jõuab telefoni kohale — muidu võib
+// teenusetöötleja vana versiooni edasi serveerida.
+const VERSION = 'dev';
 const SHELL = `tp-shell-${VERSION}`;
 const DATA = `tp-data-${VERSION}`;
 

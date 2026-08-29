@@ -208,6 +208,13 @@ süstimine jaluses ja kontroll, et kõik viidatud failid on saidil olemas.
 Töövoog vajab kahte repo saladust: `CLOUDFLARE_API_TOKEN` (õigusega
 *Cloudflare Pages: Edit*) ja `CLOUDFLARE_ACCOUNT_ID`.
 
+**Versioon** on kujul `1.0.N`, kus N on commitide arv — see kasvab täpselt siis,
+kui midagi muutub, ja seda ei pea käsitsi meeles pidama. Töövoog kirjutab sama
+numbri kahte kohta: jalusesse (näed telefonist, mis versioon käib) ja
+`sw.js`-i vahemälu nimesse. Viimane on oluline: uus number kustutab vana
+vahemälu, muidu serveerib teenusetöötleja vana `app.js`-i edasi ja parandused
+ei jõua telefoni. Kohapeal jääb versiooniks `arendus` ja `dev`.
+
 Aadressi vahetamine lähtestab salvestatud seaded — klass, rühmavalikud,
 bussisuunad ja `tp.installSeen` (kas avakuvale lisamise juhendit on näidatud)
 on `localStorage`-is, mis on seotud päritoluga.
