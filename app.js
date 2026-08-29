@@ -17,6 +17,7 @@ const LS_CLASS = 'tp.klass';
 const LS_PICKS = 'tp.picks';
 const LS_BUS = 'tp.bus';
 const LS_BUS_SHUT = 'tp.busShut';
+const LS_INSTALL = 'tp.installSeen';
 
 /* ---------- Väikesed abifunktsioonid ---------- */
 
@@ -807,9 +808,71 @@ function showPicker() {
 }
 
 function showApp() {
+  // Laps jõudis klassi valida enne kui juhend ilmus — ärme hüppa plaani peale.
+  clearTimeout(installTimer);
   $('#picker').hidden = true;
   $('#app').hidden = false;
   render();
+}
+
+/* ---------- Avakuvale lisamine ---------- */
+
+// Brauser pakub seda ainult siis, kui rakendus pole veel paigaldatud ja
+// tingimused on täidetud. iOS ei saada seda kunagi.
+let installPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();          // ära lase brauseril oma riba näidata
+  installPrompt = e;
+});
+
+/** Kas rakendus juba käib avakuvalt? Siis pole juhendil mõtet. */
+const isInstalled = () =>
+  window.matchMedia?.('(display-mode: standalone)').matches || navigator.standalone === true;
+
+/**
+ * Juhend seadme järgi. iOS-il pole paigaldamiseks mingit API-t, ainus tee on
+ * näidata, kus Jaga-nupp asub; Androidil on see brauseri menüüs.
+ */
+function installSteps() {
+  const ua = navigator.userAgent;
+  if (/iphone|ipad|ipod/i.test(ua)) {
+    return ['Vajuta all ekraani servas Jaga-nuppu ⬆️',
+            'Keri alla ja vali „Lisa avakuvale”',
+            'Vajuta „Lisa”'];
+  }
+  if (/android/i.test(ua)) {
+    return ['Vajuta paremal üleval kolme punkti ⋮',
+            'Vali „Lisa avakuvale” või „Installi rakendus”'];
+  }
+  return ['Aadressiribal on paigaldamise ikoon',
+          'Või vali brauseri menüüst „Installi”'];
+}
+
+function openInstall() {
+  $('#sheet').close();
+  const list = $('#install-steps');
+  list.textContent = '';
+  for (const step of installSteps()) list.append(el('li', null, step));
+
+  // Päris paigaldusnupp ainult siis, kui brauser selle lubas.
+  $('#install-now').hidden = !installPrompt;
+  $('#install').showModal();
+}
+
+/** Esimesel avamisel klassivaliku peale, väikese viivitusega. */
+let installTimer = null;
+function maybeOfferInstall() {
+  if (store.get(LS_INSTALL, false) || isInstalled()) return;
+  installTimer = setTimeout(() => {
+    // Kui laps jõudis vahepeal klassi valida, ei hüppa juhend enam ette.
+    // showApp tühistab taimeri, aga see kontroll hoiab ka siis, kui
+    // tühistus mingil põhjusel maha magatakse.
+    if ($('#picker').hidden) return;
+    // Lipp läheb püsti näitamisel: juhend on ühekordne, ka siis kui laps
+    // selle kohe kinni paneb.
+    store.set(LS_INSTALL, true);
+    openInstall();
+  }, 2000);
 }
 
 /* ---------- Infoleht ---------- */
@@ -867,6 +930,7 @@ async function init() {
   if (!state.klass || !data.classes[state.klass]) {
     state.klass = null;
     showPicker();
+    maybeOfferInstall();
   } else {
     state.selected = defaultDate(new Date(), state.klass);
     showApp();
@@ -875,6 +939,21 @@ async function init() {
   $('#class-btn').addEventListener('click', showPicker);
   $('#info-btn').addEventListener('click', openSheet);
   $('#close-sheet').addEventListener('click', () => $('#sheet').close());
+  $('#install-open').addEventListener('click', openInstall);
+  $('#install-close').addEventListener('click', () => $('#install').close());
+  $('#install-now').addEventListener('click', async () => {
+    if (!installPrompt) return;
+    $('#install').close();
+    installPrompt.prompt();
+    installPrompt = null;      // ühekordne, brauser ei luba sama sündmust uuesti
+  });
+
+  // Taustale vajutamine sulgeb paneeli — telefonis kõige loomulikum liigutus.
+  // Sisu peale klõps läheb lapselemendile, seega siia jõuab ainult taust.
+  for (const id of ['#sheet', '#bus-setup', '#install']) {
+    const dlg = $(id);
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  }
   $('#bus-setup-open').addEventListener('click', openBusSetup);
   $('#bus-close').addEventListener('click', () => $('#bus-setup').close());
   $('#change-class').addEventListener('click', () => { $('#sheet').close(); showPicker(); });

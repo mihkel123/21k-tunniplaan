@@ -29,6 +29,9 @@ See rakendus on ainult **lugeja** — kooli leht jääb ainsaks tõeallikaks.
 - **Riigipühad, tähtpäevad ja nimepäevad** päise all: 1. september on
   tarkusepäev, 14. märts emakeelepäev, ja iga päev näitab ka selle päeva
   nimepäevi.
+- **Juhend avakuvale lisamiseks.** Esimesel avamisel näidatakse korra, kuidas
+  rakendus kodukuvale panna — iPhone'il ja Androidil eri juhend, sest nupud on
+  eri kohtades. Hiljem leiab selle menüüst.
 - **Töötab võrguta.** Teenusetöötleja hoiab kõik vajaliku vahemälus.
 
 ## Käivitamine kohapeal
@@ -182,6 +185,9 @@ suur reede, nelipühad ja vastlapäev; emadepäev ja isadepäev on kuu n-s
 pühapäev. Test kontrollib, et `notabledays.json` ja `holidays.json` ütlevad
 suure reede kohta sama kuupäeva — kaks sõltumatut allikat peavad klappima.
 
+Nimed on failis suure algustähega, sest need lähevad otse ekraanile sildina.
+Test kontrollib seda, nagu ka seda, et emoji ei puudu.
+
 Igal tähtpäeval on `notabledays.json`-is oma emoji — tarkusepäeval koolikott,
 mardipäeval mask, jõuludel kuusk. Emoji on andmetes, mitte koodis, seega selle
 muutmiseks ei pea koodi puutuma. Test kontrollib, et ükski kirje ei jääks
@@ -202,8 +208,9 @@ süstimine jaluses ja kontroll, et kõik viidatud failid on saidil olemas.
 Töövoog vajab kahte repo saladust: `CLOUDFLARE_API_TOKEN` (õigusega
 *Cloudflare Pages: Edit*) ja `CLOUDFLARE_ACCOUNT_ID`.
 
-Aadressi vahetamine lähtestab salvestatud seaded — klass, rühmavalikud ja
-bussisuunad on `localStorage`-is, mis on seotud päritoluga.
+Aadressi vahetamine lähtestab salvestatud seaded — klass, rühmavalikud,
+bussisuunad ja `tp.installSeen` (kas avakuvale lisamise juhendit on näidatud)
+on `localStorage`-is, mis on seotud päritoluga.
 
 ### eKool ja ärajäänud tunnid
 

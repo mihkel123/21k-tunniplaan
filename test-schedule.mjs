@@ -93,17 +93,17 @@ t('kuu n-s nädalapäev', () => {
 });
 
 t('kindla kuupäevaga tähtpäevad', () => {
-  assert.deepEqual(notableOn(notable, on('2026-02-24')).map((x) => x.name), ['iseseisvuspäev']);
-  assert.deepEqual(notableOn(notable, on('2026-03-14')).map((x) => x.name), ['emakeelepäev']);
-  assert.deepEqual(notableOn(notable, on('2026-11-10')).map((x) => x.name), ['mardipäev']);
+  assert.deepEqual(notableOn(notable, on('2026-02-24')).map((x) => x.name), ['Iseseisvuspäev']);
+  assert.deepEqual(notableOn(notable, on('2026-03-14')).map((x) => x.name), ['Emakeelepäev']);
+  assert.deepEqual(notableOn(notable, on('2026-11-10')).map((x) => x.name), ['Mardipäev']);
   assert.deepEqual(notableOn(notable, on('2026-08-28')), [], 'tavaline päev on tühi');
 });
 
 t('liikuvad tähtpäevad tulevad ülestõusmispühadest', () => {
   // 2027: ülestõusmispühad 28.03, seega suur reede 26.03 ja vastlapäev 09.02.
-  assert.deepEqual(notableOn(notable, on('2027-03-26')).map((x) => x.name), ['suur reede']);
-  assert.deepEqual(notableOn(notable, on('2027-03-28')).map((x) => x.name), ['ülestõusmispühad']);
-  assert.deepEqual(notableOn(notable, on('2027-02-09')).map((x) => x.name), ['vastlapäev']);
+  assert.deepEqual(notableOn(notable, on('2027-03-26')).map((x) => x.name), ['Suur reede']);
+  assert.deepEqual(notableOn(notable, on('2027-03-28')).map((x) => x.name), ['Ülestõusmispühad']);
+  assert.deepEqual(notableOn(notable, on('2027-02-09')).map((x) => x.name), ['Vastlapäev']);
 });
 
 t('suur reede klapib holidays.json-iga', () => {
@@ -120,6 +120,13 @@ t('igal tähtpäeval on emoji', () => {
   // kukub tagasi üldisele ikoonile, ilma et keegi seda märkaks.
   const ilma = notable.days.filter((d) => !d.emoji).map((d) => d.name);
   assert.deepEqual(ilma, [], `emojita: ${ilma.join(', ')}`);
+});
+
+t('tähtpäeva nimi algab suurtähega', () => {
+  // Nimi läheb ekraanile sellisena, nagu ta failis on — väiketähega kirje
+  // paistaks reas kohe välja.
+  const vale = notable.days.filter((d) => d.name[0] !== d.name[0].toUpperCase());
+  assert.deepEqual(vale.map((d) => d.name), []);
 });
 
 t('nimepäevad on igal päeval, ka liigaastal', () => {

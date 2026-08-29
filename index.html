@@ -66,8 +66,27 @@
     <div class="sheet-actions">
       <button id="change-class" class="btn" type="button">Vaheta klassi</button>
       <button id="bus-setup-open" class="btn btn-quiet" type="button">🚌 Bussiajad</button>
+      <button id="install-open" class="btn btn-quiet" type="button">📱 Lisa rakendus avaekraanile</button>
       <button id="reset-picks" class="btn btn-quiet" type="button">Lähtesta rühmavalikud</button>
       <button id="close-sheet" class="btn btn-quiet" type="button">Sulge</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Avakuvale lisamise juhend -->
+<dialog id="install" class="sheet">
+  <div class="sheet-inner">
+    <h2>Lisa rakendus avaekraanile</h2>
+    <p class="sheet-lead">Nii avaneb tunniplaan kodukuvalt nagu päris rakendus ja
+      töötab ka ilma internetita.</p>
+
+    <!-- Sammud täidab app.js seadme järgi: iPhone'il ja Androidil on nupud eri kohas. -->
+    <ol id="install-steps" class="steps"></ol>
+
+    <div class="sheet-actions">
+      <!-- Androidil saab brauser pakkuda päris paigaldust; mujal jääb peitu. -->
+      <button id="install-now" class="btn" type="button" hidden>Paigalda</button>
+      <button id="install-close" class="btn btn-quiet" type="button">Sain aru</button>
     </div>
   </div>
 </dialog>

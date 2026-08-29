@@ -537,6 +537,11 @@ button {
 }
 .stop-hit:active { background: color-mix(in srgb, var(--brand) 12%, var(--card)); }
 
+/* Avakuvale lisamise sammud */
+.steps { margin: 0 0 16px; padding-left: 22px; display: grid; gap: 8px; }
+.steps li { font-size: 15px; line-height: 1.4; }
+.steps li::marker { color: var(--ink-faint); font-weight: 650; }
+
 .field-error { color: #dc2626; font-size: 13px; margin: 0 0 12px; min-height: 1em; }
 @media (prefers-color-scheme: dark) { .field-error { color: #f87171; } }
 .bus-head b { display: flex; align-items: center; gap: 8px; }
