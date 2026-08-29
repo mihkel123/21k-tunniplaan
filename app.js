@@ -836,9 +836,16 @@ const isInstalled = () =>
 function installSteps() {
   const ua = navigator.userAgent;
   if (/iphone|ipad|ipod/i.test(ua)) {
-    return ['Vajuta all ekraani servas Jaga-nuppu ⬆️',
-            'Keri alla ja vali „Lisa avakuvale”',
-            'Vajuta „Lisa”'];
+    // iOS-il on nupud brauseriti eri kohas. Chrome ja teised iOS-i brauserid
+    // annavad end kasutajaagendis teada (CriOS, FxiOS, EdgiOS); ülejäänu on
+    // Safari, kus jagamine käib ••• menüü alt.
+    if (/crios|fxios|edgios/i.test(ua)) {
+      return ['Vajuta üleval jagamisikooni ⬆️',
+              'Vali „Lisa avakuvale”'];
+    }
+    return ['Vajuta ••• nuppu',
+            'Vali „Jaga”',
+            'Vali „Lisa avakuvale”'];
   }
   if (/android/i.test(ua)) {
     return ['Vajuta paremal üleval kolme punkti ⋮',
