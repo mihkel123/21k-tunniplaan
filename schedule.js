@@ -63,3 +63,66 @@ export function isFreshChange(entry, now) {
   if (!entry?.since) return false;
   return (startOfDay(now) - new Date(entry.since)) / 86400000 <= CHANGE_TTL_DAYS;
 }
+
+/* ---------- Riigipühad, tähtpäevad ja nimepäevad ---------- */
+
+/**
+ * Ülestõusmispühade 1. püha (gregoriuse anonüümne algoritm).
+ * Sellest tuletatakse suur reede, nelipühad ja vastlapäev.
+ */
+export function easterSunday(year) {
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(year, month - 1, day);
+}
+
+/** Kuu n-s nädalapäev, nt mai teine pühapäev (weekday 0 = pühapäev). */
+export function nthWeekday(year, month, weekday, n) {
+  const first = new Date(year, month - 1, 1);
+  const shift = (weekday - first.getDay() + 7) % 7;
+  return new Date(year, month - 1, 1 + shift + (n - 1) * 7);
+}
+
+const MD = (d) => `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+/**
+ * Sellele päevale langevad riigipühad ja tähtpäevad.
+ * Tagastab loendi, sest üks päev võib kanda mitut nime (23. juuni on
+ * võidupüha ja mõnel aastal ka nelipühad).
+ */
+export function notableOn(notable, date) {
+  if (!notable?.days?.length) return [];
+  const year = date.getFullYear();
+  const key = MD(date);
+  const easter = easterSunday(year);
+  const out = [];
+
+  for (const d of notable.days) {
+    if (d.date) {
+      if (d.date === key) out.push(d);
+    } else if (d.easter !== undefined) {
+      if (MD(addDays(easter, d.easter)) === key) out.push(d);
+    } else if (d.nth) {
+      const { month, weekday, n } = d.nth;
+      if (MD(nthWeekday(year, month, weekday, n)) === key) out.push(d);
+    }
+  }
+  return out;
+}
+
+/** Selle päeva nimepäevad. */
+export function namesOn(namedays, date) {
+  return namedays?.days?.[MD(date)] ?? [];
+}

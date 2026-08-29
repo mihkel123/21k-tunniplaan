@@ -25,6 +25,10 @@ See rakendus on ainult **lugeja** — kooli leht jääb ainsaks tõeallikaks.
   samamoodi kaetud.
 - **Mitu suunda korraga.** Suundi saab lisada nii palju kui vaja — igaüks saab
   oma kaardi. Hommikune suund ilmub esimese tunni ette, kojusõit päeva lõppu.
+  Kaardi saab kokku klappida ja see jääb nii, kuni ise uuesti avad.
+- **Riigipühad, tähtpäevad ja nimepäevad** päise all: 1. september on
+  tarkusepäev, 14. märts emakeelepäev, ja iga päev näitab ka selle päeva
+  nimepäevi.
 - **Töötab võrguta.** Teenusetöötleja hoiab kõik vajaliku vahemälus.
 
 ## Käivitamine kohapeal
@@ -38,7 +42,8 @@ Teenusetöötleja vajab päris aadressi — `file://` alt avades see ei tööta.
 ```sh
 npm run scrape    # laeb kooli lehelt värske plaani -> data.json + changes.json
 npm run bus       # laeb mõlemad GTFS-id -> bus/ (vajalik bussiaegade jaoks)
-npm test          # 69 testi: päevaloogika, muudatused, bussiloogika, voogude liitmine
+npm run nimepaevad # laeb nimepäevad -> namedays.json (harva; tulemus commititakse)
+npm test          # 77 testi: päevaloogika, muudatused, bussiloogika, voogude liitmine
 ```
 
 Esmakordsel kohapeal käivitamisel jooksuta `npm run bus`, muidu jäävad bussiajad
@@ -80,6 +85,8 @@ Käsitsi saab käivitada GitHubis: Actions → *Uuenda tunniplaan* → *Run work
 | `make-icons.py` | Genereerib ikoonid (`python3 make-icons.py`). |
 | `bus.js` | Suunatuvastus, sõiduaeg, reaalaja parsimine, hommikuste ja kojusõidu väljumiste valik. |
 | `bus-data.mjs` | Laeb linna- ja maakonnaliinide GTFS-id, liidab need ja kirjutab `bus/`. Genereeritud, ei commitita. |
+| `namedays.mjs` | Laeb nimepäevad Statistikaametist -> `namedays.json`. Käsitsi, mitte iga deploy'ga. |
+| `notabledays.json` | Riigipühad, riiklikud tähtpäevad, rahvakalender. Käsitsi hooldatav. |
 
 ## Koolivaheaegade uuendamine
 
@@ -162,6 +169,22 @@ Teadaolevad piirangud:
 - Mõned suured sõlmed on registris platvormide kaupa eraldi nimetatud
   („Balti jaam 3", „Estonia 2"). Neid ei liideta aluspeatusega, seega tuleb
   otsingus valida just see platvorm. Puudutab 11 peatust ja 0,2% väljumistest.
+
+### Tähtpäevad ja nimepäevad
+
+Päise all on kaks rida: riigipüha või tähtpäev, ja selle päeva nimepäevad.
+
+Riigipühad ja riiklikud tähtpäevad tulevad pühade ja tähtpäevade seadusest,
+rahvakalendri päevad (tarkusepäev, sõbrapäev, mardipäev, kadripäev jt)
+[rahvakalender.ee](https://rahvakalender.ee/) järgi. Liikuvad pühad
+arvutatakse: ülestõusmispühad gregoriuse algoritmiga, sellest tuletatakse
+suur reede, nelipühad ja vastlapäev; emadepäev ja isadepäev on kuu n-s
+pühapäev. Test kontrollib, et `notabledays.json` ja `holidays.json` ütlevad
+suure reede kohta sama kuupäeva — kaks sõltumatut allikat peavad klappima.
+
+Nimepäevad on [Statistikaameti kalendrist](https://www.stat.ee/nimed/NIMEPAEVAD),
+366 päeva ja 1567 nime. Neid ei laadita iga deploy'ga: nimepäevad ei muutu,
+seega `npm run nimepaevad` jooksutatakse käsitsi ja tulemus commititakse.
 
 ### eKool ja ärajäänud tunnid
 

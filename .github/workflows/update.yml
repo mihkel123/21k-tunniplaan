@@ -60,7 +60,8 @@ jobs:
         run: |
           mkdir -p _site/icons
           cp index.html styles.css app.js schedule.js bus.js sw.js \
-             manifest.webmanifest data.json changes.json holidays.json _site/
+             manifest.webmanifest data.json changes.json holidays.json \
+             notabledays.json namedays.json _site/
           cp icons/*.png _site/icons/
           cp -r bus _site/bus
           touch _site/.nojekyll

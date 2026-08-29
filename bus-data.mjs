@@ -145,18 +145,76 @@ const activeOn = (from, to, today) => !((from && from > today) || (to && to < to
  */
 const countyName = (name, area) => (area ? `${name} (${area})` : name);
 
+/** Ligikaudne vahemaa meetrites. Eesti laiuskraadil piisab sellest täiesti. */
+const metersBetween = (a, b) =>
+  Math.hypot((a[0] - b[0]) * 111000, (a[1] - b[1]) * 57000);
+
+// Sama nime kandvad peatused, mis on üksteisest lähemal kui see, on üks koht
+// (Muuga aedlinna kolm platvormi mahuvad 60 meetri sisse).
+const SAME_PLACE_M = 1000;
+
 /**
- * Peatuse lõplik nimi. Linnavõrgu nimi võidab: linnaliin käib ka üle valla
- * piiri — Tiskre, Harkujärve ja Hansunõmme on registris Harjumaa peatused,
- * aga lapse jaoks tavalised linnapeatused. Valla lisame ainult mujal.
+ * Rühmita sama nime kandvad peatused kohtadeks. Ühelülilise ahela järgi:
+ * kui A on B lähedal ja B on C lähedal, on kõik kolm sama koht.
  */
-const stopName = (tltName, name, area) => tltName || countyName(name, area);
+export function clusterByPlace(entries) {
+  const groups = [];
+  for (const e of entries) {
+    const hit = groups.find((g) => g.some((x) => metersBetween(x.at, e.at) <= SAME_PLACE_M));
+    if (hit) hit.push(e); else groups.push([e]);
+  }
+  // Ahel võib kaks rühma hiljem kokku tuua — liidame, kuni midagi ei muutu.
+  for (let merged = true; merged;) {
+    merged = false;
+    outer:
+    for (let i = 0; i < groups.length; i++) {
+      for (let j = i + 1; j < groups.length; j++) {
+        if (groups[i].some((a) => groups[j].some((b) => metersBetween(a.at, b.at) <= SAME_PLACE_M))) {
+          groups[i].push(...groups.splice(j, 1)[0]);
+          merged = true;
+          break outer;
+        }
+      }
+    }
+  }
+  return groups;
+}
+
+/**
+ * Lõplikud peatusenimed. Valla lisame ainult siis, kui sama nime kannab
+ * päriselt mitu eri kohta — muidu jääb nimi lühikeseks.
+ *
+ * Varem otsustas seda see, kas TLT peatust juhtub tundma, ja see lõhkus ühe
+ * füüsilise peatuse kaheks: Muuga aedlinna kahte platvormi teenindab linnabuss
+ * (jäid „Muuga aedlinn"), kolmandat ainult maakonnaliin (sai „(Maardu linn)"),
+ * ja idsByName ei leidnud neid enam koos.
+ */
+export function resolveNames(raw) {
+  const byName = new Map();
+  for (const [id, info] of raw) {
+    if (!byName.has(info.name)) byName.set(info.name, []);
+    byName.get(info.name).push({ id, ...info });
+  }
+
+  const out = new Map();
+  for (const [name, entries] of byName) {
+    const places = clusterByPlace(entries);
+    for (const place of places) {
+      // Üks koht selle nimega -> nimi on juba üheselt mõistetav.
+      // Mitu kohta -> Tallinna oma jääb lühikeseks, teised saavad valla.
+      const tallinn = place.some((e) => e.inTallinn);
+      const suffix = places.length > 1 && !tallinn;
+      for (const e of place) out.set(e.id, suffix ? countyName(name, e.area) : name);
+    }
+  }
+  return out;
+}
 
 /* ---------- Kogutav seis (mõlemad vood valavad siia) ---------- */
 
 const perStop = new Map();   // peatus -> {w:[], f:[]}
 const paths = {};            // "liin|suund" -> peatuste järjekord
-const names = new Map();     // peatus -> nimi
+const raw = new Map();       // peatus -> {nimi, asukoht, vald, kas Tallinnas}
 const coords = new Map();    // peatus -> [lat, lon]
 
 function addDeparture(stop, row, w, f) {
@@ -255,13 +313,14 @@ function harvestTallinn(zip, today) {
     addPath(info.num, info.head, rows.map((r) => r[1]), rows.map((r) => r[2] - rows[0][2]));
   }
 
-  // Nimed siit on kanoonilised — riiklik register lisab neile "(train station)".
+  // TLT nimed on kanoonilised — riiklik register lisab neile "(train station)".
   const stops = table(zip, 'stops.txt');
   for (const l of stops.rows) {
     const c = splitCsv(l);
     const id = c[stops.ix.stop_id];
-    names.set(id, clean(c[stops.ix.stop_name]));
-    coords.set(id, [+c[stops.ix.stop_lat], +c[stops.ix.stop_lon]]);
+    const at = [+c[stops.ix.stop_lat], +c[stops.ix.stop_lon]];
+    raw.set(id, { name: clean(c[stops.ix.stop_name]), at, area: '', inTallinn: false });
+    coords.set(id, at);
   }
   return { routeCount, tripCount: trips.size };
 }
@@ -285,20 +344,26 @@ function harvestCounty(zip, today) {
   // Peatused enne sõite: nende järgi otsustame, mis on "Tallinnas".
   const stops = table(zip, 'stops.txt');
   const inTallinn = new Set();
-  const county = new Map();   // peatus -> [nimi, vald, lat, lon]
   for (const l of stops.rows) {
     const c = splitCsv(l);
     const id = c[stops.ix.stop_id];
-    const name = clean(c[stops.ix.stop_name]);
-    const lat = +c[stops.ix.stop_lat];
-    const lon = +c[stops.ix.stop_lon];
-    if (c[stops.ix.authority] === TALLINN) {
-      inTallinn.add(id);
-      // Kui TLT voog seda peatust ei tundnud, võtame nime siit.
-      if (!names.has(id)) { names.set(id, name); coords.set(id, [lat, lon]); }
-      continue;
+    const at = [+c[stops.ix.stop_lat], +c[stops.ix.stop_lon]];
+    const tallinn = c[stops.ix.authority] === TALLINN;
+    if (tallinn) inTallinn.add(id);
+    const prev = raw.get(id);
+    if (prev) {
+      // TLT nimi jääb; siit võtame ainult valla ja Tallinna-kuuluvuse.
+      prev.area = c[stops.ix.stop_area];
+      prev.inTallinn = tallinn;
+    } else {
+      raw.set(id, {
+        name: clean(c[stops.ix.stop_name]),
+        at,
+        area: c[stops.ix.stop_area],
+        inTallinn: tallinn,
+      });
+      coords.set(id, at);
     }
-    county.set(id, [name, c[stops.ix.stop_area], lat, lon]);
   }
 
   const { routeCount, trips } = weekdayTrips(zip, today, (c, ix) =>
@@ -318,14 +383,7 @@ function harvestCounty(zip, today) {
     addPath(info.num, info.head, rows.map((r) => r[1]), rows.map((r) => r[2] - rows[0][2]));
   }
 
-  let named = 0;
-  for (const [id, [name, area, lat, lon]] of county) {
-    if (!perStop.has(id)) continue;
-    if (!names.has(id)) { coords.set(id, [lat, lon]); named++; }
-    names.set(id, stopName(names.get(id), name, area));
-  }
-
-  return { routeCount, keptRoutes: keep.size, tripCount: kept, countyStops: named };
+  return { routeCount, keptRoutes: keep.size, tripCount: kept };
 }
 
 /* ---------- Peamine ---------- */
@@ -350,7 +408,7 @@ async function main() {
 
   const cty = harvestCounty(await load(EE_GTFS), today);
   console.log(`  Harjumaa: ${cty.keptRoutes}/${cty.routeCount} liini puudutab Tallinna, ` +
-              `${cty.tripCount} sõitu, ${cty.countyStops} maakonnapeatust`);
+              `${cty.tripCount} sõitu`);
 
   // Kui voo kuju muutub, on kahjutum siin katkeda kui avaldada sait, kust
   // lapse buss on vaikselt kadunud — deploy jääb tegemata ja vana jääb püsti.
@@ -366,6 +424,8 @@ async function main() {
   }
 
   // --- Peatuste nimekiri ---
+  // Nimed alles siin: valla lisamiseks peab teadma kõiki sama nimega peatusi.
+  const names = resolveNames(new Map([...raw].filter(([id]) => perStop.has(id))));
   const stopList = [];
   for (const id of perStop.keys()) {
     const name = names.get(id);
@@ -398,7 +458,7 @@ async function main() {
   console.log(`-> ${OUT}`);
 }
 
-export { activeOn, clean, countyName, stopName, splitCsv, splitRow, linesOf, routesTouchingTallinn };
+export { activeOn, clean, countyName, splitCsv, splitRow, linesOf, routesTouchingTallinn };
 
 const runDirectly = process.argv[1] && import.meta.url === `file://${process.argv[1]}`;
 if (runDirectly) {

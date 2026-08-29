@@ -1,0 +1,51 @@
+{
+  "_comment": "Riigipühad, riiklikud tähtpäevad ja tuntumad rahvakalendri päevad. KÄSITSI HOOLDATAV — muutub harva, seaduse muutmisel. Liikuvad päevad arvutatakse schedule.js-is: 'easter' on nihe ülestõusmispühade 1. pühast, 'nth' on kuu n-s nädalapäev (weekday 0 = pühapäev).",
+  "sources": [
+    "https://www.riigiteataja.ee/akt/12803312",
+    "https://www.riigikantselei.ee/riiklikud-sumbolid-preemiad-ja-tahtpaevad/puhad-ja-tahtpaevad/riiklikud-tahtpaevad",
+    "https://rahvakalender.ee/"
+  ],
+  "checkedOn": "2026-08-29",
+  "days": [
+    { "name": "uusaasta", "kind": "riigipüha", "date": "01-01" },
+    { "name": "kolmekuningapäev", "kind": "tähtpäev", "date": "01-06" },
+    { "name": "Eesti kirjanduse päev", "kind": "tähtpäev", "date": "01-30" },
+    { "name": "Tartu rahu aastapäev", "kind": "tähtpäev", "date": "02-02" },
+    { "name": "iseseisvuspäev", "kind": "rahvuspüha", "date": "02-24" },
+    { "name": "emakeelepäev", "kind": "tähtpäev", "date": "03-14" },
+    { "name": "kevadpüha", "kind": "riigipüha", "date": "05-01" },
+    { "name": "lastekaitsepäev", "kind": "tähtpäev", "date": "06-01" },
+    { "name": "Eesti lipu päev", "kind": "tähtpäev", "date": "06-04" },
+    { "name": "leinapäev", "kind": "tähtpäev", "date": "06-14" },
+    { "name": "võidupüha", "kind": "riigipüha", "date": "06-23" },
+    { "name": "jaanipäev", "kind": "riigipüha", "date": "06-24" },
+    { "name": "taasiseseisvumispäev", "kind": "riigipüha", "date": "08-20" },
+    { "name": "kommunismi ja natsismi ohvrite mälestuspäev", "kind": "tähtpäev", "date": "08-23" },
+    { "name": "vastupanuvõitluse päev", "kind": "tähtpäev", "date": "09-22" },
+    { "name": "omavalitsuspäev", "kind": "tähtpäev", "date": "10-01" },
+    { "name": "hingedepäev", "kind": "tähtpäev", "date": "11-02" },
+    { "name": "sõbrapäev", "kind": "rahvakalender", "date": "02-14" },
+    { "name": "naistepäev", "kind": "rahvakalender", "date": "03-08" },
+    { "name": "aprillipäev ehk naljapäev", "kind": "rahvakalender", "date": "04-01" },
+    { "name": "jüripäev", "kind": "rahvakalender", "date": "04-23" },
+    { "name": "volbripäev", "kind": "rahvakalender", "date": "05-01" },
+    { "name": "tarkusepäev", "kind": "rahvakalender", "date": "09-01" },
+    { "name": "mihklipäev", "kind": "rahvakalender", "date": "09-29" },
+    { "name": "õpetajate päev", "kind": "rahvakalender", "date": "10-05" },
+    { "name": "mardipäev", "kind": "rahvakalender", "date": "11-10" },
+    { "name": "kadripäev", "kind": "rahvakalender", "date": "11-25" },
+    { "name": "jõululaupäev", "kind": "riigipüha", "date": "12-24" },
+    { "name": "esimene jõulupüha", "kind": "riigipüha", "date": "12-25" },
+    { "name": "teine jõulupüha", "kind": "riigipüha", "date": "12-26" },
+
+    { "name": "vastlapäev", "kind": "rahvakalender", "easter": -47 },
+    { "name": "suur reede", "kind": "riigipüha", "easter": -2 },
+    { "name": "ülestõusmispühad", "kind": "riigipüha", "easter": 0 },
+    { "name": "nelipühad", "kind": "riigipüha", "easter": 49 },
+
+    { "name": "emadepäev", "kind": "tähtpäev", "nth": { "month": 5, "weekday": 0, "n": 2 } },
+    { "name": "vanavanemate päev", "kind": "tähtpäev", "nth": { "month": 9, "weekday": 0, "n": 2 } },
+    { "name": "hõimupäev", "kind": "tähtpäev", "nth": { "month": 10, "weekday": 6, "n": 3 } },
+    { "name": "isadepäev", "kind": "tähtpäev", "nth": { "month": 11, "weekday": 0, "n": 2 } }
+  ]
+}

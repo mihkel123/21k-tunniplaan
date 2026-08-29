@@ -1,5 +1,5 @@
 // Päevaloogika testid: node test-schedule.mjs
-import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso } from './schedule.js';
+import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn } from './schedule.js';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
@@ -70,6 +70,55 @@ t('muudatus aegub 14 päevaga', () => {
 t('nädalapäeva indeks: E=0 … P=6', () => {
   assert.equal(weekdayIndex(at('2026-08-31T00:00')), 0);  // esmaspäev
   assert.equal(weekdayIndex(at('2026-09-06T00:00')), 6);  // pühapäev
+});
+
+/* ---------- Riigipühad, tähtpäevad, nimepäevad ---------- */
+
+const notable = JSON.parse(readFileSync(new URL('./notabledays.json', import.meta.url), 'utf8'));
+const namedays = JSON.parse(readFileSync(new URL('./namedays.json', import.meta.url), 'utf8'));
+const on = (s) => new Date(`${s}T12:00:00`);
+
+t('ülestõusmispühad arvutatakse õigesti', () => {
+  // Teadaolevad kuupäevad; 2027 langeb kokku holidays.json-i suure reedega.
+  assert.equal(iso(easterSunday(2024)), '2024-03-31');
+  assert.equal(iso(easterSunday(2025)), '2025-04-20');
+  assert.equal(iso(easterSunday(2026)), '2026-04-05');
+  assert.equal(iso(easterSunday(2027)), '2027-03-28');
+});
+
+t('kuu n-s nädalapäev', () => {
+  assert.equal(iso(nthWeekday(2026, 5, 0, 2)), '2026-05-10', 'emadepäev');
+  assert.equal(iso(nthWeekday(2026, 11, 0, 2)), '2026-11-08', 'isadepäev');
+  assert.equal(iso(nthWeekday(2026, 10, 6, 3)), '2026-10-17', 'hõimupäev');
+});
+
+t('kindla kuupäevaga tähtpäevad', () => {
+  assert.deepEqual(notableOn(notable, on('2026-02-24')).map((x) => x.name), ['iseseisvuspäev']);
+  assert.deepEqual(notableOn(notable, on('2026-03-14')).map((x) => x.name), ['emakeelepäev']);
+  assert.deepEqual(notableOn(notable, on('2026-11-10')).map((x) => x.name), ['mardipäev']);
+  assert.deepEqual(notableOn(notable, on('2026-08-28')), [], 'tavaline päev on tühi');
+});
+
+t('liikuvad tähtpäevad tulevad ülestõusmispühadest', () => {
+  // 2027: ülestõusmispühad 28.03, seega suur reede 26.03 ja vastlapäev 09.02.
+  assert.deepEqual(notableOn(notable, on('2027-03-26')).map((x) => x.name), ['suur reede']);
+  assert.deepEqual(notableOn(notable, on('2027-03-28')).map((x) => x.name), ['ülestõusmispühad']);
+  assert.deepEqual(notableOn(notable, on('2027-02-09')).map((x) => x.name), ['vastlapäev']);
+});
+
+t('suur reede klapib holidays.json-iga', () => {
+  // Kaks sõltumatut allikat peavad sama päeva ütlema, muidu on üks vale.
+  for (const h of H.publicHolidays ?? []) {
+    const names = notableOn(notable, on(h.date)).map((x) => x.name.toLowerCase());
+    assert.ok(names.includes(h.name.toLowerCase()),
+      `${h.date} ${h.name} peaks olema ka notabledays.json-is, sain: ${names}`);
+  }
+});
+
+t('nimepäevad on igal päeval, ka liigaastal', () => {
+  assert.deepEqual(namesOn(namedays, on('2026-08-29')), ['Õnne', 'Õnnela']);
+  assert.ok(namesOn(namedays, on('2024-02-29')).length, 'liigapäeval on samuti nimed');
+  assert.equal(Object.keys(namedays.days).length, 366);
 });
 
 console.log(`\n${pass} testi läbitud.`);

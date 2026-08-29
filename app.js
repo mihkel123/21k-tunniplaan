@@ -5,6 +5,7 @@ import {
   iso, addDays, startOfDay, weekdayIndex, minutesOf, gradeOf, formatDay,
   holidayOn as holidayIn, isSchoolDay as isSchoolDayIn, defaultDate as defaultDateIn,
   relativeLabel, isFreshChange,
+  notableOn as notableIn, namesOn as namesIn,
 } from './schedule.js';
 import {
   DEFAULT_WALK_MIN, TO_SCHOOL, TO_HOME, searchStops, idsByName, matchRoutes, parseSiri,
@@ -15,6 +16,7 @@ import {
 const LS_CLASS = 'tp.klass';
 const LS_PICKS = 'tp.picks';
 const LS_BUS = 'tp.bus';
+const LS_BUS_SHUT = 'tp.busShut';
 
 /* ---------- Väikesed abifunktsioonid ---------- */
 
@@ -72,6 +74,7 @@ const state = {
   klass: store.get(LS_CLASS, null),
   picks: store.get(LS_PICKS, {}),
   buses: busList(store.get(LS_BUS, null)),
+  busShut: store.get(LS_BUS_SHUT, []) ?? [],
   busData: null,      // {stops, paths} — laetakse alles seadistamisel
   selected: null,   // valitud kuupäev (Date)
   now: new Date(),
@@ -368,10 +371,40 @@ function renderHeader() {
   badge.classList.toggle('is-date', !label);
   badge.hidden = false;
 
+  renderDayNotes(selected);
+
   const d = state.data;
   $('#source-note').textContent = d.sourceUpdated
     ? `Kooli tunniplaan uuendatud ${d.sourceUpdated}`
     : 'Allikas: 21k.ee';
+}
+
+/** Riigipüha või tähtpäev ja nimepäevad päise all. */
+function renderDayNotes(selected) {
+  const box = $('#day-notes');
+  box.textContent = '';
+
+  const notable = notableIn(state.notable, selected);
+  if (notable.length) {
+    const row = el('div', 'day-note');
+    // Riigipüha ja rahvuspüha on töövabad — need väärivad rohkem rõhku
+    // kui emakeelepäev või mardipäev.
+    const big = notable.some((n) => n.kind === 'riigipüha' || n.kind === 'rahvuspüha');
+    row.classList.toggle('is-holiday', big);
+    row.append(el('span', 'day-note-icon', big ? '🇪🇪' : '📌'));
+    row.append(el('span', null, notable.map((n) => n.name).join(', ')));
+    box.append(row);
+  }
+
+  const names = namesIn(state.namedays, selected);
+  if (names.length) {
+    const row = el('div', 'day-note');
+    row.append(el('span', 'day-note-icon', '🎂'));
+    row.append(el('span', null, `Nimepäev: ${names.join(', ')}`));
+    box.append(row);
+  }
+
+  box.hidden = !box.childNodes.length;
 }
 
 function render() {
@@ -403,6 +436,16 @@ function busList(saved) {
 }
 
 const saveBuses = () => store.set(LS_BUS, state.buses);
+
+/** Kokkuklapitud kaardid. Võti on suund ise, et see püsiks ka ümberjärjestamisel. */
+const cardKey = (b) => `${b.dir}|${b.fromName}|${b.toName}`;
+const isCollapsed = (b) => state.busShut.includes(cardKey(b));
+function toggleCollapsed(b) {
+  const k = cardKey(b);
+  const i = state.busShut.indexOf(k);
+  if (i === -1) state.busShut.push(k); else state.busShut.splice(i, 1);
+  store.set(LS_BUS_SHUT, state.busShut);
+}
 
 /**
  * Enne sõiduaegade lisandumist salvestatud suundadel pole `rides` kirjas,
@@ -449,20 +492,32 @@ function renderBusCards(main, { dir, day, anchorMin, isToday, gen }) {
 
   for (const cfg of list) {
     const card = el('section', 'bus-card');
-    const head = el('div', 'bus-head');
+    const shut = isCollapsed(cfg);
+
+    // Päis on nupp: pealkiri jääb alati näha, nii et suletud kaardi puhul
+    // on ikka teada, mis seal all on.
+    const head = el('button', 'bus-head');
+    head.type = 'button';
+    head.setAttribute('aria-expanded', String(!shut));
     const title = el('b');
-    title.append(el('span', 'bus-emoji', '🚌'), el('span', null, busLabel(cfg)));
+    title.append(
+      el('span', 'bus-caret', shut ? '▸' : '▾'),
+      el('span', 'bus-emoji', '🚌'),
+      el('span', null, busLabel(cfg)),
+    );
     const when = anchorMin == null ? ''
       : dir === TO_SCHOOL ? `Tunnid algavad ${hhmm(anchorMin * 60)}`
       : `Tunnid lõpevad ${hhmm(anchorMin * 60)}`;
     head.append(title, el('span', null, when));
+    head.addEventListener('click', () => { toggleCollapsed(cfg); render(); });
     card.append(head);
+    main.append(card);
+
+    if (shut) continue;
 
     const list_ = el('div', 'bus-list');
     list_.append(el('div', 'bus-note', 'Laen bussiaegu…'));
     card.append(list_);
-    main.append(card);
-
     fillBus(list_, cfg, { day, anchorMin, isToday, gen });
   }
 }
@@ -514,7 +569,7 @@ async function fillBus(list, cfg, { day, anchorMin, isToday, gen }) {
       note = 'Hommikused bussid on läinud.';
     } else {
       rows = r.rows;
-      markRow = r.last;
+      markRow = r.best;
       if (!r.madeIt) note = 'Ükski buss ei jõua enne tundide algust.';
     }
   } else {
@@ -539,7 +594,7 @@ async function fillBus(list, cfg, { day, anchorMin, isToday, gen }) {
     const mid = el('div', 'bus-mid');
     mid.append(el('b', null, r.head));
     if (r === markRow) {
-      if (cfg.dir === TO_SCHOOL) mid.append(el('span', 'bus-last', 'viimane, mis jõuab'));
+      if (cfg.dir === TO_SCHOOL) mid.append(el('span', 'bus-last', 'jõuab kõige täpsemalt'));
       if (isToday) {
         const leave = leaveInMinutes(r.secs, clock, walk);
         mid.append(el('span', null, leave > 0 ? `Pead väljuma ${leave} min pärast` : 'Mine kohe!'));
@@ -579,7 +634,6 @@ async function openBusSetup() {
   $('#sheet').close();
   const dlg = $('#bus-setup');
   const form = $('#bus-form');
-  const reverse = $('#bus-reverse');
 
   if (!(await loadBusData())) {
     const box = $('#bus-routes');
@@ -587,7 +641,6 @@ async function openBusSetup() {
     box.append(el('p', 'field-error', 'Bussiandmeid ei õnnestunud laadida. Proovi internetiühendusega.'));
     $('#bus-add-open').hidden = true;
     form.hidden = true;
-    reverse.hidden = true;
     dlg.showModal();
     return;
   }
@@ -660,7 +713,6 @@ async function openBusSetup() {
     $('#bus-to-hits').textContent = '';
     $('#bus-error').textContent = '';
     setDir(pre.dir ?? TO_HOME);
-    reverse.hidden = true;
     form.hidden = false;
     $('#bus-add-open').hidden = true;
   }
@@ -669,24 +721,6 @@ async function openBusSetup() {
     form.hidden = true;
     $('#bus-add-open').hidden = false;
     $('#bus-error').textContent = '';
-  }
-
-  // Enamik lapsi sõidab sama paari mõlemat pidi — pakume teist suunda ise.
-  function offerReverse(saved) {
-    const mirror = {
-      dir: saved.dir === TO_SCHOOL ? TO_HOME : TO_SCHOOL,
-      fromName: saved.toName,
-      toName: saved.fromName,
-    };
-    if (state.buses.some((b) => sameRoute(b, mirror))) return;
-    $('#bus-reverse-text').textContent =
-      `Salvestatud. Lisan ka ${mirror.fromName} → ${mirror.toName} (${DIR_LABEL[mirror.dir]})?`;
-    $('#bus-reverse-add').onclick = () => {
-      reverse.hidden = true;
-      openForm({ dir: mirror.dir, from: mirror.fromName, to: mirror.toName, walk: saved.walk });
-    };
-    $('#bus-reverse-skip').onclick = () => { reverse.hidden = true; };
-    reverse.hidden = false;
   }
 
   $('#bus-dir').onclick = (e) => {
@@ -723,12 +757,10 @@ async function openBusSetup() {
     closeForm();
     renderRoutes();
     render();
-    offerReverse(cfg);
   };
 
   renderRoutes();
   closeForm();
-  reverse.hidden = true;
   if (!state.buses.length) openForm();
   dlg.showModal();
 }
@@ -810,10 +842,12 @@ async function loadJSON(path, fallback) {
 }
 
 async function init() {
-  const [data, changes, holidays] = await Promise.all([
+  const [data, changes, holidays, notable, namedays] = await Promise.all([
     loadJSON('data.json', null),
     loadJSON('changes.json', {}),
     loadJSON('holidays.json', null),
+    loadJSON('notabledays.json', null),
+    loadJSON('namedays.json', null),
   ]);
 
   if (!data) {
@@ -824,6 +858,8 @@ async function init() {
   state.data = data;
   state.changes = changes || {};
   state.holidays = holidays;
+  state.notable = notable;
+  state.namedays = namedays;
 
   if (!state.klass || !data.classes[state.klass]) {
     state.klass = null;

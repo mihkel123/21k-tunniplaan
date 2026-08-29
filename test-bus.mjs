@@ -2,8 +2,8 @@
 import { matchRoutes, parseSiri, nextDepartures, morningDepartures, arrivalOf,
          fromSchedule, searchStops, idsByName,
          minutesUntil, leaveInMinutes, scheduleKeyForDay } from './bus.js';
-import { activeOn, clean, countyName, stopName, splitRow, linesOf,
-         routesTouchingTallinn } from './bus-data.mjs';
+import { activeOn, clean, countyName, splitRow, linesOf,
+         routesTouchingTallinn, resolveNames, clusterByPlace } from './bus-data.mjs';
 import assert from 'node:assert/strict';
 
 let pass = 0;
@@ -152,31 +152,32 @@ const morn = {
     .map((secs) => fromSchedule(['1', 'Vana-Pääsküla', secs])),
 };
 
-t('hommik: näitab viimased bussid, millega veel jõuab', () => {
+t('hommik: kõige täpsemalt jõudev on ees', () => {
   // Sõit 20 min, tund algab 8:00, jalutus 5 min -> kohal olla 7:55.
-  // 7:35 väljub liiga hilja (kohal 7:55 ei ole enam varuga), 7:30 on viimane.
+  // 7:30 jõuab 7:50 ehk kõige napimalt; 7:45 jõuaks alles 8:05 ja jääb välja.
   const r = morningDepartures({ ...morn, afterSecs: 0, arriveBy: H(7, 55), limit: 3 });
-  assert.deepEqual(r.rows.map((x) => x.secs), [H(7, 0), H(7, 15), H(7, 30)]);
-  assert.equal(r.last.secs, H(7, 30), 'viimane, mis jõuab');
+  assert.deepEqual(r.rows.map((x) => x.secs), [H(7, 30), H(7, 15), H(7, 0)],
+    'täpseim ees, siis varasemad');
+  assert.equal(r.best.secs, H(7, 30));
   assert.ok(r.madeIt);
 });
 
-t('hommik: liiga vara väljunud bussid jäävad välja', () => {
+t('hommik: liiga varajased kukuvad nimekirjast välja', () => {
   const r = morningDepartures({ ...morn, afterSecs: 0, arriveBy: H(7, 55), limit: 2 });
-  assert.deepEqual(r.rows.map((x) => x.secs), [H(7, 15), H(7, 30)],
-    'kolmest sobivast näitame kaks viimast, mitte kahte esimest');
+  assert.deepEqual(r.rows.map((x) => x.secs), [H(7, 30), H(7, 15)],
+    'kaks täpseimat, mitte kaks varaseimat');
 });
 
 t('hommik: juba läinud bussi ei pakuta', () => {
   // Kell on 7:05 ja peatusesse on 5 min jalutust — 7:00 buss on läinud.
   const r = morningDepartures({ ...morn, afterSecs: H(7, 10), arriveBy: H(7, 55), limit: 3 });
-  assert.deepEqual(r.rows.map((x) => x.secs), [H(7, 15), H(7, 30)]);
+  assert.deepEqual(r.rows.map((x) => x.secs), [H(7, 30), H(7, 15)]);
 });
 
 t('hommik: kui ükski ei jõua, ütleme seda ausalt', () => {
   const r = morningDepartures({ ...morn, afterSecs: 0, arriveBy: H(6, 0), limit: 3 });
   assert.equal(r.madeIt, false);
-  assert.equal(r.last, null);
+  assert.equal(r.best, null);
   assert.ok(r.rows.length, 'järgmised näitame ikka ära');
 });
 
@@ -214,15 +215,41 @@ t('maakonnapeatus saab valla nime juurde', () => {
   assert.equal(countyName('Kadaka', ''), 'Kadaka', 'vallata jääb nimi endiseks');
 });
 
-t('linnavõrgu nimi võidab valla sufiksi', () => {
-  // Tiskre ja Hansunõmme on registris Harjumaa peatused, aga TLT bussid
-  // peatuvad seal. Kui need ümber nimetada, ei leia laps enam oma
-  // salvestatud peatust — ja lapse jaoks on need lihtsalt linnapeatused.
-  assert.equal(stopName('Hansunõmme', 'Hansunõmme', 'Viimsi vald'), 'Hansunõmme');
-  assert.equal(stopName('Tiskre', 'Tiskre', 'Harku vald'), 'Tiskre');
-  // Puhtalt maakonna peatus saab valla juurde.
-  assert.equal(stopName(undefined, 'Jüri', 'Rae vald'), 'Jüri (Rae vald)');
-  assert.equal(stopName('', 'Kadaka', 'Harku vald'), 'Kadaka (Harku vald)');
+t('sama koha platvormid jäävad üheks peatuseks', () => {
+  // Muuga aedlinna kolm platvormi mahuvad 60 meetri sisse. Varem otsustas
+  // valla lisamise see, kas TLT peatust juhtub tundma, ja üks füüsiline
+  // peatus lagunes kaheks eri nimeks — laps kaotas pooled liinid.
+  const at = (lat, lon) => [lat, lon];
+  const names = resolveNames(new Map([
+    ['2871', { name: 'Muuga aedlinn', at: at(59.47699, 24.92068), area: 'Maardu linn', inTallinn: false }],
+    ['2872', { name: 'Muuga aedlinn', at: at(59.47678, 24.91898), area: 'Maardu linn', inTallinn: false }],
+    ['10522', { name: 'Muuga aedlinn', at: at(59.47753, 24.92075), area: 'Maardu linn', inTallinn: false }],
+  ]));
+  assert.deepEqual([...new Set(names.values())], ['Muuga aedlinn'],
+    'kõik kolm platvormi kannavad sama nime');
+});
+
+t('päriselt eri kohad saavad valla juurde', () => {
+  // Kadaka on nii Tallinnas kui Harku vallas — need on eri kohad ja
+  // ilma vallata satuks laps valele bussile.
+  const names = resolveNames(new Map([
+    ['927', { name: 'Kadaka', at: [59.4150, 24.6600], area: 'Kristiine', inTallinn: true }],
+    ['902', { name: 'Kadaka', at: [59.4152, 24.6605], area: 'Kristiine', inTallinn: true }],
+    ['132209', { name: 'Kadaka', at: [59.3900, 24.5500], area: 'Harku vald', inTallinn: false }],
+  ]));
+  assert.equal(names.get('927'), 'Kadaka', 'Tallinna oma jääb lühikeseks');
+  assert.equal(names.get('902'), 'Kadaka');
+  assert.equal(names.get('132209'), 'Kadaka (Harku vald)');
+});
+
+t('kohtade rühmitamine: lähedased kokku, kauged lahku', () => {
+  const g = clusterByPlace([
+    { id: 'a', at: [59.4770, 24.9207] },
+    { id: 'b', at: [59.4768, 24.9190] },
+    { id: 'c', at: [59.3900, 24.5500] },
+  ]);
+  assert.equal(g.length, 2);
+  assert.equal(g.find((x) => x.length === 2).map((x) => x.id).sort().join(','), 'a,b');
 });
 
 t('küla-sisene liin jäetakse välja, Tallinna puudutav mitte', () => {

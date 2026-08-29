@@ -137,6 +137,20 @@ button {
 .day-head { display: flex; align-items: baseline; gap: 10px; margin: 12px 0 10px; }
 .day-head h1 { margin: 0; font-size: 27px; letter-spacing: -.02em; }
 
+/* Riigipüha / tähtpäev ja nimepäevad päise all */
+.day-notes { display: grid; gap: 3px; margin: -4px 0 10px; }
+.day-note {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  min-width: 0;
+}
+.day-note span:last-child { overflow-wrap: anywhere; }
+.day-note-icon { font-size: 12px; line-height: 1; flex: none; }
+.day-note.is-holiday { color: var(--ink); font-weight: 620; }
+
 .badge {
   font-size: 12px;
   font-weight: 700;
@@ -337,6 +351,15 @@ button {
 .info dd { margin: 0; text-align: right; }
 
 .sheet-actions { display: grid; gap: 8px; }
+/* Bussilehel on mitu plokki üksteise all — üks vaherütm kõigile, ka vormi
+   sees. Vahe tuleb ainult ülemisest veerisest, muidu liituvad kaks veerist. */
+#bus-setup .sheet-inner > * + *,
+#bus-setup #bus-form > * + * { margin-top: 14px; }
+#bus-setup .sheet-lead,
+#bus-setup .field,
+#bus-setup .field-error { margin: 0; }
+#bus-setup .field-error:empty { display: none; }
+#bus-setup #bus-add-open { width: 100%; }
 .btn {
   border: 1px solid var(--brand);
   background: var(--brand);
@@ -431,10 +454,18 @@ button {
   align-items: baseline;
   justify-content: space-between;
   gap: 10px;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-bottom: 1px solid var(--line);
   padding: 13px 14px;
   background: color-mix(in srgb, var(--brand) 10%, var(--card));
-  border-bottom: 1px solid var(--line);
+  min-height: 46px;
 }
+.bus-head:active { background: color-mix(in srgb, var(--brand) 18%, var(--card)); }
+/* Suletud kaardil pole midagi all — joon jääks lahtiseks otsaks. */
+.bus-head[aria-expanded="false"] { border-bottom: 0; }
+.bus-caret { font-size: 11px; color: var(--ink-soft); flex: none; }
 .bus-head b { font-size: 16px; }
 .bus-head span { font-size: 12px; color: var(--ink-soft); }
 

@@ -142,8 +142,9 @@ export function arrivalOf(r, rides) {
 
 /**
  * Hommikused väljumised: need, millega laps jõuab enne `arriveBy` kohale.
- * Näitame VIIMASED `limit` sobivat — hommikul on tähtis teada, kui kaua veel
- * venitada saab, mitte see, mis läks kell kuus.
+ * Järjekord on kõige täpsemalt jõudev ees — see, mis jõuab tunni algusele
+ * kõige lähemale, on hommikul kõige kasulikum, sest siis saab kõige kauem
+ * magada. Ülejäänud tulevad varasuse järjekorras tahapoole.
  * Kui ükski enam ei jõua, anname ikka järgmised, aga ütleme seda ausalt.
  */
 export function morningDepartures({ scheduled = [], live = [], routes, rides, afterSecs, arriveBy, limit = 3 }) {
@@ -152,8 +153,16 @@ export function morningDepartures({ scheduled = [], live = [], routes, rides, af
     const a = arrivalOf(r, rides);
     return a == null || a <= arriveBy;
   });
-  const rows = inTime.length ? inTime.slice(-limit) : all.slice(0, limit);
-  return { rows, madeIt: inTime.length > 0, last: inTime.length ? inTime[inTime.length - 1] : null };
+  if (!inTime.length) return { rows: all.slice(0, limit), madeIt: false, best: null };
+
+  // Hilisem saabumine = vähem tühja ootamist kooli juures.
+  const byArrival = [...inTime].sort((a, b) => {
+    const av = arrivalOf(a, rides) ?? a.secs;
+    const bv = arrivalOf(b, rides) ?? b.secs;
+    return bv - av;
+  });
+  const rows = byArrival.slice(0, limit);
+  return { rows, madeIt: true, best: rows[0] };
 }
 
 /** Mitu minutit on väljumiseni (ümardatud allapoole). */

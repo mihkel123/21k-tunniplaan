@@ -1,11 +1,14 @@
 /* Offline-tugi. Rakenduse failid vahemälust, andmed võrgust (vahemälu varuks). */
 
-const VERSION = 'v3';
+const VERSION = 'v4';
 const SHELL = `tp-shell-${VERSION}`;
 const DATA = `tp-data-${VERSION}`;
 
 const SHELL_FILES = [
   '.', 'index.html', 'styles.css', 'app.js', 'schedule.js', 'bus.js', 'manifest.webmanifest',
+  // Nimepäevad ja tähtpäevad ei muutu — need käivad kesta, mitte andmete alla,
+  // muidu laeks 17 KB nimesid iga avamisega uuesti.
+  'notabledays.json', 'namedays.json',
   'icons/apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/favicon-32.png',
 ];
 const DATA_FILES = ['data.json', 'changes.json', 'holidays.json'];
