@@ -309,6 +309,10 @@ button {
   margin: 0 auto;
 }
 
+.foot-credit { display: block; margin-top: 4px; }
+.foot-credit a { color: inherit; }
+.foot-version { display: block; margin-top: 3px; font-size: 11px; opacity: .65; }
+
 /* ---------- Infoleht ---------- */
 
 .sheet {
@@ -500,3 +504,60 @@ button {
 @media (prefers-color-scheme: dark) { .field-error { color: #f87171; } }
 .bus-head b { display: flex; align-items: center; gap: 8px; }
 .bus-emoji { font-size: 17px; line-height: 1; }
+
+/* ---------- Bussisuundade loend seadetes ---------- */
+
+.bus-routes { display: grid; gap: 8px; margin-bottom: 14px; }
+.route-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.route-label { display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1; }
+.route-label b { font-size: 15px; font-weight: 620; overflow-wrap: anywhere; }
+.route-label span { font-size: 12px; color: var(--ink-faint); }
+.route-del {
+  flex: none;
+  width: 34px;
+  min-height: 34px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 16px;
+}
+.route-del:active { background: color-mix(in srgb, #dc2626 14%, var(--card)); color: #dc2626; }
+
+/* Suunavalik: hommikul / pärast tunde */
+.seg { display: flex; gap: 6px; margin-bottom: 14px; }
+.seg-btn {
+  flex: 1;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink-soft);
+  border-radius: 12px;
+  padding: 10px 8px;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.seg-btn.is-on {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--brand-ink);
+}
+
+.bus-reverse {
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+.bus-reverse p { margin: 0 0 10px; font-size: 14px; color: var(--ink-soft); }
+
+/* Viimane hommikune buss, millega veel kohale jõuab */
+.bus-last { color: var(--accent) !important; font-weight: 650; }

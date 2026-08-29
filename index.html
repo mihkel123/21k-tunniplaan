@@ -48,6 +48,12 @@
 
   <footer class="foot">
     <span id="source-note"></span>
+    <!-- Ühistranspordiregistri avaandmete tingimus: allikas peab olema nähtav. -->
+    <span class="foot-credit">Bussiajad: Tallinna Linnatransport ja
+      <a href="https://agri.ee/regionaalareng-uhistransport/uhistransport-ja-reisimine/uhistranspordiregistri-avaandmed">ühistranspordiregister</a></span>
+    <!-- Ehitusel asendab töövoog selle kuupäeva ja commiti lühinumbriga.
+         Kohapeal jääb "arendus" — nii on kohe näha, kas vaatad päris väljalaset. -->
+    <span class="foot-version" data-version>arendus</span>
   </footer>
 </div>
 
@@ -69,31 +75,53 @@
 <dialog id="bus-setup" class="sheet">
   <div class="sheet-inner">
     <h2>Bussiajad</h2>
-    <p class="sheet-lead">Vali, kust sa pärast tunde bussile lähed ja kuhu sõidad.
-      Õige peatuse pool leiame ise.</p>
 
-    <label class="field">
-      <span>Kust lähed (kooli juurest)</span>
-      <input id="bus-from" type="search" placeholder="nt Viru" autocomplete="off" enterkeyhint="search">
-      <div id="bus-from-hits" class="stop-hits"></div>
-    </label>
+    <div id="bus-routes" class="bus-routes"></div>
 
-    <label class="field">
-      <span>Kuhu sõidad (kodu juurde)</span>
-      <input id="bus-to" type="search" placeholder="nt Balti jaam" autocomplete="off" enterkeyhint="search">
-      <div id="bus-to-hits" class="stop-hits"></div>
-    </label>
+    <button id="bus-add-open" class="btn btn-quiet" type="button">＋ Lisa suund</button>
 
-    <label class="field">
-      <span>Jalutusaeg peatusesse (min)</span>
-      <input id="bus-walk" type="number" min="0" max="60" step="1" inputmode="numeric">
-    </label>
+    <div id="bus-form" hidden>
+      <p class="sheet-lead">Õige peatuse pool leiame ise.</p>
 
-    <p id="bus-error" class="field-error"></p>
+      <div class="seg" id="bus-dir" role="radiogroup" aria-label="Millal sõidad">
+        <button type="button" class="seg-btn" data-dir="am" role="radio" aria-checked="false">Hommikul kooli</button>
+        <button type="button" class="seg-btn is-on" data-dir="pm" role="radio" aria-checked="true">Pärast tunde koju</button>
+      </div>
+
+      <label class="field">
+        <span id="bus-from-label">Kust lähed (kooli juurest)</span>
+        <input id="bus-from" type="search" placeholder="nt Viru" autocomplete="off" enterkeyhint="search">
+        <div id="bus-from-hits" class="stop-hits"></div>
+      </label>
+
+      <label class="field">
+        <span id="bus-to-label">Kuhu sõidad (kodu juurde)</span>
+        <input id="bus-to" type="search" placeholder="nt Balti jaam" autocomplete="off" enterkeyhint="search">
+        <div id="bus-to-hits" class="stop-hits"></div>
+      </label>
+
+      <label class="field">
+        <span>Jalutusaeg peatusesse (min)</span>
+        <input id="bus-walk" type="number" min="0" max="60" step="1" inputmode="numeric">
+      </label>
+
+      <p id="bus-error" class="field-error"></p>
+
+      <div class="sheet-actions">
+        <button id="bus-save" class="btn" type="button">Salvesta</button>
+        <button id="bus-cancel" class="btn btn-quiet" type="button">Loobu</button>
+      </div>
+    </div>
+
+    <div id="bus-reverse" class="bus-reverse" hidden>
+      <p id="bus-reverse-text"></p>
+      <div class="sheet-actions">
+        <button id="bus-reverse-add" class="btn" type="button">Lisa ka tagasitee</button>
+        <button id="bus-reverse-skip" class="btn btn-quiet" type="button">Ei ole vaja</button>
+      </div>
+    </div>
 
     <div class="sheet-actions">
-      <button id="bus-save" class="btn" type="button">Salvesta</button>
-      <button id="bus-remove" class="btn btn-quiet" type="button">Eemalda bussiajad</button>
       <button id="bus-close" class="btn btn-quiet" type="button">Sulge</button>
     </div>
   </div>

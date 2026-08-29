@@ -1,6 +1,6 @@
 /* Offline-tugi. Rakenduse failid vahemälust, andmed võrgust (vahemälu varuks). */
 
-const VERSION = 'v2';
+const VERSION = 'v3';
 const SHELL = `tp-shell-${VERSION}`;
 const DATA = `tp-data-${VERSION}`;
 

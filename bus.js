@@ -1,6 +1,10 @@
 /* Bussiloogika. Ilma DOM-ita, et oleks testitav.
    Andmed: bus/stops.json, bus/routes.json, bus/stop/<id>.json (vt bus-data.mjs). */
 
+/** Suunad: hommikul kooli, pärast tunde koju. */
+export const TO_SCHOOL = 'am';
+export const TO_HOME = 'pm';
+
 export const DEFAULT_WALK_MIN = 5;
 
 /** Kõik peatuse-id-d, mis kannavad sama nime (Virul on viis platvormi). */
@@ -34,26 +38,31 @@ export function searchStops(stops, query, limit = 12) {
 /**
  * Leia liinid, mis läbivad lähtepeatust ja SEEJÄREL sihtpeatust.
  * Tagastab ka need lähteplatvormid, mis päriselt õiges suunas sõidavad —
- * nii ei pea laps teadma, kumbal pool teed seista.
+ * nii ei pea laps teadma, kumbal pool teed seista — ning iga liini sõiduaja
+ * lähtepeatusest sihtpeatuseni, millest saab saabumisaja.
  */
 export function matchRoutes(paths, fromIds, toIds) {
   const from = new Set(fromIds.map(String));
   const to = new Set(toIds.map(String));
   const routes = [];
   const usable = new Set();
+  const rides = {};
 
-  for (const [key, stops] of Object.entries(paths)) {
+  for (const [key, path] of Object.entries(paths)) {
+    const stops = path.s;
     let firstFrom = -1;
     for (let i = 0; i < stops.length; i++) {
       if (firstFrom === -1 && from.has(stops[i])) { firstFrom = i; continue; }
       if (firstFrom !== -1 && to.has(stops[i])) {
         routes.push(key);
         usable.add(Number(stops[firstFrom]));
+        // Sõiduaeg = vahe sihtpeatuse ja lähtepeatuse nihkes liini algusest.
+        if (path.t) rides[key] = path.t[i] - path.t[firstFrom];
         break;
       }
     }
   }
-  return { routes: [...new Set(routes)], fromIds: [...usable] };
+  return { routes: [...new Set(routes)], fromIds: [...usable], rides };
 }
 
 /* ---------- Reaalaja vastuse parsimine ---------- */
@@ -123,6 +132,28 @@ export function nextDepartures({ scheduled = [], live = [], routes, afterSecs, l
   }
 
   return picked.sort((a, b) => a.secs - b.secs).slice(0, limit);
+}
+
+/** Millal buss sihtpeatusse jõuab. Ilma sõiduajata tagastab null. */
+export function arrivalOf(r, rides) {
+  const ride = rides?.[keyOf(r)];
+  return Number.isFinite(ride) ? r.secs + ride : null;
+}
+
+/**
+ * Hommikused väljumised: need, millega laps jõuab enne `arriveBy` kohale.
+ * Näitame VIIMASED `limit` sobivat — hommikul on tähtis teada, kui kaua veel
+ * venitada saab, mitte see, mis läks kell kuus.
+ * Kui ükski enam ei jõua, anname ikka järgmised, aga ütleme seda ausalt.
+ */
+export function morningDepartures({ scheduled = [], live = [], routes, rides, afterSecs, arriveBy, limit = 3 }) {
+  const all = nextDepartures({ scheduled, live, routes, afterSecs, limit: Infinity });
+  const inTime = all.filter((r) => {
+    const a = arrivalOf(r, rides);
+    return a == null || a <= arriveBy;
+  });
+  const rows = inTime.length ? inTime.slice(-limit) : all.slice(0, limit);
+  return { rows, madeIt: inTime.length > 0, last: inTime.length ? inTime[inTime.length - 1] : null };
 }
 
 /** Mitu minutit on väljumiseni (ümardatud allapoole). */

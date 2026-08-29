@@ -65,6 +65,14 @@ jobs:
           cp -r bus _site/bus
           touch _site/.nojekyll
 
+          # Versioon jaluses: kuupäev + commiti lühinumber. Nii näeb telefonist
+          # kohe, kas laadis uue väljalaske või serveerib teenusetöötleja vana.
+          SHA="$(git rev-parse --short HEAD)"
+          VER="$(date -u +%Y-%m-%d) $SHA"
+          sed -i "s|<span class=\"foot-version\" data-version>[^<]*</span>|<span class=\"foot-version\" data-version>$VER</span>|" _site/index.html
+          grep -q "$SHA" _site/index.html || { echo "Versiooninumber jäi asendamata."; exit 1; }
+          echo "Versioon: $VER"
+
           # Iga import peab saidil päriselt olemas olema. Ilma selleta 404-b üks
           # moodul ja terve rakendus jääb käivitumata — täpselt nii juhtus bus.js-iga.
           missing=0
