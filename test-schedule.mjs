@@ -115,6 +115,13 @@ t('suur reede klapib holidays.json-iga', () => {
   }
 });
 
+t('igal tähtpäeval on emoji', () => {
+  // Ilma selleta jääb uue päeva lisamisel emoji vaikselt puudu ja rida
+  // kukub tagasi üldisele ikoonile, ilma et keegi seda märkaks.
+  const ilma = notable.days.filter((d) => !d.emoji).map((d) => d.name);
+  assert.deepEqual(ilma, [], `emojita: ${ilma.join(', ')}`);
+});
+
 t('nimepäevad on igal päeval, ka liigaastal', () => {
   assert.deepEqual(namesOn(namedays, on('2026-08-29')), ['Õnne', 'Õnnela']);
   assert.ok(namesOn(namedays, on('2024-02-29')).length, 'liigapäeval on samuti nimed');

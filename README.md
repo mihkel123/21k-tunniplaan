@@ -182,9 +182,28 @@ suur reede, nelipühad ja vastlapäev; emadepäev ja isadepäev on kuu n-s
 pühapäev. Test kontrollib, et `notabledays.json` ja `holidays.json` ütlevad
 suure reede kohta sama kuupäeva — kaks sõltumatut allikat peavad klappima.
 
+Igal tähtpäeval on `notabledays.json`-is oma emoji — tarkusepäeval koolikott,
+mardipäeval mask, jõuludel kuusk. Emoji on andmetes, mitte koodis, seega selle
+muutmiseks ei pea koodi puutuma. Test kontrollib, et ükski kirje ei jääks
+emojita.
+
 Nimepäevad on [Statistikaameti kalendrist](https://www.stat.ee/nimed/NIMEPAEVAD),
 366 päeva ja 1567 nime. Neid ei laadita iga deploy'ga: nimepäevad ei muutu,
 seega `npm run nimepaevad` jooksutatakse käsitsi ja tulemus commititakse.
+
+### Kus sait elab
+
+Sait on [Cloudflare Pages'is](https://tunniplaan.pages.dev). Ehitus jääb aga
+GitHub Actionsisse ja Cloudflare saab valmis kausta: Pages ehitab ainult tõuke
+peale, aga selle rakenduse mõte on igaöine ajastatud uuendus. Nii jääb alles ka
+kogu ülejäänud töövoog — testid, kraapimine, `bus/` genereerimine, versiooni
+süstimine jaluses ja kontroll, et kõik viidatud failid on saidil olemas.
+
+Töövoog vajab kahte repo saladust: `CLOUDFLARE_API_TOKEN` (õigusega
+*Cloudflare Pages: Edit*) ja `CLOUDFLARE_ACCOUNT_ID`.
+
+Aadressi vahetamine lähtestab salvestatud seaded — klass, rühmavalikud ja
+bussisuunad on `localStorage`-is, mis on seotud päritoluga.
 
 ### eKool ja ärajäänud tunnid
 

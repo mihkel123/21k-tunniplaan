@@ -386,19 +386,22 @@ function renderDayNotes(selected) {
 
   const notable = notableIn(state.notable, selected);
   if (notable.length) {
-    const row = el('div', 'day-note');
+    const row = el('div', 'day-note day-note--notable');
     // Riigipüha ja rahvuspüha on töövabad — need väärivad rohkem rõhku
     // kui emakeelepäev või mardipäev.
     const big = notable.some((n) => n.kind === 'riigipüha' || n.kind === 'rahvuspüha');
     row.classList.toggle('is-holiday', big);
-    row.append(el('span', 'day-note-icon', big ? '🇪🇪' : '📌'));
+    // Emoji tuleb andmefailist. Kui mõnel kirjel see puudub, jääb rida siiski
+    // ikooniga — parem üldine märk kui tühi koht.
+    const icon = notable.find((n) => n.emoji)?.emoji ?? (big ? '🇪🇪' : '📌');
+    row.append(el('span', 'day-note-icon', icon));
     row.append(el('span', null, notable.map((n) => n.name).join(', ')));
     box.append(row);
   }
 
   const names = namesIn(state.namedays, selected);
   if (names.length) {
-    const row = el('div', 'day-note');
+    const row = el('div', 'day-note day-note--names');
     row.append(el('span', 'day-note-icon', '🎂'));
     row.append(el('span', null, `Nimepäev: ${names.join(', ')}`));
     box.append(row);

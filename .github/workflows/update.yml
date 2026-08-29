@@ -8,13 +8,12 @@ on:
   push:
     branches: [main]
 
+# contents: write — töövoog commitib data.json ja changes.json.
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: deploy
   cancel-in-progress: false
 
 jobs:
@@ -87,8 +86,10 @@ jobs:
           echo "Kõik viidatud failid on olemas."
           ls -la _site
 
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      # Ehitus jääb siia, mitte Cloudflare'i: Pages ehitab ainult tõuke peale,
+      # aga selle rakenduse mõte on igaöine uuendus ajastatud käivitusest.
+      - uses: cloudflare/wrangler-action@v3
         with:
-          path: _site
-      - uses: actions/deploy-pages@v4
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy _site --project-name=tunniplaan

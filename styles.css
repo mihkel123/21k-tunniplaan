@@ -138,18 +138,24 @@ button {
 .day-head h1 { margin: 0; font-size: 27px; letter-spacing: -.02em; }
 
 /* Riigipüha / tähtpäev ja nimepäevad päise all */
-.day-notes { display: grid; gap: 3px; margin: -4px 0 10px; }
+/* Baassuurus on konteineril, et modifikaatorite protsendid arvutataks
+   sellest, mitte body 16 pikslist. */
+.day-notes { display: grid; gap: 3px; margin: -4px 0 10px; font-size: 13px; }
 .day-note {
   display: flex;
   align-items: baseline;
   gap: 7px;
-  font-size: 13px;
   color: var(--ink-soft);
   min-width: 0;
 }
 .day-note span:last-child { overflow-wrap: anywhere; }
 .day-note-icon { font-size: 12px; line-height: 1; flex: none; }
 .day-note.is-holiday { color: var(--ink); font-weight: 620; }
+/* Tähtpäev on päeva kohta olulisem info kui nimepäev — anname sellele
+   veidi rohkem ruumi ja nimepäevale veidi vähem. Protsentides, et suhe
+   oleks näha ka siis, kui baassuurust muudetakse. */
+.day-note--notable { font-size: 105%; }
+.day-note--names { font-size: 90%; }
 
 .badge {
   font-size: 12px;
