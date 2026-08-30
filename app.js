@@ -6,6 +6,7 @@ import {
   holidayOn as holidayIn, isSchoolDay as isSchoolDayIn, defaultDate as defaultDateIn,
   relativeLabel, isFreshChange,
   notableOn as notableIn, namesOn as namesIn,
+  overrideOn as overrideIn,
 } from './schedule.js';
 import {
   DEFAULT_WALK_MIN, TO_SCHOOL, TO_HOME, searchStops, idsByName, matchRoutes, parseSiri,
@@ -207,6 +208,23 @@ function ghostCard(period, change) {
   return card;
 }
 
+/** Erandpäeva sündmus: kellaaeg vasakul, pealkiri ja koht paremal. */
+function eventCard(e) {
+  const card = el('section', 'card is-event');
+  const when = el('div', 'when');
+  when.append(el('b', null, e.at));
+  card.append(when);
+
+  const what = el('div', 'what');
+  const subject = el('div', 'subject');
+  subject.append(el('span', 'emoji', e.emoji ?? '🎓'), el('span', null, e.title));
+  what.append(subject);
+  if (e.teacher) what.append(el('div', 'meta', e.teacher));
+  if (e.room) what.append(el('span', 'room', e.room));
+  card.append(what);
+  return card;
+}
+
 function altRow(entry, onPick) {
   const b = el('button', 'alt');
   b.type = 'button';
@@ -272,6 +290,19 @@ function renderLessons() {
       el('span', null, holiday.kind === 'public' ? 'Täna kooli ei ole.' : `Koolivaheaeg kuni ${formatDay(until)}.`)
     );
     main.append(b);
+    return;
+  }
+
+  // Erandpäev (aktus, klassijuhatajatund): kooli tunniplaanis neid ei ole,
+  // seega tavalised tunnid jäävad ära ja näitame päevakava.
+  const special = overrideIn(state.overrides, selected, klass);
+  if (special) {
+    if (special.notice) {
+      const n = el('div', 'banner special');
+      n.append(el('b', null, '🎓 Esimene koolipäev'), el('span', null, special.notice));
+      main.append(n);
+    }
+    for (const e of special.events) main.append(eventCard(e));
     return;
   }
 
@@ -917,12 +948,13 @@ async function loadJSON(path, fallback) {
 }
 
 async function init() {
-  const [data, changes, holidays, notable, namedays] = await Promise.all([
+  const [data, changes, holidays, notable, namedays, overrides] = await Promise.all([
     loadJSON('data.json', null),
     loadJSON('changes.json', {}),
     loadJSON('holidays.json', null),
     loadJSON('notabledays.json', null),
     loadJSON('namedays.json', null),
+    loadJSON('overrides.json', null),
   ]);
 
   if (!data) {
@@ -935,6 +967,7 @@ async function init() {
   state.holidays = holidays;
   state.notable = notable;
   state.namedays = namedays;
+  state.overrides = overrides;
 
   if (!state.klass || !data.classes[state.klass]) {
     state.klass = null;

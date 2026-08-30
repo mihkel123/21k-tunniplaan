@@ -142,6 +142,17 @@ export function notableOn(notable, date) {
   return out;
 }
 
+/**
+ * Erandpäev: aktus, klassijuhatajatund vms, mida kooli tunniplaanis ei ole.
+ * Tagastab selle klassi sündmused või null, kui päev on tavaline.
+ */
+export function overrideOn(overrides, date, klass) {
+  const day = overrides?.days?.[iso(date)];
+  const events = day?.classes?.[klass];
+  if (!events?.length) return null;
+  return { notice: day.notice ?? null, events };
+}
+
 /** Selle päeva nimepäevad. */
 export function namesOn(namedays, date) {
   return namedays?.days?.[MD(date)] ?? [];

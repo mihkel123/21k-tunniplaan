@@ -197,6 +197,19 @@ Nimepäevad on [Statistikaameti kalendrist](https://www.stat.ee/nimed/NIMEPAEVAD
 366 päeva ja 1567 nime. Neid ei laadita iga deploy'ga: nimepäevad ei muutu,
 seega `npm run nimepaevad` jooksutatakse käsitsi ja tulemus commititakse.
 
+### Erandpäevad
+
+Aktused, klassijuhatajatunnid ja muu, mida kooli Untise tunniplaanis ei ole,
+käivad `overrides.json`-i. Fail on kuupäevapõhine ja käsitsi hooldatav:
+`data.json` genereeritakse igal öösel uuesti, seega sinna neid kirjutada ei saa.
+
+Kui päeval on erand, asenduvad tavalised tunnid päevakava kaartidega ja
+bussikaarte ei näidata — aktusepäeval pole tundide lõpuaeg teada. Möödunud
+kuupäevad ei sega midagi, need lihtsalt ei lange enam kokku.
+
+Test kontrollib, et iga `data.json`-is olev klass on erandpäeval kaetud —
+kui kool lisab klassi, tuleb see ehitusel välja, mitte lapse ekraanil.
+
 ### Kus sait elab
 
 Sait on [Cloudflare Pages'is](https://tunniplaan.pages.dev). Ehitus jääb aga

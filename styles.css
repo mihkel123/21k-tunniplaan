@@ -300,6 +300,15 @@ button {
 .alt:active { background: color-mix(in srgb, var(--ink) 5%, transparent); }
 .alt .swap { margin-left: auto; font-size: 12px; color: var(--ink-faint); }
 
+/* Erandpäev: aktus, klassijuhatajatund */
+.card.is-event { --stripe: var(--brand); }
+.card.is-event .when b { font-size: 15px; font-weight: 700; line-height: 1.2; }
+.banner.special {
+  background: color-mix(in srgb, var(--brand) 10%, var(--card));
+  border-color: color-mix(in srgb, var(--brand) 35%, var(--line));
+}
+.banner.special b { display: block; margin-bottom: 3px; }
+
 /* Bännerid ja tühi olek */
 .banner {
   border-radius: var(--r);

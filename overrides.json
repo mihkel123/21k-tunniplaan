@@ -1,0 +1,719 @@
+{
+  "_comment": "Erandpäevad, mida kooli Untise tunniplaan ei kajasta — aktused, klassijuhatajatunnid jms. KÄSITSI HOOLDATAV: data.json genereeritakse igal öösel uuesti, seega sinna neid kirjutada ei saa. Kirjed on kuupäeva järgi, seega möödunud erand ei sega midagi.",
+  "source": "https://21k.ee/2026/08/17/oppeaasta-avaaktused-1-septembril-2026/",
+  "checkedOn": "2026-08-30",
+  "days": {
+    "2026-09-01": {
+      "notice": "Tavalisi tunde ei ole. Kanname koolimütsi ja võtame vajadusel kaasa vihmakeebi!",
+      "classes": {
+        "1A": [
+          {
+            "at": "10:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "koolimaja ees"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Marelin Peetris",
+            "room": "T-104"
+          }
+        ],
+        "1B": [
+          {
+            "at": "10:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "koolimaja ees"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Kätlin Stahlman",
+            "room": "T-214"
+          }
+        ],
+        "1C": [
+          {
+            "at": "10:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "koolimaja ees"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Ene Palo",
+            "room": "T-203"
+          }
+        ],
+        "1D": [
+          {
+            "at": "10:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "koolimaja ees"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Lisete Pukk",
+            "room": "T-204"
+          }
+        ],
+        "1E": [
+          {
+            "at": "10:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "koolimaja ees"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Maarja Lips",
+            "room": "T-103"
+          }
+        ],
+        "2A": [
+          {
+            "at": "11:00",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Annely Jürgens",
+            "room": "113"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          }
+        ],
+        "2B": [
+          {
+            "at": "11:00",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Krista Unt",
+            "room": "214"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          }
+        ],
+        "2C": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Piret Kellam",
+            "room": "T-303"
+          }
+        ],
+        "2D": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Helina Nael",
+            "room": "T-304"
+          }
+        ],
+        "3A": [
+          {
+            "at": "11:00",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Anne Änilane-Käämer",
+            "room": "114"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          }
+        ],
+        "3B": [
+          {
+            "at": "11:00",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Kaja Männik",
+            "room": "215"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          }
+        ],
+        "3C": [
+          {
+            "at": "11:00",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Endla Üksti",
+            "room": "116"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          }
+        ],
+        "3D": [
+          {
+            "at": "11:00",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Tiina Peepson",
+            "room": "115"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          }
+        ],
+        "4A": [
+          {
+            "at": "11:00",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Katri Sanina",
+            "room": "209"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          }
+        ],
+        "4B": [
+          {
+            "at": "11:00",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Merris Kivisoo",
+            "room": "210"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          }
+        ],
+        "4C": [
+          {
+            "at": "11:00",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Agnes Värik",
+            "room": "312"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          }
+        ],
+        "4D": [
+          {
+            "at": "11:00",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Marju Meremäe",
+            "room": "321"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          }
+        ],
+        "5A": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Anne-Ly Lään",
+            "room": "217"
+          }
+        ],
+        "5B": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Heli Raidma",
+            "room": "113"
+          }
+        ],
+        "5C": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Riina Mereväli-Vingertsuk",
+            "room": "006"
+          }
+        ],
+        "5D": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Ave Vurma",
+            "room": "432"
+          }
+        ],
+        "6A": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Liina Liivsoo",
+            "room": "114"
+          }
+        ],
+        "6B": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Irina Rozanova",
+            "room": "115"
+          }
+        ],
+        "6C": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Ave Arutamm",
+            "room": "116"
+          }
+        ],
+        "6D": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Svea Sokka",
+            "room": "318"
+          }
+        ],
+        "7A": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Liudmyla Nychyporuk",
+            "room": "431"
+          }
+        ],
+        "7B": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Kristiina Tiits",
+            "room": "208"
+          }
+        ],
+        "7C": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Indrek Vahtra",
+            "room": "108"
+          }
+        ],
+        "7D": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Natalia Samoilenko",
+            "room": "314"
+          }
+        ],
+        "8A": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Kadri Mägi",
+            "room": "312"
+          }
+        ],
+        "8B": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Merike Kaus",
+            "room": "313"
+          }
+        ],
+        "8C": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Katrin Koger",
+            "room": "319"
+          }
+        ],
+        "8D": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Kristi Leibur",
+            "room": "409"
+          }
+        ],
+        "9A": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Külliki Kaju",
+            "room": "107"
+          }
+        ],
+        "9B": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Ülle-Ly Vohnja",
+            "room": "106"
+          }
+        ],
+        "9C": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Tuuli Mällo",
+            "room": "320"
+          }
+        ],
+        "9D": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Liivi Urbel",
+            "room": "216"
+          }
+        ],
+        "10A": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Lilian Kippasto",
+            "room": "206"
+          }
+        ],
+        "10B": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Merle Teever",
+            "room": "305"
+          }
+        ],
+        "10C": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Karl Henri Käämer",
+            "room": "311"
+          }
+        ],
+        "11A": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Kristjan Õmblus",
+            "room": "203"
+          }
+        ],
+        "11B": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Triin Lingiene",
+            "room": "310"
+          }
+        ],
+        "11C": [
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Anett Arutamm",
+            "room": "405"
+          }
+        ],
+        "12A": [
+          {
+            "at": "10:00",
+            "emoji": "🎓",
+            "title": "Aktus koos 1. klassidega",
+            "room": "koolimaja ees"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Merle Kaldjärv",
+            "room": "105"
+          }
+        ],
+        "12B": [
+          {
+            "at": "10:00",
+            "emoji": "🎓",
+            "title": "Aktus koos 1. klassidega",
+            "room": "koolimaja ees"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Polina Martila",
+            "room": "209"
+          }
+        ],
+        "12C": [
+          {
+            "at": "10:00",
+            "emoji": "🎓",
+            "title": "Aktus koos 1. klassidega",
+            "room": "koolimaja ees"
+          },
+          {
+            "at": "12:00",
+            "emoji": "🎓",
+            "title": "Aktus",
+            "room": "spordiväljakul"
+          },
+          {
+            "at": "pärast aktust",
+            "emoji": "👥",
+            "title": "Klassijuhatajatund",
+            "teacher": "Maarika Paun"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 // Päevaloogika testid: node test-schedule.mjs
-import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn } from './schedule.js';
+import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn } from './schedule.js';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
@@ -153,6 +153,46 @@ t('nimepäevad on igal päeval, ka liigaastal', () => {
   assert.deepEqual(namesOn(namedays, on('2026-08-29')), ['Õnne', 'Õnnela']);
   assert.ok(namesOn(namedays, on('2024-02-29')).length, 'liigapäeval on samuti nimed');
   assert.equal(Object.keys(namedays.days).length, 366);
+});
+
+/* ---------- Erandpäevad ---------- */
+
+const OV = JSON.parse(readFileSync(new URL('./overrides.json', import.meta.url), 'utf8'));
+
+t('erandpäev asendab tavalise päeva', () => {
+  const sept1 = at('2026-09-01T12:00:00');
+  const r = overrideOn(OV, sept1, '1A');
+  assert.ok(r, '1. septembril peab erand olema');
+  assert.match(r.notice, /Tavalisi tunde ei ole/);
+  assert.deepEqual(r.events.map((e) => `${e.at} ${e.title}`),
+    ['10:00 Aktus', 'pärast aktust Klassijuhatajatund']);
+});
+
+t('klassijuhatajatund enne aktust jääb ka järjekorras ette', () => {
+  // 2AB ja 3.-4. klassidel on klassijuhatajatund kell 11.00, aktus 12.00.
+  const r = overrideOn(OV, at('2026-09-01T12:00:00'), '3A');
+  assert.deepEqual(r.events.map((e) => e.at), ['11:00', '12:00']);
+  assert.equal(r.events[0].title, 'Klassijuhatajatund');
+});
+
+t('12. klass käib kahel aktusel', () => {
+  const r = overrideOn(OV, at('2026-09-01T12:00:00'), '12A');
+  assert.equal(r.events.length, 3);
+  assert.deepEqual(r.events.map((e) => e.at), ['10:00', '12:00', 'pärast aktust']);
+});
+
+t('tavalisel päeval erandit ei ole', () => {
+  assert.equal(overrideOn(OV, at('2026-09-02T12:00:00'), '1A'), null);
+  assert.equal(overrideOn(OV, at('2026-09-01T12:00:00'), 'puudub'), null, 'tundmatu klass');
+  assert.equal(overrideOn(null, at('2026-09-01T12:00:00'), '1A'), null, 'faili puudumine ei lõhu');
+});
+
+t('kõik klassid on erandpäeval kaetud', () => {
+  // Kui kool lisab klassi, peab see siin välja tulema, mitte lapse ekraanil.
+  const data = JSON.parse(readFileSync(new URL('./data.json', import.meta.url), 'utf8'));
+  const day = OV.days['2026-09-01'].classes;
+  const puudu = data.classOrder.filter((k) => !day[k]?.length);
+  assert.deepEqual(puudu, []);
 });
 
 console.log(`\n${pass} testi läbitud.`);
