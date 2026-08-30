@@ -839,13 +839,15 @@ function installSteps() {
     // iOS-il on nupud brauseriti eri kohas. Chrome ja teised iOS-i brauserid
     // annavad end kasutajaagendis teada (CriOS, FxiOS, EdgiOS); ülejäänu on
     // Safari, kus jagamine käib ••• menüü alt.
+    // Menüünimed inglise keeles: iOS-il ei ole eestikeelset varianti, seega
+    // laps näeb ekraanil täpselt neid sõnu.
     if (/crios|fxios|edgios/i.test(ua)) {
       return ['Vajuta üleval jagamisikooni ⬆️',
-              'Vali „Lisa avakuvale”'];
+              'Vali „Add to Home Screen”'];
     }
     return ['Vajuta ••• nuppu',
-            'Vali „Jaga”',
-            'Vali „Lisa avakuvale”'];
+            'Vali „Share”',
+            'Vali „Add to Home Screen”'];
   }
   if (/android/i.test(ua)) {
     return ['Vajuta paremal üleval kolme punkti ⋮',

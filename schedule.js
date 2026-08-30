@@ -14,6 +14,11 @@ export const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() 
 export const startOfDay = (d) => { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; };
 /** 0 = esmaspäev … 6 = pühapäev */
 export const weekdayIndex = (d) => (d.getDay() + 6) % 7;
+/** Eelmine päev ISO-kujul. Kuupäev ehitame osadest, et ajavöönd ei nihutaks. */
+const dayBefore = (isoDay) => {
+  const [y, m, d] = isoDay.split('-').map(Number);
+  return iso(addDays(new Date(y, m - 1, d), -1));
+};
 export const minutesOf = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return h * 60 + m; };
 export const gradeOf = (klass) => parseInt(klass, 10) || 0;
 export const formatDay = (d) => `${d.getDate()}. ${MONTHS[d.getMonth()]}`;
@@ -27,12 +32,27 @@ export function holidayOn(holidays, date, klass) {
   for (const p of holidays.publicHolidays || []) {
     if (p.date === day) return { name: p.name, until: p.date, kind: 'public' };
   }
-  for (const y of holidays.schoolYears || []) {
+  const years = holidays.schoolYears || [];
+  let exemptFromBreak = false;
+  for (const y of years) {
     for (const b of y.breaks || []) {
       if (day < b.from || day > b.to) continue;
-      if (b.exceptGrades?.includes(grade)) continue;  // nt 12. klassil kevadvaheaega pole
+      if (b.exceptGrades?.includes(grade)) { exemptFromBreak = true; continue; }  // nt 12. klassil kevadvaheaega pole
       return { name: b.name, until: b.to, kind: 'break' };
     }
+  }
+  // 9. ja 12. klass käivad suvevaheajal veel eksamitel — nende jaoks on see
+  // koolipäev, ka siis kui õppeaasta ametlik lõpp on möödas.
+  if (exemptFromBreak) return null;
+
+  // Väljaspool õppeaastat koolipäevi pole. `start` ja `end` olid failis juba
+  // olemas, aga kasutamata — ilma selle kontrollita oleks 31. august tavaline
+  // koolipäev ja rakendus näitaks tunde, mida pole.
+  if (years.length && !years.some((y) => day >= y.start && day <= y.end)) {
+    const next = years.map((y) => y.start).filter((s) => s > day).sort()[0];
+    // Nimi käib bänneri pealkirjaks, kehatekst ütleb juba "Koolivaheaeg kuni…",
+    // seega üldnimi kordaks ennast. Õppeaasta ette jääb Eestis alati suvi.
+    return { name: 'Suvevaheaeg', until: next ? dayBefore(next) : day, kind: 'break' };
   }
   return null;
 }

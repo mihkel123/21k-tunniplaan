@@ -78,6 +78,26 @@ const notable = JSON.parse(readFileSync(new URL('./notabledays.json', import.met
 const namedays = JSON.parse(readFileSync(new URL('./namedays.json', import.meta.url), 'utf8'));
 const on = (s) => new Date(`${s}T12:00:00`);
 
+t('õppeaasta väliseid päevi koolipäevaks ei loeta', () => {
+  // 31. august 2026 on esmaspäev, aga õppeaasta algab 1. septembril.
+  // Ilma selle kontrollita näitas rakendus tunde päeval, mida polnud.
+  const enne = at('2026-08-31T12:00:00');
+  assert.equal(isSchoolDay(H, enne, '1A'), false);
+  assert.equal(isSchoolDay(H, enne, '12A'), false);
+  assert.equal(holidayOn(H, enne, '1A').name, 'Suvevaheaeg');
+  assert.equal(holidayOn(H, enne, '1A').until, '2026-08-31', 'vaheaeg lõpeb päev enne algust');
+
+  // Esimene koolipäev on tavaline päev.
+  const algus = at('2026-09-01T12:00:00');
+  assert.equal(isSchoolDay(H, algus, '1A'), true);
+  assert.equal(holidayOn(H, algus, '1A'), null);
+});
+
+t('enne õppeaasta algust avades näidatakse esimest koolipäeva', () => {
+  assert.equal(d('2026-08-30T10:00:00'), '2026-09-01');
+  assert.equal(d('2026-08-31T10:00:00'), '2026-09-01', 'ka 31. augustil, mis on esmaspäev');
+});
+
 t('ülestõusmispühad arvutatakse õigesti', () => {
   // Teadaolevad kuupäevad; 2027 langeb kokku holidays.json-i suure reedega.
   assert.equal(iso(easterSunday(2024)), '2024-03-31');
