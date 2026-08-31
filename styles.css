@@ -260,6 +260,20 @@ button {
 .what { min-width: 0; }
 .subject { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 680; letter-spacing: -.01em; }
 .subject .emoji { font-size: 19px; line-height: 1; }
+
+/* Rühmavaliku vahetusnupp tunnikaardil endal — mitte enam eraldi rida all.
+   Elab .card-badges sees, mitte .subject sees, et "Praegu/Järgmine" märk
+   ei kataks ikooni ära, kui mõlemad on koos. */
+.subject-swap {
+  background: transparent;
+  border: none;
+  font-size: 19px;
+  line-height: 1;
+  padding: 6px;
+  border-radius: 10px;
+  color: var(--ink-soft);
+}
+.subject-swap:active { background: color-mix(in srgb, var(--ink) 8%, transparent); }
 .meta { margin-top: 3px; color: var(--ink-soft); font-size: 14px; }
 .room {
   display: inline-block;
@@ -288,6 +302,15 @@ button {
 }
 .pill.now { background: var(--now); color: #fff; }
 .pill.next { background: color-mix(in srgb, var(--brand) 14%, transparent); color: var(--brand); }
+
+/* Praegu/Järgmine koos vahetusnupuga: üks plokk, mitte kattuvad elemendid. */
+.card-badges { position: absolute; top: 11px; right: 12px; display: flex; align-items: center; gap: 6px; }
+.card-badges .pill { position: static; }
+/* Badge on väljaspool teksti voogu (position:absolute), seega ei jäta
+   pikk ainenimi ise ruumi vabaks — reserveerime selle käsitsi, muidu
+   kirjutaks "Praegu" märk või ikoon teksti otsa peale. */
+.card:has(.card-badges) .subject { padding-right: 40px; }
+.card:has(.card-badges .pill) .subject { padding-right: 118px; }
 
 /* Muudatused */
 .card.is-changed { border-color: var(--accent); }
@@ -354,21 +377,6 @@ button {
   color: var(--ink-soft);
   padding: 0 2px;
 }
-.alt {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  text-align: left;
-  background: transparent;
-  border: 1px dashed var(--line);
-  border-radius: 12px;
-  padding: 9px 12px;
-  color: var(--ink-soft);
-  min-height: 44px;
-}
-.alt:active { background: color-mix(in srgb, var(--ink) 5%, transparent); }
-.alt .swap { margin-left: auto; font-size: 12px; color: var(--ink-faint); }
 
 /* Erandpäev: aktus, klassijuhatajatund */
 .card.is-event { --stripe: var(--brand); }
@@ -460,11 +468,6 @@ button {
   .top { padding-left: max(16px, calc((100% - 640px) / 2)); padding-right: max(16px, calc((100% - 640px) / 2)); }
 }
 
-/* Alternatiivse rühma rida: aine + õpetaja üksteise all */
-.alt-label { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.alt-label b { font-weight: 620; color: var(--ink-soft); }
-.alt-label span { font-size: 12px; color: var(--ink-faint); }
-
 /* Kuupäev, kui päev pole täna ega homme */
 .badge.is-date { background: color-mix(in srgb, var(--ink) 8%, transparent); color: var(--ink-soft); }
 
@@ -501,6 +504,21 @@ button {
 .choice-icon { font-size: 17px; }
 .choice .card { box-shadow: none; cursor: pointer; }
 .choice .card:active { transform: scale(.99); }
+.choice .card.is-picked { border-color: color-mix(in srgb, var(--brand) 40%, var(--line)); }
+.pill.picked { background: color-mix(in srgb, var(--ink) 8%, transparent); color: var(--ink-soft); }
+
+/* Rühmavaliku muutmisel (mitte esmakordsel valikul) on midagi, kuhu
+   tagasi minna, seega ✕ nupp päises. */
+.choice-close {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  color: var(--ink-faint);
+  padding: 6px;
+  border-radius: 10px;
+}
+.choice-close:active { background: color-mix(in srgb, var(--ink) 8%, transparent); }
 
 .choice-no {
   border: 1px solid var(--line);

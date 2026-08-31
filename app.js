@@ -96,6 +96,7 @@ const state = {
   wxAt: 0,          // millal see prognoos saadi
   wxTriedAt: 0,     // millal viimati võrku koputasime (ka ebaõnnestunult)
   theme: 'auto',    // auto | light | dark, vt allpool
+  editingChoice: null,   // choiceKey, mille rühmavalikut hetkel muudetakse, või null
 };
 
 const picksFor = (klass) => state.picks[klass] || {};
@@ -289,6 +290,7 @@ function setPick(klass, cell, value) {
   const picks = { ...picksFor(klass), [choiceKey(cell)]: value };
   state.picks = { ...state.picks, [klass]: picks };
   store.set(LS_PICKS, state.picks);
+  state.editingChoice = null;   // valik tehtud, sulge vahetusplokk
   render();
 }
 
@@ -344,8 +346,22 @@ function lessonCard(entry, period, opts) {
   }
   card.append(what);
 
-  if (opts.now) card.append(el('span', 'pill now', 'Praegu'));
-  else if (opts.next) card.append(el('span', 'pill next', 'Järgmine'));
+  const status = opts.now ? el('span', 'pill now', 'Praegu')
+    : opts.next ? el('span', 'pill next', 'Järgmine') : null;
+
+  if (opts.onSwap) {
+    // Pill ja vahetusnupp koos ühes plokis, muidu kataks "Praegu" märk ikooni ära.
+    const badges = el('div', 'card-badges');
+    if (status) badges.append(status);
+    const swap = el('button', 'subject-swap', '🔀');
+    swap.type = 'button';
+    swap.setAttribute('aria-label', 'Vaheta rühma');
+    swap.addEventListener('click', opts.onSwap);
+    badges.append(swap);
+    card.append(badges);
+  } else if (status) {
+    card.append(status);
+  }
   return card;
 }
 
@@ -388,36 +404,37 @@ function eventCard(e) {
   return card;
 }
 
-function altRow(entry, onPick) {
-  const b = el('button', 'alt');
-  b.type = 'button';
-  const label = el('span', 'alt-label');
-  label.append(el('b', null, entry.subjectFull || entry.subject));
-  if (entry.teacherFull || entry.teacher) {
-    label.append(el('span', null, entry.teacherFull || entry.teacher));
-  }
-  b.append(el('span', 'emoji', emojiFor(entry.subjectFull)), label, el('span', 'swap', 'vali'));
-  b.addEventListener('click', onPick);
-  return b;
-}
-
-function choiceBlock(klass, cell, period, change) {
+function choiceBlock(klass, cell, period, change, { editing = false, chosenKey = null } = {}) {
   const box = el('section', 'choice');
   const optional = cellIsOptional(cell);
   const many = cell.length > 1;
 
   const head = el('div', 'choice-head');
   head.append(
-    el('span', 'choice-icon', optional ? '🙋' : '👥'),
-    el('b', null, optional
-      ? (many ? 'Kas käid? Vali oma rühm' : 'Kas käid selles tunnis?')
-      : 'Vali oma rühm')
+    el('span', 'choice-icon', editing ? '🔀' : optional ? '🙋' : '👥'),
+    el('b', null, editing
+      ? 'Vaheta rühma'
+      : optional
+        ? (many ? 'Kas käid? Vali oma rühm' : 'Kas käid selles tunnis?')
+        : 'Vali oma rühm')
   );
+  if (editing) {
+    // Siin (erinevalt esmakordsest valikust) on midagi, kuhu tagasi minna.
+    const close = el('button', 'choice-close', '✕');
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Loobu');
+    close.addEventListener('click', () => { state.editingChoice = null; render(); });
+    head.append(close);
+  }
   box.append(head);
 
   for (const entry of cell) {
     const card = lessonCard(entry, period, { change });
     card.classList.add('is-choice');
+    if (editing && entryKey(entry) === chosenKey) {
+      card.classList.add('is-picked');
+      card.append(el('span', 'pill picked', 'Praegune'));
+    }
     card.addEventListener('click', () => chooseGroup(klass, cell, entry));
     box.append(card);
   }
@@ -517,8 +534,15 @@ function renderLessons() {
       return;
     }
 
-    put(lessonCard(chosen, period, { now: i === nowIdx, next: i === nextIdx, change }));
-    for (const a of alts) main.append(altRow(a, () => chooseGroup(klass, cell, a)));
+    if (state.editingChoice === choiceKey(cell)) {
+      put(choiceBlock(klass, cell, period, change, { editing: true, chosenKey: entryKey(chosen) }));
+      return;
+    }
+
+    const onSwap = alts.length
+      ? () => { state.editingChoice = choiceKey(cell); render(); }
+      : null;
+    put(lessonCard(chosen, period, { now: i === nowIdx, next: i === nextIdx, change, onSwap }));
   });
 
   if (!any) {
@@ -554,7 +578,7 @@ function renderWeekstrip() {
     if (!isSchoolDay(d, state.klass)) b.classList.add('is-off');
     b.append(el('b', null, DAY_LETTER[i]), el('span', null, String(d.getDate())));
     if (dayHasChanges(state.klass, i)) b.append(el('span', 'dot'));
-    b.addEventListener('click', () => { state.selected = d; trackScreen('/paev'); render(); });
+    b.addEventListener('click', () => { state.selected = d; state.editingChoice = null; trackScreen('/paev'); render(); });
     strip.append(b);
   }
 }
@@ -1012,6 +1036,7 @@ function showApp() {
   clearTimeout(installTimer);
   $('#picker').hidden = true;
   $('#app').hidden = false;
+  state.editingChoice = null;
   trackScreen('/');
   render();
 }
