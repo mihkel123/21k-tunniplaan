@@ -4,6 +4,416 @@
       "kind": "changed",
       "wasSubject": "klassijuhatajatund",
       "since": "2026-08-31"
+    },
+    "7|2": {
+      "kind": "removed",
+      "wasSubject": "20. sajandi kunst",
+      "since": "2026-08-31"
+    },
+    "7|3": {
+      "kind": "removed",
+      "wasSubject": "koorimuusika, giidiõpetus, Diplomaatia, protokoll ja etikett, kristlus kunstis, Koolileht Lennuk",
+      "since": "2026-08-31"
+    },
+    "7|4": {
+      "kind": "removed",
+      "wasSubject": "Õiguse alused",
+      "since": "2026-08-31"
+    },
+    "8|0": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, Kirjandus muusikas",
+      "since": "2026-08-31"
+    },
+    "8|1": {
+      "kind": "removed",
+      "wasSubject": "kõne ja väitlus, ansambel, programmeerimine",
+      "since": "2026-08-31"
+    },
+    "8|2": {
+      "kind": "removed",
+      "wasSubject": "20. sajandi kunst",
+      "since": "2026-08-31"
+    },
+    "8|3": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, ansambel",
+      "since": "2026-08-31"
+    }
+  },
+  "2B": {
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "liikumisõpetus",
+      "movedTo": {
+        "subject": "liikumisõpetus",
+        "slot": "K 6. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-08-31"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "liikumisõpetus",
+        "slot": "K 5. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-08-31"
+    }
+  },
+  "2C": {
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-08-31"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-08-31"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-08-31"
+    }
+  },
+  "2D": {
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-08-31"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-08-31"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-08-31"
+    }
+  },
+  "3B": {
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "E 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-08-31"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 3. tund"
+      },
+      "since": "2026-08-31"
+    }
+  },
+  "9A": {
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "tehnoloogiaõpetus, käsitöö ja kodundus",
+      "movedTo": {
+        "subject": "käsitöö ja kodundus",
+        "slot": "N 8. tund"
+      },
+      "since": "2026-08-31"
+    },
+    "7|3": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "käsitöö ja kodundus",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-08-31"
+    }
+  },
+  "10A": {
+    "0|1": {
+      "kind": "removed",
+      "wasSubject": "graafiline disain, Tallinna keskaegne arhitektuur",
+      "since": "2026-08-31"
+    },
+    "7|0": {
+      "kind": "removed",
+      "wasSubject": "keemia praktikum, mütoloogia ja kultuurilugu, Küberturve ja digijälg praktikas",
+      "since": "2026-08-31"
+    },
+    "7|3": {
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, hispaania keel",
+      "since": "2026-08-31"
+    },
+    "8|0": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, sissejuhatus filosoofiasse, arvuteooria, Kirjandus muusikas",
+      "since": "2026-08-31"
+    },
+    "8|1": {
+      "kind": "removed",
+      "wasSubject": "kõne ja väitlus, ansambel",
+      "since": "2026-08-31"
+    },
+    "8|3": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, ansambel",
+      "since": "2026-08-31"
+    }
+  },
+  "10B": {
+    "0|1": {
+      "kind": "removed",
+      "wasSubject": "graafiline disain, Tallinna keskaegne arhitektuur",
+      "since": "2026-08-31"
+    },
+    "7|0": {
+      "kind": "removed",
+      "wasSubject": "keemia praktikum, mütoloogia ja kultuurilugu, Küberturve ja digijälg praktikas",
+      "since": "2026-08-31"
+    },
+    "7|3": {
+      "kind": "removed",
+      "wasSubject": "koorimuusika, koorimuusika",
+      "since": "2026-08-31"
+    },
+    "8|0": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, sissejuhatus filosoofiasse, arvuteooria, Kirjandus muusikas",
+      "since": "2026-08-31"
+    },
+    "8|1": {
+      "kind": "removed",
+      "wasSubject": "kõne ja väitlus, ansambel",
+      "since": "2026-08-31"
+    },
+    "8|3": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, ansambel",
+      "since": "2026-08-31"
+    }
+  },
+  "10C": {
+    "0|1": {
+      "kind": "removed",
+      "wasSubject": "Tallinna keskaegne arhitektuur",
+      "since": "2026-08-31"
+    },
+    "7|0": {
+      "kind": "removed",
+      "wasSubject": "keemia praktikum, mütoloogia ja kultuurilugu, Küberturve ja digijälg praktikas",
+      "since": "2026-08-31"
+    },
+    "7|3": {
+      "kind": "removed",
+      "wasSubject": "koorimuusika, koorimuusika",
+      "since": "2026-08-31"
+    },
+    "8|0": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, sissejuhatus filosoofiasse, arvuteooria, Kirjandus muusikas",
+      "since": "2026-08-31"
+    },
+    "8|1": {
+      "kind": "removed",
+      "wasSubject": "kõne ja väitlus, ansambel",
+      "since": "2026-08-31"
+    },
+    "8|3": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, ansambel",
+      "since": "2026-08-31"
+    }
+  },
+  "11A": {
+    "0|1": {
+      "kind": "removed",
+      "wasSubject": "õpilasfirmade programm",
+      "since": "2026-08-31"
+    },
+    "1|1": {
+      "kind": "removed",
+      "wasSubject": "õpilasfirmade programm",
+      "since": "2026-08-31"
+    },
+    "7|3": {
+      "kind": "removed",
+      "wasSubject": "koorimuusika, koorimuusika, saksa keele praktikum, giidiõpetus, Diplomaatia, protokoll ja etikett",
+      "since": "2026-08-31"
+    },
+    "8|0": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, sissejuhatus filosoofiasse, Kirjandus muusikas, keemia praktikum, Regionaaluuringud",
+      "since": "2026-08-31"
+    },
+    "8|1": {
+      "kind": "removed",
+      "wasSubject": "kõne ja väitlus, ansambel, religioon ja kultuurilugu",
+      "since": "2026-08-31"
+    },
+    "8|3": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, ansambel, rahvuskeskse tsivilisatsiooni areng",
+      "since": "2026-08-31"
+    }
+  },
+  "11B": {
+    "0|1": {
+      "kind": "removed",
+      "wasSubject": "õpilasfirmade programm",
+      "since": "2026-08-31"
+    },
+    "1|1": {
+      "kind": "removed",
+      "wasSubject": "õpilasfirmade programm",
+      "since": "2026-08-31"
+    },
+    "7|3": {
+      "kind": "removed",
+      "wasSubject": "koorimuusika, koorimuusika, saksa keele praktikum, giidiõpetus, Diplomaatia, protokoll ja etikett",
+      "since": "2026-08-31"
+    },
+    "8|0": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, sissejuhatus filosoofiasse, Kirjandus muusikas, keemia praktikum, Regionaaluuringud",
+      "since": "2026-08-31"
+    },
+    "8|1": {
+      "kind": "removed",
+      "wasSubject": "kõne ja väitlus, ansambel, religioon ja kultuurilugu",
+      "since": "2026-08-31"
+    },
+    "8|3": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, ansambel, rahvuskeskse tsivilisatsiooni areng",
+      "since": "2026-08-31"
+    }
+  },
+  "11C": {
+    "0|1": {
+      "kind": "removed",
+      "wasSubject": "õpilasfirmade programm",
+      "since": "2026-08-31"
+    },
+    "1|1": {
+      "kind": "removed",
+      "wasSubject": "õpilasfirmade programm",
+      "since": "2026-08-31"
+    },
+    "7|3": {
+      "kind": "removed",
+      "wasSubject": "koorimuusika, koorimuusika, saksa keele praktikum, giidiõpetus, Diplomaatia, protokoll ja etikett",
+      "since": "2026-08-31"
+    },
+    "8|0": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, sissejuhatus filosoofiasse, Kirjandus muusikas, keemia praktikum, Regionaaluuringud",
+      "since": "2026-08-31"
+    },
+    "8|1": {
+      "kind": "removed",
+      "wasSubject": "kõne ja väitlus, ansambel, religioon ja kultuurilugu",
+      "since": "2026-08-31"
+    },
+    "8|3": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, ansambel, rahvuskeskse tsivilisatsiooni areng",
+      "since": "2026-08-31"
+    }
+  },
+  "12A": {
+    "7|2": {
+      "kind": "removed",
+      "wasSubject": "20. sajandi kunst",
+      "since": "2026-08-31"
+    },
+    "7|3": {
+      "kind": "removed",
+      "wasSubject": "koorimuusika, giidiõpetus, Diplomaatia, protokoll ja etikett, kristlus kunstis",
+      "since": "2026-08-31"
+    },
+    "7|4": {
+      "kind": "removed",
+      "wasSubject": "Õiguse alused",
+      "since": "2026-08-31"
+    },
+    "8|0": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, Kirjandus muusikas",
+      "since": "2026-08-31"
+    },
+    "8|1": {
+      "kind": "removed",
+      "wasSubject": "kõne ja väitlus, ansambel, programmeerimine",
+      "since": "2026-08-31"
+    },
+    "8|2": {
+      "kind": "removed",
+      "wasSubject": "20. sajandi kunst",
+      "since": "2026-08-31"
+    },
+    "8|3": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, ansambel",
+      "since": "2026-08-31"
+    }
+  },
+  "12C": {
+    "7|2": {
+      "kind": "removed",
+      "wasSubject": "20. sajandi kunst",
+      "since": "2026-08-31"
+    },
+    "7|3": {
+      "kind": "removed",
+      "wasSubject": "koorimuusika, giidiõpetus, Diplomaatia, protokoll ja etikett, kristlus kunstis",
+      "since": "2026-08-31"
+    },
+    "7|4": {
+      "kind": "removed",
+      "wasSubject": "Õiguse alused",
+      "since": "2026-08-31"
+    },
+    "8|0": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, Kirjandus muusikas",
+      "since": "2026-08-31"
+    },
+    "8|1": {
+      "kind": "removed",
+      "wasSubject": "kõne ja väitlus, ansambel, programmeerimine",
+      "since": "2026-08-31"
+    },
+    "8|2": {
+      "kind": "removed",
+      "wasSubject": "20. sajandi kunst",
+      "since": "2026-08-31"
+    },
+    "8|3": {
+      "kind": "removed",
+      "wasSubject": "kirjakunst, ansambel",
+      "since": "2026-08-31"
     }
   }
 }
