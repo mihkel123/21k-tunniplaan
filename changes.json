@@ -1,1 +1,9 @@
-{}
+{
+  "12B": {
+    "0|2": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "since": "2026-08-31"
+    }
+  }
+}
