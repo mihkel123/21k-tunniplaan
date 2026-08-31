@@ -277,6 +277,17 @@ button {
   color: color-mix(in srgb, var(--accent) 72%, var(--ink));
 }
 
+/* Ilm liikumisõpetuse ja väliürituste kaartidel */
+.wx {
+  margin-top: 7px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.wx-icon { font-size: 14px; line-height: 1; flex: none; }
+
 /* Paralleelrühmad */
 .group-hint {
   margin: 2px 0 -2px;

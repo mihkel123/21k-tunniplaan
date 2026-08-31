@@ -6,7 +6,7 @@
   "description": "Tallinna 21. Kooli tunniplaan telefonis (PWA).",
   "scripts": {
     "scrape": "node scrape.mjs",
-    "test": "node test-schedule.mjs && node test-diff.mjs && node test-bus.mjs",
+    "test": "node test-schedule.mjs && node test-diff.mjs && node test-bus.mjs && node test-weather.mjs",
     "serve": "python3 -m http.server 8765",
     "bus": "node bus-data.mjs",
     "nimepaevad": "node namedays.mjs"

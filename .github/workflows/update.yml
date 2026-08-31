@@ -35,6 +35,7 @@ jobs:
           node test-schedule.mjs
           node test-diff.mjs
           node test-bus.mjs
+          node test-weather.mjs
 
       # Kraabib kooli lehe ja võrdleb eelmise plaaniga.
       # Kui kooli HTML on muutunud, lõpeb see veaga ja deploy jääb tegemata —
@@ -62,7 +63,7 @@ jobs:
       - name: Koosta veebisait
         run: |
           mkdir -p _site/icons
-          cp index.html styles.css app.js schedule.js bus.js sw.js \
+          cp index.html styles.css app.js schedule.js bus.js weather.js sw.js \
              manifest.webmanifest data.json changes.json holidays.json \
              notabledays.json namedays.json overrides.json _site/
           cp icons/*.png _site/icons/

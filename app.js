@@ -13,12 +13,17 @@ import {
   nextDepartures, morningDepartures, arrivalOf, fromSchedule, minutesUntil,
   leaveInMinutes, scheduleKeyForDay,
 } from './bus.js';
+import {
+  REFRESH_AFTER_MS, CACHE_MAX_AGE_MS, forecastUrl, indexHourly, summarize,
+  formatWeather, isPeSubject, peWeatherSeason, eventStartMin,
+} from './weather.js';
 
 const LS_CLASS = 'tp.klass';
 const LS_PICKS = 'tp.picks';
 const LS_BUS = 'tp.bus';
 const LS_BUS_SHUT = 'tp.busShut';
 const LS_INSTALL = 'tp.installSeen';
+const LS_WX = 'tp.wx';
 
 /* ---------- Väikesed abifunktsioonid ---------- */
 
@@ -80,9 +85,73 @@ const state = {
   busData: null,      // {stops, paths} — laetakse alles seadistamisel
   selected: null,   // valitud kuupäev (Date)
   now: new Date(),
+  wx: null,         // ilmaprognoos tundide kaupa, vt weather.js
+  wxAt: 0,          // millal see prognoos saadi
+  wxTriedAt: 0,     // millal viimati võrku koputasime (ka ebaõnnestunult)
 };
 
 const picksFor = (klass) => state.picks[klass] || {};
+
+/* ---------- Ilm ---------- */
+
+/** Salvestatud prognoos, kui see pole veel liiga vana. */
+function weatherCache() {
+  const c = store.get(LS_WX, null);
+  if (!c?.at || !c.hours) return null;
+  // Eilne prognoos on halvem kui tühi rida.
+  return Date.now() - c.at > CACHE_MAX_AGE_MS ? null : c;
+}
+
+/**
+ * Prognoos vahemälust ja vajadusel võrgust. Renderdust ei blokeeri: vahemälu
+ * loetakse kohe (enne esimest await'i), võrgust tulnu joonistab kaardid uuesti.
+ * Võrku koputame kõige rohkem korra poole tunni jooksul, ka siis kui vastus
+ * jäi tulemata — muidu tembeldaks minutiline kell päringuid katkise ühenduse
+ * taga lõputult.
+ */
+async function loadWeather() {
+  if (!state.wx) {
+    const cached = weatherCache();
+    if (cached) { state.wx = cached.hours; state.wxAt = cached.at; }
+  }
+  if (Date.now() - Math.max(state.wxAt, state.wxTriedAt) < REFRESH_AFTER_MS) return;
+  state.wxTriedAt = Date.now();
+
+  try {
+    const res = await fetch(forecastUrl(), { cache: 'no-store' });
+    if (!res.ok) throw new Error(String(res.status));
+    const hours = indexHourly(await res.json());
+    if (!hours) return;
+    state.wx = hours;
+    state.wxAt = Date.now();
+    store.set(LS_WX, { at: state.wxAt, hours });
+    if (state.klass && !$('#app').hidden) render();
+  } catch {
+    // Ilm on lisa, mitte tuum. Rida jääb ära, muu töötab edasi.
+  }
+}
+
+/** Liikumisõpetuse ilm — talvel mitte, siis on tund niikuinii sees. */
+function lessonWeather(entry, period) {
+  if (!state.wx || !peWeatherSeason(state.selected)) return null;
+  if (!isPeSubject(entry.subjectFull || entry.subject)) return null;
+  return formatWeather(summarize(state.wx, iso(state.selected),
+    minutesOf(period.start), minutesOf(period.end)));
+}
+
+/** Väliürituse ilm. Kellaajata sündmusel ("pärast aktust") pole akent, mida küsida. */
+function eventWeather(e) {
+  if (!state.wx || !e.outdoor) return null;
+  const start = eventStartMin(e.at);
+  if (start == null) return null;
+  return formatWeather(summarize(state.wx, iso(state.selected), start, start + 60));
+}
+
+function weatherRow(line) {
+  const row = el('div', 'wx');
+  row.append(el('span', 'wx-icon', line.icon), el('span', null, line.text));
+  return row;
+}
 
 /* ---------- Koolipäevad ja vaheajad ---------- */
 
@@ -176,6 +245,8 @@ function lessonCard(entry, period, opts) {
 
   if (entry.teacherFull || entry.teacher) what.append(el('div', 'meta', entry.teacherFull || entry.teacher));
   if (entry.room) what.append(el('div', 'room', `Ruum ${entry.room}`));
+  const wx = lessonWeather(entry, period);
+  if (wx) what.append(weatherRow(wx));
   if (opts.change) {
     const c = el('div', 'changed');
     c.append(el('span', null, '🔄'), el('span', null, changeText(opts.change)));
@@ -221,6 +292,8 @@ function eventCard(e) {
   what.append(subject);
   if (e.teacher) what.append(el('div', 'meta', e.teacher));
   if (e.room) what.append(el('span', 'room', e.room));
+  const wx = eventWeather(e);
+  if (wx) what.append(weatherRow(wx));
   card.append(what);
   return card;
 }
@@ -975,6 +1048,7 @@ async function init() {
     maybeOfferInstall();
   } else {
     state.selected = defaultDate(new Date(), state.klass);
+    loadWeather();          // vahemälu jõuab kohale enne esimest renderdust
     showApp();
   }
 
@@ -1013,9 +1087,14 @@ async function init() {
     state.now = new Date();
     const fresh = defaultDate(state.now, state.klass);
     if (iso(fresh) !== before) state.selected = fresh;
+    loadWeather();
     render();
   });
-  setInterval(() => { state.now = new Date(); if (state.klass && !$('#app').hidden) render(); }, 60000);
+  setInterval(() => {
+    state.now = new Date();
+    loadWeather();          // ise otsustab, kas midagi küsida on
+    if (state.klass && !$('#app').hidden) render();
+  }, 60000);
 
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 

@@ -1,5 +1,5 @@
 {
-  "_comment": "Erandpäevad, mida kooli Untise tunniplaan ei kajasta — aktused, klassijuhatajatunnid jms. KÄSITSI HOOLDATAV: data.json genereeritakse igal öösel uuesti, seega sinna neid kirjutada ei saa. Kirjed on kuupäeva järgi, seega möödunud erand ei sega midagi.",
+  "_comment": "Erandpäevad, mida kooli Untise tunniplaan ei kajasta — aktused, klassijuhatajatunnid jms. KÄSITSI HOOLDATAV: data.json genereeritakse igal öösel uuesti, seega sinna neid kirjutada ei saa. Kirjed on kuupäeva järgi, seega möödunud erand ei sega midagi. \"outdoor\": true tähendab, et sündmus toimub õues — siis näitab kaart ka ilma, ja selleks peab \"at\" olema kellaaeg.",
   "source": "https://21k.ee/2026/08/17/oppeaasta-avaaktused-1-septembril-2026/",
   "checkedOn": "2026-08-30",
   "days": {
@@ -11,7 +11,8 @@
             "at": "10:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "koolimaja ees"
+            "room": "koolimaja ees",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -26,7 +27,8 @@
             "at": "10:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "koolimaja ees"
+            "room": "koolimaja ees",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -41,7 +43,8 @@
             "at": "10:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "koolimaja ees"
+            "room": "koolimaja ees",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -56,7 +59,8 @@
             "at": "10:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "koolimaja ees"
+            "room": "koolimaja ees",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -71,7 +75,8 @@
             "at": "10:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "koolimaja ees"
+            "room": "koolimaja ees",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -93,7 +98,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           }
         ],
         "2B": [
@@ -108,7 +114,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           }
         ],
         "2C": [
@@ -116,7 +123,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -131,7 +139,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -153,7 +162,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           }
         ],
         "3B": [
@@ -168,7 +178,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           }
         ],
         "3C": [
@@ -183,7 +194,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           }
         ],
         "3D": [
@@ -198,7 +210,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           }
         ],
         "4A": [
@@ -213,7 +226,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           }
         ],
         "4B": [
@@ -228,7 +242,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           }
         ],
         "4C": [
@@ -243,7 +258,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           }
         ],
         "4D": [
@@ -258,7 +274,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           }
         ],
         "5A": [
@@ -266,7 +283,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -281,7 +299,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -296,7 +315,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -311,7 +331,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -326,7 +347,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -341,7 +363,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -356,7 +379,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -371,7 +395,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -386,7 +411,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -401,7 +427,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -416,7 +443,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -431,7 +459,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -446,7 +475,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -461,7 +491,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -476,7 +507,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -491,7 +523,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -506,7 +539,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -521,7 +555,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -536,7 +571,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -551,7 +587,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -566,7 +603,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -581,7 +619,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -596,7 +635,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -611,7 +651,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -626,7 +667,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -641,7 +683,8 @@
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -656,13 +699,15 @@
             "at": "10:00",
             "emoji": "🎓",
             "title": "Aktus koos 1. klassidega",
-            "room": "koolimaja ees"
+            "room": "koolimaja ees",
+            "outdoor": true
           },
           {
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -677,13 +722,15 @@
             "at": "10:00",
             "emoji": "🎓",
             "title": "Aktus koos 1. klassidega",
-            "room": "koolimaja ees"
+            "room": "koolimaja ees",
+            "outdoor": true
           },
           {
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
@@ -698,13 +745,15 @@
             "at": "10:00",
             "emoji": "🎓",
             "title": "Aktus koos 1. klassidega",
-            "room": "koolimaja ees"
+            "room": "koolimaja ees",
+            "outdoor": true
           },
           {
             "at": "12:00",
             "emoji": "🎓",
             "title": "Aktus",
-            "room": "spordiväljakul"
+            "room": "spordiväljakul",
+            "outdoor": true
           },
           {
             "at": "pärast aktust",
