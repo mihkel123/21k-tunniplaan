@@ -142,15 +142,21 @@ button {
 }
 .class-chip:active { opacity: .8; }
 
+/* Sisu on SVG, mitte tekstiglüüf: nii on tsentreerimine pikslitäpne ja
+   suurus ei sõltu süsteemi fondist. 44 px on puutesihtmärgi miinimum. */
 .icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid var(--line);
   background: var(--card);
   border-radius: 12px;
-  width: 40px;
-  height: 40px;
-  font-size: 17px;
-  line-height: 1;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--ink);
 }
+.icon-btn svg { display: block; }
 
 .day-head { display: flex; align-items: baseline; gap: 10px; margin: 12px 0 10px; }
 .day-head h1 { margin: 0; font-size: 27px; letter-spacing: -.02em; }
