@@ -17,12 +17,17 @@ import {
   REFRESH_AFTER_MS, CACHE_MAX_AGE_MS, forecastUrl, indexHourly, summarize,
   formatWeather, isPeSubject, peWeatherSeason, eventStartMin,
 } from './weather.js';
+import { screen as trackScreen, leaving as trackLeaving } from './stats.js';
 
 const LS_CLASS = 'tp.klass';
 const LS_PICKS = 'tp.picks';
 const LS_BUS = 'tp.bus';
 const LS_BUS_SHUT = 'tp.busShut';
 const LS_INSTALL = 'tp.installSeen';
+
+// Kestus, mida statistikale saadame, loetakse sellest hetkest. Moodul jookseb
+// kohe lehe laadimisel, mil leht on tavajuhul juba nähtaval.
+let visibleSince = Date.now();
 const LS_WX = 'tp.wx';
 const LS_THEME = 'tp.theme';
 
@@ -501,7 +506,7 @@ function renderWeekstrip() {
     if (!isSchoolDay(d, state.klass)) b.classList.add('is-off');
     b.append(el('b', null, DAY_LETTER[i]), el('span', null, String(d.getDate())));
     if (dayHasChanges(state.klass, i)) b.append(el('span', 'dot'));
-    b.addEventListener('click', () => { state.selected = d; render(); });
+    b.addEventListener('click', () => { state.selected = d; trackScreen('/paev'); render(); });
     strip.append(b);
   }
 }
@@ -912,6 +917,7 @@ async function openBusSetup() {
   closeForm();
   if (!state.buses.length) openForm();
   dlg.showModal();
+  trackScreen('/bussid');
 }
 
 /* ---------- Klassi valik ---------- */
@@ -950,6 +956,7 @@ function showPicker() {
   renderPicker();
   $('#picker').hidden = false;
   $('#app').hidden = true;
+  trackScreen('/klassivalik');
 }
 
 function showApp() {
@@ -957,6 +964,7 @@ function showApp() {
   clearTimeout(installTimer);
   $('#picker').hidden = true;
   $('#app').hidden = false;
+  trackScreen('/');
   render();
 }
 
@@ -1011,6 +1019,7 @@ function openInstall() {
   // Päris paigaldusnupp ainult siis, kui brauser selle lubas.
   $('#install-now').hidden = !installPrompt;
   $('#install').showModal();
+  trackScreen('/paigalda');
 }
 
 /** Esimesel avamisel klassivaliku peale, väikese viivitusega. */
@@ -1047,6 +1056,7 @@ function openSheet() {
     info.append(d);
   }
   $('#sheet').showModal();
+  trackScreen('/info');
 }
 
 /* ---------- Käivitus ---------- */
@@ -1133,7 +1143,12 @@ async function init() {
 
   // Kui telefon on olnud taskus üle tunni, arvuta päev ja "praegu" uuesti
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden || !state.klass) return;
+    if (document.hidden) {
+      trackLeaving((Date.now() - visibleSince) / 1000);
+      return;
+    }
+    visibleSince = Date.now();
+    if (!state.klass) return;
     const before = iso(state.selected);
     state.now = new Date();
     const fresh = defaultDate(state.now, state.klass);

@@ -9,7 +9,7 @@ const SHELL = `tp-shell-${VERSION}`;
 const DATA = `tp-data-${VERSION}`;
 
 const SHELL_FILES = [
-  '.', 'index.html', 'styles.css', 'app.js', 'schedule.js', 'bus.js', 'weather.js',
+  '.', 'index.html', 'styles.css', 'app.js', 'schedule.js', 'bus.js', 'weather.js', 'stats.js',
   'manifest.webmanifest',
   // Nimepäevad ja tähtpäevad ei muutu — need käivad kesta, mitte andmete alla,
   // muidu laeks 17 KB nimesid iga avamisega uuesti.

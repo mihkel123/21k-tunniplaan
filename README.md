@@ -93,6 +93,7 @@ Käsitsi saab käivitada GitHubis: Actions → *Uuenda tunniplaan* → *Run work
 | `bus.js` | Suunatuvastus, sõiduaeg, reaalaja parsimine, hommikuste ja kojusõidu väljumiste valik. |
 | `bus-data.mjs` | Laeb linna- ja maakonnaliinide GTFS-id, liidab need ja kirjutab `bus/`. Genereeritud, ei commitita. |
 | `weather.js` | Ilmaprognoosi päring, kokkuvõte tunni aja kohta ja rea vormindus. Ilma DOM-ita, seetõttu testitav. |
+| `stats.js` | Kasutusstatistika (Umami) saatmine: kestuse vahemikud ja ekraanide lehevaated. Ilma DOM-ita, seetõttu testitav. |
 | `namedays.mjs` | Laeb nimepäevad Statistikaametist -> `namedays.json`. Käsitsi, mitte iga deploy'ga. |
 | `notabledays.json` | Riigipühad, riiklikud tähtpäevad, rahvakalender. Käsitsi hooldatav. |
 | `overrides.json` | Erandpäevad: aktused, klassijuhatajatunnid. **Käsitsi hooldatav** — vt allpool. |
@@ -257,6 +258,30 @@ Prognoos elab `localStorage`-is (`tp.wx`, ~7 KB) ja töötab võrguta. Võrku
 koputatakse kõige rohkem korra poole tunni jooksul — ka siis, kui vastus jäi
 tulemata. Üle ööpäeva vana vahemälu visatakse ära: vale ilm on halvem kui
 tühi rida.
+
+### Statistika
+
+[Umami Cloud](https://umami.is/) loeb külastusi, korduvkülastusi (Retention-raport),
+külastuse pikkust ja seadmeid — küpsisteta, isikuandmeteta. Skript
+(`index.html`) on piiratud `data-domains`-iga saidi enda aadressile, seega
+kohalik arendus statistikasse ei satu.
+
+**Mida ei koguta:** klassi, bussipeatuste nimesid ega rühmavalikuid. Külastajat
+ei tunta ka üle päevade ära — see nõuaks püsivat tuvastajat ja seega
+nõusolekubännerit, mis on halvem tehing kui ligikaudne number.
+
+**Miks lisandusid ekraanid.** Äpp on üks leht, kust kunagi mujale ei
+navigeerita — Umami arvutab külastuse pikkuse aga just lehevaadete vahest.
+Ilma milleta jääks kestus alati nulliks. Seepärast saadab äpp lehevaatena ka
+sisemisi ekraane (`/paev`, `/info`, `/bussid`, `/paigalda`, `/klassivalik`) ja
+taustale minnes sündmuse `lahkus` koos nähtud aja vahemikuga (`<15s` …
+`15min+`).
+
+**Mida numbrid tähendavad.** Umami tunneb külastaja ära IP-st ja brauseri
+tunnusstringist tuletatud räsi järgi, kuu kaupa. Telefon, mis vahetab võrku
+(WiFi ↔ 4G), loendub mitu korda; kooli WiFi taga samasugused telefonid võivad
+kokku langeda. „Unikaalsed" ja Retention on seega suurusjärk ja trend, mitte
+pealoendus.
 
 ### Hele ja tume teema
 
