@@ -42,6 +42,16 @@ const el = (tag, cls, text) => {
   return n;
 };
 
+/* Süsteemikontrollid (menüü, rühma vahetus) kannavad joonikoone, samas kui
+   sisu (ained, tähtpäevad, sündmused) kannab emojisid — sama jaotus, mis
+   burgerinupu SVG-l juba on. Kaks noolt vastassuundades: "vaheta teise
+   valiku peale", mitte segi minev "muudatus" 🔄 tähisega mujal kaardil. */
+const SWAP_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <path d="M3 7h15M14 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M21 17H6M10 21l-4-4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`;
+const svgEl = (tag, cls, svg) => { const n = el(tag, cls); n.innerHTML = svg; return n; };
+
 
 const store = {
   get(key, fallback) {
@@ -353,7 +363,7 @@ function lessonCard(entry, period, opts) {
     // Pill ja vahetusnupp koos ühes plokis, muidu kataks "Praegu" märk ikooni ära.
     const badges = el('div', 'card-badges');
     if (status) badges.append(status);
-    const swap = el('button', 'subject-swap', '🔀');
+    const swap = svgEl('button', 'subject-swap', SWAP_ICON);
     swap.type = 'button';
     swap.setAttribute('aria-label', 'Vaheta rühma');
     swap.addEventListener('click', opts.onSwap);
@@ -411,7 +421,7 @@ function choiceBlock(klass, cell, period, change, { editing = false, chosenKey =
 
   const head = el('div', 'choice-head');
   head.append(
-    el('span', 'choice-icon', editing ? '🔀' : optional ? '🙋' : '👥'),
+    editing ? svgEl('span', 'choice-icon', SWAP_ICON) : el('span', 'choice-icon', optional ? '🙋' : '👥'),
     el('b', null, editing
       ? 'Vaheta rühma'
       : optional

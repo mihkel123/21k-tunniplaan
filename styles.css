@@ -265,14 +265,14 @@ button {
    Elab .card-badges sees, mitte .subject sees, et "Praegu/Järgmine" märk
    ei kataks ikooni ära, kui mõlemad on koos. */
 .subject-swap {
+  display: flex;
   background: transparent;
   border: none;
-  font-size: 19px;
-  line-height: 1;
   padding: 6px;
   border-radius: 10px;
   color: var(--ink-soft);
 }
+.subject-swap svg { width: 18px; height: 18px; display: block; }
 .subject-swap:active { background: color-mix(in srgb, var(--ink) 8%, transparent); }
 .meta { margin-top: 3px; color: var(--ink-soft); font-size: 14px; }
 .room {
@@ -501,7 +501,8 @@ button {
   color: color-mix(in srgb, var(--brand) 78%, var(--ink));
   padding: 0 2px 2px;
 }
-.choice-icon { font-size: 17px; }
+.choice-icon { font-size: 17px; display: flex; }
+.choice-icon svg { width: 17px; height: 17px; display: block; }
 .choice .card { box-shadow: none; cursor: pointer; }
 .choice .card:active { transform: scale(.99); }
 .choice .card.is-picked { border-color: color-mix(in srgb, var(--brand) 40%, var(--line)); }
