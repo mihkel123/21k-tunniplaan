@@ -12,8 +12,11 @@ export const CACHE_MAX_AGE_MS = 24 * 60 * 60 * 1000;
 
 /* Läved. Alla nende jääb vastav osa reast välja — pool rida infot on parem
    kui terve rida müra. */
-export const POP_MIN = 10;          // sademete tõenäosus, %
-export const FEELS_GAP = 3;         // kraadi, millest alates "tundub" midagi ütleb
+export const POP_MIN = 10;          // sademete tõenäosus, mille juures sõna üldse ilmub, %
+/* Ikooni jaoks eraldi, veidi kõrgemad läved: "vihmapilv" peab tähendama
+   päriselt suurt tõenäosust, mitte igasugust sadu. */
+export const POP_MAYBE = 30;        // "võib sadada" — pilv koos päikesega
+export const POP_LIKELY = 60;       // "vihma/lume/lörtsi" ikoon
 /* Ilmateenistuse skaala: mõõdukas 3,4–7,9; tugev 8,0–13,8; väga tugev alates 13,9.
    Näitame mõõdukast alles ülemisest poolest — 4 m/s pole märkimisväärne. */
 export const WIND_MODERATE = 5.5;
@@ -63,6 +66,81 @@ function hoursTouched(startMin, endMin) {
 }
 
 const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
+const round = (n) => Math.round(n);
+
+/**
+ * Tunnetuslik temperatuur reale — ainult siis, kui see ümardatuna jääb
+ * näidatud kraadivahemikust välja. Kui vahemik on juba "16–20°" ja tundub
+ * jääb sinna sisse, ei ütle number midagi uut ja jääb ära. Kui akna sees
+ * tunnetuslik nii jahedam kui soojem hälbib, valime suurema hälbega otsa.
+ */
+function pickFeel(tempMin, tempMax, feels) {
+  if (!feels.length) return null;
+  const feelMin = Math.min(...feels);
+  const feelMax = Math.max(...feels);
+  const lo = round(tempMin);
+  const hi = round(tempMax);
+  const diffLow = lo - round(feelMin);   // > 0: tundub näidatud alampiirist külmem
+  const diffHigh = round(feelMax) - hi;  // > 0: tundub näidatud ülempiirist soojem
+  if (diffLow > 0 && diffHigh > 0) return diffLow >= diffHigh ? feelMin : feelMax;
+  if (diffLow > 0) return feelMin;
+  if (diffHigh > 0) return feelMax;
+  return null;
+}
+
+const SNOW_CODES = new Set([71, 73, 75, 77, 85, 86]);
+const SLEET_CODES = new Set([56, 57, 66, 67]);
+const RAIN_CODES = new Set([51, 53, 55, 61, 63, 65, 80, 81, 82]);
+
+/**
+ * Sademe liik. WMO kood ütleb liigi otse peaaegu alati; erand on siis, kui
+ * kood ise sadu ei näita (selge/pilves/udu), aga sademetõenäosus on ikkagi
+ * suur — ansambliprognoos ja "kõige tõenäolisem" kood lähevad mõnikord lahku.
+ * Sel juhul otsustab kraad: alla +1° lumi, muidu vihm.
+ */
+export function precipKind(code, temp) {
+  if (SNOW_CODES.has(code)) return 'snow';
+  if (SLEET_CODES.has(code)) return 'sleet';
+  if (RAIN_CODES.has(code)) return 'rain';
+  return temp != null && temp < 1 ? 'snow' : 'rain';
+}
+
+export function precipWord(kind) {
+  if (kind === 'snow') return 'Lumi';
+  if (kind === 'sleet') return 'Lörts';
+  return 'Vihm';
+}
+
+export function windLabel(ms) {
+  if (ms == null) return null;
+  if (ms >= WIND_VERY_STRONG) return 'Väga tugev tuul';
+  if (ms >= WIND_STRONG) return 'Tugev tuul';
+  if (ms >= WIND_MODERATE) return 'Mõõdukas tuul';
+  return null;
+}
+
+/**
+ * Ikoon käib alati sademetõenäosusega kokku — see on nii ka arvutatud, mitte
+ * eraldi koodist tuletatud. Ilmakood üksi valetaks: "peamiselt selge" kood
+ * kõrvuti 46% sajuvõimalusega näitaks päikest, kus tegelikult vihma oodata.
+ * Äike on ainus erand — see on hoiatus sõltumata protsendist.
+ */
+export function iconFor(code, pop, kind) {
+  if (code != null && code >= 95) return '⛈️';
+
+  const p = pop ?? 0;
+  if (p >= POP_LIKELY) {
+    if (kind === 'snow') return '❄️';
+    if (kind === 'sleet') return '🌨️';
+    return '🌧️';
+  }
+  if (p >= POP_MAYBE) return '🌦️';
+
+  if (code === 0) return '☀️';
+  if (code === 3) return '☁️';
+  if (code === 45 || code === 48) return '🌫️';
+  return '🌤️';       // selge kuni kergelt pilves, ja tundmatu kood
+}
 
 /**
  * Kokkuvõte ühe ajavahemiku kohta või null, kui prognoosi ei ulatu.
@@ -91,61 +169,20 @@ export function summarize(hours, isoDay, startMin, endMin) {
 
   const tempMin = Math.min(...temps);
   const tempMax = Math.max(...temps);
-
-  // "Tundub" ainult siis, kui tuul või niiskus asja päriselt muudab. Võrdleme
-  // vahemikku vahemikuga, et number ei satuks näidatud kraadide sisse —
-  // "16–20°, tundub 17°" oleks segadus, "16–20°, tundub 13°" on riietumisotsus.
-  let feel = null;
-  if (feels.length) {
-    const feelMin = Math.min(...feels);
-    const feelMax = Math.max(...feels);
-    if (tempMin - feelMin >= FEELS_GAP) feel = feelMin;
-    else if (feelMax - tempMax >= FEELS_GAP) feel = feelMax;
-  }
+  // WMO kood kasvab enam-vähem tõsiduse järgi (0 selge … 99 äike), seega
+  // suurim kood on selle akna halvim ilm.
+  const code = codes.length ? Math.max(...codes) : null;
 
   return {
     tempMin,
     tempMax,
-    feels: feel,
+    feels: pickFeel(tempMin, tempMax, feels),
     pop: pops.length ? Math.max(...pops) : null,
-    // WMO kood kasvab enam-vähem tõsiduse järgi (0 selge … 99 äike), seega
-    // suurim kood on selle akna halvim ilm.
-    code: codes.length ? Math.max(...codes) : null,
+    code,
+    kind: precipKind(code, tempMin),
     wind: winds.length ? Math.max(...winds) : null,
   };
 }
-
-export function windLabel(ms) {
-  if (ms == null) return null;
-  if (ms >= WIND_VERY_STRONG) return 'väga tugev tuul';
-  if (ms >= WIND_STRONG) return 'tugev tuul';
-  if (ms >= WIND_MODERATE) return 'mõõdukas tuul';
-  return null;
-}
-
-const SNOW = new Set([71, 73, 75, 77, 85, 86]);
-const SLEET = new Set([56, 57, 66, 67]);
-
-/** Sademete liik ilmakoodist: osastav kääne, sest käib koos protsendiga. */
-export function precipWord(code) {
-  if (SNOW.has(code)) return 'lund';
-  if (SLEET.has(code)) return 'lörtsi';
-  return 'vihma';
-}
-
-export function iconFor(code) {
-  if (code == null) return '🌤️';
-  if (code === 0) return '☀️';
-  if (code <= 2) return '🌤️';
-  if (code === 3) return '☁️';
-  if (code === 45 || code === 48) return '🌫️';
-  if (code >= 95) return '⛈️';
-  if (SNOW.has(code)) return '❄️';
-  if (code >= 51 && code <= 57) return '🌦️';
-  return '🌧️';
-}
-
-const round = (n) => Math.round(n);
 
 /** Kokkuvõte reaks: { icon, text } või null, kui midagi öelda pole. */
 export function formatWeather(sum) {
@@ -154,13 +191,13 @@ export function formatWeather(sum) {
   const hi = round(sum.tempMax);
   const parts = [lo === hi ? `${lo}°` : `${lo}–${hi}°`];
 
-  if (sum.feels != null) parts.push(`tundub ${round(sum.feels)}°`);
-  if (sum.pop != null && sum.pop >= POP_MIN) parts.push(`${precipWord(sum.code)} ${round(sum.pop)}%`);
+  if (sum.feels != null) parts.push(`Tundub ${round(sum.feels)}°`);
+  if (sum.pop != null && sum.pop >= POP_MIN) parts.push(`${precipWord(sum.kind)} ${round(sum.pop)}%`);
 
   const wind = windLabel(sum.wind);
   if (wind) parts.push(wind);
 
-  return { icon: iconFor(sum.code), text: parts.join(' · ') };
+  return { icon: iconFor(sum.code, sum.pop, sum.kind), text: parts.join(' · ') };
 }
 
 /* ---------- Kus ilma üldse näidata ---------- */

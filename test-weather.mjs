@@ -1,7 +1,8 @@
 // Ilmaloogika testid: node test-weather.mjs
 import {
-  forecastUrl, indexHourly, summarize, windLabel, precipWord, iconFor,
+  forecastUrl, indexHourly, summarize, windLabel, precipKind, precipWord, iconFor,
   formatWeather, isPeSubject, peWeatherSeason, eventStartMin,
+  POP_MAYBE, POP_LIKELY,
 } from './weather.js';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
@@ -96,59 +97,110 @@ t('halvim väärtus akna sees võidab', () => {
   assert.equal(s.wind, 9);
 });
 
-// --- tajutav temperatuur ---
-t('tundub näidatakse alates kolmest kraadist, mitte enne', () => {
-  const near = build([[8, 16, 13.1, 0, 0, 0]]);
-  assert.equal(summarize(near, day, 480, 525).feels, null, '2,9 kraadi jääb näitamata');
-  const far = build([[8, 16, 13, 0, 0, 0]]);
-  assert.equal(summarize(far, day, 480, 525).feels, 13, '3,0 kraadi näidatakse');
+// --- tunnetuslik temperatuur: nähtav alati, kui erineb näidatud vahemikust ---
+t('Tundub ilmub, kui ümardatuna erineb näidatud kraadist', () => {
+  const hours = build([[12, 20.1, 20.5, 0, 1, 1]]);
+  const s = summarize(hours, day, 720, 765);
+  assert.equal(Math.round(s.tempMin), 20);
+  assert.equal(Math.round(s.feels), 21, 'sama päris ilm, mis 1. septembril kell 12');
 });
 
-t('kuumal päeval võib tunduda soojem', () => {
+t('Tundub ei ilmu, kui ümardatuna langeb näidatud vahemikku', () => {
+  const same = build([[8, 16, 16.3, 0, 0, 0]]);
+  assert.equal(summarize(same, day, 480, 525).feels, null, 'ümardub samaks kraadiks');
+});
+
+t('Tundub ei ilmu, kui langeb näidatud vahemiku SISSE (mitte ainult võrdseks)', () => {
+  // 16–20°, tundub 18° — 18 on juba vahemiku sees, ei lisa infot.
+  const hours = build([[10, 16, 16, 0, 0, 0], [11, 20, 18, 0, 0, 0]]);
+  const s = summarize(hours, day, 600, 705);
+  assert.equal(s.feels, null);
+});
+
+t('kuumal päeval võib tunduda soojem kui näidatud ülempiir', () => {
   const hours = build([[12, 27, 31, 0, 0, 1]]);
   assert.equal(summarize(hours, day, 720, 765).feels, 31);
 });
 
-t('tundub jääb näidatud kraadidest välja', () => {
-  // 16–20°, tundub 13° — mitte kunagi "tundub 17°", mis oleks segadus.
-  const hours = build([[10, 16, 12, 0, 0, 0], [11, 20, 17, 0, 0, 0]]);
+t('külmal päeval võib tunduda külmem kui näidatud alampiir', () => {
+  const hours = build([[8, 2, -3, 0, 71, 8]]);
+  assert.equal(summarize(hours, day, 480, 525).feels, -3);
+});
+
+t('kui mõlemad otsad hälbivad, võidab suurem hälve', () => {
+  // Näidatud 10–20°. Hommikutund tundub palju külmem (hälve 8), pärastlõunane
+  // veidi soojem (hälve 1) — kokkuvõte peab valima külmema.
+  const hours = build([[10, 10, 2, 0, 0, 6], [11, 20, 21, 0, 0, 1]]);
   const s = summarize(hours, day, 600, 705);
-  assert.equal(s.feels, 12);
-  assert.ok(s.feels < s.tempMin);
+  assert.equal(s.feels, 2);
 });
 
 // --- tuul ---
-t('tuule läved on täpselt piiril', () => {
+t('tuule läved on täpselt piiril ja sildid suurtähelised', () => {
   assert.equal(windLabel(5.4), null);
-  assert.equal(windLabel(5.5), 'mõõdukas tuul');
-  assert.equal(windLabel(7.9), 'mõõdukas tuul');
-  assert.equal(windLabel(8), 'tugev tuul');
-  assert.equal(windLabel(13.8), 'tugev tuul');
-  assert.equal(windLabel(13.9), 'väga tugev tuul');
+  assert.equal(windLabel(5.5), 'Mõõdukas tuul');
+  assert.equal(windLabel(7.9), 'Mõõdukas tuul');
+  assert.equal(windLabel(8), 'Tugev tuul');
+  assert.equal(windLabel(13.8), 'Tugev tuul');
+  assert.equal(windLabel(13.9), 'Väga tugev tuul');
   assert.equal(windLabel(null), null);
 });
 
-// --- sademed ja ikoon ---
-t('sademete sõna tuleb ilmakoodist', () => {
-  assert.equal(precipWord(63), 'vihma');
-  assert.equal(precipWord(81), 'vihma');
-  assert.equal(precipWord(73), 'lund');
-  assert.equal(precipWord(86), 'lund');
-  assert.equal(precipWord(67), 'lörtsi');
-  assert.equal(precipWord(57), 'lörtsi');
+// --- sademe liik ---
+t('sademe liik tuleb koodist', () => {
+  assert.equal(precipKind(63, 15), 'rain');
+  assert.equal(precipKind(81, 15), 'rain');
+  assert.equal(precipKind(73, 15), 'snow');
+  assert.equal(precipKind(86, 15), 'snow');
+  assert.equal(precipKind(67, 15), 'sleet');
+  assert.equal(precipKind(57, 15), 'sleet');
 });
 
-t('ikoon katab kogu koodivahemiku', () => {
-  assert.equal(iconFor(0), '☀️');
-  assert.equal(iconFor(2), '🌤️');
-  assert.equal(iconFor(3), '☁️');
-  assert.equal(iconFor(48), '🌫️');
-  assert.equal(iconFor(53), '🌦️');
-  assert.equal(iconFor(63), '🌧️');
-  assert.equal(iconFor(82), '🌧️');
-  assert.equal(iconFor(73), '❄️');
-  assert.equal(iconFor(95), '⛈️');
-  assert.equal(iconFor(null), '🌤️');
+t('kui kood sadu ei näita, otsustab kraad', () => {
+  assert.equal(precipKind(3, 5), 'rain', 'pilves ja soe -> vihm');
+  assert.equal(precipKind(3, 0.5), 'snow', 'pilves ja külm -> lumi');
+  assert.equal(precipKind(3, 1), 'rain', 'täpselt +1° -> veel vihm');
+  assert.equal(precipKind(0, null), 'rain', 'kraad puudub -> vaikimisi vihm');
+});
+
+t('sademe sõna on nimetavas käändes ja suure algustähega', () => {
+  assert.equal(precipWord('rain'), 'Vihm');
+  assert.equal(precipWord('snow'), 'Lumi');
+  assert.equal(precipWord('sleet'), 'Lörts');
+});
+
+// --- ikoon käib alati protsendiga kokku, mitte koodiga ---
+t('ikoon ei tohi numbriga vastuollu minna: sinu nähtud 46% ja 28%', () => {
+  // 46% sadu, kood ütleb "peamiselt selge" (1) — ikoon pidi enne näitama päikest.
+  assert.equal(iconFor(1, 46, 'rain'), '🌦️', '46% on "võib sadada" tsoonis');
+  // 28% sadu, kood ütleb vihma (63) — ikoon pidi enne näitama vihma.
+  assert.equal(iconFor(63, 28, 'rain'), '🌤️', '28% jääb alla 30% läve, ikoon ei tohi vihma näidata');
+});
+
+t('ikooniläved on täpselt piiril', () => {
+  assert.equal(iconFor(1, 29, 'rain'), '🌤️');
+  assert.equal(iconFor(1, 30, 'rain'), '🌦️');
+  assert.equal(iconFor(1, 59, 'rain'), '🌦️');
+  assert.equal(iconFor(61, 60, 'rain'), '🌧️');
+});
+
+t('äike võidab igasuguse protsendi', () => {
+  assert.equal(iconFor(95, 5, 'rain'), '⛈️');
+  assert.equal(iconFor(99, 0, 'rain'), '⛈️');
+});
+
+t('suure tõenäosuse juures käib ikoon sademe liigiga kaasas', () => {
+  assert.equal(iconFor(61, 80, 'rain'), '🌧️');
+  assert.equal(iconFor(73, 80, 'snow'), '❄️');
+  assert.equal(iconFor(67, 80, 'sleet'), '🌨️');
+});
+
+t('madala tõenäosuse juures tuleb ikoon taevast, mitte sademest', () => {
+  assert.equal(iconFor(0, 5, 'rain'), '☀️');
+  assert.equal(iconFor(3, 5, 'rain'), '☁️');
+  assert.equal(iconFor(48, 5, 'rain'), '🌫️');
+  assert.equal(iconFor(2, 5, 'rain'), '🌤️');
+  assert.equal(iconFor(null, 0, 'rain'), '🌤️');
 });
 
 // --- rida ekraanil ---
@@ -158,28 +210,35 @@ t('ühekraadine vahemik kirjutatakse ühe numbriga', () => {
   assert.equal(line.text, '17°');
 });
 
-t('täisrida paneb osad õigesse järjekorda', () => {
+t('täisrida paneb osad õigesse järjekorda, suured algustähed', () => {
   const hours = build([[11, 16, 13, 60, 63, 9]]);
   const line = formatWeather(summarize(hours, day, 660, 705));
   assert.equal(line.icon, '🌧️');
-  assert.equal(line.text, '16° · tundub 13° · vihma 60% · tugev tuul');
+  assert.equal(line.text, '16° · Tundub 13° · Vihm 60% · Tugev tuul');
 });
 
 t('sademed alates 10%, alla selle ei mainita', () => {
   const nine = formatWeather(summarize(build([[11, 16, 16, 9, 61, 0]]), day, 660, 705));
   assert.equal(nine.text, '16°');
   const ten = formatWeather(summarize(build([[11, 16, 16, 10, 61, 0]]), day, 660, 705));
-  assert.equal(ten.text, '16° · vihma 10%');
+  assert.equal(ten.text, '16° · Vihm 10%');
 });
 
 t('vaiksel ilmal jääb alles ainult kraad', () => {
-  const line = formatWeather(summarize(build([[11, 16, 15, 0, 1, 2]]), day, 660, 705));
+  const line = formatWeather(summarize(build([[11, 16, 16, 0, 1, 2]]), day, 660, 705));
   assert.equal(line.text, '16°');
   assert.equal(line.icon, '🌤️');
 });
 
 t('olematust kokkuvõttest rida ei teki', () => {
   assert.equal(formatWeather(null), null);
+});
+
+t('päris andmete näide: 1. september kell 12, 20,1° tundub 20,5°, sadu 25%', () => {
+  const hours = build([[12, 20.1, 20.5, 25, 2, 3.2]]);
+  const line = formatWeather(summarize(hours, day, 720, 765));
+  assert.equal(line.text, '20° · Tundub 21° · Vihm 25%');
+  assert.equal(line.icon, '🌤️', '25% on alla 30% läve, seega ikoon jääb taevast, mitte sademest');
 });
 
 // --- kus ilma näidata ---
@@ -206,6 +265,12 @@ t('sündmuse kellaaeg loetakse, lause mitte', () => {
   assert.equal(eventStartMin(''), null);
   assert.equal(eventStartMin(undefined), null);
   assert.equal(eventStartMin('25:00'), null);
+});
+
+// --- konstandid, et läved ei liiguks vaikselt ---
+t('ikoonilävede konstandid on need, mida testid eeldavad', () => {
+  assert.equal(POP_MAYBE, 30);
+  assert.equal(POP_LIKELY, 60);
 });
 
 // --- päris andmed ---

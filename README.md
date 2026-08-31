@@ -235,10 +235,19 @@ linna keskpunkt. Päring läheb otse telefonist, seega isikuandmeid kuhugi ei li
 ja teenusetöötleja seda ei vahemäluta.
 
 Rida ilmub kahes kohas: liikumisõpetuse kaardil ja `outdoor`-lipuga sündmusel.
-Näidatakse kraadivahemikku tunni ajal, sademeid alates 10%-st ja tuult alates
-mõõdukast (Ilmateenistuse skaala: mõõdukas 5,5+, tugev 8+, väga tugev 13,9+ m/s).
-„Tundub" lisandub ainult siis, kui tajutav temperatuur erineb päris omast
-vähemalt kolm kraadi — muidu oleks see teine number müra.
+Näidatakse kraadivahemikku tunni ajal, sademeid alates 10%-st (`Vihm 46%`,
+`Lumi` või `Lörts` — liik tuleb ilmakoodist, ja kui kood ise sadu ei näita,
+otsustab kraad) ja tuult alates mõõdukast (Ilmateenistuse skaala: mõõdukas
+5,5+, tugev 8+, väga tugev 13,9+ m/s). „Tundub X°" ilmub täpselt siis, kui
+tajutav temperatuur ümardatuna erineb näidatud kraadivahemikust — ilma
+kunstliku läveta, aga ka mitte siis, kui see vahemikku juba kordaks.
+
+**Ikoon käib alati sademete protsendiga kokku, mitte ilmakoodiga.** Need on
+Open-Meteos kaks eri välja ja lähevad vahel lahku — nii nägi kaart korra
+päikest 46% sajuvõimaluse kõrval. Nüüd: äike (kood 95+) võidab igasuguse
+protsendi; ≥60% annab sademeikooni (🌧️/❄️/🌨️ vastavalt liigile); 30–59% annab
+„võib sadada" pilve (🌦️) sõltumata liigist; alla 30% tuleb ikoon taevast
+(☀️/🌤️/☁️/🌫️). Nii ei saa ikoon kunagi numbriga vastuollu minna.
 
 **1. detsembrist 31. märtsini liikumisõpetuse rida ei ilmu**: siis on tund
 niikuinii sees. Väliüritustele see ei laiene, sest need on käsitsi õueks
