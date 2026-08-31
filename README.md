@@ -29,6 +29,10 @@ See rakendus on ainult **lugeja** — kooli leht jääb ainsaks tõeallikaks.
 - **Riigipühad, tähtpäevad ja nimepäevad** päise all: 1. september on
   tarkusepäev, 14. märts emakeelepäev, ja iga päev näitab ka selle päeva
   nimepäevi.
+- **Ilm seal, kus see riietumist muudab.** Liikumisõpetuse kaardil ja
+  väliürituste (aktus, spordipäev) kaardil on kraadivahemik, sademete
+  tõenäosus ja tuul — kooli enda asukoha järgi. Vt allpool.
+- **Hele või tume teema.** Vaikimisi süsteemi järgi, aga menüüst saab valida.
 - **Juhend avakuvale lisamiseks.** Esimesel avamisel näidatakse korra, kuidas
   rakendus kodukuvale panna — iPhone'il ja Androidil eri juhend, sest nupud on
   eri kohtades. Hiljem leiab selle menüüst.
@@ -88,8 +92,10 @@ Käsitsi saab käivitada GitHubis: Actions → *Uuenda tunniplaan* → *Run work
 | `make-icons.py` | Genereerib ikoonid (`python3 make-icons.py`). |
 | `bus.js` | Suunatuvastus, sõiduaeg, reaalaja parsimine, hommikuste ja kojusõidu väljumiste valik. |
 | `bus-data.mjs` | Laeb linna- ja maakonnaliinide GTFS-id, liidab need ja kirjutab `bus/`. Genereeritud, ei commitita. |
+| `weather.js` | Ilmaprognoosi päring, kokkuvõte tunni aja kohta ja rea vormindus. Ilma DOM-ita, seetõttu testitav. |
 | `namedays.mjs` | Laeb nimepäevad Statistikaametist -> `namedays.json`. Käsitsi, mitte iga deploy'ga. |
 | `notabledays.json` | Riigipühad, riiklikud tähtpäevad, rahvakalender. Käsitsi hooldatav. |
+| `overrides.json` | Erandpäevad: aktused, klassijuhatajatunnid. **Käsitsi hooldatav** — vt allpool. |
 
 ## Koolivaheaegade uuendamine
 
@@ -107,7 +113,8 @@ suvevaheaeg ei kehti lõpuklassidele.
 
 - **Ei näita ärajäänud tunde.** Asendused ja tühistused käivad eKooli kaudu,
   mis nõuab sisselogimist. Vt allpool.
-- **Ei tea koolisiseseid erisusi** (üritused, ekskursioonid, aktused).
+- **Ei tea koolisiseseid erisusi ise.** Üritused, ekskursioonid ja aktused ei
+  ole kooli Untise plaanis; need tuleb `overrides.json`-i käsitsi kirjutada.
 
 ### Bussiajad — kust andmed tulevad
 
@@ -210,6 +217,47 @@ kuupäevad ei sega midagi, need lihtsalt ei lange enam kokku.
 Test kontrollib, et iga `data.json`-is olev klass on erandpäeval kaetud —
 kui kool lisab klassi, tuleb see ehitusel välja, mitte lapse ekraanil.
 
+Õues toimuv sündmus saab `"outdoor": true` — siis näitab kaart ka ilma. Selleks
+peab `at` olema kellaaeg (`"10:00"`), mitte lause (`"pärast aktust"`): ilma
+küsitakse konkreetse tunni kohta. Test käib mõlemat pidi läbi — et „koolimaja
+ees" ja „spordiväljakul" oleks lipuga ja et lipuga kirjel oleks kellaaeg.
+
+Kooli [ülekooliliste ürituste plaan](https://21k.ee/yldinfo/ulekooliliste-urituste-plaan/)
+on eraldi leht ja käib omas tempos. Kui uue õppeaasta oma ilmub, tulevad
+spordipäev ja muud väliüritused siia faili — kraapimist ei tasu ehitada, plaan
+muutub paar korda aastas.
+
+### Ilm
+
+Prognoos tuleb [Open-Meteost](https://open-meteo.com/) — võtmeta, CORS lubatud,
+tunnipõhine. Koordinaadid on koolimaja omad (Raua 6: 59.4352, 24.7665), mitte
+linna keskpunkt. Päring läheb otse telefonist, seega isikuandmeid kuhugi ei liigu
+ja teenusetöötleja seda ei vahemäluta.
+
+Rida ilmub kahes kohas: liikumisõpetuse kaardil ja `outdoor`-lipuga sündmusel.
+Näidatakse kraadivahemikku tunni ajal, sademeid alates 10%-st ja tuult alates
+mõõdukast (Ilmateenistuse skaala: mõõdukas 5,5+, tugev 8+, väga tugev 13,9+ m/s).
+„Tundub" lisandub ainult siis, kui tajutav temperatuur erineb päris omast
+vähemalt kolm kraadi — muidu oleks see teine number müra.
+
+**1. detsembrist 31. märtsini liikumisõpetuse rida ei ilmu**: siis on tund
+niikuinii sees. Väliüritustele see ei laiene, sest need on käsitsi õueks
+märgitud.
+
+Prognoos elab `localStorage`-is (`tp.wx`, ~7 KB) ja töötab võrguta. Võrku
+koputatakse kõige rohkem korra poole tunni jooksul — ka siis, kui vastus jäi
+tulemata. Üle ööpäeva vana vahemälu visatakse ära: vale ilm on halvem kui
+tühi rida.
+
+### Hele ja tume teema
+
+Vaikimisi järgib rakendus süsteemi seadet. Infolehelt saab valida `süsteem`,
+`hele` või `tume`; valik läheb `localStorage`-i võtme `tp.theme` alla ja tuleb
+peale juba `index.html`-i päises, enne esimest värvimist — muidu välgataks hele
+taust. CSS-is on tumedad muutujad kaks korda (media-päringu all ja
+`[data-theme="dark"]` all), et käsitsi valik võidaks mõlemas suunas ja
+süsteemieelistus töötaks ka ilma JS-ita.
+
 ### Kus sait elab
 
 Sait on [Cloudflare Pages'is](https://tunniplaan.pages.dev). Ehitus jääb aga
@@ -229,8 +277,9 @@ vahemälu, muidu serveerib teenusetöötleja vana `app.js`-i edasi ja parandused
 ei jõua telefoni. Kohapeal jääb versiooniks `arendus` ja `dev`.
 
 Aadressi vahetamine lähtestab salvestatud seaded — klass, rühmavalikud,
-bussisuunad ja `tp.installSeen` (kas avakuvale lisamise juhendit on näidatud)
-on `localStorage`-is, mis on seotud päritoluga.
+bussisuunad, teemavalik (`tp.theme`), ilmaprognoos (`tp.wx`) ja
+`tp.installSeen` (kas avakuvale lisamise juhendit on näidatud) on
+`localStorage`-is, mis on seotud päritoluga.
 
 ### eKool ja ärajäänud tunnid
 
