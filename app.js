@@ -24,6 +24,7 @@ const LS_BUS = 'tp.bus';
 const LS_BUS_SHUT = 'tp.busShut';
 const LS_INSTALL = 'tp.installSeen';
 const LS_WX = 'tp.wx';
+const LS_THEME = 'tp.theme';
 
 /* ---------- Väikesed abifunktsioonid ---------- */
 
@@ -88,9 +89,49 @@ const state = {
   wx: null,         // ilmaprognoos tundide kaupa, vt weather.js
   wxAt: 0,          // millal see prognoos saadi
   wxTriedAt: 0,     // millal viimati võrku koputasime (ka ebaõnnestunult)
+  theme: 'auto',    // auto | light | dark, vt allpool
 };
 
 const picksFor = (klass) => state.picks[klass] || {};
+
+/* ---------- Teema ---------- */
+
+const THEMES = ['auto', 'light', 'dark'];
+const THEME_COLOR = { light: '#2563eb', dark: '#0b1220' };
+
+/**
+ * "auto" jätab otsuse süsteemile: eemaldame data-theme'i ja CSS-i media-päring
+ * teeb ülejäänu. Nii töötab süsteemieelistus ka siis, kui JS pole veel jõudnud.
+ */
+function applyTheme(theme) {
+  const root = document.documentElement;
+  if (theme === 'auto') delete root.dataset.theme;
+  else root.dataset.theme = theme;
+
+  // Olekuriba värv. Media-põhised sildid näitaksid käsitsi valiku korral vale
+  // teemat, seega kirjutame käsitsi valikul mõlemad üle ja autol paneme
+  // kummalegi tema oma värvi tagasi.
+  for (const meta of document.querySelectorAll('meta[name="theme-color"]')) {
+    const own = meta.media.includes('dark') ? THEME_COLOR.dark : THEME_COLOR.light;
+    meta.content = theme === 'auto' ? own : THEME_COLOR[theme];
+  }
+}
+
+function renderThemeSeg() {
+  for (const b of document.querySelectorAll('#theme-seg .seg-btn')) {
+    const on = b.dataset.theme === state.theme;
+    b.classList.toggle('is-on', on);
+    b.setAttribute('aria-checked', String(on));
+  }
+}
+
+function setTheme(theme) {
+  if (!THEMES.includes(theme)) return;
+  state.theme = theme;
+  store.set(LS_THEME, theme);
+  applyTheme(theme);
+  renderThemeSeg();
+}
 
 /* ---------- Ilm ---------- */
 
@@ -1041,6 +1082,16 @@ async function init() {
   state.notable = notable;
   state.namedays = namedays;
   state.overrides = overrides;
+
+  // Sama võti loeb ka index.html-i sisemine skript, et teema jõuaks kohale
+  // enne esimest värvimist. Siin normaliseerime rikutud väärtuse.
+  const saved = store.get(LS_THEME, 'auto');
+  state.theme = THEMES.includes(saved) ? saved : 'auto';
+  applyTheme(state.theme);
+  renderThemeSeg();
+  for (const b of document.querySelectorAll('#theme-seg .seg-btn')) {
+    b.addEventListener('click', () => setTheme(b.dataset.theme));
+  }
 
   if (!state.klass || !data.classes[state.klass]) {
     state.klass = null;

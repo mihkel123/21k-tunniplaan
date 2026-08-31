@@ -18,8 +18,12 @@
   color-scheme: light;
 }
 
+/* Teemal on kolm olekut: süsteemi järgi (data-theme puudub), käsitsi hele ja
+   käsitsi tume. Sellepärast on tumedad muutujad kaks korda — nii võidab
+   käsitsi valik mõlemas suunas ja süsteemieelistus töötab ka ilma JS-ita.
+   Kaks loendit peavad samaks jääma; muudad ühte, muuda ka teist. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #0b1220;
     --card: #151d2c;
     --ink: #eaf0f8;
@@ -32,6 +36,20 @@
     --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 6px 18px rgba(0, 0, 0, .35);
     color-scheme: dark;
   }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b1220;
+  --card: #151d2c;
+  --ink: #eaf0f8;
+  --ink-soft: #9fb0c6;
+  --ink-faint: #718095;
+  --line: #24304a;
+  --brand: #3b82f6;
+  --accent: #fbbf24;
+  --now: #34d399;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 6px 18px rgba(0, 0, 0, .35);
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -563,7 +581,8 @@ button {
 .steps li::marker { color: var(--ink-faint); font-weight: 650; }
 
 .field-error { color: #dc2626; font-size: 13px; margin: 0 0 12px; min-height: 1em; }
-@media (prefers-color-scheme: dark) { .field-error { color: #f87171; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .field-error { color: #f87171; } }
+:root[data-theme="dark"] .field-error { color: #f87171; }
 .bus-head b { display: flex; align-items: center; gap: 8px; }
 .bus-emoji { font-size: 17px; line-height: 1; }
 

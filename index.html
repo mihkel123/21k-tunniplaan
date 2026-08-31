@@ -34,6 +34,15 @@
 <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
 
 <link rel="stylesheet" href="styles.css">
+
+<!-- Käsitsi valitud teema tuleb peale enne esimest värvimist, muidu vilgub
+     hele taust. app.js on moodul ja jõuab kohale liiga hilja. -->
+<script>
+  try {
+    const t = JSON.parse(localStorage.getItem('tp.theme') || '"auto"');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch { /* privaatrežiim */ }
+</script>
 </head>
 <body>
 
@@ -79,6 +88,14 @@
   <div class="sheet-inner">
     <h2>Info</h2>
     <dl id="sheet-info" class="info"></dl>
+
+    <p class="sheet-lead">Välimus</p>
+    <div class="seg" id="theme-seg" role="radiogroup" aria-label="Välimus">
+      <button type="button" class="seg-btn" data-theme="auto" role="radio" aria-checked="true">Süsteem</button>
+      <button type="button" class="seg-btn" data-theme="light" role="radio" aria-checked="false">Hele</button>
+      <button type="button" class="seg-btn" data-theme="dark" role="radio" aria-checked="false">Tume</button>
+    </div>
+
     <div class="sheet-actions">
       <button id="change-class" class="btn" type="button">Vaheta klassi</button>
       <button id="bus-setup-open" class="btn btn-quiet" type="button">🚌 Bussiajad</button>
