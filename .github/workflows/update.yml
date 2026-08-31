@@ -4,6 +4,9 @@ on:
   schedule:
     # 02:00 UTC = 05:00 Eesti suveajal, 04:00 talveajal
     - cron: '0 2 * * *'
+    # 14:00 UTC = 17:00 Eesti suveajal, 16:00 talveajal — püüab kinni
+    # päeva jooksul tulnud muudatuse sama õhtu jooksul.
+    - cron: '0 14 * * *'
   workflow_dispatch:
   push:
     branches: [main]
