@@ -317,13 +317,18 @@ button {
 .day-weather {
   display: grid;
   gap: 10px;
-  background: var(--card);
-  border: 1px solid var(--line);
+  /* Õrn toon eristab riba tunnikaardist, sama taaskasutatud muster, mis
+     .banner.special'il (esimese koolipäeva teade). */
+  background: color-mix(in srgb, var(--brand) 6%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--brand) 20%, var(--line));
   border-radius: var(--r);
   padding: 13px 14px;
   box-shadow: var(--shadow);
 }
-.day-weather-row + .day-weather-row { border-top: 1px solid var(--line); padding-top: 10px; }
+.day-weather-row + .day-weather-row {
+  border-top: 1px solid color-mix(in srgb, var(--brand) 15%, var(--line));
+  padding-top: 10px;
+}
 .day-weather-when {
   font-size: 12px;
   font-weight: 650;
