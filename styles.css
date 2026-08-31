@@ -312,6 +312,36 @@ button {
 }
 .wx-icon { font-size: 14px; line-height: 1; flex: none; }
 
+/* Päeva ilmariba: hommik ja kojusõit, tunnikaartide ees. See ON põhisõnum,
+   mitte lisamärkus nagu .wx tunnikaardi sees, seega suurem ja selgem. */
+.day-weather {
+  display: grid;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 13px 14px;
+  box-shadow: var(--shadow);
+}
+.day-weather-row + .day-weather-row { border-top: 1px solid var(--line); padding-top: 10px; }
+.day-weather-when {
+  font-size: 12px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--ink-faint);
+  margin-bottom: 4px;
+}
+.day-weather .wx {
+  margin-top: 0;
+  flex-wrap: wrap;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.day-weather .wx-icon { font-size: 17px; }
+.wx-sep { color: var(--ink-faint); }
+
 /* Paralleelrühmad */
 .group-hint {
   margin: 2px 0 -2px;

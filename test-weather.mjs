@@ -2,7 +2,7 @@
 import {
   forecastUrl, indexHourly, summarize, windLabel, precipKind, precipWord, iconFor,
   formatWeather, isPeSubject, peWeatherSeason, eventStartMin,
-  POP_MAYBE, POP_LIKELY,
+  POP_MAYBE, POP_LIKELY, adviceTemp, clothingFor,
 } from './weather.js';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
@@ -271,6 +271,24 @@ t('sündmuse kellaaeg loetakse, lause mitte', () => {
 t('ikoonilävede konstandid on need, mida testid eeldavad', () => {
   assert.equal(POP_MAYBE, 30);
   assert.equal(POP_LIKELY, 60);
+});
+
+// --- päeva ilmariba: riietuse nõuanne ---
+t('adviceTemp valib külmema kahest kraadist', () => {
+  assert.equal(adviceTemp({ tempMin: 10, feels: 6 }), 6, 'tunnetuslik külmem -> tema');
+  assert.equal(adviceTemp({ tempMin: 10, feels: 14 }), 10, 'tunnetuslik soojem -> päris kraad jääb');
+  assert.equal(adviceTemp({ tempMin: 10, feels: 10 }), 10, 'võrdne -> päris kraad');
+  assert.equal(adviceTemp({ tempMin: 10, feels: null }), 10, 'tunnetuslik puudub -> päris kraad');
+  assert.equal(adviceTemp(null), null);
+});
+
+t('riietusebandid on täpselt piiril: 0 / 10 / 21', () => {
+  assert.deepEqual(clothingFor(-0.1), { icon: '🧊', label: 'Talvejope' });
+  assert.deepEqual(clothingFor(0), { icon: '🧥', label: 'Soe jope' });
+  assert.deepEqual(clothingFor(9.9), { icon: '🧥', label: 'Soe jope' });
+  assert.deepEqual(clothingFor(10), { icon: '🧢', label: 'Kerge jope' });
+  assert.deepEqual(clothingFor(20), { icon: '🧢', label: 'Kerge jope' });
+  assert.deepEqual(clothingFor(21), { icon: '👕', label: 'Õhuke riietus' });
 });
 
 // --- päris andmed ---

@@ -200,6 +200,31 @@ export function formatWeather(sum) {
   return { icon: iconFor(sum.code, sum.pop, sum.kind), text: parts.join(' · ') };
 }
 
+/* ---------- Päeva ilmariba: hommik ja kojusõit ---------- */
+
+/**
+ * Kraad, mille järgi riietust valida — külmem kahest: kui tunnetuslik on
+ * päris kraadist külmem (külm tuul), kasutame seda; kui soojem (nt otsene
+ * päike), jääme päris kraadi juurde. Parem veidi üleriietada kui alla.
+ */
+export function adviceTemp(sum) {
+  if (!sum) return null;
+  return sum.feels != null && sum.feels < sum.tempMin ? sum.feels : sum.tempMin;
+}
+
+const CLOTHING_BANDS = [
+  [0, '🧊', 'Talvejope'],
+  [10, '🧥', 'Soe jope'],
+  [21, '🧢', 'Kerge jope'],
+];
+const CLOTHING_WARM = { icon: '👕', label: 'Õhuke riietus' };
+
+/** Riietusnõuanne kraadist: 0/10/21 piirid. */
+export function clothingFor(temp) {
+  for (const [max, icon, label] of CLOTHING_BANDS) if (temp < max) return { icon, label };
+  return CLOTHING_WARM;
+}
+
 /* ---------- Kus ilma üldse näidata ---------- */
 
 export const isPeSubject = (name) => /liikumis|kehaline/i.test(name || '');

@@ -16,6 +16,7 @@ import {
 import {
   REFRESH_AFTER_MS, CACHE_MAX_AGE_MS, forecastUrl, indexHourly, summarize,
   formatWeather, isPeSubject, peWeatherSeason, eventStartMin,
+  adviceTemp, clothingFor,
 } from './weather.js';
 import { screen as trackScreen, leaving as trackLeaving } from './stats.js';
 
@@ -197,6 +198,49 @@ function weatherRow(line) {
   const row = el('div', 'wx');
   row.append(el('span', 'wx-icon', line.icon), el('span', null, line.text));
   return row;
+}
+
+const clockLabel = (min) => `${Math.floor(min / 60)}:${String(min % 60).padStart(2, '0')}`;
+
+/**
+ * Üks rida päeva ilmaribas: riietusnõuanne + päris ilm samas kohas, sest
+ * mõlemad tulevad samast prognoosiaknast. Riietus ("Kerge jope") ja ilm
+ * ("16° · Vihm 4%") taaskasutavad täpselt sama `formatWeather()`-it, mis
+ * juba liikumisõpetuse ja väliürituste kaartidel töötab.
+ */
+function dayWeatherRow(label, timeMin, sum) {
+  const line = formatWeather(sum);
+  if (!line) return null;
+  const cloth = clothingFor(adviceTemp(sum));
+  const row = el('div', 'day-weather-row');
+  row.append(el('div', 'day-weather-when', `${label} · ${clockLabel(timeMin)}`));
+  const wx = el('div', 'wx');
+  wx.append(
+    el('span', 'wx-icon', cloth.icon), el('span', null, cloth.label),
+    el('span', 'wx-sep', '·'),
+    el('span', 'wx-icon', line.icon), el('span', null, line.text),
+  );
+  row.append(wx);
+  return row;
+}
+
+/**
+ * Päeva ilmariba: mis selga panna hommikul ja mis ilmaga koolist koju
+ * minnes. Erinevalt liikumisõpetuse reast käib see aasta ringi, ka talvel —
+ * just siis loeb "talvejope" kõige rohkem.
+ */
+function dailyWeatherBanner(firstStartMin, lastEndMin) {
+  if (!state.wx) return null;
+  const day = iso(state.selected);
+  const morning = dayWeatherRow('Hommikul', firstStartMin - 30,
+    summarize(state.wx, day, firstStartMin - 30, firstStartMin));
+  const afternoon = dayWeatherRow('Kooli lõpuks', lastEndMin,
+    summarize(state.wx, day, lastEndMin, lastEndMin));
+  if (!morning && !afternoon) return null;
+  const box = el('section', 'day-weather');
+  if (morning) box.append(morning);
+  if (afternoon) box.append(afternoon);
+  return box;
 }
 
 /* ---------- Koolipäevad ja vaheajad ---------- */
@@ -484,8 +528,12 @@ function renderLessons() {
     return;
   }
 
-  // Hommikune kaart käib esimese tunni ette, kojusõit päeva lõppu.
+  // Ilmariba ja hommikune bussikaart käivad esimese tunni ette, sel
+  // järjekorras — enne kõike muud "mida selga panna", siis "millal bussile".
   if (firstStartMin != null) {
+    const weather = dailyWeatherBanner(firstStartMin, lastEndMin);
+    if (weather) main.insertBefore(weather, firstEl);
+
     const before = document.createDocumentFragment();
     renderBusCards(before, { dir: TO_SCHOOL, day, anchorMin: firstStartMin, isToday, gen });
     if (before.childNodes.length) main.insertBefore(before, firstEl);

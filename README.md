@@ -235,8 +235,19 @@ tunnipõhine. Koordinaadid on koolimaja omad (Raua 6: 59.4352, 24.7665), mitte
 linna keskpunkt. Päring läheb otse telefonist, seega isikuandmeid kuhugi ei liigu
 ja teenusetöötleja seda ei vahemäluta.
 
-Rida ilmub kahes kohas: liikumisõpetuse kaardil ja `outdoor`-lipuga sündmusel.
-Näidatakse kraadivahemikku tunni ajal, sademeid alates 10%-st (`Vihm 46%`,
+**Päeva ilmariba** ilmub iga tavalise koolipäeva algusesse, tunnikaartide
+ette: mis ilm on hommikul pool tundi enne esimese tunni algust ja mis ilm on
+kooli lõppedes. Iga rida ütleb ka, mida selga panna — `talvejope` alla 0°,
+`soe jope` 0–9°, `kerge jope` 10–20°, `õhuke riietus` 21°+, valitud külmema
+kraadi järgi (tunnetuslik, kui see on päris kraadist külmem, muidu päris
+kraad). Erinevalt liikumisõpetuse reast ei sõltu see riba talvereeglist —
+näidatakse aasta ringi, ka detsembrist märtsini, sest just siis "talvejope"
+nõuanne kõige rohkem loeb. Koolivaheajal ja erandpäeval (aktus jms) riba ei
+ilmu, samadel tingimustel, mis bussikaartegi ei näidata.
+
+Väiksem, tunnipõhine rida ilmub kahes kohas: liikumisõpetuse kaardil ja
+`outdoor`-lipuga sündmusel. Näidatakse kraadivahemikku tunni ajal, sademeid
+alates 10%-st (`Vihm 46%`,
 `Lumi` või `Lörts` — liik tuleb ilmakoodist, ja kui kood ise sadu ei näita,
 otsustab kraad) ja tuult alates mõõdukast (Ilmateenistuse skaala: mõõdukas
 5,5+, tugev 8+, väga tugev 13,9+ m/s). „Tundub X°" ilmub täpselt siis, kui
