@@ -467,20 +467,22 @@ function eventCard(e) {
 function lunchCard(lunch, menu) {
   const card = el('section', 'card is-lunch');
 
+  // Suur number on söömise aeg — see on number, mille kool ise tunniplaani
+  // lehel avaldab ja mille laps ära tunneb. Tuletatud 30-minutiline vahetund
+  // käib väiksemal real: see selgitab, miks järgmine tund nihkub, aga ei tohi
+  // kaardil kooli enda ajaga vastuollu minna.
   const when = el('div', 'when');
-  const aeg = lunch.break ?? lunch.eat;
-  when.append(el('b', null, clockLabel(aeg.start)), el('span', null, clockLabel(aeg.end)));
+  when.append(el('b', null, clockLabel(lunch.eat.start)), el('span', null, clockLabel(lunch.eat.end)));
   card.append(when);
 
   const what = el('div', 'what');
   const subject = el('div', 'subject');
-  subject.append(el('span', 'emoji', '🍽️'),
-    el('span', null, lunch.break ? 'Söögivahetund' : 'Söömine'));
+  subject.append(el('span', 'emoji', '🍽️'), el('span', null, 'Söömine'));
   what.append(subject);
 
-  // Vahetund on 30 min, söömine selle sees 15 — ütleme, millal just see klass läheb.
   if (lunch.break) {
-    what.append(el('div', 'meta', `Söömine ${clockLabel(lunch.eat.start)}–${clockLabel(lunch.eat.end)}`));
+    what.append(el('div', 'meta',
+      `Vahetund ${clockLabel(lunch.break.start)}–${clockLabel(lunch.break.end)}`));
   }
 
   // Taimetoit ei saa eraldi märki — iga roog kannab lihtsalt oma ikooni.
