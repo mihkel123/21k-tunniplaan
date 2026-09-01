@@ -90,28 +90,40 @@ function emojiFor(name) {
   return '📘';
 }
 
-/* Koolilõuna road. Järjekord loeb: esimene vaste võidab, seega käib
-   iseloomulikum enne üldisemat — "Sealiha-hapukapsapada" on liharoog, mitte
-   kapsaroog, ja "Värskekapsaborš" on supp, mitte kapsas. Kõige ees on
-   magustoit ja supp, sest need määravad roa olemuse tugevamini kui koostis. */
+/* Koolilõuna road. Esimene vaste võidab, seega järjekord on kogu reegel.
+   Kõige tähtsam: VORM käib koostisosa ees. Koostisosa ütleb, millest roog
+   on, aga ikoon näitab, mis kujul see lauale tuleb — "Hakkliha-koorekaste"
+   on kaste, mitte konditükk, ja "kanakaste" on kaste, mitte praetud koib.
+   Eesti koolitoit on valdavalt kaste, pada või supp, seega vorm on
+   visuaalselt iseloomulikum kui loom. Koostisosa otsustab ainult siis, kui
+   vormisõna puudub ("Ahjupraad", "Keedetud kana"). */
 const DISH_EMOJI = [
+  // 1. Magustoit
   ['kohupiim', '🍮'], ['kissell', '🍮'], ['magustoit', '🍮'], ['kreem', '🍮'],
-  ['moos', '🍮'], ['vahukoor', '🍮'], ['kook', '🍰'], ['pannkook', '🥞'],
+  ['moos', '🍮'], ['vahukoor', '🍮'], ['pannkook', '🥞'], ['kook', '🍰'],
+  // 2. Supp
   ['supp', '🍲'], ['borš', '🍲'], ['seljanka', '🍲'], ['puljong', '🍲'],
+  // 3. Puder
   ['puder', '🥣'], ['kama', '🥣'], ['manna', '🥣'],
+  // 4. Roog, mis on juba nime järgi valmis roog
   ['pitsa', '🍕'], ['pasta', '🍝'], ['makaron', '🍝'], ['spagett', '🍝'], ['lasanje', '🍝'],
+  ['riso', '🍚'], ['pilaff', '🍚'], ['salat', '🥗'],
+  // 5. Vorm — käib koostisosade ees
+  ['karri', '🍛'], ['kaste', '🍛'],
+  ['pada', '🥘'], ['hautis', '🥘'], ['raguu', '🥘'], ['vormiroog', '🥘'],
+  ['kotlet', '🧆'], ['frikadell', '🧆'], ['lihapall', '🧆'],
+  ['praad', '🍖'],
+  // 6. Koostisosa
   ['kala', '🐟'], ['lõhe', '🐟'], ['tursk', '🐟'], ['räim', '🐟'], ['heeringas', '🐟'],
   ['kana', '🍗'], ['broiler', '🍗'], ['kalkun', '🍗'],
   ['vorst', '🌭'], ['viiner', '🌭'],
-  ['sealiha', '🍖'], ['veise', '🍖'], ['hakkliha', '🍖'], ['kotlet', '🍖'],
-  ['frikadell', '🍖'], ['praad', '🍖'], ['sink', '🍖'], ['liha', '🍖'],
+  ['sealiha', '🥩'], ['veise', '🥩'], ['hakkliha', '🥩'], ['sink', '🥩'], ['liha', '🥩'],
   ['muna', '🥚'], ['omlett', '🥚'],
   ['uba', '🫘'], ['oad', '🫘'], ['läätse', '🫘'], ['herne', '🫘'],
   ['tatar', '🌾'], ['tatra', '🌾'], ['oder', '🌾'], ['kruubi', '🌾'],
-  ['riso', '🍚'], ['riis', '🍚'], ['pilaff', '🍚'],
-  ['kartul', '🥔'],
+  ['riis', '🍚'], ['kartul', '🥔'],
   ['juust', '🧀'], ['seen', '🍄'],
-  ['köögivilja', '🥗'], ['kapsa', '🥗'], ['porgand', '🥗'], ['salat', '🥗'],
+  ['köögivilja', '🥗'], ['kapsa', '🥗'], ['porgand', '🥗'],
 ];
 
 function dishEmoji(name) {
