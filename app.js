@@ -6,7 +6,7 @@ import {
   holidayOn as holidayIn, isSchoolDay as isSchoolDayIn, defaultDate as defaultDateIn,
   relativeLabel, isFreshChange,
   notableOn as notableIn, namesOn as namesIn,
-  overrideOn as overrideIn,
+  overrideOn as overrideIn, parseLunch,
 } from './schedule.js';
 import {
   DEFAULT_WALK_MIN, TO_SCHOOL, TO_HOME, searchStops, idsByName, matchRoutes, parseSiri,
@@ -108,6 +108,7 @@ const state = {
   wxTriedAt: 0,     // millal viimati võrku koputasime (ka ebaõnnestunult)
   theme: 'auto',    // auto | light | dark, vt allpool
   editingChoice: null,   // choiceKey, mille rühmavalikut hetkel muudetakse, või null
+  menu: null,       // koolilõuna menüü kuupäevade kaupa, vt menu.mjs
 };
 
 const picksFor = (klass) => state.picks[klass] || {};
@@ -415,6 +416,42 @@ function eventCard(e) {
   return card;
 }
 
+/**
+ * Söögivahetund tundide vahel. Vasakul 30-minutiline vahetund (kooli reegli
+ * järgi tuletatud), all täpsustus, millal see klass sööma läheb, ja päeva
+ * menüü — ainult roa nimed, ilma lisandite, jookide ja leivata.
+ * 1.–2. klassil, kellel vahetundi tuletada ei saa, jääb ainult söömise aken.
+ */
+function lunchCard(lunch, menu) {
+  const card = el('section', 'card is-lunch');
+
+  const when = el('div', 'when');
+  const aeg = lunch.break ?? lunch.eat;
+  when.append(el('b', null, clockLabel(aeg.start)), el('span', null, clockLabel(aeg.end)));
+  card.append(when);
+
+  const what = el('div', 'what');
+  const subject = el('div', 'subject');
+  subject.append(el('span', 'emoji', '🍽️'),
+    el('span', null, lunch.break ? 'Söögivahetund' : 'Söömine'));
+  what.append(subject);
+
+  // Vahetund on 30 min, söömine selle sees 15 — ütleme, millal just see klass läheb.
+  if (lunch.break) {
+    what.append(el('div', 'meta', `Söömine ${clockLabel(lunch.eat.start)}–${clockLabel(lunch.eat.end)}`));
+  }
+
+  for (const roog of menu?.tava ?? []) what.append(el('div', 'dish', roog));
+  for (const roog of menu?.taim ?? []) {
+    const rida = el('div', 'dish');
+    rida.append(el('span', 'dish-veg', '🌱'), el('span', null, roog));
+    what.append(rida);
+  }
+
+  card.append(what);
+  return card;
+}
+
 function choiceBlock(klass, cell, period, change, { editing = false, chosenKey = null } = {}) {
   const box = el('section', 'choice');
   const optional = cellIsOptional(cell);
@@ -501,11 +538,22 @@ function renderLessons() {
   const isToday = iso(selected) === iso(state.now);
   const nowMin = state.now.getHours() * 60 + state.now.getMinutes();
 
+  // Söögivahetund nihutab ühte tundi 15 min hilisemaks (kooli tundide-ajad
+  // leht loetleb tundidele 3.-7. kaks varianti). Ehitame selle päeva
+  // tunniajad nihkega, et kaart, "Praegu" silt, bussikaart ja ilmariba
+  // räägiksid kõik samast kellaajast. data.periods ise jääb puutumata.
+  const lunch = parseLunch(data.classes[klass].lunch?.[day]);
+  const periods = lunch?.shift
+    ? data.periods.map((p) => (p.n === lunch.shift.periodN
+      ? { ...p, start: clockLabel(lunch.shift.start), end: clockLabel(lunch.shift.end) }
+      : p))
+    : data.periods;
+
   // Leia praegu käiv ja järgmine tund
   let nowIdx = -1;
   let nextIdx = -1;
   if (isToday) {
-    data.periods.forEach((p, i) => {
+    periods.forEach((p, i) => {
       if (!grid[i]?.[day]?.length) return;
       if (nowMin >= minutesOf(p.start) && nowMin <= minutesOf(p.end)) nowIdx = i;
       else if (nextIdx === -1 && nowMin < minutesOf(p.start)) nextIdx = i;
@@ -520,7 +568,18 @@ function renderLessons() {
 
   const put = (node) => { if (!firstEl) firstEl = node; main.append(node); };
 
-  data.periods.forEach((period, i) => {
+  // Söögikaart läheb kronoloogiliselt õigesse kohta: enne esimest tundi,
+  // mis algab hiljem kui söögivahetund.
+  const lunchAt = lunch ? (lunch.break ?? lunch.eat).start : null;
+  const menuToday = state.menu?.days?.[iso(selected)] ?? null;
+  let lunchPlaced = false;
+  const putLunchBefore = (startMin) => {
+    if (lunchPlaced || lunchAt == null || lunchAt > startMin) return;
+    lunchPlaced = true;
+    put(lunchCard(lunch, menuToday));
+  };
+
+  periods.forEach((period, i) => {
     const cell = grid[i]?.[day] ?? [];
     const change = changeFor(klass, i, day);
 
@@ -528,6 +587,7 @@ function renderLessons() {
     if (!cell.length) {
       if (change && (change.kind === 'removed' || change.movedTo)) {
         any = true;
+        putLunchBefore(minutesOf(period.start));
         put(ghostCard(period, change));
       }
       return;
@@ -537,6 +597,7 @@ function renderLessons() {
     if (skipped) return;        // laps ei käi siin — kaarti ei näidata
 
     any = true;
+    putLunchBefore(minutesOf(period.start));
     lastEndMin = minutesOf(period.end);
     if (firstStartMin == null) firstStartMin = minutesOf(period.start);
 
@@ -1165,13 +1226,14 @@ async function loadJSON(path, fallback) {
 }
 
 async function init() {
-  const [data, changes, holidays, notable, namedays, overrides] = await Promise.all([
+  const [data, changes, holidays, notable, namedays, overrides, menu] = await Promise.all([
     loadJSON('data.json', null),
     loadJSON('changes.json', {}),
     loadJSON('holidays.json', null),
     loadJSON('notabledays.json', null),
     loadJSON('namedays.json', null),
     loadJSON('overrides.json', null),
+    loadJSON('menu.json', null),
   ]);
 
   if (!data) {
@@ -1185,6 +1247,7 @@ async function init() {
   state.notable = notable;
   state.namedays = namedays;
   state.overrides = overrides;
+  state.menu = menu;
 
   // Sama võti loeb ka index.html-i sisemine skript, et teema jõuaks kohale
   // enne esimest värvimist. Siin normaliseerime rikutud väärtuse.

@@ -16,7 +16,7 @@ const SHELL_FILES = [
   'notabledays.json', 'namedays.json', 'overrides.json',
   'icons/apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/favicon-32.png',
 ];
-const DATA_FILES = ['data.json', 'changes.json', 'holidays.json'];
+const DATA_FILES = ['data.json', 'changes.json', 'holidays.json', 'menu.json'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {

@@ -1,5 +1,5 @@
 // Päevaloogika testid: node test-schedule.mjs
-import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn } from './schedule.js';
+import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, parseLunch } from './schedule.js';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
@@ -193,6 +193,85 @@ t('kõik klassid on erandpäeval kaetud', () => {
   const day = OV.days['2026-09-01'].classes;
   const puudu = data.classOrder.filter((k) => !day[k]?.length);
   assert.deepEqual(puudu, []);
+});
+
+/* ---------- Söögivahetund ---------- */
+
+const hhmm = (t) => `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`;
+const vahemik = (v) => (v ? `${hhmm(v.start)}-${hhmm(v.end)}` : null);
+
+t('lihtne söömise aken ilma märkuseta', () => {
+  const r = parseLunch('11:30 - 11:45');
+  assert.equal(vahemik(r.eat), '11:30-11:45');
+  assert.equal(r.note, null);
+  assert.equal(r.shift, null);
+});
+
+t('30-min vahetund tuletatakse kooli reegli järgi', () => {
+  // :30 ja :45 algus -> söömine vahetunni alguses
+  assert.equal(vahemik(parseLunch('11:30 - 11:45').break), '11:30-12:00');
+  assert.equal(vahemik(parseLunch('11:45 - 12:00').break), '11:45-12:15');
+  // :00 algus -> vahetund algab 15 min enne söömist
+  assert.equal(vahemik(parseLunch('11:00 - 11:15').break), '10:45-11:15');
+});
+
+t('1.-2. klassi 20-minutilisest aknast vahetundi ei tuletata', () => {
+  // Need ei mahu kooli ametlikku üheksa sloti loendisse — parem vähem kui vale.
+  assert.equal(parseLunch('11:00 - 11:20').break, null, '20 min aken, kuigi algus :00');
+  assert.equal(parseLunch('11:40 - 12:00').break, null);
+  assert.equal(parseLunch('10:50 - 11:10').break, null);
+});
+
+t('nihe loetakse välja koos tunni numbriga', () => {
+  const r = parseLunch('11:00 - 11:15 4. tund algab ja lõppeb 15 min hiljem 4. tund kestab 11.15-12.00');
+  assert.deepEqual(r.shift, { periodN: 4, start: 11 * 60 + 15, end: 12 * 60 });
+  assert.equal(r.note, '4. tund algab ja lõppeb 15 min hiljem');
+});
+
+t('punkt kooloni asemel ei sega — kool kirjutab ühes kirjes 13.15', () => {
+  const r = parseLunch('13:00 - 13.15 6. tund algab ja lõppeb 15 min hiljem 6. tund kestab 13.15-14.00');
+  assert.equal(vahemik(r.eat), '13:00-13:15');
+  assert.equal(vahemik(r.break), '12:45-13:15');
+  assert.deepEqual(r.shift, { periodN: 6, start: 13 * 60 + 15, end: 14 * 60 });
+});
+
+t('paaristunni märkus jääb alles, nihet ei ole', () => {
+  const r = parseLunch('11:30 - 11:45 Söömine on pärast paaristundi. 5. tund algab kell 12.00');
+  assert.equal(vahemik(r.break), '11:30-12:00');
+  assert.equal(r.shift, null, 'kool ütleb ainult algusaja, mis on standardne');
+  assert.equal(r.note, 'Söömine on pärast paaristundi. 5. tund algab kell 12.00');
+});
+
+t('tühi või vigane lahter annab null', () => {
+  assert.equal(parseLunch(''), null);
+  assert.equal(parseLunch(null), null);
+  assert.equal(parseLunch('Söömist ei ole'), null, 'kellaaegadeta tekst');
+  assert.equal(parseLunch('11:00'), null, 'ainult üks kellaaeg');
+});
+
+t('kõik 230 päris kirjet parsivad ja vahetunnid langevad kooli loendisse', () => {
+  const data = JSON.parse(readFileSync(new URL('./data.json', import.meta.url), 'utf8'));
+  // Kooli tundide-ajad lehe ametlikud üheksa söögivahetundi.
+  const ametlik = new Set(['09:45-10:15', '10:30-11:00', '10:45-11:15', '11:30-12:00',
+    '11:45-12:15', '12:30-13:00', '12:45-13:15', '13:30-14:00', '13:45-14:15']);
+  let parsis = 0, vahetunde = 0, ilma = 0;
+  for (const k of data.classOrder) {
+    for (const l of data.classes[k].lunch) {
+      const r = parseLunch(l);
+      assert.ok(r, `${k}: ei parsinud "${l}"`);
+      parsis++;
+      if (r.break) {
+        vahetunde++;
+        assert.ok(ametlik.has(vahemik(r.break)), `${k}: vahetund ${vahemik(r.break)} pole kooli loendis`);
+      } else {
+        ilma++;
+        assert.equal(r.eat.end - r.eat.start, 20, `${k}: vahetunnita kirje peaks olema 20-min aken`);
+      }
+    }
+  }
+  assert.equal(parsis, 230);
+  assert.equal(vahetunde, 195);
+  assert.equal(ilma, 35, '1A-1E, 2C, 2D viie päeva kohta');
 });
 
 console.log(`\n${pass} testi läbitud.`);

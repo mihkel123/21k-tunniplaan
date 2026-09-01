@@ -157,3 +157,69 @@ export function overrideOn(overrides, date, klass) {
 export function namesOn(namedays, date) {
   return namedays?.days?.[MD(date)] ?? [];
 }
+
+/* ---------- Söögivahetund ---------- */
+
+/**
+ * Kooli reegel (tundide-ajad leht): söögivahetund kestab 30 minutit ja
+ * söömise aken selle sees 15. Tunniplaani tabelis on aken, mitte vahetund.
+ *   :30 algus -> vahetund :30–:00 (söömine alguses)
+ *   :45 algus -> vahetund :45–:15 (söömine alguses)
+ *   :00 algus -> vahetund :45–:15 (söömine lõpus, vahetund algab 15 min varem)
+ *
+ * 1.–2. klassil (1A–1E, 2C, 2D) on aken 20 minutit ja algused :40/:50 —
+ * need ei mahu kooli ametlikku üheksa sloti loendisse. Neil tagastame null
+ * ja näitame ainult akent, nagu koolil kirjas: parem vähem kui vale.
+ */
+function breakAround(eat) {
+  if (eat.end - eat.start !== 15) return null;
+  const m = eat.start % 60;
+  if (m === 30 || m === 45) return { start: eat.start, end: eat.start + 30 };
+  if (m === 0) return { start: eat.start - 15, end: eat.start + 15 };
+  return null;
+}
+
+const HHMM = /(\d{1,2})[:.](\d{2})/g;
+const toMin = (h, m) => Number(h) * 60 + Number(m);
+
+/**
+ * Söögiaja lahter kooli tunniplaanist. Kolm kuju:
+ *   "11:00 - 11:20"
+ *   "11:00 - 11:15 4. tund algab ja lõppeb 15 min hiljem 4. tund kestab 11.15-12.00"
+ *   "11:30 - 11:45 Söömine on pärast paaristundi. 5. tund algab kell 12.00"
+ * Kellaaja eraldaja on enamasti koolon, aga ühes kirjes on punkt — mõlemad käivad.
+ *
+ * -> { eat: {start, end}, break: {start, end}|null, note, shift: {periodN, start, end}|null }
+ */
+export function parseLunch(str) {
+  const s = String(str ?? '').trim();
+  if (!s) return null;
+
+  HHMM.lastIndex = 0;
+  const eatFrom = HHMM.exec(s);
+  const eatTo = HHMM.exec(s);
+  if (!eatFrom || !eatTo) return null;
+
+  const eat = { start: toMin(eatFrom[1], eatFrom[2]), end: toMin(eatTo[1], eatTo[2]) };
+
+  // Nihe: kool ütleb tunni uue kestuse ("4. tund kestab 11.15-12.00") või
+  // ainult uue alguse ("5. tund algab kell 12.00", paaristunni järel).
+  let shift = null;
+  const kestab = /(\d+)\. tund kestab\s*(\d{1,2})[:.](\d{2})\s*-\s*(\d{1,2})[:.](\d{2})/.exec(s);
+  if (kestab) {
+    shift = {
+      periodN: Number(kestab[1]),
+      start: toMin(kestab[2], kestab[3]),
+      end: toMin(kestab[4], kestab[5]),
+    };
+  }
+
+  // Kooli märkus ilma kellaaegadeta — söömise akna järelt, ilma nihkelauseta.
+  const note = s
+    .slice(eatTo.index + eatTo[0].length)
+    .replace(/\d+\. tund kestab[\s\S]*$/, '')
+    .replace(/\s+/g, ' ')
+    .trim() || null;
+
+  return { eat, break: breakAround(eat), note, shift };
+}

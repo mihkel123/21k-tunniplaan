@@ -40,6 +40,7 @@ jobs:
           node test-bus.mjs
           node test-weather.mjs
           node test-stats.mjs
+          node test-menu.mjs
 
       # Kraabib kooli lehe ja võrdleb eelmise plaaniga.
       # Kui kooli HTML on muutunud, lõpeb see veaga ja deploy jääb tegemata —
@@ -47,14 +48,20 @@ jobs:
       - name: Lae tunniplaan
         run: node scrape.mjs
 
+      # Koolilõuna menüü. Tõrge EI peata avaldamist (menu.mjs lõpetab koodiga
+      # 0): menüü on kõrvaline lisa ja katkine menüüleht ei tohi tunniplaani
+      # väljas hoida. Vana menu.json jääb siis alles.
+      - name: Lae koolilõuna menüü
+        run: node menu.mjs
+
       - name: Salvesta muudatused
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- data.json changes.json; then
+          if git diff --quiet -- data.json changes.json menu.json; then
             echo "Tunniplaan ei muutunud."
           else
-            git add data.json changes.json
+            git add data.json changes.json menu.json
             git commit -m "Tunniplaan uuendatud $(date -u +%Y-%m-%d)"
             git push
           fi
@@ -68,7 +75,7 @@ jobs:
         run: |
           mkdir -p _site/icons
           cp index.html styles.css app.js schedule.js bus.js weather.js stats.js sw.js \
-             manifest.webmanifest data.json changes.json holidays.json \
+             manifest.webmanifest data.json changes.json holidays.json menu.json \
              notabledays.json namedays.json overrides.json _site/
           cp icons/*.png _site/icons/
           cp -r bus _site/bus
