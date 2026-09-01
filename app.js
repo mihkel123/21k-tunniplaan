@@ -25,6 +25,7 @@ const LS_PICKS = 'tp.picks';
 const LS_BUS = 'tp.bus';
 const LS_BUS_SHUT = 'tp.busShut';
 const LS_INSTALL = 'tp.installSeen';
+const LS_INSTALL_TRIED = 'tp.installTried';
 
 // Kestus, mida statistikale saadame, loetakse sellest hetkest. Moodul jookseb
 // kohe lehe laadimisel, mil leht on tavajuhul juba nähtaval.
@@ -1105,20 +1106,29 @@ function openInstall() {
   trackScreen('/paigalda');
 }
 
-/** Esimesel avamisel klassivaliku peale, väikese viivitusega. */
+/**
+ * Klassivaliku peale, kui laps on seal nähtaval oldud (mitte kella järgi
+ * ka taustal olles). Esimesel korral 30s, kui see "sessioon" (nähtavaks
+ * jäämine) enne seda taustale läheb, siis järgmisel korral juba 5s — ei
+ * pea kohe uuesti kaua ootama, kui esimene kord peaaegu kohale jõudis.
+ * Kutsutakse nii esimesel avamisel kui igal järgmisel nähtavaks-tulekul
+ * (vt visibilitychange allpool); kui klass on juba valitud, ei tee midagi.
+ */
 let installTimer = null;
 function maybeOfferInstall() {
-  if (store.get(LS_INSTALL, false) || isInstalled()) return;
+  if (state.klass || store.get(LS_INSTALL, false) || isInstalled()) return;
+  const delay = store.get(LS_INSTALL_TRIED, false) ? 5000 : 30000;
+  store.set(LS_INSTALL_TRIED, true);
   installTimer = setTimeout(() => {
     // Kui laps jõudis vahepeal klassi valida, ei hüppa juhend enam ette.
     // showApp tühistab taimeri, aga see kontroll hoiab ka siis, kui
     // tühistus mingil põhjusel maha magatakse.
-    if ($('#picker').hidden) return;
+    if (state.klass) return;
     // Lipp läheb püsti näitamisel: juhend on ühekordne, ka siis kui laps
     // selle kohe kinni paneb.
     store.set(LS_INSTALL, true);
     openInstall();
-  }, 2000);
+  }, delay);
 }
 
 /* ---------- Infoleht ---------- */
@@ -1228,9 +1238,11 @@ async function init() {
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       trackLeaving((Date.now() - visibleSince) / 1000);
+      clearTimeout(installTimer);   // sessioon lõppes ilma juhendit näitamata
       return;
     }
     visibleSince = Date.now();
+    maybeOfferInstall();   // uus nähtavaks-tulek — proovi uuesti, õige viivitusega
     if (!state.klass) return;
     const before = iso(state.selected);
     state.now = new Date();
