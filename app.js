@@ -467,19 +467,19 @@ function eventCard(e) {
 function lunchCard(lunch, menu) {
   const card = el('section', 'card is-lunch');
 
-  // Üks kellaaeg, mitte kaks: 30-minutiline vahetund. Söömise aken (15 min
-  // selle sees) jääb näitamata — kaks kattuvat vahemikku ühel kaardil luges
-  // vastuoluna, eriti päeval, mil mõlemad algavad samal minutil.
-  // 1.-2. klassil vahetundi tuletada ei saa, seal on aken ainus, mis on.
+  // Kaardil on kooli enda avaldatud number ja kooli enda sõna: tunniplaani
+  // rea päis on sõna-sõnalt "SÖÖMINE:" ja lahtris on söömise aeg. 30-min
+  // vahetund on meie tuletis (vt parseLunch) — see teeb oma töö ära tunni
+  // nihutamisel ja kaardi paigutamisel, aga ekraanile see ei jõua: kaks
+  // kattuvat vahemikku luges vastuoluna ja tuletis ei tohi kooli enda numbrit
+  // kaardilt välja tõrjuda.
   const when = el('div', 'when');
-  const aeg = lunch.break ?? lunch.eat;
-  when.append(el('b', null, clockLabel(aeg.start)), el('span', null, clockLabel(aeg.end)));
+  when.append(el('b', null, clockLabel(lunch.eat.start)), el('span', null, clockLabel(lunch.eat.end)));
   card.append(when);
 
   const what = el('div', 'what');
   const subject = el('div', 'subject');
-  subject.append(el('span', 'emoji', '🍽️'),
-    el('span', null, lunch.break ? 'Söögivahetund' : 'Söömine'));
+  subject.append(el('span', 'emoji', '🍽️'), el('span', null, 'Söömine'));
   what.append(subject);
 
   // Taimetoit ei saa eraldi märki — iga roog kannab lihtsalt oma ikooni.
