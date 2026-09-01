@@ -223,3 +223,16 @@ export function parseLunch(str) {
 
   return { eat, break: breakAround(eat), note, shift };
 }
+
+/**
+ * Kummas 30-minutilise vahetunni pooles see klass sööb.
+ * Kool ütleb sedasama sõnadega ("4. tunni alguses" vs "pärast 3. tundi"),
+ * aga tunniplaani lahtris on ainult söömise aeg — poole arvutame sellest.
+ *   'algus' — söömine on vahetunni esimeses pooles
+ *   'lõpp'  — teises pooles, vahetund algas 15 min varem
+ * Null, kui vahetundi tuletada ei saanud (1.–2. klassi 20-min aknad).
+ */
+export function eatingHalf(lunch) {
+  if (!lunch?.break) return null;
+  return lunch.eat.start === lunch.break.start ? 'algus' : 'lõpp';
+}

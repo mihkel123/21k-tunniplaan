@@ -1,5 +1,5 @@
 // Päevaloogika testid: node test-schedule.mjs
-import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, parseLunch } from './schedule.js';
+import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, parseLunch, eatingHalf } from './schedule.js';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
@@ -272,6 +272,26 @@ t('kõik 230 päris kirjet parsivad ja vahetunnid langevad kooli loendisse', () 
   assert.equal(parsis, 230);
   assert.equal(vahetunde, 195);
   assert.equal(ilma, 35, '1A-1E, 2C, 2D viie päeva kohta');
+});
+
+t('eatingHalf ütleb, kummas vahetunni pooles klass sööb', () => {
+  // :30 ja :45 algused — vahetund algab söömisega, klass läheb kohe.
+  assert.equal(eatingHalf(parseLunch('11:30 - 11:45')), 'algus');
+  assert.equal(eatingHalf(parseLunch('10:45 - 11:00')), 'algus');
+  // :00 algus — vahetund algas 15 min varem, söömine on selle lõpus.
+  assert.equal(eatingHalf(parseLunch('11:00 - 11:15')), 'lõpp');
+  // 1.-2. klassi 20-min aken: vahetundi pole, siis pole ka poolt.
+  assert.equal(eatingHalf(parseLunch('11:00 - 11:20')), null);
+  assert.equal(eatingHalf(null), null);
+});
+
+t('7A nädal: vahetund on iga päev 30 minutit', () => {
+  const data = JSON.parse(readFileSync(new URL('./data.json', import.meta.url), 'utf8'));
+  for (const lahter of data.classes['7A'].lunch) {
+    const r = parseLunch(lahter);
+    assert.ok(r.break, `7A vahetund puudub: ${lahter}`);
+    assert.equal(r.break.end - r.break.start, 30);
+  }
 });
 
 console.log(`\n${pass} testi läbitud.`);

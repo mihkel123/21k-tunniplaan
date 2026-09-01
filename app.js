@@ -6,7 +6,7 @@ import {
   holidayOn as holidayIn, isSchoolDay as isSchoolDayIn, defaultDate as defaultDateIn,
   relativeLabel, isFreshChange,
   notableOn as notableIn, namesOn as namesIn,
-  overrideOn as overrideIn, parseLunch,
+  overrideOn as overrideIn, parseLunch, eatingHalf,
 } from './schedule.js';
 import {
   DEFAULT_WALK_MIN, TO_SCHOOL, TO_HOME, searchStops, idsByName, matchRoutes, parseSiri,
@@ -459,28 +459,31 @@ function eventCard(e) {
 }
 
 /**
- * Söögivahetund tundide vahel. Vasakul 30-minutiline vahetund (kooli reegli
- * järgi tuletatud), all täpsustus, millal see klass sööma läheb, ja päeva
- * menüü — ainult roa nimed, ilma lisandite, jookide ja leivata.
- * 1.–2. klassil, kellel vahetundi tuletada ei saa, jääb ainult söömise aken.
+ * Söögivahetund tundide vahel: vasakul aeg, all päeva menüü — ainult roa
+ * nimed, ilma lisandite, jookide ja leivata.
  */
 function lunchCard(lunch, menu) {
   const card = el('section', 'card is-lunch');
 
-  // Kaardil on kooli enda avaldatud number ja kooli enda sõna: tunniplaani
-  // rea päis on sõna-sõnalt "SÖÖMINE:" ja lahtris on söömise aeg. 30-min
-  // vahetund on meie tuletis (vt parseLunch) — see teeb oma töö ära tunni
-  // nihutamisel ja kaardi paigutamisel, aga ekraanile see ei jõua: kaks
-  // kattuvat vahemikku luges vastuoluna ja tuletis ei tohi kooli enda numbrit
-  // kaardilt välja tõrjuda.
+  // Kaardil on 30-minutiline vahetund, mitte 15-minutiline söömise aken.
+  // Kooli tunniplaani lahtris on ainult aken, aga vaba aega on pool tundi
+  // (vt parseLunch) — laps peab nägema seda, mis tal päriselt käes on.
+  // Kus aken vahetunni sees on, ütleme sõnadega: teine kellaaeg kõrvuti
+  // esimesega loeti kaardilt vastuoluna.
+  // 1.–2. klassi 20-min aknad jäävad omaette: neil vahetundi tuletada ei saa.
+  const span = lunch.break ?? lunch.eat;
   const when = el('div', 'when');
-  when.append(el('b', null, clockLabel(lunch.eat.start)), el('span', null, clockLabel(lunch.eat.end)));
+  when.append(el('b', null, clockLabel(span.start)), el('span', null, clockLabel(span.end)));
   card.append(when);
 
   const what = el('div', 'what');
   const subject = el('div', 'subject');
-  subject.append(el('span', 'emoji', '🍽️'), el('span', null, 'Söömine'));
+  subject.append(el('span', 'emoji', '🍽️'),
+    el('span', null, lunch.break ? 'Söögivahetund' : 'Söömine'));
   what.append(subject);
+
+  const half = eatingHalf(lunch);
+  if (half) what.append(el('div', 'lunch-half', `Söömine vahetunni ${half === 'algus' ? 'alguses' : 'lõpus'}`));
 
   // Taimetoit ei saa eraldi märki — iga roog kannab lihtsalt oma ikooni.
   for (const roog of [...(menu?.tava ?? []), ...(menu?.taim ?? [])]) {
