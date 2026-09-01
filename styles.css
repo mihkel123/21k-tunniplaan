@@ -383,7 +383,7 @@ button {
 .card.is-lunch .when b { font-size: 15px; font-weight: 700; line-height: 1.2; }
 .card.is-lunch .when span { display: block; font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
 .dish { margin-top: 5px; font-size: 14px; color: var(--ink); display: flex; align-items: baseline; gap: 6px; }
-.dish-veg { font-size: 13px; flex: none; }
+.dish-icon { font-size: 13px; line-height: 1; flex: none; }
 
 /* Erandpäev: aktus, klassijuhatajatund */
 .card.is-event { --stripe: var(--brand); }

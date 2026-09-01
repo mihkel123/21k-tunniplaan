@@ -90,6 +90,36 @@ function emojiFor(name) {
   return '📘';
 }
 
+/* Koolilõuna road. Järjekord loeb: esimene vaste võidab, seega käib
+   iseloomulikum enne üldisemat — "Sealiha-hapukapsapada" on liharoog, mitte
+   kapsaroog, ja "Värskekapsaborš" on supp, mitte kapsas. Kõige ees on
+   magustoit ja supp, sest need määravad roa olemuse tugevamini kui koostis. */
+const DISH_EMOJI = [
+  ['kohupiim', '🍮'], ['kissell', '🍮'], ['magustoit', '🍮'], ['kreem', '🍮'],
+  ['moos', '🍮'], ['vahukoor', '🍮'], ['kook', '🍰'], ['pannkook', '🥞'],
+  ['supp', '🍲'], ['borš', '🍲'], ['seljanka', '🍲'], ['puljong', '🍲'],
+  ['puder', '🥣'], ['kama', '🥣'], ['manna', '🥣'],
+  ['pitsa', '🍕'], ['pasta', '🍝'], ['makaron', '🍝'], ['spagett', '🍝'], ['lasanje', '🍝'],
+  ['kala', '🐟'], ['lõhe', '🐟'], ['tursk', '🐟'], ['räim', '🐟'], ['heeringas', '🐟'],
+  ['kana', '🍗'], ['broiler', '🍗'], ['kalkun', '🍗'],
+  ['vorst', '🌭'], ['viiner', '🌭'],
+  ['sealiha', '🍖'], ['veise', '🍖'], ['hakkliha', '🍖'], ['kotlet', '🍖'],
+  ['frikadell', '🍖'], ['praad', '🍖'], ['sink', '🍖'], ['liha', '🍖'],
+  ['muna', '🥚'], ['omlett', '🥚'],
+  ['uba', '🫘'], ['oad', '🫘'], ['läätse', '🫘'], ['herne', '🫘'],
+  ['tatar', '🌾'], ['tatra', '🌾'], ['oder', '🌾'], ['kruubi', '🌾'],
+  ['riso', '🍚'], ['riis', '🍚'], ['pilaff', '🍚'],
+  ['kartul', '🥔'],
+  ['juust', '🧀'], ['seen', '🍄'],
+  ['köögivilja', '🥗'], ['kapsa', '🥗'], ['porgand', '🥗'], ['salat', '🥗'],
+];
+
+function dishEmoji(name) {
+  const s = (name || '').toLowerCase();
+  for (const [needle, icon] of DISH_EMOJI) if (s.includes(needle)) return icon;
+  return '🍽️';
+}
+
 /* ---------- Olek ---------- */
 
 const state = {
@@ -441,10 +471,10 @@ function lunchCard(lunch, menu) {
     what.append(el('div', 'meta', `Söömine ${clockLabel(lunch.eat.start)}–${clockLabel(lunch.eat.end)}`));
   }
 
-  for (const roog of menu?.tava ?? []) what.append(el('div', 'dish', roog));
-  for (const roog of menu?.taim ?? []) {
+  // Taimetoit ei saa eraldi märki — iga roog kannab lihtsalt oma ikooni.
+  for (const roog of [...(menu?.tava ?? []), ...(menu?.taim ?? [])]) {
     const rida = el('div', 'dish');
-    rida.append(el('span', 'dish-veg', '🌱'), el('span', null, roog));
+    rida.append(el('span', 'dish-icon', dishEmoji(roog)), el('span', null, roog));
     what.append(rida);
   }
 
