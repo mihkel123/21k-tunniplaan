@@ -66,13 +66,14 @@ Klassi- ja rühmavalik salvestatakse ainult telefoni (`localStorage`), mitte ser
 
 ## Kuidas andmed värskena püsivad
 
-`.github/workflows/update.yml` käivitub iga öö kell ~05:00:
+`.github/workflows/update.yml` käivitub iga öö kell ~04:40 (01:37 UTC) ja
+teist korda pärastlõunal ~17:40:
 
 1. jooksutab testid,
 2. laeb kooli lehelt värske plaani,
 3. võrdleb eelmisega ja uuendab `changes.json`-i,
 4. salvestab muutused repositooriumi (nii tekib ka ajalugu),
-5. avaldab saidi GitHub Pagesis.
+5. avaldab saidi Cloudflare Pagesis.
 
 Kui kooli lehe HTML muutub, katkeb kraapimine veaga ja **avaldamine jääb ära** —
 vana töötav plaan jääb püsti, tühja tunniplaani välja ei panda.
