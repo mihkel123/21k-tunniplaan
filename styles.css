@@ -611,7 +611,6 @@ button {
 .bus-when { text-align: right; display: flex; flex-direction: column; gap: 1px; }
 .bus-when b { font-size: 16px; font-weight: 700; }
 .bus-when span { font-size: 12px; color: var(--ink-faint); }
-.bus-live { color: var(--now) !important; font-weight: 650; }
 
 /* ---------- Seadistusvormi väljad ---------- */
 

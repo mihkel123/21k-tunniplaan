@@ -949,7 +949,6 @@ async function fillBus(list, cfg, { day, anchorMin, isToday, gen }) {
     const arr = arrivalOf(r, cfg.rides);
     if (arr != null) right.append(el('span', null, `kohal ${hhmm(arr)}`));
     if (isToday) right.append(el('span', null, `${Math.max(0, minutesUntil(r.secs, clock))} min`));
-    if (r.live) right.append(el('span', 'bus-live', '● reaalajas'));
     row.append(right);
 
     list.append(row);
