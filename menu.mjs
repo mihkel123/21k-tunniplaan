@@ -10,7 +10,7 @@
  * Kasutus: npm run menyy
  */
 
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -96,6 +96,15 @@ async function main() {
     scrapedAt: new Date().toISOString(),
     days,
   };
+  // Sama valvur mis scrape.mjs-is: kui road ei muutunud, hoia vana ajatempel
+  // alles. Muidu erineb fail iga kraapimisega ainult 'scrapedAt' poolest ja
+  // workflow commitib kaks korda päevas tühja muudatuse.
+  const previous = await readFile(OUT, 'utf8').then(JSON.parse, () => null);
+  if (previous && JSON.stringify(previous.days) === JSON.stringify(days)) {
+    out.scrapedAt = previous.scrapedAt;
+    console.log('Menüü ei muutunud — ajatemplit ei uuendata.');
+  }
+
   await writeFile(OUT, `${JSON.stringify(out, null, 0)}\n`, 'utf8');
   for (const [date, d] of Object.entries(days)) {
     console.log(`  ${date}  ${[...d.tava, ...d.taim.map((t) => `🌱 ${t}`)].join(' | ')}`);

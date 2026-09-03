@@ -2,15 +2,19 @@ name: Uuenda tunniplaan
 
 on:
   schedule:
-    # 01:37 UTC = 04:37 Eesti suveajal, 03:37 talveajal.
-    # Miks veider minut, mitte täistund: GitHubi ajastatud käivitused ootavad
-    # jagatud järjekorras ja täistund on kõige koormatum minut. 30.08–02.09
-    # hilines iga hommikune käivitus 4,5–6 tundi ehk plaan värskenes alles
-    # kella 10 paiku, pärast koolipäeva algust. Varasem tund jätab lisaks
-    # puhvri, kui järjekord ikkagi venib.
-    - cron: '37 1 * * *'
-    # 14:37 UTC = 17:37 Eesti suveajal, 16:37 talveajal — püüab kinni
-    # päeva jooksul tulnud muudatuse sama õhtu jooksul.
+    # NB! Need kellaajad ei ole soovitud käivitusajad, vaid soovitud aeg miinus
+    # GitHubi järjekord. Ajastatud käivitus seisab jagatud järjekorras: 30.08–
+    # 03.09 mõõdetud hilinemine oli 4 h 46 min kuni 6 h 03 min. Minutist see ei
+    # sõltu — 02:00 peale seatud käivitus tuli 06:46, 01:37 peale seatud 06:25.
+    # Seepärast on cron seatud ~6 tundi sihtajast ettepoole.
+    #
+    # Siht: plaan on värske kella 6-ks Eesti aja järgi. 20:00 UTC + mõõdetud
+    # hilinemine = tegelik käivitus 00:46–02:03 UTC ehk 03:46–05:03 suveajal.
+    # Kraapimine toimub käivitushetkel, mitte ajastushetkel, nii et kooli
+    # õhtune uuendus (nähtud 01.09 kell 23:19) jääb ikka sisse.
+    - cron: '0 20 * * *'
+    # Teine käivitus püüab päeva jooksul tulnud muudatuse sama õhtu jooksul:
+    # 14:37 UTC + hilinemine = tegelik käivitus ~18:00 UTC ehk ~21:00 suveajal.
     - cron: '37 14 * * *'
   workflow_dispatch:
   push:

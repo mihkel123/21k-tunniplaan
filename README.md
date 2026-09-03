@@ -66,8 +66,11 @@ Klassi- ja rühmavalik salvestatakse ainult telefoni (`localStorage`), mitte ser
 
 ## Kuidas andmed värskena püsivad
 
-`.github/workflows/update.yml` käivitub iga öö kell ~04:40 (01:37 UTC) ja
-teist korda pärastlõunal ~17:40:
+`.github/workflows/update.yml` käivitub öösel ja teist korda pärastlõunal.
+Cron on seatud tublisti ettepoole, sest GitHubi ajastatud käivitus seisab
+järjekorras 5–6 tundi: `0 20 UTC` tähendab tegelikku käivitust kella 4–5 ajal
+öösel, `37 14 UTC` õhtul kella 21 paiku. Siht on, et plaan oleks värske kella
+6-ks hommikul. Iga käivitus:
 
 1. jooksutab testid,
 2. laeb kooli lehelt värske plaani,
