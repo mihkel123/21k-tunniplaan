@@ -67,6 +67,23 @@
         "slot": "K 5. tund"
       },
       "since": "2026-08-31"
+    },
+    "0|0": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-09-03"
+    },
+    "6|2": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "E 1. tund"
+      },
+      "since": "2026-09-03"
     }
   },
   "2C": {
@@ -101,6 +118,32 @@
       "kind": "changed",
       "wasSubject": "inglise keel, inglise keel",
       "since": "2026-08-31"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "N 3. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-09-03"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "N 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-09-03"
     }
   },
   "3B": {
@@ -180,6 +223,11 @@
       "kind": "removed",
       "wasSubject": "kirjakunst, ansambel",
       "since": "2026-08-31"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, vene keel, hispaania keel",
+      "since": "2026-09-03"
     }
   },
   "10B": {
@@ -308,6 +356,11 @@
       "kind": "removed",
       "wasSubject": "kirjakunst, ansambel, rahvuskeskse tsivilisatsiooni areng",
       "since": "2026-08-31"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "since": "2026-09-03"
     }
   },
   "11C": {
@@ -414,6 +467,115 @@
       "kind": "removed",
       "wasSubject": "kirjakunst, ansambel",
       "since": "2026-08-31"
+    }
+  },
+  "1C": {
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "T 5. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-09-03"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "T 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 2. tund"
+      },
+      "since": "2026-09-03"
+    }
+  },
+  "1E": {
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "T 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-09-03"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 2. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-09-03"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "T 2. tund"
+      },
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-09-03"
+    }
+  },
+  "5B": {
+    "0|3": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-09-03"
+    },
+    "7|1": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-09-03"
+    }
+  },
+  "6B": {
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, hispaania keel",
+      "since": "2026-09-03"
+    }
+  },
+  "6C": {
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, saksa keel, hispaania keel",
+      "since": "2026-09-03"
+    }
+  },
+  "7D": {
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "prantsuse keel, saksa keel",
+      "since": "2026-09-03"
     }
   }
 }
