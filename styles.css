@@ -217,6 +217,22 @@ button {
   color: var(--brand-ink);
 }
 .wd[aria-pressed="true"] span { color: color-mix(in srgb, var(--brand-ink) 78%, transparent); }
+
+/* Nädalavahetus. Nupp on tahtlikult tagasihoidlik: seda vajutatakse harva,
+   ja päevariba peab jääma peategelaseks. */
+.weeknav { display: flex; flex-direction: column; gap: 6px; padding-bottom: 10px; }
+.weeknav-btn {
+  align-self: flex-start;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 13px;
+}
+.weeknav-note { margin: 0; font-size: 12px; line-height: 1.4; color: var(--ink-faint); }
 .wd.is-off { opacity: .45; }
 .wd .dot {
   position: absolute;

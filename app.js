@@ -304,9 +304,25 @@ const holidayOn = (date, klass) => holidayIn(state.holidays, date, klass);
 const isSchoolDay = (date, klass) => isSchoolDayIn(state.holidays, date, klass);
 const defaultDate = (now, klass) => defaultDateIn(state.holidays, now, klass);
 
+/* ---------- Nädal ---------- */
+
+// data.json ei sisalda kuupäevi: päevad on 'Esmaspäev'…'Reede' ja sama
+// ruudustik kordub igal nädalal. "Järgmine nädal" on seega sama tunniplaan
+// teiste kuupäevadega — päriselt erinevad ainult vaheajad, tähtpäevad, ilm ja
+// menüü. Kaks viimast saavad nädala pärast otsa, seega peame teadma, kas
+// vaadatav päev on jooksvas nädalas.
+const mondayOf = (d) => startOfDay(addDays(d, -weekdayIndex(d)));
+// Math.round, mitte jagatis: kellakeeramise nädal on 7 päeva ± tund.
+const weekOffset = () => Math.round((mondayOf(state.selected) - mondayOf(state.now)) / 604800000);
+
 /* ---------- Muudatused ---------- */
 
 function changeFor(klass, period, day) {
+  // Muudatuse võti on 'tund|nädalapäev', mitte kuupäev. Teisel nädalal
+  // tähendaks sama kirje hoopis teist päeva, seega jääb see jooksvasse
+  // nädalasse — muidu näitaks äpp järgmise nädala teisipäeval selle nädala
+  // teisipäeva muudatust.
+  if (weekOffset() !== 0) return null;
   const entry = state.changes?.[klass]?.[`${period}|${day}`];
   return isFreshChange(entry, state.now) ? entry : null;
 }
@@ -699,6 +715,35 @@ function renderWeekstrip() {
   }
 }
 
+/**
+ * Üks samm edasi ja tagasi, kaugemale mitte: tunnid korduvad niikuinii ja
+ * kõik kuupäevapõhine (menüü, ilm, muudatused) saab nädala pärast otsa.
+ */
+function renderWeeknav() {
+  const box = $('#weeknav');
+  box.textContent = '';
+  const ahead = weekOffset() !== 0;
+
+  const b = el('button', 'weeknav-btn');
+  b.type = 'button';
+  b.textContent = ahead ? '‹ Tagasi sellele nädalale' : 'Järgmine nädal ›';
+  b.addEventListener('click', () => {
+    state.selected = ahead ? defaultDate(state.now, state.klass) : addDays(mondayOf(state.now), 7);
+    state.editingChoice = null;
+    trackScreen(ahead ? '/paev' : '/jargmine-nadal');
+    render();
+  });
+  box.append(b);
+
+  // Öelda välja, mida ei näidata — tühi koht tekitab küsimuse, rida vastab.
+  if (ahead) {
+    const menuKnown = Boolean(state.menu?.days?.[iso(state.selected)]);
+    box.append(el('p', 'weeknav-note', menuKnown
+      ? 'Tunnid on igal nädalal samad. Tunnimuudatusi järgmise nädala kohta veel ei ole.'
+      : 'Tunnid on igal nädalal samad. Menüüd ja tunnimuudatusi järgmise nädala kohta veel ei ole.'));
+  }
+}
+
 function renderHeader() {
   const { selected, now, klass } = state;
   $('#class-btn').textContent = `${klass} ▾`;
@@ -752,6 +797,7 @@ function renderDayNotes(selected) {
 function render() {
   renderHeader();
   renderWeekstrip();
+  renderWeeknav();
   renderLessons();
 }
 
