@@ -18,6 +18,10 @@ See rakendus on ainult **lugeja** — kooli leht jääb ainsaks tõeallikaks.
 - **Koolivaheajad** ja riigipühad on arvestatud, sh 12. klassi erandid.
 - **Valikulised tunnid.** Tugiõpe, koorid, ansambel ja orkester on huvitegevus —
   laps vastab korra „kas käid?" ja kui ei käi, siis kaarti enam ei näidata.
+- **Valikud on ümber tehtavad.** Seadetes on „Minu valikud": kõik rühma- ja
+  osalusvalikud koos, igaüht saab eraldi muuta. Tugiõpe, mida sel nädalal
+  vaja oli ja järgmisel enam mitte, käib sealt tagasi maha — ilma et peaks
+  kõiki valikuid lähtestama.
 - **Bussiajad hommikul ja päeva lõpus.** Laps valib kooli- ja kodupoolse
   peatuse; app näitab kolme väljumist õiges suunas, saabumisaega ja seda,
   millal peab välja minema. Peale Tallinna linnaliinide on sees ka Harjumaa

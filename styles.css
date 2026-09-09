@@ -468,6 +468,27 @@ button {
 .info dd { margin: 0; text-align: right; }
 
 .sheet-actions { display: grid; gap: 8px; }
+
+/* ---------- Minu valikud ---------- */
+
+/* Nimekiri võib olla pikk (7A-l üheksa valikut) — leht kerib ise, selle
+   asemel et ekraanist välja kasvada. Kerimine ei kandu taustalehele. */
+.sheet { max-height: 100%; overscroll-behavior: contain; }
+
+/* Sama vaherütm, mis "Välimus" sildil: seg-nuppude alläär on 6px kõrgemal. */
+.pick-lead { margin-top: 4px; }
+.picks { display: grid; gap: 10px; margin-bottom: 18px; }
+.pick-row { border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px 12px; }
+.pick-name { display: flex; align-items: center; gap: 8px; font-size: 15px; }
+.pick-name .emoji { font-size: 17px; line-height: 1; flex: none; }
+.pick-name b { font-weight: 620; overflow-wrap: anywhere; }
+.pick-none { margin-top: 3px; font-size: 12px; color: var(--ink-faint); }
+.pick-empty { margin: 0 0 18px; font-size: 14px; color: var(--ink-faint); }
+
+/* Sildid on väga eri pikkusega ("Käin" vs "prantsuse keel"), seega nupud
+   voolavad ridadesse, mitte ei suru end kolmekesi ühte ritta ära. */
+.pick-opts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.pick-opts .seg-btn { flex: 1 1 auto; min-width: 96px; padding: 9px 10px; font-size: 13px; }
 /* Bussilehel on mitu plokki üksteise all — üks vaherütm kõigile, ka vormi
    sees. Vahe tuleb ainult ülemisest veerisest, muidu liituvad kaks veerist. */
 #bus-setup .sheet-inner > * + *,

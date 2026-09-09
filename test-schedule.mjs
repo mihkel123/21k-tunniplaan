@@ -1,5 +1,5 @@
 // Päevaloogika testid: node test-schedule.mjs
-import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, parseLunch, eatingHalf } from './schedule.js';
+import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, parseLunch, eatingHalf, entryKey, choiceKey, cellIsOptional, collectChoices } from './schedule.js';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
@@ -292,6 +292,62 @@ t('7A nädal: vahetund on iga päev 30 minutit', () => {
     assert.ok(r.break, `7A vahetund puudub: ${lahter}`);
     assert.equal(r.break.end - r.break.start, 30);
   }
+});
+
+/* ---------- Rühma- ja osalusvalikud ---------- */
+
+const e = (subjectFull, teacher) => ({ subject: subjectFull.slice(0, 2).toUpperCase(), subjectFull, teacher });
+
+t('choiceKey ei sõltu rühmade järjekorrast lahtris', () => {
+  const a = e('inglise keel', 'Mägi');
+  const b = e('inglise keel', 'Soysal');
+  assert.equal(choiceKey([a, b]), choiceKey([b, a]));
+  // Aga õpetaja on võtme sees: kaks lastekoori sama ainekoodiga on eri valikud.
+  assert.notEqual(entryKey(e('lastekoor', 'Õmblus')), entryKey(e('lastekoor', 'Urbel')));
+});
+
+t('cellIsOptional: valikuline ainult siis, kui kõik rühmad on valikulised', () => {
+  assert.equal(cellIsOptional([e('tugiõpe', 'Kask')]), true);
+  assert.equal(cellIsOptional([e('lastekoor', 'Õmblus'), e('meeskoor', 'Kerge')]), true);
+  assert.equal(cellIsOptional([e('inglise keel', 'Mägi'), e('inglise keel', 'Soysal')]), false);
+  // Segalahter jääb kohustuslikuks: ühest tunnist pääsu pole.
+  assert.equal(cellIsOptional([e('tugiõpe', 'Kask'), e('matemaatika', 'Tamm')]), false);
+  assert.equal(cellIsOptional([]), false);
+});
+
+t('collectChoices: küsib ainult seal, kus on midagi valida', () => {
+  const data = { classes: { X: { grid: [
+    [[e('matemaatika', 'Tamm')], [e('tugiõpe', 'Kask')]],
+    [[e('inglise keel', 'Mägi'), e('inglise keel', 'Soysal')], []],
+  ] } } };
+  const got = collectChoices(data, 'X');
+  // Üksik kohustuslik tund ja tühi lahter jäävad välja.
+  assert.deepEqual(got.map((c) => c.cell.map((x) => x.subjectFull)),
+    [['tugiõpe'], ['inglise keel', 'inglise keel']]);
+  assert.deepEqual(got.map((c) => c.optional), [true, false]);
+});
+
+t('collectChoices: korduv valik tuleb nimekirja üks kord', () => {
+  const cell = [e('inglise keel', 'Mägi'), e('inglise keel', 'Soysal')];
+  const data = { classes: { X: { grid: [[cell, cell], [cell, null]] } } };
+  assert.equal(collectChoices(data, 'X').length, 1);
+});
+
+t('collectChoices: tundmatu klass ja puuduv tunniplaan ei lõhu midagi', () => {
+  assert.deepEqual(collectChoices({ classes: {} }, 'X'), []);
+  assert.deepEqual(collectChoices(null, 'X'), []);
+});
+
+t('7A: iga valikuline tund on nimekirjast leitav ja võtmed on unikaalsed', () => {
+  const data = JSON.parse(readFileSync(new URL('./data.json', import.meta.url), 'utf8'));
+  const got = collectChoices(data, '7A');
+  assert.ok(got.length > 0);
+  assert.equal(new Set(got.map((c) => c.key)).size, got.length);
+  // Esimese tunni koorid on valikulised, keelerühmad kohustuslikud.
+  const koor = got.find((c) => c.cell.some((x) => x.subjectFull === 'lastekoor'));
+  assert.ok(koor && koor.optional);
+  const keeled = got.find((c) => c.cell.some((x) => x.subjectFull === 'prantsuse keel'));
+  assert.ok(keeled && !keeled.optional);
 });
 
 console.log(`\n${pass} testi läbitud.`);

@@ -7,6 +7,7 @@ import {
   relativeLabel, isFreshChange,
   notableOn as notableIn, namesOn as namesIn,
   overrideOn as overrideIn, parseLunch, eatingHalf,
+  entryKey, choiceKey, cellIsOptional, collectChoices, SKIP,
 } from './schedule.js';
 import {
   DEFAULT_WALK_MIN, TO_SCHOOL, TO_HOME, searchStops, idsByName, matchRoutes, parseSiri,
@@ -342,19 +343,6 @@ function changeText(c) {
 }
 
 /* ---------- Rühma- ja osalusvalikud ---------- */
-
-/* Rühma tunnus peab sisaldama ka õpetajat: 7A esimeses tunnis on kaks eri
-   lastekoori (Õmblus ja Urbel), mille ainekood on mõlemal 'LAK'. */
-const entryKey = (e) => `${e.subject}·${e.teacher}`;
-const choiceKey = (cell) => cell.map(entryKey).sort().join('|');
-
-/* Ained, kus käiakse ainult siis, kui ise soovid. Tugiõpe on vajaduspõhine,
-   ülejäänud on huvitegevus. Kontrollitud, et 82 aine seas vale vastet ei teki. */
-const OPTIONAL = /koor|^(tugiõpe|ansambel|orkestriõpe)$/i;
-const SKIP = '__ei__';
-
-const isOptional = (e) => OPTIONAL.test(e.subjectFull || e.subject || '');
-const cellIsOptional = (cell) => cell.length > 0 && cell.every(isOptional);
 
 function setPick(klass, cell, value) {
   const picks = { ...picksFor(klass), [choiceKey(cell)]: value };
@@ -799,6 +787,8 @@ function render() {
   renderWeekstrip();
   renderWeeknav();
   renderLessons();
+  // Valik võib muutuda seadetest — hoia nimekiri päevavaatega sammus.
+  if ($('#sheet').open) renderPicks();
 }
 
 /* ---------- Bussiajad ---------- */
@@ -1283,6 +1273,71 @@ function maybeOfferInstall() {
 
 /* ---------- Infoleht ---------- */
 
+/* Valikute nimekiri seadetes. Päevavaates saab valikut muuta ainult seal, kus
+   tund nähtaval on — aga "ma ei käi" peidab kaardi ära ja koos sellega ka
+   ainsa tee tagasi. Siin on kõik valikud koos, ka mahavõetud, ja lähtestamine
+   jääb viimaseks abinõuks, mitte ainsaks. */
+
+/** Nupu silt: kui aine on kõigil sama, eristab õpetaja; muidu eristab aine. */
+function optionLabel(cell, entry) {
+  const subjectOf = (e) => e.subjectFull || e.subject || '';
+  const subj = subjectOf(entry);
+  if (cell.every((e) => subjectOf(e) === subjectOf(cell[0]))) {
+    return entry.teacherFull || entry.teacher || subj;
+  }
+  // Sama aine kahes rühmas (kaks lastekoori) — ainenimest üksi ei piisa.
+  const twice = cell.filter((e) => subjectOf(e) === subj).length > 1;
+  return twice ? `${subj} · ${entry.teacher}` : subj;
+}
+
+function pickRow(klass, { key, cell, optional }) {
+  const pick = picksFor(klass)[key];
+  const subjects = [...new Set(cell.map((e) => e.subjectFull || e.subject))];
+  const title = subjects.join(' / ');
+
+  const row = el('div', 'pick-row');
+  const name = el('div', 'pick-name');
+  name.append(el('span', 'emoji', emojiFor(subjects[0])), el('b', null, title));
+  row.append(name);
+  if (!pick) row.append(el('div', 'pick-none', 'Pole valitud'));
+
+  const opts = el('div', 'pick-opts');
+  opts.setAttribute('role', 'radiogroup');
+  opts.setAttribute('aria-label', title);
+  const add = (label, on, onClick) => {
+    const b = el('button', on ? 'seg-btn is-on' : 'seg-btn', label);
+    b.type = 'button';
+    b.setAttribute('role', 'radio');
+    b.setAttribute('aria-checked', String(on));
+    b.addEventListener('click', onClick);
+    opts.append(b);
+  };
+
+  // Üksik valikuline tund on jah/ei küsimus — rühma nimi ei ütleks siin midagi.
+  const solo = optional && cell.length === 1;
+  for (const entry of cell) {
+    add(solo ? 'Käin' : optionLabel(cell, entry),
+      pick === entryKey(entry),
+      () => chooseGroup(klass, cell, entry));
+  }
+  if (optional) add('Ei käi', pick === SKIP, () => skipCell(klass, cell));
+
+  row.append(opts);
+  return row;
+}
+
+function renderPicks() {
+  const box = $('#sheet-picks');
+  box.textContent = '';
+
+  const choices = collectChoices(state.data, state.klass);
+  for (const c of choices) box.append(pickRow(state.klass, c));
+  if (!choices.length) box.append(el('p', 'pick-empty', 'Sel klassil valikulisi tunde pole.'));
+
+  // Lähtestamist pole mõtet pakkuda, kui midagi valida polnudki.
+  $('#reset-picks').hidden = !choices.length;
+}
+
 function openSheet() {
   const info = $('#sheet-info');
   info.textContent = '';
@@ -1298,6 +1353,7 @@ function openSheet() {
     d.append(el('dt', null, k), el('dd', null, v));
     info.append(d);
   }
+  renderPicks();
   $('#sheet').showModal();
   trackScreen('/info');
 }
@@ -1382,8 +1438,7 @@ async function init() {
   $('#reset-picks').addEventListener('click', () => {
     state.picks = { ...state.picks, [state.klass]: {} };
     store.set(LS_PICKS, state.picks);
-    $('#sheet').close();
-    render();
+    render();          // leht jääb lahti: nimekiri näitab kohe, mis muutus
   });
 
   // Kui telefon on olnud taskus üle tunni, arvuta päev ja "praegu" uuesti

@@ -236,3 +236,45 @@ export function eatingHalf(lunch) {
   if (!lunch?.break) return null;
   return lunch.eat.start === lunch.break.start ? 'algus' : 'lõpp';
 }
+
+/* ---------- Rühma- ja osalusvalikud ---------- */
+
+/* Rühma tunnus peab sisaldama ka õpetajat: 7A esimeses tunnis on kaks eri
+   lastekoori (Õmblus ja Urbel), mille ainekood on mõlemal 'LAK'. */
+export const entryKey = (e) => `${e.subject}·${e.teacher}`;
+export const choiceKey = (cell) => cell.map(entryKey).sort().join('|');
+
+/* Ained, kus käiakse ainult siis, kui ise soovid. Tugiõpe on vajaduspõhine,
+   ülejäänud on huvitegevus. Kontrollitud, et 82 aine seas vale vastet ei teki. */
+const OPTIONAL = /koor|^(tugiõpe|ansambel|orkestriõpe)$/i;
+export const SKIP = '__ei__';
+
+export const isOptional = (e) => OPTIONAL.test(e.subjectFull || e.subject || '');
+export const cellIsOptional = (cell) => cell.length > 0 && cell.every(isOptional);
+
+/**
+ * Kõik selle klassi tunniplaani kohad, mis kasutajalt vastust ootavad:
+ * mitme rühmaga lahtrid ja valikulised ained. Sama valik kordub tavaliselt
+ * mitmes lahtris (inglise keel neljal korral nädalas) — võtme järgi kokku,
+ * seega üks kirje valiku kohta, mitte tunni kohta.
+ *
+ * Järjekord on tunniplaani oma: tund tunni haaval, igas tunnis E–R.
+ * -> [{ key, cell, optional }]
+ */
+export function collectChoices(data, klass) {
+  const grid = data?.classes?.[klass]?.grid;
+  if (!Array.isArray(grid)) return [];
+
+  const seen = new Map();
+  for (const row of grid) {
+    for (const cell of row ?? []) {
+      if (!cell?.length) continue;
+      const optional = cellIsOptional(cell);
+      // Üksik kohustuslik tund ei küsi midagi — seal pole, mida valida.
+      if (cell.length < 2 && !optional) continue;
+      const key = choiceKey(cell);
+      if (!seen.has(key)) seen.set(key, { key, cell, optional });
+    }
+  }
+  return [...seen.values()];
+}
