@@ -10,8 +10,9 @@
       "since": "2026-09-06"
     },
     "7|3": {
-      "kind": "added",
-      "since": "2026-09-06"
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett, Koolileht Lennuk",
+      "since": "2026-09-09"
     },
     "7|4": {
       "kind": "added",
@@ -166,6 +167,49 @@
         "slot": "E 3. tund"
       },
       "since": "2026-08-31"
+    },
+    "0|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-09-09"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 5. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-09-09"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 3. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-09-09"
+    },
+    "6|2": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 1. tund"
+      },
+      "since": "2026-09-09"
     }
   },
   "9A": {
@@ -185,6 +229,11 @@
         "slot": "N 1. tund"
       },
       "since": "2026-08-31"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "since": "2026-09-09"
     }
   },
   "10A": {
@@ -284,8 +333,9 @@
       "since": "2026-09-06"
     },
     "7|3": {
-      "kind": "added",
-      "since": "2026-09-06"
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-09-09"
     },
     "8|0": {
       "kind": "added",
@@ -315,8 +365,9 @@
       "since": "2026-09-06"
     },
     "7|3": {
-      "kind": "added",
-      "since": "2026-09-06"
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-09-09"
     },
     "8|0": {
       "kind": "added",
@@ -346,8 +397,9 @@
       "since": "2026-09-06"
     },
     "7|3": {
-      "kind": "added",
-      "since": "2026-09-06"
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-09-09"
     },
     "8|0": {
       "kind": "added",
@@ -368,8 +420,9 @@
       "since": "2026-09-06"
     },
     "7|3": {
-      "kind": "added",
-      "since": "2026-09-06"
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-09-09"
     },
     "7|4": {
       "kind": "added",
@@ -398,8 +451,9 @@
       "since": "2026-09-06"
     },
     "7|3": {
-      "kind": "added",
-      "since": "2026-09-06"
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-09-09"
     },
     "7|4": {
       "kind": "added",
@@ -493,12 +547,9 @@
   },
   "5B": {
     "0|3": {
-      "kind": "added",
-      "movedFrom": {
-        "subject": "klassijuhatajatund",
-        "slot": "T 8. tund"
-      },
-      "since": "2026-09-03"
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "since": "2026-09-09"
     },
     "7|1": {
       "kind": "removed",
@@ -538,12 +589,13 @@
   },
   "2A": {
     "0|2": {
-      "kind": "added",
-      "movedFrom": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
         "subject": "klassijuhatajatund",
-        "slot": "R 6. tund"
+        "slot": "N 1. tund"
       },
-      "since": "2026-09-07"
+      "since": "2026-09-09"
     },
     "5|4": {
       "kind": "removed",
@@ -553,6 +605,14 @@
         "slot": "K 1. tund"
       },
       "since": "2026-09-07"
+    },
+    "0|3": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 1. tund"
+      },
+      "since": "2026-09-09"
     }
   },
   "9B": {
@@ -560,6 +620,11 @@
       "kind": "changed",
       "wasSubject": "vene keel, prantsuse keel, saksa keel",
       "since": "2026-09-07"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "since": "2026-09-09"
     }
   },
   "9C": {
@@ -567,6 +632,20 @@
       "kind": "changed",
       "wasSubject": "vene keel, prantsuse keel, saksa keel",
       "since": "2026-09-07"
+    }
+  },
+  "8A": {
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "since": "2026-09-09"
+    }
+  },
+  "9D": {
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "prantsuse keel, saksa keel, vene keel",
+      "since": "2026-09-09"
     }
   }
 }
