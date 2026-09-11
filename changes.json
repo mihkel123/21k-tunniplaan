@@ -446,8 +446,8 @@
     },
     "5|2": {
       "kind": "changed",
-      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
-      "since": "2026-09-09"
+      "wasSubject": "saksa keel, hispaania keel, saksa keel, prantsuse keel",
+      "since": "2026-09-11"
     }
   },
   "12C": {
