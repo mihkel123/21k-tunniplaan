@@ -19,6 +19,7 @@ import {
   formatWeather, isPeSubject, peWeatherSeason, eventStartMin,
   adviceTemp, clothingFor,
 } from './weather.js';
+import { mergeClubs, deadlineOn } from './clubs.js';
 import { screen as trackScreen, leaving as trackLeaving } from './stats.js';
 
 const LS_CLASS = 'tp.klass';
@@ -152,6 +153,9 @@ const state = {
   theme: 'auto',    // auto | light | dark, vt allpool
   editingChoice: null,   // choiceKey, mille rühmavalikut hetkel muudetakse, või null
   menu: null,       // koolilõuna menüü kuupäevade kaupa, vt menu.mjs
+  clubs: null,      // huviringid kooli lehelt, vt clubs-data.mjs
+  clubsOverlay: null,   // käsitsi hoitav kiht: nimed, kategooriad, side tunniplaaniga
+  clubsScope: 'mine',   // mine | all — keda huviringide nimekirjas näidata
 };
 
 const picksFor = (klass) => state.picks[klass] || {};
@@ -556,6 +560,17 @@ function renderLessons() {
     const n = el('div', 'banner notice');
     n.append(el('b', null, 'Kooli teade'), el('span', null, data.notice));
     main.append(n);
+  }
+
+  // Huviringide avalduse tähtaeg. Riba kaob ise ära, kui tähtaeg möödas —
+  // info on kasutu, kui seda õigel ajal ei märgata, ja tüütu pärast seda.
+  const ringiTahtaeg = deadlineOn(state.clubsOverlay, state.now);
+  if (ringiTahtaeg) {
+    const b = el('button', 'banner clubs-cta');
+    b.type = 'button';
+    b.append(el('span', 'emoji', '🎭'), el('span', null, ringiTahtaeg.tekst), el('span', 'banner-go', '›'));
+    b.addEventListener('click', openClubs);
+    main.append(b);
   }
 
   if (holiday) {
@@ -1271,6 +1286,131 @@ function maybeOfferInstall() {
   }, delay);
 }
 
+/* ---------- Huviringid ---------- */
+
+/* Osa huviringe on juba tunniplaanis (koorid, ansambel) ja neil on seal ka
+   valik. Overlay ütleb ainekoodi, lahtri otsime jooksvalt üles: sama koor on
+   eri klassides eri lahtris — 7A-l on esimeses tunnis koos ka meeskoor,
+   enamikul mitte, ja valiku võti sõltub just lahtri koosseisust. */
+function clubChoice(klass, subjects) {
+  if (!klass || !subjects?.length || !state.data) return null;
+  for (const { key, cell, optional } of collectChoices(state.data, klass)) {
+    const mine = cell.filter((e) => subjects.includes(e.subject));
+    if (mine.length) return { key, cell, optional, mine, pick: picksFor(klass)[key] };
+  }
+  return null;
+}
+
+function clubPicker(klass, choice) {
+  const box = el('div', 'club-pick');
+  const { cell, mine, pick } = choice;
+
+  // Valik võib olla tehtud sama lahtri teise ringi kasuks — siis pole see
+  // "ei käi", vaid "käid sel ajal mujal", ja seda tuleb ka öelda.
+  const mujal = pick && pick !== SKIP && !mine.some((e) => entryKey(e) === pick)
+    ? cell.find((e) => entryKey(e) === pick)
+    : null;
+
+  const add = (label, on, onClick) => {
+    const b = el('button', on ? 'seg-btn is-on' : 'seg-btn', label);
+    b.type = 'button';
+    b.addEventListener('click', onClick);
+    box.append(b);
+  };
+
+  const solo = mine.length === 1;
+  for (const entry of mine) {
+    add(solo ? 'Käin' : (entry.teacherFull || entry.teacher),
+      pick === entryKey(entry),
+      () => { chooseGroup(klass, cell, entry); renderClubs(); });
+  }
+  add('Ei käi', pick === SKIP, () => { skipCell(klass, cell); renderClubs(); });
+
+  if (mujal) {
+    const note = el('div', 'club-elsewhere', `Sel ajal käid: ${mujal.subjectFull || mujal.subject}`);
+    const wrap = el('div');
+    wrap.append(box, note);
+    return wrap;
+  }
+  return box;
+}
+
+function clubCard(club, { showClass }) {
+  const card = el('article', 'club');
+
+  const head = el('div', 'club-head');
+  head.append(el('span', 'emoji', club.emoji), el('b', null, club.nimi));
+  card.append(head);
+  if (club.juhendaja) card.append(el('div', 'club-meta', club.juhendaja));
+
+  const facts = el('div', 'club-facts');
+  const fact = (icon, text, cls) => {
+    const f = el('span', cls);
+    f.append(el('span', 'emoji', icon), el('span', null, text));
+    facts.append(f);
+  };
+  if (club.aeg) fact('🗓', club.aeg);
+  if (club.ruum) fact('📍', club.ruum);
+  // Hind jääb ilma ikoonita: "Tasuta" ja "54 € kuus" ütlevad end ise ära, ja
+  // kolmas emoji ühes reas teeb rea loetamatuks.
+  facts.append(el('span', 'club-fee', club.tasuline
+    ? (club.kuutasu ? `${club.kuutasu} € kuus` : 'Tasu täpsustamisel')
+    : 'Tasuta'));
+  card.append(facts);
+
+  // Klassivahemik on "minu klassile" vaates iseenesestmõistetav — näitame
+  // ainult siis, kui nimekirjas on ka teiste vanuserühmade ringid.
+  if (showClass && club.klass) card.append(el('div', 'club-klass', club.klass));
+  if (club.info) card.append(el('div', 'club-info', club.info));
+
+  const choice = clubChoice(state.klass, club.subject);
+  if (choice) card.append(clubPicker(state.klass, choice));
+  return card;
+}
+
+function renderClubs() {
+  const box = $('#clubs-list');
+  box.textContent = '';
+
+  for (const b of document.querySelectorAll('#clubs-seg .seg-btn')) {
+    const on = b.dataset.scope === state.clubsScope;
+    b.classList.toggle('is-on', on);
+    b.setAttribute('aria-checked', String(on));
+  }
+
+  const mine = state.clubsScope === 'mine';
+  const groups = mergeClubs(state.clubs, state.clubsOverlay, mine ? state.klass : null);
+  const count = groups.reduce((n, g) => n + g.ringid.length, 0);
+
+  const deadline = deadlineOn(state.clubsOverlay, state.now);
+  const lead = [];
+  if (deadline) lead.push(deadline.tekst);
+  lead.push(mine ? `${count} ringi sinu klassile` : `${count} ringi kokku`);
+  $('#clubs-lead').textContent = lead.join(' · ');
+
+  if (!count) {
+    const e = el('div', 'empty');
+    e.append(el('span', 'big', '🎭'), el('div', null, mine
+      ? 'Sinu klassile ringe kirjas ei ole. Vaata "Kõik".'
+      : 'Ringide nimekirja ei õnnestunud laadida.'));
+    box.append(e);
+    return;
+  }
+
+  for (const { kategooria, ringid } of groups) {
+    const head = el('h3', 'club-cat');
+    head.append(el('span', 'emoji', kategooria.emoji), el('span', null, kategooria.nimi));
+    box.append(head);
+    for (const r of ringid) box.append(clubCard({ ...r, emoji: kategooria.emoji }, { showClass: !mine }));
+  }
+}
+
+function openClubs() {
+  renderClubs();
+  $('#clubs').showModal();
+  trackScreen('/huviringid');
+}
+
 /* ---------- Infoleht ---------- */
 
 /* Valikute nimekiri seadetes. Päevavaates saab valikut muuta ainult seal, kus
@@ -1371,7 +1511,7 @@ async function loadJSON(path, fallback) {
 }
 
 async function init() {
-  const [data, changes, holidays, notable, namedays, overrides, menu] = await Promise.all([
+  const [data, changes, holidays, notable, namedays, overrides, menu, clubs, clubsOverlay] = await Promise.all([
     loadJSON('data.json', null),
     loadJSON('changes.json', {}),
     loadJSON('holidays.json', null),
@@ -1379,6 +1519,8 @@ async function init() {
     loadJSON('namedays.json', null),
     loadJSON('overrides.json', null),
     loadJSON('menu.json', null),
+    loadJSON('clubs.json', null),
+    loadJSON('clubs-overlay.json', null),
   ]);
 
   if (!data) {
@@ -1393,6 +1535,8 @@ async function init() {
   state.namedays = namedays;
   state.overrides = overrides;
   state.menu = menu;
+  state.clubs = clubs;
+  state.clubsOverlay = clubsOverlay;
 
   // Sama võti loeb ka index.html-i sisemine skript, et teema jõuaks kohale
   // enne esimest värvimist. Siin normaliseerime rikutud väärtuse.
@@ -1428,9 +1572,14 @@ async function init() {
 
   // Taustale vajutamine sulgeb paneeli — telefonis kõige loomulikum liigutus.
   // Sisu peale klõps läheb lapselemendile, seega siia jõuab ainult taust.
-  for (const id of ['#sheet', '#bus-setup', '#install']) {
+  for (const id of ['#sheet', '#bus-setup', '#install', '#clubs']) {
     const dlg = $(id);
     dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  }
+  $('#clubs-open').addEventListener('click', () => { $('#sheet').close(); openClubs(); });
+  $('#clubs-close').addEventListener('click', () => $('#clubs').close());
+  for (const b of document.querySelectorAll('#clubs-seg .seg-btn')) {
+    b.addEventListener('click', () => { state.clubsScope = b.dataset.scope; renderClubs(); });
   }
   $('#bus-setup-open').addEventListener('click', openBusSetup);
   $('#bus-close').addEventListener('click', () => $('#bus-setup').close());

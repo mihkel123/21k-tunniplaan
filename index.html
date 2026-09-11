@@ -115,6 +115,7 @@
 
     <div class="sheet-actions">
       <button id="change-class" class="btn" type="button">Vaheta klassi</button>
+      <button id="clubs-open" class="btn btn-quiet" type="button">🎭 Huviringid</button>
       <button id="bus-setup-open" class="btn btn-quiet" type="button">🚌 Bussiajad</button>
       <button id="install-open" class="btn btn-quiet" type="button">📱 Lisa rakendus avaekraanile</button>
       <button id="reset-picks" class="btn btn-quiet" type="button">Lähtesta rühmavalikud</button>
@@ -142,6 +143,25 @@
 </dialog>
 
 <!-- Bussiaegade seadistamine -->
+<!-- Huviringid -->
+<dialog id="clubs" class="sheet sheet-tall">
+  <div class="sheet-inner">
+    <h2>Huviringid</h2>
+    <p id="clubs-lead" class="sheet-lead"></p>
+
+    <div class="seg" id="clubs-seg" role="radiogroup" aria-label="Keda näidata">
+      <button type="button" class="seg-btn is-on" data-scope="mine" role="radio" aria-checked="true">Minu klassile</button>
+      <button type="button" class="seg-btn" data-scope="all" role="radio" aria-checked="false">Kõik</button>
+    </div>
+
+    <div id="clubs-list" class="clubs"></div>
+
+    <div class="sheet-actions">
+      <button id="clubs-close" class="btn btn-quiet" type="button">Sulge</button>
+    </div>
+  </div>
+</dialog>
+
 <dialog id="bus-setup" class="sheet">
   <div class="sheet-inner">
     <h2>Bussiajad</h2>

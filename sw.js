@@ -9,14 +9,14 @@ const SHELL = `tp-shell-${VERSION}`;
 const DATA = `tp-data-${VERSION}`;
 
 const SHELL_FILES = [
-  '.', 'index.html', 'styles.css', 'app.js', 'schedule.js', 'bus.js', 'weather.js', 'stats.js',
+  '.', 'index.html', 'styles.css', 'app.js', 'schedule.js', 'bus.js', 'weather.js', 'stats.js', 'clubs.js',
   'manifest.webmanifest',
   // Nimepäevad ja tähtpäevad ei muutu — need käivad kesta, mitte andmete alla,
   // muidu laeks 17 KB nimesid iga avamisega uuesti.
-  'notabledays.json', 'namedays.json', 'overrides.json',
+  'notabledays.json', 'namedays.json', 'overrides.json', 'clubs-overlay.json',
   'icons/apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/favicon-32.png',
 ];
-const DATA_FILES = ['data.json', 'changes.json', 'holidays.json', 'menu.json'];
+const DATA_FILES = ['data.json', 'changes.json', 'holidays.json', 'menu.json', 'clubs.json'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {

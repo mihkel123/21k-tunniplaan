@@ -50,6 +50,7 @@ jobs:
           node test-weather.mjs
           node test-stats.mjs
           node test-menu.mjs
+          node test-clubs.mjs
 
       # Kraabib kooli lehe ja võrdleb eelmise plaaniga.
       # Kui kooli HTML on muutunud, lõpeb see veaga ja deploy jääb tegemata —
@@ -63,14 +64,19 @@ jobs:
       - name: Lae koolilõuna menüü
         run: node menu.mjs
 
+      # Huviringid. Sama valvur mis menüül: tõrge lõpetab koodiga 0 ja vana
+      # clubs.json jääb alles — ringide nimekiri ei tohi tunniplaani kinni hoida.
+      - name: Lae huviringid
+        run: node clubs-data.mjs
+
       - name: Salvesta muudatused
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- data.json changes.json menu.json; then
+          if git diff --quiet -- data.json changes.json menu.json clubs.json; then
             echo "Tunniplaan ei muutunud."
           else
-            git add data.json changes.json menu.json
+            git add data.json changes.json menu.json clubs.json
             git commit -m "Tunniplaan uuendatud $(date -u +%Y-%m-%d)"
             git push
           fi
@@ -83,9 +89,9 @@ jobs:
       - name: Koosta veebisait
         run: |
           mkdir -p _site/icons
-          cp index.html styles.css app.js schedule.js bus.js weather.js stats.js sw.js \
+          cp index.html styles.css app.js schedule.js bus.js weather.js stats.js clubs.js sw.js \
              manifest.webmanifest data.json changes.json holidays.json menu.json \
-             notabledays.json namedays.json overrides.json _site/
+             notabledays.json namedays.json overrides.json clubs.json clubs-overlay.json _site/
           cp icons/*.png _site/icons/
           cp -r bus _site/bus
           touch _site/.nojekyll
@@ -105,6 +111,9 @@ jobs:
           # moodul ja terve rakendus jääb käivitumata — täpselt nii juhtus bus.js-iga.
           missing=0
           for f in $(grep -ohE "from '\./[^']+'" _site/*.js | sed "s/from '\.\///;s/'//" | sort -u); do
+            if [ ! -f "_site/$f" ]; then echo "PUUDU: $f"; missing=1; fi
+          done
+          for f in $(grep -ohE "loadJSON\('[^']+'" _site/app.js | sed "s/loadJSON('//;s/'//" | sort -u); do
             if [ ! -f "_site/$f" ]; then echo "PUUDU: $f"; missing=1; fi
           done
           for f in $(grep -ohE '(href|src)="[^"]+"' _site/index.html | sed 's/.*="//;s/"//' | grep -v '^http'); do

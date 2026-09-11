@@ -18,6 +18,11 @@ See rakendus on ainult **lugeja** — kooli leht jääb ainsaks tõeallikaks.
 - **Koolivaheajad** ja riigipühad on arvestatud, sh 12. klassi erandid.
 - **Valikulised tunnid.** Tugiõpe, koorid, ansambel ja orkester on huvitegevus —
   laps vastab korra „kas käid?" ja kui ei käi, siis kaarti enam ei näidata.
+- **Huviringid eraldi vaates.** Menüüst avaneb kõigi kooli huvi- ja aineringide
+  kataloog, kategooriate kaupa. Vaikimisi näidatakse ainult neid, mis sellele
+  klassile sobivad — seitsmendikule 10 ringi 37-st. Ringid, mis on ka
+  tunniplaanis (koorid, ansambel), näitavad sealsamas sinu valikut ja lasevad
+  seda muuta. Avalduse tähtajani jääb päevavaatesse riba.
 - **Valikud on ümber tehtavad.** Seadetes on „Minu valikud": kõik rühma- ja
   osalusvalikud koos, igaüht saab eraldi muuta. Tugiõpe, mida sel nädalal
   vaja oli ja järgmisel enam mitte, käib sealt tagasi maha — ilma et peaks
@@ -105,6 +110,34 @@ Käsitsi saab käivitada GitHubis: Actions → *Uuenda tunniplaan* → *Run work
 | `namedays.mjs` | Laeb nimepäevad Statistikaametist -> `namedays.json`. Käsitsi, mitte iga deploy'ga. |
 | `notabledays.json` | Riigipühad, riiklikud tähtpäevad, rahvakalender. Käsitsi hooldatav. |
 | `overrides.json` | Erandpäevad: aktused, klassijuhatajatunnid. **Käsitsi hooldatav** — vt allpool. |
+| `clubs.js` | Huviringide parsimine ja liitmine: klassisobivus, ajaveerg, kategooriatesse rühmitamine. Ilma DOM-ita, seetõttu testitav. |
+| `clubs-data.mjs` | Laeb huviringide tabelid kooli lehelt -> `clubs.json`. Ainult võrk ja fail, loogika on `clubs.js`-is. |
+| `clubs.json` | Kraabitud huviringid (37 rida). Genereeritud — käsitsi ei muuda. |
+| `clubs-overlay.json` | Ringide nimed, juhendajad, kategooriad ja side tunniplaaniga. **Käsitsi hooldatav** — vt allpool. |
+
+## Huviringide uuendamine
+
+Kool avaldab ringide nimekirja kord aastas septembri alguses lehel
+[Huviala- ja aineringid](https://21k.ee/koolielu/huviala-ja-aineringid/).
+`clubs-data.mjs` kraabib sealt kaks tabelit — tasulised ja tasuta ringid — ja
+kirjutab `clubs.json`. See käib iga deploy'ga kaasa, nii et kui kool septembri
+jooksul kellaaega või ruumi muudab, tuleb see ise järele.
+
+Mida kraapija **ei** tea, elab `clubs-overlay.json` failis:
+
+- **Nimi ja juhendaja lahku.** Kooli tabelis on need ühes lahtris ilma
+  eraldajata ("Male Karl Erik Olde"), mida masin usaldusväärselt ei jaga.
+- **Kategooria**, mille järgi vaade rühmitab.
+- **`subject`** — ainekood tunniplaanis, kui ring on ka seal. Nii teab äpp, et
+  tabeli "Lastekoor" ja tunniplaani `LAK` on sama asi, ja oskab näidata valikut.
+
+Võti on `clubs.json` kirje `id`. Kui kool ringi ümber nimetab, muutub `id` ja
+overlay kirje jääb orvuks — `test-clubs.mjs` annab sellest teada, nii et
+uuendamise vajadus tuleb testidest välja, mitte kasutaja kaebusest.
+
+Ring, millel overlay kirjet pole, jääb nimekirja alles: nimeks toores lahter,
+kategooriaks "muu". Andmeid ei peideta sellepärast, et käsitsi kiht on maha
+jäänud.
 
 ## Koolivaheaegade uuendamine
 

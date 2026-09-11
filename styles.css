@@ -469,6 +469,67 @@ button {
 
 .sheet-actions { display: grid; gap: 8px; }
 
+/* ---------- Huviringid ---------- */
+
+/* Kataloogi sirvitakse, mitte ei seadistata — sellele paneelile anname kogu
+   ekraani kõrguse, erinevalt madalatest seadetelehtedest. */
+.sheet-tall { margin: 0 auto; height: 100%; }
+.sheet-tall .sheet-inner {
+  border-radius: 0;
+  min-height: 100%;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 20px);
+}
+
+.clubs { display: grid; gap: 10px; margin-bottom: 18px; }
+.club-cat {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 14px 0 2px;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--ink-soft);
+  letter-spacing: .02em;
+}
+.club-cat:first-child { margin-top: 0; }
+
+.club { border: 1px solid var(--line); border-radius: 14px; padding: 12px; }
+.club-head { display: flex; align-items: center; gap: 8px; font-size: 15px; }
+.club-head .emoji { font-size: 17px; line-height: 1; flex: none; }
+.club-head b { font-weight: 620; overflow-wrap: anywhere; }
+.club-meta { margin-top: 2px; font-size: 13px; color: var(--ink-soft); }
+
+/* Aeg, ruum ja hind voolavad ridadesse: ruuminimed on pikad ("Tartu mnt 23
+   ruum T203") ja telefonis ei mahu need kõrvuti. */
+.club-facts { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 7px; font-size: 13px; }
+.club-facts > span { display: inline-flex; align-items: center; gap: 5px; color: var(--ink-soft); }
+.club-facts .emoji { font-size: 13px; line-height: 1; flex: none; }
+.club-facts .club-fee { color: var(--ink); font-weight: 600; }
+.club-klass { margin-top: 5px; font-size: 12px; color: var(--ink-faint); }
+.club-info { margin-top: 6px; font-size: 12px; color: var(--ink-faint); overflow-wrap: anywhere; }
+
+.club-pick { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.club-pick .seg-btn { flex: 1 1 auto; min-width: 96px; padding: 9px 10px; font-size: 13px; }
+.club-elsewhere { margin-top: 6px; font-size: 12px; color: var(--ink-faint); }
+
+/* Tähtajariba päevavaates */
+.banner.clubs-cta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--brand) 8%, var(--card));
+  border-color: color-mix(in srgb, var(--brand) 30%, var(--line));
+  padding: 12px 14px;
+}
+.banner.clubs-cta .emoji { font-size: 17px; line-height: 1; flex: none; }
+.banner.clubs-cta .banner-go { margin-left: auto; color: var(--ink-faint); font-size: 18px; }
+.banner.clubs-cta:active { background: color-mix(in srgb, var(--brand) 16%, var(--card)); }
+
 /* ---------- Minu valikud ---------- */
 
 /* Nimekiri võib olla pikk (7A-l üheksa valikut) — leht kerib ise, selle

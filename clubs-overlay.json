@@ -1,0 +1,98 @@
+{
+  "_comment": "Käsitsi hoitav kiht clubs.json peal. Kraapija ei tea, kus lõpeb ringi nimi ja algab juhendaja, mis kategooriasse ring kuulub ega seda, et Lastekoor on sama asi mis tunniplaani LAK. Võti on clubs.json kirje id. Kui kraapija toob uue ringi, mida siin pole, näidatakse seda ikka — toore nimega, kategoorias 'muu'.",
+  "tahtaeg": {
+    "avaldus": "2026-09-25",
+    "algus": "2026-09-21",
+    "tekst": "Huviringide avaldus 25. septembrini"
+  },
+  "kategooriad": [
+    { "id": "muusika", "nimi": "Muusika", "emoji": "🎶" },
+    { "id": "tants", "nimi": "Tants ja teater", "emoji": "💃" },
+    { "id": "tehnika", "nimi": "Programmeerimine ja robootika", "emoji": "💻" },
+    { "id": "kunst", "nimi": "Kunst ja käsitöö", "emoji": "🎨" },
+    { "id": "sport", "nimi": "Sport", "emoji": "⚽" },
+    { "id": "motlemine", "nimi": "Mõtlemine ja väitlus", "emoji": "🧠" },
+    { "id": "muu", "nimi": "Muu", "emoji": "🎭" }
+  ],
+  "ringid": {
+    "lastekoor-peadirigent-liivi-urbel-dirigent-kristjan-omblus-5-9-klassid": {
+      "nimi": "Lastekoor", "juhendaja": "Liivi Urbel (peadirigent), Kristjan Õmblus", "kategooria": "muusika", "subject": ["LAK"] },
+    "noorte-meeskoor-kuno-kerge-7a-8a-9a": {
+      "nimi": "Noorte meeskoor", "juhendaja": "Kuno Kerge", "kategooria": "muusika", "subject": ["MEK"] },
+    "lastekoor-vocal-spirit-lydia-rahula-5a-6a-7a-8a-9a": {
+      "nimi": "Lastekoor Vocal Spirit", "juhendaja": "Lydia Rahula", "kategooria": "muusika", "subject": ["VSK"] },
+    "muusikaklasside-mudilaskoor-ene-uibo-2a-3a-4a": {
+      "nimi": "Muusikaklasside mudilaskoor", "juhendaja": "Ene Uibo", "kategooria": "muusika", "subject": ["AMK"] },
+    "mudilaskoor-ene-uibo-2bcd-3bcd-4bcd": {
+      "nimi": "Mudilaskoor", "juhendaja": "Ene Uibo", "kategooria": "muusika", "subject": ["BMK"] },
+    "segakoor-peadirigent-kristjan-omblus-dirigent-kadri-magi-10-12-klassid": {
+      "nimi": "Segakoor", "juhendaja": "Kristjan Õmblus (peadirigent), Kadri Mägi", "kategooria": "muusika", "subject": ["KM"] },
+    "segaansambel-kristjan-omblus-10-12-klassid": {
+      "nimi": "Segaansambel", "juhendaja": "Kristjan Õmblus", "kategooria": "muusika", "subject": ["ANS"] },
+    "meesansambel-kristjan-omblus-10-12-klassid": {
+      "nimi": "Meesansambel", "juhendaja": "Kristjan Õmblus", "kategooria": "muusika" },
+    "kammerorkester-siim-aimla-8-12-klassid": {
+      "nimi": "Kammerorkester", "juhendaja": "Siim Aimla", "kategooria": "muusika" },
+
+    "rahvatants-mart-agu-1-klassid": {
+      "nimi": "Rahvatants", "juhendaja": "Märt Agu", "kategooria": "tants" },
+    "rahvatants-mart-agu-2-3-klassid": {
+      "nimi": "Rahvatants", "juhendaja": "Märt Agu", "kategooria": "tants" },
+    "tantsuline-liikumine-sarasammud-helina-nael-1-2-klassid": {
+      "nimi": "Tantsuline liikumine — Särasammud", "juhendaja": "Helina Nael", "kategooria": "tants" },
+    "tapikitse-teater-anne-anilane-kaamer-1-klassid": {
+      "nimi": "Täpikitse teater", "juhendaja": "Anne Änilane-Käämer", "kategooria": "tants" },
+    "tapikitse-teater-anne-anilane-kaamer-2-3-klassid": {
+      "nimi": "Täpikitse teater", "juhendaja": "Anne Änilane-Käämer", "kategooria": "tants" },
+    "kooliteater-oskar-viirand-10-12-klassid": {
+      "nimi": "Kooliteater", "juhendaja": "Oskar Viirand", "kategooria": "tants" },
+
+    "minecraft-programmeerimine-ja-inseneeria-alused-xteadus-1-2-klassid": {
+      "nimi": "Minecraft — programmeerimine ja inseneeria", "juhendaja": "XTeadus", "kategooria": "tehnika" },
+    "minecraft-programmeerimine-ja-inseneeria-alused-xteadus-3-5-klassid": {
+      "nimi": "Minecraft — programmeerimine ja inseneeria", "juhendaja": "XTeadus", "kategooria": "tehnika" },
+    "minecraft-python-programmeerimine-xteadus-4-6-klassid": {
+      "nimi": "Minecraft Python", "juhendaja": "XTeadus", "kategooria": "tehnika" },
+    "roblox-programmeerimine-ja-arvutimangude-arendus-xteadus-3-6-klassid": {
+      "nimi": "Roblox — arvutimängude arendus", "juhendaja": "XTeadus", "kategooria": "tehnika" },
+    "robootika-marika-reinmets-2-klassid": {
+      "nimi": "Robootika", "juhendaja": "Marika Reinmets", "kategooria": "tehnika" },
+    "robootika-marika-reinmets-3-4-klassid": {
+      "nimi": "Robootika", "juhendaja": "Marika Reinmets", "kategooria": "tehnika" },
+    "robootika-edasijoudnutele-lennart-kits-5-12-klassid": {
+      "nimi": "Robootika edasijõudnutele", "juhendaja": "Lennart Kits", "kategooria": "tehnika" },
+    "lahingrobotid-mart-soobik-4-9-klassid": {
+      "nimi": "Lahingrobotid", "juhendaja": "Mart Soobik", "kategooria": "tehnika" },
+
+    "digitaalne-joonistamine-xteadus-1-2-klassid": {
+      "nimi": "Digitaalne joonistamine", "juhendaja": "XTeadus", "kategooria": "kunst" },
+    "digitaalne-joonistamine-xteadus-3-5-klassid": {
+      "nimi": "Digitaalne joonistamine", "juhendaja": "XTeadus", "kategooria": "kunst" },
+    "voolime-savist-agnes-varik-1abcde-ja-2cd": {
+      "nimi": "Voolime savist", "juhendaja": "Agnes Värik", "kategooria": "kunst" },
+    "paberi-volud-ene-palo-1-2-klassid": {
+      "nimi": "Paberi võlud", "juhendaja": "Ene Palo", "kategooria": "kunst" },
+    "varvide-muinasjutt-annely-jurgens-1-2-klassid": {
+      "nimi": "Värvide muinasjutt", "juhendaja": "Annely Jürgens", "kategooria": "kunst" },
+    "kunstiring-karin-luuk-alates-5-klassist": {
+      "nimi": "Kunstiring", "juhendaja": "Karin Luuk", "kategooria": "kunst" },
+
+    "karate-hellar-bergmann-1-2-klassid": {
+      "nimi": "Karate", "juhendaja": "Hellar Bergmann", "kategooria": "sport" },
+    "ujumine-ave-arutamm-4-12-klassid": {
+      "nimi": "Ujumine", "juhendaja": "Ave Arutamm", "kategooria": "sport" },
+    "sportmangud-indrek-vahtra-9-12-klassid": {
+      "nimi": "Sportmängud", "juhendaja": "Indrek Vahtra", "kategooria": "sport" },
+
+    "male-karl-erik-olde-1-3-klassid": {
+      "nimi": "Male", "juhendaja": "Karl Erik Olde", "kategooria": "motlemine" },
+    "male-karl-erik-olde-4-12-klassid": {
+      "nimi": "Male", "juhendaja": "Karl Erik Olde", "kategooria": "motlemine" },
+    "mottepahklid-svea-sokka-2-3-klassid": {
+      "nimi": "Mõttepähklid", "juhendaja": "Svea Sokka", "kategooria": "motlemine" },
+    "vaitlusklubi-karl-pillak-margo-loor-7-8-klassid": {
+      "nimi": "Väitlusklubi", "juhendaja": "Karl Pillak, Margo Loor", "kategooria": "motlemine" },
+    "ajalooring-ave-vurma-5-9-klassid": {
+      "nimi": "Ajalooring", "juhendaja": "Ave Vurma", "kategooria": "motlemine" }
+  }
+}
