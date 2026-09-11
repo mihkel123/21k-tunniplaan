@@ -110,14 +110,19 @@
       <button type="button" class="seg-btn" data-theme="dark" role="radio" aria-checked="false">Tume</button>
     </div>
 
-    <p class="sheet-lead pick-lead">Minu valikud</p>
-    <div id="sheet-picks" class="picks"></div>
-
     <div class="sheet-actions">
       <button id="change-class" class="btn" type="button">Vaheta klassi</button>
       <button id="clubs-open" class="btn btn-quiet" type="button">🎭 Huviringid</button>
       <button id="bus-setup-open" class="btn btn-quiet" type="button">🚌 Bussiajad</button>
       <button id="install-open" class="btn btn-quiet" type="button">📱 Lisa rakendus avaekraanile</button>
+    </div>
+
+    <!-- Valikute nimekiri käib menüü lõppu: seda vaadatakse harva, samas kui
+         klassi vahetus ja huviringid on need, mille pärast menüü avatakse. -->
+    <p class="sheet-lead pick-lead">Minu valikud</p>
+    <div id="sheet-picks" class="picks"></div>
+
+    <div class="sheet-actions">
       <button id="reset-picks" class="btn btn-quiet" type="button">Lähtesta rühmavalikud</button>
       <button id="close-sheet" class="btn btn-quiet" type="button">Sulge</button>
     </div>

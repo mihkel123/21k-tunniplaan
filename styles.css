@@ -11,6 +11,7 @@
   --brand-ink: #ffffff;
   --accent: #f59e0b;
   --now: #16a34a;
+  --cta: #7c3aed;
   --shadow: 0 1px 2px rgba(16, 32, 60, .06), 0 6px 16px rgba(16, 32, 60, .06);
   --r: 18px;
   --safe-t: env(safe-area-inset-top, 0px);
@@ -33,6 +34,7 @@
     --brand: #3b82f6;
     --accent: #fbbf24;
     --now: #34d399;
+    --cta: #a78bfa;
     --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 6px 18px rgba(0, 0, 0, .35);
     color-scheme: dark;
   }
@@ -48,6 +50,7 @@
   --brand: #3b82f6;
   --accent: #fbbf24;
   --now: #34d399;
+  --cta: #a78bfa;
   --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 6px 18px rgba(0, 0, 0, .35);
   color-scheme: dark;
 }
@@ -522,13 +525,13 @@ button {
   font: inherit;
   font-size: 14px;
   color: var(--ink);
-  background: color-mix(in srgb, var(--brand) 8%, var(--card));
-  border-color: color-mix(in srgb, var(--brand) 30%, var(--line));
+  background: color-mix(in srgb, var(--cta) 10%, var(--card));
+  border-color: color-mix(in srgb, var(--cta) 32%, var(--line));
   padding: 12px 14px;
 }
 .banner.clubs-cta .emoji { font-size: 17px; line-height: 1; flex: none; }
 .banner.clubs-cta .banner-go { margin-left: auto; color: var(--ink-faint); font-size: 18px; }
-.banner.clubs-cta:active { background: color-mix(in srgb, var(--brand) 16%, var(--card)); }
+.banner.clubs-cta:active { background: color-mix(in srgb, var(--cta) 20%, var(--card)); }
 
 /* ---------- Minu valikud ---------- */
 
@@ -536,8 +539,10 @@ button {
    asemel et ekraanist välja kasvada. Kerimine ei kandu taustalehele. */
 .sheet { max-height: 100%; overscroll-behavior: contain; }
 
-/* Sama vaherütm, mis "Välimus" sildil: seg-nuppude alläär on 6px kõrgemal. */
-.pick-lead { margin-top: 4px; }
+/* Nimekiri istub nupugrupi all, seega vajab selget vahet — ilma selleta loeks
+   "Minu valikud" viimase nupu sildina. Kaks klassi, sest .sheet-lead on failis
+   allpool ja üksik .pick-lead kaotaks talle järjekorra tõttu. */
+.sheet-lead.pick-lead { margin-top: 22px; }
 .picks { display: grid; gap: 10px; margin-bottom: 18px; }
 .pick-row { border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px 12px; }
 .pick-name { display: flex; align-items: center; gap: 8px; font-size: 15px; }
