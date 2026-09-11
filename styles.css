@@ -461,7 +461,7 @@ button {
 .sheet-inner {
   background: var(--card);
   border-radius: 22px 22px 0 0;
-  padding: 20px 20px calc(var(--safe-b) + 20px);
+  padding: 26px 20px calc(var(--safe-b) + 20px);
 }
 .sheet h2 { margin: 0 0 14px; font-size: 20px; }
 
@@ -480,7 +480,7 @@ button {
 .sheet-tall .sheet-inner {
   border-radius: 0;
   min-height: 100%;
-  padding-top: calc(env(safe-area-inset-top, 0px) + 20px);
+  padding-top: calc(var(--safe-t) + 22px);
 }
 
 .clubs { display: grid; gap: 10px; margin-bottom: 18px; }
@@ -536,8 +536,16 @@ button {
 /* ---------- Minu valikud ---------- */
 
 /* Nimekiri võib olla pikk (7A-l üheksa valikut) — leht kerib ise, selle
-   asemel et ekraanist välja kasvada. Kerimine ei kandu taustalehele. */
-.sheet { max-height: 100%; overscroll-behavior: contain; }
+   asemel et ekraanist välja kasvada. Kerimine ei kandu taustalehele.
+   Ülaserva jääb olekuriba jagu reservi: ilma selleta jookseb "Info" pealkiri
+   kella ja leviribade alla. Reserv on siin, mitte .sheet-inner veerises —
+   veeris nihutaks ka lühikest lehte, mis ülaserva ei ulatugi. */
+.sheet {
+  max-height: calc(100% - var(--safe-t) - 18px);
+  overscroll-behavior: contain;
+}
+/* Huviringid on teadlikult täisekraan, servast servani — see käib reservist üle. */
+.sheet-tall { max-height: 100%; }
 
 /* Nimekiri istub nupugrupi all, seega vajab selget vahet — ilma selleta loeks
    "Minu valikud" viimase nupu sildina. Kaks klassi, sest .sheet-lead on failis
