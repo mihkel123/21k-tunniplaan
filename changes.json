@@ -29,6 +29,11 @@
     "8|3": {
       "kind": "added",
       "since": "2026-09-06"
+    },
+    "7|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-09-15"
     }
   },
   "2B": {
