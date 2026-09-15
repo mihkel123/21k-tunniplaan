@@ -186,18 +186,72 @@ export function mergeClubs(data, overlay, klass) {
     .filter((c) => !klass || fitsClass(c.sobib, klass))
     .map((c) => {
       const kiht = kihid[c.id] ?? {};
+      const kat = kategooriad.find((k) => k.id === kiht.kategooria) ?? muu;
       return {
         ...c,
         nimi: kiht.nimi || c.ring,
         juhendaja: kiht.juhendaja || '',
         subject: kiht.subject ?? [],
-        kategooria: kategooriad.some((k) => k.id === kiht.kategooria) ? kiht.kategooria : muu.id,
+        kategooria: kat.id,
+        emoji: kat.emoji,
       };
     });
 
   return kategooriad
     .map((kat) => ({ kategooria: kat, ringid: ringid.filter((r) => r.kategooria === kat.id) }))
     .filter((g) => g.ringid.length);
+}
+
+/* ---------- Minu ringid tunniplaanis ---------- */
+
+/**
+ * Rea võti, mille all lisatud ring salvestatakse. Ainult id ei piisa: male
+ * käib 1.-3. klassile kaks korda nädalas ja mõlemal real on sama id, sest
+ * need on sama ring. Kellaaeg eristab need read.
+ */
+export const clubRowKey = (club) => `${club.id}#${club.aeg}`;
+
+/**
+ * Kas selle ringi saab tunniplaani panna? Vaja on ühemõttelist päeva.
+ * Välja jäävad "eriplaan" (päeva pole) ja "K või N" (kool pakub kaht päeva,
+ * aga käiakse ühel — kahele päevale panek näitaks tunniplaanis ringi, mida
+ * päriselt ei toimu).
+ */
+export const canAdd = (club) => Boolean(club?.time?.days?.length) && !club.time.either;
+
+const minutesOf = (hhmm, fallback) => {
+  const m = /^(\d{1,2})[.:](\d{2})$/.exec(String(hhmm ?? ''));
+  return m ? Number(m[1]) * 60 + Number(m[2]) : fallback;
+};
+
+export const clubStartMin = (club) => minutesOf(club?.time?.start, null);
+/** Lõpp, või algus + 45 min, kui kool lõppu ei kirjutanud. */
+export const clubEndMin = (club) => {
+  const end = minutesOf(club?.time?.end, null);
+  if (end != null) return end;
+  const start = clubStartMin(club);
+  return start == null ? null : start + 45;
+};
+
+/**
+ * Lisatud ringid, mis sellel nädalapäeval toimuvad. dayIndex 0 = esmaspäev.
+ *
+ * Kui kool on aega muutnud, ei leidu täpset reavõtit enam — siis langeme
+ * tagasi sama id-ga reale, nii et kaart nihkub uude aega, selle asemel et
+ * vaikselt kaduda.
+ */
+export function clubsOnDay(merged, chosen, dayIndex) {
+  const day = DAYS[dayIndex];
+  if (!day) return [];
+
+  const out = [];
+  for (const [key, on] of Object.entries(chosen ?? {})) {
+    if (!on) continue;
+    const id = key.split('#')[0];
+    const club = merged.find((c) => clubRowKey(c) === key) ?? merged.find((c) => c.id === id);
+    if (club && club.time.days.includes(day) && !out.includes(club)) out.push(club);
+  }
+  return out.sort((a, b) => (clubStartMin(a) ?? 1e9) - (clubStartMin(b) ?? 1e9));
 }
 
 /**

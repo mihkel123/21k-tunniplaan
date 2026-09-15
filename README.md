@@ -23,6 +23,13 @@ See rakendus on ainult **lugeja** — kooli leht jääb ainsaks tõeallikaks.
   klassile sobivad — seitsmendikule 10 ringi 37-st. Ringid, mis on ka
   tunniplaanis (koorid, ansambel), näitavad sealsamas sinu valikut ja lasevad
   seda muuta. Avalduse tähtajani jääb päevavaatesse riba.
+- **Ringi saab tunniplaani panna.** Huviringide vaates on nupp „Lisa
+  tunniplaani". Ring ilmub oma päeva viimaste tundide järele violetse kaardina
+  ja nihutab ühtlasi päeva lõppu: „Kooli lõpuks" ilm ja kojusõidu bussikaart
+  arvestavad ringi lõpuga, mitte viimase tunni omaga. Kaks päeva korraga
+  („E ja K") tulevad mõlemale päevale. Ringid, mille aeg on lahtine
+  („eriplaan", „K või N"), lisamist ei paku — neid ei saaks õigesse kohta
+  panna.
 - **Valikud on ümber tehtavad.** Seadetes on „Minu valikud": kõik rühma- ja
   osalusvalikud koos, igaüht saab eraldi muuta. Tugiõpe, mida sel nädalal
   vaja oli ja järgmisel enam mitte, käib sealt tagasi maha — ilma et peaks
@@ -114,6 +121,7 @@ Käsitsi saab käivitada GitHubis: Actions → *Uuenda tunniplaan* → *Run work
 | `clubs-data.mjs` | Laeb huviringide tabelid kooli lehelt -> `clubs.json`. Ainult võrk ja fail, loogika on `clubs.js`-is. |
 | `clubs.json` | Kraabitud huviringid (37 rida). Genereeritud — käsitsi ei muuda. |
 | `clubs-overlay.json` | Ringide nimed, juhendajad, kategooriad ja side tunniplaaniga. **Käsitsi hooldatav** — vt allpool. |
+| `tp.myclubs` (localStorage) | Kasutaja lisatud ringid klassi kaupa. Võti on `id#aeg`, sest sama ring võib nädalas kahel ajal käia. |
 
 ## Huviringide uuendamine
 

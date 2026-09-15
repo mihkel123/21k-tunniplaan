@@ -1,5 +1,6 @@
 // Huviringide parsimise testid: node test-clubs.mjs
-import { normalize, clubId, parseGrades, fitsClass, parseTime, parseFee, parseClubs, mergeClubs, deadlineOn, overlayIssues } from './clubs.js';
+import { normalize, clubId, parseGrades, fitsClass, parseTime, parseFee, parseClubs, mergeClubs, deadlineOn, overlayIssues,
+  canAdd, clubRowKey, clubsOnDay, clubStartMin, clubEndMin } from './clubs.js';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
@@ -230,6 +231,75 @@ t('deadlineOn näitab riba kuni tähtajani ja siis kaob', () => {
   assert.ok(deadlineOn(o, new Date(2026, 8, 25)));     // tähtaja päeval veel
   assert.equal(deadlineOn(o, new Date(2026, 8, 26)), null);
   assert.equal(deadlineOn({}, new Date(2026, 8, 11)), null);
+});
+
+/* ---------- Minu ringid tunniplaanis ---------- */
+
+const all = () => mergeClubs(read('clubs.json'), read('clubs-overlay.json'), null).flatMap((g) => g.ringid);
+const leia = (nimi) => all().find((c) => c.nimi === nimi);
+
+t('canAdd: hägusa ajaga ringi tunniplaani panna ei saa', () => {
+  assert.equal(canAdd(leia('Ujumine')), true);
+  // "K või N" — kool pakub kaht päeva, käiakse ühel. Mõlemale panek valetaks.
+  assert.equal(canAdd(leia('Kunstiring')), false);
+  // "eriplaan" — päeva pole, pole kuhugi panna
+  assert.equal(canAdd(leia('Kammerorkester')), false);
+  assert.equal(canAdd(null), false);
+});
+
+t('clubRowKey eristab sama ringi kaht kellaaega', () => {
+  const male = all().filter((c) => c.nimi === 'Male' && c.klass.startsWith('1.'));
+  assert.equal(male.length, 2, 'koolil on male 1.-3. klassile kaks korda nädalas');
+  assert.equal(male[0].id, male[1].id, 'sama ring, seega sama overlay võti');
+  assert.notEqual(clubRowKey(male[0]), clubRowKey(male[1]), 'aga eri read');
+});
+
+t('clubsOnDay paneb ringi õigele päevale', () => {
+  const uju = leia('Ujumine');                   // T 15.15-16.00
+  const valitud = { [clubRowKey(uju)]: true };
+  assert.deepEqual(clubsOnDay(all(), valitud, 1).map((c) => c.nimi), ['Ujumine']);   // teisipäev
+  assert.deepEqual(clubsOnDay(all(), valitud, 0), []);                               // esmaspäev
+  assert.deepEqual(clubsOnDay(all(), valitud, 9), []);                               // nädalavahetus
+});
+
+t('clubsOnDay: "E ja K" ring käib mõlemal päeval', () => {
+  const karate = leia('Karate');                 // E ja K 15.00-16.00
+  const valitud = { [clubRowKey(karate)]: true };
+  assert.equal(clubsOnDay(all(), valitud, 0).length, 1);   // E
+  assert.equal(clubsOnDay(all(), valitud, 2).length, 1);   // K
+  assert.equal(clubsOnDay(all(), valitud, 1).length, 0);   // T
+});
+
+t('clubsOnDay: kui kool aega muutis, nihkub kaart, mitte ei kao', () => {
+  const uju = leia('Ujumine');
+  // Vana võti viitab ajale, mida enam ei ole
+  const vana = { [`${uju.id}#T 14.00-14.45`]: true };
+  const leitud = clubsOnDay(all(), vana, 1);
+  assert.equal(leitud.length, 1, 'sama id-ga rida on ikka olemas');
+  assert.equal(leitud[0].aeg, uju.aeg, 'ja kaart läheb uue aja peale');
+});
+
+t('clubsOnDay järjestab kellaaja järgi ja ei korda ringi', () => {
+  const a = leia('Ujumine');          // T 15.15
+  const b = leia('Minecraft Python'); // T 16.20
+  const valitud = { [clubRowKey(b)]: true, [clubRowKey(a)]: true };
+  assert.deepEqual(clubsOnDay(all(), valitud, 1).map((c) => c.nimi), ['Ujumine', 'Minecraft Python']);
+  // Sama rida kaks korda (vana ja uus võti) annab ühe kaardi
+  const topelt = { [clubRowKey(a)]: true, [`${a.id}#miski muu`]: true };
+  assert.equal(clubsOnDay(all(), topelt, 1).length, 1);
+});
+
+t('clubEndMin: ilma lõputa ring saab 45 minutit', () => {
+  assert.equal(clubStartMin({ time: { start: '15.15' } }), 915);
+  assert.equal(clubEndMin({ time: { start: '15.15', end: '16.00' } }), 960);
+  assert.equal(clubEndMin({ time: { start: '8.00' } }), 525);     // 8.00 + 45
+  assert.equal(clubEndMin({ time: {} }), null);
+});
+
+t('clubsOnDay ei kuku läbi tühjade sisenditega', () => {
+  assert.deepEqual(clubsOnDay([], null, 1), []);
+  assert.deepEqual(clubsOnDay(all(), {}, 1), []);
+  assert.deepEqual(clubsOnDay(all(), { 'pole-olemas#x': true }, 1), []);
 });
 
 console.log(`\n${pass} testi läbitud.`);

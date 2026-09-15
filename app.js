@@ -19,11 +19,14 @@ import {
   formatWeather, isPeSubject, peWeatherSeason, eventStartMin,
   adviceTemp, clothingFor,
 } from './weather.js';
-import { mergeClubs, deadlineOn } from './clubs.js';
+import {
+  mergeClubs, deadlineOn, canAdd, clubRowKey, clubsOnDay, clubStartMin, clubEndMin,
+} from './clubs.js';
 import { screen as trackScreen, leaving as trackLeaving } from './stats.js';
 
 const LS_CLASS = 'tp.klass';
 const LS_PICKS = 'tp.picks';
+const LS_MYCLUBS = 'tp.myclubs';
 const LS_BUS = 'tp.bus';
 const LS_BUS_SHUT = 'tp.busShut';
 const LS_INSTALL = 'tp.installSeen';
@@ -156,9 +159,11 @@ const state = {
   clubs: null,      // huviringid kooli lehelt, vt clubs-data.mjs
   clubsOverlay: null,   // käsitsi hoitav kiht: nimed, kategooriad, side tunniplaaniga
   clubsScope: 'mine',   // mine | all — keda huviringide nimekirjas näidata
+  myClubs: store.get(LS_MYCLUBS, {}),   // klass -> { reaVõti: true } — ringid, mis käivad tunniplaani
 };
 
 const picksFor = (klass) => state.picks[klass] || {};
+const myClubsFor = (klass) => state.myClubs[klass] || {};
 
 /* ---------- Teema ---------- */
 
@@ -548,6 +553,32 @@ function choiceBlock(klass, cell, period, change, { editing = false, chosenKey =
   return box;
 }
 
+/* Huviring päevavaates. Teadlikult mitte tunnikaart: ring ei ole tund, ja
+   violetne on selles äpis juba huviringide värv. */
+function clubLessonCard(club) {
+  const card = el('article', 'card is-club');
+
+  const when = el('div', 'when');
+  when.append(el('b', null, '🎭'), el('span', null, club.time.start ?? ''));
+  if (club.time.end) when.append(el('span', null, club.time.end));
+  card.append(when);
+
+  const what = el('div', 'what');
+  const subject = el('div', 'subject');
+  subject.append(el('span', 'emoji', club.emoji), el('span', null, club.nimi));
+  what.append(subject);
+  if (club.juhendaja) what.append(el('div', 'meta', club.juhendaja));
+  if (club.ruum) what.append(el('div', 'room', club.ruum));
+  card.append(what);
+
+  const badges = el('div', 'card-badges');
+  badges.append(el('span', 'pill is-club', 'Huviring'));
+  card.append(badges);
+
+  card.addEventListener('click', openClubs);
+  return card;
+}
+
 function renderLessons() {
   const main = $('#lessons');
   main.textContent = '';
@@ -679,6 +710,19 @@ function renderLessons() {
       : null;
     put(lessonCard(chosen, period, { now: i === nowIdx, next: i === nextIdx, change, onSwap }));
   });
+
+  // Lisatud huviringid käivad tundide järele, oma kaardina. Nad nihutavad ka
+  // päeva lõppu: kui jääd 16.30-ni ringi, on "Kooli lõpuks" ilm ja kojusõidu
+  // buss selle järgi, mitte viimase tunni järgi.
+  const minuRingid = clubsOnDay(
+    mergeClubs(state.clubs, state.clubsOverlay, null).flatMap((g) => g.ringid),
+    myClubsFor(klass), day);
+  for (const ring of minuRingid) {
+    any = true;
+    put(clubLessonCard(ring));
+    const lopp = clubEndMin(ring);
+    if (lopp != null && (lastEndMin == null || lopp > lastEndMin)) lastEndMin = lopp;
+  }
 
   if (!any) {
     const e = el('div', 'empty');
@@ -1335,6 +1379,15 @@ function clubPicker(klass, choice) {
   return box;
 }
 
+function toggleClub(klass, club) {
+  const key = clubRowKey(club);
+  const mine = { ...myClubsFor(klass) };
+  if (mine[key]) delete mine[key]; else mine[key] = true;
+  state.myClubs = { ...state.myClubs, [klass]: mine };
+  store.set(LS_MYCLUBS, state.myClubs);
+  render();
+}
+
 function clubCard(club, { showClass }) {
   const card = el('article', 'club');
 
@@ -1364,7 +1417,16 @@ function clubCard(club, { showClass }) {
   if (club.info) card.append(el('div', 'club-info', club.info));
 
   const choice = clubChoice(state.klass, club.subject);
-  if (choice) card.append(clubPicker(state.klass, choice));
+  if (choice) {
+    card.append(clubPicker(state.klass, choice));
+  } else if (canAdd(club)) {
+    // Ring, mida tunniplaanis ei ole — selle saab ise sinna panna.
+    const on = Boolean(myClubsFor(state.klass)[clubRowKey(club)]);
+    const b = el('button', on ? 'club-add is-on' : 'club-add', on ? '✓ Tunniplaanis' : '+ Lisa tunniplaani');
+    b.type = 'button';
+    b.addEventListener('click', () => { toggleClub(state.klass, club); renderClubs(); });
+    card.append(b);
+  }
   return card;
 }
 
@@ -1401,7 +1463,7 @@ function renderClubs() {
     const head = el('h3', 'club-cat');
     head.append(el('span', 'emoji', kategooria.emoji), el('span', null, kategooria.nimi));
     box.append(head);
-    for (const r of ringid) box.append(clubCard({ ...r, emoji: kategooria.emoji }, { showClass: !mine }));
+    for (const r of ringid) box.append(clubCard(r, { showClass: !mine }));
   }
 }
 
