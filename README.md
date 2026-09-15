@@ -131,9 +131,17 @@ Mida kraapija **ei** tea, elab `clubs-overlay.json` failis:
 - **`subject`** — ainekood tunniplaanis, kui ring on ka seal. Nii teab äpp, et
   tabeli "Lastekoor" ja tunniplaani `LAK` on sama asi, ja oskab näidata valikut.
 
-Võti on `clubs.json` kirje `id`. Kui kool ringi ümber nimetab, muutub `id` ja
-overlay kirje jääb orvuks — `test-clubs.mjs` annab sellest teada, nii et
-uuendamise vajadus tuleb testidest välja, mitte kasutaja kaebusest.
+Võti on `clubs.json` kirje `id`, mis tuleb ringi nimest ja klassivahemikust.
+Kellaaeg sinna ei käi: kool nihutab aegu (male 4.-12. lõpp liikus 17.30 pealt
+17.00 peale) ja see lõhuks võtme iga kord. Sama id võib katta mitut rida —
+male käib 1.-3. klassile kaks korda nädalas, mõlemal sama nimi, juhendaja ja
+kategooria, seega üks overlay kirje teenindab mõlemat.
+
+Kui kool klassivahemikku muudab (Minecraft "3.-5. klassid" -> "2.-3. klassid"),
+muutub `id` ja overlay kirje jääb orvuks. `npm run ringid` **hoiatab** sellest
+ja töövoog teeb sellest GitHubis kollase märkuse — aga ei kuku läbi. Vananenud
+overlay ei tee vaadet katki, ja kooli huviringide lehe redigeerimine ei tohi
+tunniplaani avaldamist kinni hoida.
 
 Ring, millel overlay kirjet pole, jääb nimekirja alles: nimeks toores lahter,
 kategooriaks "muu". Andmeid ei peideta sellepärast, et käsitsi kiht on maha

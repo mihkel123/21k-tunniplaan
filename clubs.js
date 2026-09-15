@@ -200,6 +200,26 @@ export function mergeClubs(data, overlay, klass) {
     .filter((g) => g.ringid.length);
 }
 
+/**
+ * Kus käsitsi kiht on lehest maha jäänud. Tagastab inimloetavad read, mitte
+ * vea: vananenud overlay ei tee vaadet katki (ring jääb toore nimega alles),
+ * seega ei tohi see ka tunniplaani avaldamist kinni hoida.
+ */
+export function overlayIssues(data, overlay) {
+  const clubs = data?.clubs ?? [];
+  const kihid = overlay?.ringid ?? {};
+  const ids = new Set(clubs.map((c) => c.id));
+  const out = new Set();
+
+  for (const c of clubs) {
+    if (!kihid[c.id]) out.add(`uus ring ilma nime ja kategooriata: ${c.id} ("${c.ring}", ${c.klass})`);
+  }
+  for (const k of Object.keys(kihid)) {
+    if (!ids.has(k)) out.add(`kirje viitab ringile, mida lehel enam pole: ${k}`);
+  }
+  return [...out];
+}
+
 /** Kas avalduse tähtaeg on veel ees? Riba kaob ise ära, kui aeg läbi saab. */
 export function deadlineOn(overlay, today) {
   const t = overlay?.tahtaeg;

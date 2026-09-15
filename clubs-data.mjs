@@ -15,10 +15,12 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { parseClubs } from './clubs.js';
+import { parseClubs, overlayIssues } from './clubs.js';
 
 const URL = 'https://21k.ee/koolielu/huviala-ja-aineringid/';
-const OUT = join(dirname(fileURLToPath(import.meta.url)), 'clubs.json');
+const HERE = dirname(fileURLToPath(import.meta.url));
+const OUT = join(HERE, 'clubs.json');
+const OVERLAY = join(HERE, 'clubs-overlay.json');
 
 async function main() {
   process.stdout.write(`Laen ${URL} ... `);
@@ -49,6 +51,17 @@ async function main() {
     console.log(`  ${c.tasuline ? '€' : ' '} ${c.aeg.padEnd(22)} ${c.ring.slice(0, 46)}`);
   }
   console.log(`Ringe: ${clubs.length}\n-> ${OUT}`);
+
+  // Kool muudab lehte septembri jooksul ja siis jääb käsitsi kiht maha. See
+  // on hoiatus, mitte viga: ring jääb vaates alles, lihtsalt toore nime ja
+  // kategooriata. Punane töövoog peataks kogu tunniplaani avaldamise.
+  const overlay = await readFile(OVERLAY, 'utf8').then(JSON.parse, () => null);
+  const vead = overlayIssues({ clubs }, overlay);
+  for (const v of vead) {
+    // ::warning:: teeb sellest GitHubis kollase märkuse, mitte punase risti.
+    console.log(process.env.GITHUB_ACTIONS ? `::warning::clubs-overlay.json: ${v}` : `HOIATUS  ${v}`);
+  }
+  if (vead.length) console.log(`\nclubs-overlay.json vajab ${vead.length} parandust.`);
 }
 
 main().catch((err) => {
