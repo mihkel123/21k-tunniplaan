@@ -1,153 +1,16 @@
 {
   "12B": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett, Koolileht Lennuk",
-      "since": "2026-09-09"
-    },
     "7|1": {
       "kind": "changed",
       "wasSubject": "inglise keel, inglise keel",
       "since": "2026-09-15"
     }
   },
-  "3B": {
-    "0|2": {
-      "kind": "added",
-      "movedFrom": {
-        "subject": "klassijuhatajatund",
-        "slot": "K 7. tund"
-      },
-      "since": "2026-09-09"
-    },
-    "2|1": {
-      "kind": "changed",
-      "wasSubject": "matemaatika",
-      "movedTo": {
-        "subject": "matemaatika",
-        "slot": "T 5. tund"
-      },
-      "movedFrom": {
-        "subject": "eesti keel",
-        "slot": "T 5. tund"
-      },
-      "since": "2026-09-09"
-    },
-    "4|1": {
-      "kind": "changed",
-      "wasSubject": "eesti keel",
-      "movedFrom": {
-        "subject": "matemaatika",
-        "slot": "T 3. tund"
-      },
-      "movedTo": {
-        "subject": "eesti keel",
-        "slot": "T 3. tund"
-      },
-      "since": "2026-09-09"
-    },
-    "6|2": {
-      "kind": "removed",
-      "wasSubject": "klassijuhatajatund",
-      "movedTo": {
-        "subject": "klassijuhatajatund",
-        "slot": "K 1. tund"
-      },
-      "since": "2026-09-09"
-    }
-  },
-  "9A": {
-    "4|1": {
-      "kind": "changed",
-      "wasSubject": "vene keel, prantsuse keel, saksa keel",
-      "since": "2026-09-09"
-    }
-  },
-  "11A": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
-      "since": "2026-09-09"
-    }
-  },
-  "11B": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
-      "since": "2026-09-09"
-    }
-  },
-  "11C": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
-      "since": "2026-09-09"
-    }
-  },
   "12A": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
-      "since": "2026-09-09"
-    },
     "5|2": {
       "kind": "changed",
       "wasSubject": "saksa keel, hispaania keel, saksa keel, prantsuse keel",
       "since": "2026-09-11"
-    }
-  },
-  "12C": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
-      "since": "2026-09-09"
-    }
-  },
-  "5B": {
-    "0|3": {
-      "kind": "changed",
-      "wasSubject": "klassijuhatajatund",
-      "since": "2026-09-09"
-    }
-  },
-  "2A": {
-    "0|2": {
-      "kind": "removed",
-      "wasSubject": "klassijuhatajatund",
-      "movedTo": {
-        "subject": "klassijuhatajatund",
-        "slot": "N 1. tund"
-      },
-      "since": "2026-09-09"
-    },
-    "0|3": {
-      "kind": "added",
-      "movedFrom": {
-        "subject": "klassijuhatajatund",
-        "slot": "K 1. tund"
-      },
-      "since": "2026-09-09"
-    }
-  },
-  "9B": {
-    "2|1": {
-      "kind": "changed",
-      "wasSubject": "bioloogia",
-      "since": "2026-09-09"
-    }
-  },
-  "8A": {
-    "3|1": {
-      "kind": "changed",
-      "wasSubject": "füüsika",
-      "since": "2026-09-09"
-    }
-  },
-  "9D": {
-    "4|1": {
-      "kind": "changed",
-      "wasSubject": "prantsuse keel, saksa keel, vene keel",
-      "since": "2026-09-09"
     }
   }
 }
