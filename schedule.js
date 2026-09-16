@@ -14,11 +14,20 @@ export const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() 
 export const startOfDay = (d) => { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; };
 /** 0 = esmaspäev … 6 = pühapäev */
 export const weekdayIndex = (d) => (d.getDay() + 6) % 7;
-/** Eelmine päev ISO-kujul. Kuupäev ehitame osadest, et ajavöönd ei nihutaks. */
-const dayBefore = (isoDay) => {
-  const [y, m, d] = isoDay.split('-').map(Number);
-  return iso(addDays(new Date(y, m - 1, d), -1));
+/**
+ * ISO-kuupäev kohalikuks Date'iks. new Date('2026-09-09') annaks UTC kesköö,
+ * mis on Eesti suveajal 3 tundi varem kui kohalik kesköö — vahed kuupäevade
+ * vahel tuleksid siis katki ja päevaarvestus nihkuks.
+ */
+export const fromIso = (isoDay) => {
+  const [y, m, d] = String(isoDay ?? '').split('-').map(Number);
+  return Number.isFinite(y) && Number.isFinite(m) && Number.isFinite(d)
+    ? new Date(y, m - 1, d)
+    : null;
 };
+
+/** Eelmine päev ISO-kujul. Kuupäev ehitame osadest, et ajavöönd ei nihutaks. */
+const dayBefore = (isoDay) => iso(addDays(fromIso(isoDay), -1));
 export const minutesOf = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return h * 60 + m; };
 export const gradeOf = (klass) => parseInt(klass, 10) || 0;
 export const formatDay = (d) => `${d.getDate()}. ${MONTHS[d.getMonth()]}`;
@@ -79,13 +88,16 @@ export function relativeLabel(selected, now) {
 }
 
 /**
- * Kas muudatus on veel värske? Üks nädal: muudatuse võti on 'tund|nädalapäev',
- * seega pikem aken näitaks sama märki ka järgmise nädala samal päeval, kus
- * tund on juba ammu paigas.
+ * Kas muudatus on veel värske? Aken on täpselt üks nädal ja võrdlus on range.
+ *
+ * Muudatuse võti on 'tund|nädalapäev', mitte kuupäev. Seitsmes päev on sama
+ * nädalapäev nädal hiljem — see on juba tunni järgmine kordus, kus plaan on
+ * ammu paigas ja märk valetaks. Seega 6 päeva näidatakse, 7 mitte.
  */
 export function isFreshChange(entry, now) {
-  if (!entry?.since) return false;
-  return (startOfDay(now) - new Date(entry.since)) / 86400000 <= CHANGE_TTL_DAYS;
+  const since = fromIso(entry?.since);
+  if (!since) return false;
+  return (startOfDay(now) - since) / 86400000 < CHANGE_TTL_DAYS;
 }
 
 /* ---------- Riigipühad, tähtpäevad ja nimepäevad ---------- */

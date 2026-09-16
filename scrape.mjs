@@ -209,13 +209,15 @@ function diffClass(oldGrid, newGrid, periods) {
 function mergeLedger(previous, fresh, today) {
   const cutoff = new Date(today);
   cutoff.setDate(cutoff.getDate() - CHANGE_TTL_DAYS);
-  const iso = (d) => d.toISOString().slice(0, 10);
+  const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   const merged = {};
 
   // Vanad kirjed, mis pole veel aegunud
   for (const [klass, slots] of Object.entries(previous)) {
     for (const [slot, entry] of Object.entries(slots)) {
-      if (!entry.since || entry.since < iso(cutoff)) continue;
+      // Range võrdlus, sama piir mis schedule.js-i isFreshChange'il: täpselt
+      // nädala vanune kirje on juba tunni järgmine kordus ja läheb minema.
+      if (!entry.since || entry.since <= iso(cutoff)) continue;
       (merged[klass] ??= {})[slot] = entry;
     }
   }
@@ -253,7 +255,10 @@ async function pool(items, limit, worker) {
 async function main() {
   const previousData = await readJson(OUT, null);
   const previousLedger = await readJson(CHANGES, {});
-  const today = new Date().toISOString().slice(0, 10);
+  // Kohalik kuupäev, mitte UTC: töövoos on TZ=Europe/Tallinn ja 'since' peab
+  // tähendama sama päeva, mida laps telefonis näeb.
+  const n = new Date();
+  const today = `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, '0')}-${String(n.getDate()).padStart(2, '0')}`;
 
   process.stdout.write('Laen klasside nimekirja... ');
   const index = await get(BASE);

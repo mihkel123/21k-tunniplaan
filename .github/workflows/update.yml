@@ -28,6 +28,13 @@ concurrency:
   group: deploy
   cancel-in-progress: false
 
+# Runner on UTC, aga kool ja lapsed on Eestis. Öine käivitus tuleb ~22:20 UTC,
+# mil Eestis on juba järgmine päev — ilma selleta saaks muudatus 'since'
+# kuupäevaks eilse ja märk kaoks päev enne tähtaega. Üks koht, kus "täna"
+# tähendab kogu torus sama asja.
+env:
+  TZ: Europe/Tallinn
+
 jobs:
   update:
     runs-on: ubuntu-latest

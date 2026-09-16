@@ -61,13 +61,25 @@ t('sildid Täna/Homme', () => {
   assert.equal(relativeLabel(at('2026-09-03T00:00'), now), 'Homme');
   assert.equal(relativeLabel(at('2026-09-04T00:00'), now), null);
 });
-t('muudatus aegub nädalaga', () => {
-  const now = at('2026-09-20T10:00');
-  assert.ok(isFreshChange({ since: '2026-09-14' }, now), '6 päeva -> värske');
-  assert.ok(isFreshChange({ since: '2026-09-13' }, now), '7 päeva -> veel värske');
-  // 8 päeva tähendaks juba eelmise nädala sama päeva — märk peab kaduma
-  assert.ok(!isFreshChange({ since: '2026-09-12' }, now), '8 päeva -> aegunud');
-  assert.ok(!isFreshChange({}, now), 'ilma kuupäevata kirje pole värske');
+t('muudatus aegub täpselt nädalaga', () => {
+  // Kolmapäev. Eelmisel kolmapäeval tehtud muudatus ei tohi siin enam paista:
+  // see on sama tunni järgmine kordus, kus plaan on ammu paigas.
+  const kolmapäev = at('2026-09-16T10:00');
+  assert.ok(isFreshChange({ since: '2026-09-15' }, kolmapäev), '1 päev -> värske');
+  assert.ok(isFreshChange({ since: '2026-09-10' }, kolmapäev), '6 päeva -> värske');
+  assert.ok(!isFreshChange({ since: '2026-09-09' }, kolmapäev), '7 päeva ehk eelmine kolmapäev -> kadunud');
+  assert.ok(!isFreshChange({ since: '2026-09-02' }, kolmapäev), '14 päeva -> kadunud');
+  assert.ok(!isFreshChange({}, kolmapäev), 'ilma kuupäevata kirje pole värske');
+  assert.ok(!isFreshChange({ since: 'praht' }, kolmapäev), 'vigane kuupäev pole värske');
+
+  // Ajavöönd ei tohi piiri nihutada: new Date('2026-09-09') oleks UTC kesköö
+  // ehk Eesti suveajal 3 h varem kui kohalik, ja kirje elaks peaaegu päeva üle.
+  const päevaAlgus = at('2026-09-16T00:00');
+  const päevaLõpp = at('2026-09-16T23:59');
+  assert.equal(isFreshChange({ since: '2026-09-09' }, päevaAlgus), false);
+  assert.equal(isFreshChange({ since: '2026-09-09' }, päevaLõpp), false);
+  assert.equal(isFreshChange({ since: '2026-09-10' }, päevaAlgus), true);
+  assert.equal(isFreshChange({ since: '2026-09-10' }, päevaLõpp), true);
 });
 t('nädalapäeva indeks: E=0 … P=6', () => {
   assert.equal(weekdayIndex(at('2026-08-31T00:00')), 0);  // esmaspäev

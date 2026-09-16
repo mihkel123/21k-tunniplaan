@@ -80,6 +80,9 @@ t('ledger: üle nädala vanad kirjed kustuvad, uued jäävad', () => {
   const merged = mergeLedger(prev, { '7A': { '2|2': { kind: 'removed' } } }, '2026-08-29');
   assert.ok(!merged['7A']['0|0'], '28 päeva vana kirje peaks kustuma');
   assert.ok(merged['7A']['1|1'], '4 päeva vana kirje peaks jääma');
+  // Täpselt nädala vanune kirje on juba tunni järgmine kordus — läheb minema
+  const nädal = mergeLedger({ '7A': { '3|3': { kind: 'added', since: '2026-08-22' } } }, {}, '2026-08-29');
+  assert.ok(!nädal['7A']?.['3|3'], '7 päeva vana kirje peaks kustuma');
   assert.equal(merged['7A']['2|2'].since, '2026-08-29', 'uus kirje saab tänase kuupäeva');
 });
 
