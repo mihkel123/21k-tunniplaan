@@ -457,6 +457,7 @@ function eventCard(e) {
   const card = el('section', 'card is-event');
   const when = el('div', 'when');
   when.append(el('b', null, e.at));
+  if (e.until) when.append(el('span', null, e.until));
   card.append(when);
 
   const what = el('div', 'what');
@@ -464,6 +465,7 @@ function eventCard(e) {
   subject.append(el('span', 'emoji', e.emoji ?? '🎓'), el('span', null, e.title));
   what.append(subject);
   if (e.teacher) what.append(el('div', 'meta', e.teacher));
+  if (e.note) what.append(el('div', 'meta', e.note));
   if (e.room) what.append(el('span', 'room', e.room));
   const wx = eventWeather(e);
   if (wx) what.append(weatherRow(wx));
@@ -621,7 +623,7 @@ function renderLessons() {
   if (special) {
     if (special.notice) {
       const n = el('div', 'banner special');
-      n.append(el('b', null, '🎓 Esimene koolipäev'), el('span', null, special.notice));
+      n.append(el('b', null, special.title), el('span', null, special.notice));
       main.append(n);
     }
     for (const e of special.events) main.append(eventCard(e));

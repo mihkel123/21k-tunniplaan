@@ -72,14 +72,14 @@ t('paralleelrühmad: ühe rühma õpetaja muutus -> changed', () => {
   assert.equal(diffClass(a, b, P)['0|0'].kind, 'changed');
 });
 
-t('ledger: üle 14 päeva vanad kirjed kustuvad, uued jäävad', () => {
+t('ledger: üle nädala vanad kirjed kustuvad, uued jäävad', () => {
   const prev = { '7A': {
     '0|0': { kind: 'changed', since: '2026-08-01' },   // vana
-    '1|1': { kind: 'added',   since: '2026-08-20' },   // värske
+    '1|1': { kind: 'added',   since: '2026-08-25' },   // värske
   }};
   const merged = mergeLedger(prev, { '7A': { '2|2': { kind: 'removed' } } }, '2026-08-29');
   assert.ok(!merged['7A']['0|0'], '28 päeva vana kirje peaks kustuma');
-  assert.ok(merged['7A']['1|1'], '9 päeva vana kirje peaks jääma');
+  assert.ok(merged['7A']['1|1'], '4 päeva vana kirje peaks jääma');
   assert.equal(merged['7A']['2|2'].since, '2026-08-29', 'uus kirje saab tänase kuupäeva');
 });
 

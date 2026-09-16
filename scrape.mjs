@@ -11,7 +11,7 @@ const BASE = 'https://21k.ee/oppetoo/tunniplaan/';
 const DIR = dirname(fileURLToPath(import.meta.url));
 const OUT = join(DIR, 'data.json');
 const CHANGES = join(DIR, 'changes.json');
-const CHANGE_TTL_DAYS = 14;
+const CHANGE_TTL_DAYS = 7;   // sama aken mis schedule.js-is — vt sealset selgitust
 const CONCURRENCY = 6;
 
 const ENTITIES = {

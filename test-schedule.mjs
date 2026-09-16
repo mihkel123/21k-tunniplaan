@@ -61,11 +61,13 @@ t('sildid Täna/Homme', () => {
   assert.equal(relativeLabel(at('2026-09-03T00:00'), now), 'Homme');
   assert.equal(relativeLabel(at('2026-09-04T00:00'), now), null);
 });
-t('muudatus aegub 14 päevaga', () => {
+t('muudatus aegub nädalaga', () => {
   const now = at('2026-09-20T10:00');
-  assert.ok(isFreshChange({ since: '2026-09-07' }, now), '13 päeva -> värske');
-  assert.ok(isFreshChange({ since: '2026-09-06' }, now), '14 päeva -> veel värske');
-  assert.ok(!isFreshChange({ since: '2026-09-05' }, now), '15 päeva -> aegunud');
+  assert.ok(isFreshChange({ since: '2026-09-14' }, now), '6 päeva -> värske');
+  assert.ok(isFreshChange({ since: '2026-09-13' }, now), '7 päeva -> veel värske');
+  // 8 päeva tähendaks juba eelmise nädala sama päeva — märk peab kaduma
+  assert.ok(!isFreshChange({ since: '2026-09-12' }, now), '8 päeva -> aegunud');
+  assert.ok(!isFreshChange({}, now), 'ilma kuupäevata kirje pole värske');
 });
 t('nädalapäeva indeks: E=0 … P=6', () => {
   assert.equal(weekdayIndex(at('2026-08-31T00:00')), 0);  // esmaspäev
@@ -187,12 +189,52 @@ t('tavalisel päeval erandit ei ole', () => {
   assert.equal(overrideOn(null, at('2026-09-01T12:00:00'), '1A'), null, 'faili puudumine ei lõhu');
 });
 
-t('kõik klassid on erandpäeval kaetud', () => {
+t('kõik klassid on igal erandpäeval kaetud', () => {
   // Kui kool lisab klassi, peab see siin välja tulema, mitte lapse ekraanil.
   const data = JSON.parse(readFileSync(new URL('./data.json', import.meta.url), 'utf8'));
-  const day = OV.days['2026-09-01'].classes;
-  const puudu = data.classOrder.filter((k) => !day[k]?.length);
-  assert.deepEqual(puudu, []);
+  for (const [kuupäev, day] of Object.entries(OV.days)) {
+    const puudu = data.classOrder.filter((k) => !day.classes[k]?.length);
+    assert.deepEqual(puudu, [], `${kuupäev}: katmata klassid ${puudu}`);
+  }
+});
+
+t('erandpäeval on pealkiri ja sündmused on ajas järjekorras', () => {
+  for (const [kuupäev, day] of Object.entries(OV.days)) {
+    assert.ok(day.title, `${kuupäev}: pealkiri puudub, bänner jääks tühjaks`);
+    for (const [klass, events] of Object.entries(day.classes)) {
+      const ajad = events.map((e) => e.at);
+      const sorditud = [...ajad].sort((a, b) => {
+        const m = (t) => { const [h, x] = t.split(':').map(Number); return h * 60 + x; };
+        return m(a) - m(b);
+      });
+      assert.deepEqual(ajad, sorditud, `${kuupäev} ${klass}: sündmused pole ajas`);
+      for (const e of events) {
+        assert.ok(e.title, `${kuupäev} ${klass}: sündmusel pole pealkirja`);
+        // Ilm käib välisürituse kaardile ainult siis, kui kellaaeg on loetav
+        if (e.outdoor) assert.match(e.at, /^\d{1,2}:\d{2}$/, `${kuupäev} ${klass}: "${e.at}" ei anna ilma`);
+      }
+    }
+  }
+});
+
+t('spordipäev: iga klass saab oma astme kava', () => {
+  const day = OV.days['2026-09-18'];
+  assert.equal(day.title, '🏃 Spordipäev');
+  const nimed = (k) => day.classes[k].map((e) => e.title);
+  assert.deepEqual(nimed('1A'), ['Sügismatk Kadriorgu']);
+  assert.deepEqual(nimed('4B'), ['Matk']);
+  // 3. klass algab varem kui 2. klass — plakatil on need vastupidi lugeda
+  assert.equal(day.classes['3A'][0].at, '8:30');
+  assert.equal(day.classes['2A'][0].at, '11:00');
+  // Jalgpall ainult 8.-12. klassile, noorematel mitte
+  const jalgpall = (k) => day.classes[k].some((e) => e.title.startsWith('Jalgpall'));
+  assert.equal(jalgpall('7A'), false);
+  assert.equal(jalgpall('8A'), true);
+  assert.equal(day.classes['8A'].find((e) => e.title.startsWith('Jalgpall')).at, '10:00');
+  assert.equal(day.classes['11A'].find((e) => e.title.startsWith('Jalgpall')).at, '12:00');
+  // 5.-8. jooksevad hiljem kui 9.-12.
+  assert.equal(day.classes['7A'][1].at, '10:15');
+  assert.equal(day.classes['9A'][1].at, '09:00');
 });
 
 /* ---------- Söögivahetund ---------- */

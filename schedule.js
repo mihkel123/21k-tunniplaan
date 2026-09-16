@@ -3,7 +3,7 @@
 export const DAY_LETTER = ['E', 'T', 'K', 'N', 'R'];
 export const DAY_NAME = ['Esmaspäev', 'Teisipäev', 'Kolmapäev', 'Neljapäev', 'Reede'];
 export const CUTOVER_HOUR = 16;
-export const CHANGE_TTL_DAYS = 14;
+export const CHANGE_TTL_DAYS = 7;
 
 const MONTHS = ['jaanuar', 'veebruar', 'märts', 'aprill', 'mai', 'juuni',
   'juuli', 'august', 'september', 'oktoober', 'november', 'detsember'];
@@ -78,7 +78,11 @@ export function relativeLabel(selected, now) {
   return diff === 0 ? 'Täna' : diff === 1 ? 'Homme' : null;
 }
 
-/** Kas muudatus on veel värske (14 päeva)? */
+/**
+ * Kas muudatus on veel värske? Üks nädal: muudatuse võti on 'tund|nädalapäev',
+ * seega pikem aken näitaks sama märki ka järgmise nädala samal päeval, kus
+ * tund on juba ammu paigas.
+ */
 export function isFreshChange(entry, now) {
   if (!entry?.since) return false;
   return (startOfDay(now) - new Date(entry.since)) / 86400000 <= CHANGE_TTL_DAYS;
@@ -143,14 +147,14 @@ export function notableOn(notable, date) {
 }
 
 /**
- * Erandpäev: aktus, klassijuhatajatund vms, mida kooli tunniplaanis ei ole.
+ * Erandpäev: aktus, spordipäev vms, mida kooli tunniplaanis ei ole.
  * Tagastab selle klassi sündmused või null, kui päev on tavaline.
  */
 export function overrideOn(overrides, date, klass) {
   const day = overrides?.days?.[iso(date)];
   const events = day?.classes?.[klass];
   if (!events?.length) return null;
-  return { notice: day.notice ?? null, events };
+  return { title: day.title ?? 'Erandpäev', notice: day.notice ?? null, events };
 }
 
 /** Selle päeva nimepäevad. */

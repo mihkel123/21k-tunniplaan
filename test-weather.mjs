@@ -292,15 +292,21 @@ t('riietusebandid on täpselt piiril: 0 / 10 / 21', () => {
 });
 
 // --- päris andmed ---
+/* Siseruumi tunnused, mitte õuekohtade loend: kool leiab iga kord uue õuekoha
+   (staadion, terviserajad, Kadriorg), aga siseruum on ikka number, aula,
+   võimla või ujula. Vastupidine loend vananeks iga erandpäevaga. */
+const ÕUES = /koolimaja ees|spordiväljak|staadion|terviserajad|park|kadrior/i;
+const SISERUUM = /\b(ruum|aula|võimla|ujula|klass|saal|kabinet)\b|\b[A-ZÕÄÖÜ]?-?\d{3}\b/i;
+
 t('väliüritused on erandpäeval õueks märgitud', () => {
   const ov = JSON.parse(readFileSync(new URL('./overrides.json', import.meta.url), 'utf8'));
   const events = Object.values(ov.days).flatMap((d) => Object.values(d.classes).flat());
-  const outside = events.filter((e) => /koolimaja ees|spordiväljak/i.test(e.room || ''));
+  const outside = events.filter((e) => ÕUES.test(e.room || ''));
   assert.ok(outside.length > 0, 'õues toimuvaid sündmusi peab olema');
   const puudu = outside.filter((e) => e.outdoor !== true);
   assert.deepEqual(puudu.map((e) => `${e.title} @ ${e.room}`), [], 'igal õuesündmusel peab olema outdoor');
-  // Ja vastupidi: siseruumis toimuvale lippu ei panda.
-  const vale = events.filter((e) => e.outdoor && !/koolimaja ees|spordiväljak/i.test(e.room || ''));
+  // Ja vastupidi: siseruumis toimuvale lippu ei panda — ilmarida oleks seal vale.
+  const vale = events.filter((e) => e.outdoor && SISERUUM.test(e.room || ''));
   assert.deepEqual(vale.map((e) => `${e.title} @ ${e.room}`), []);
 });
 

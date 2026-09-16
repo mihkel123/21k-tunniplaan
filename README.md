@@ -11,7 +11,7 @@ See rakendus on ainult **lugeja** — kooli leht jääb ainsaks tõeallikaks.
 - **Näitab õiget päeva ise.** Enne kella 16 tänast, alates kella 16-st järgmist
   koolipäeva. Nädalavahetused ja koolivaheajad jäetakse vahele.
 - **Üks kaart tunni kohta** — aine täisnimi, õpetaja, ruum ja kellaaeg.
-- **Muudatused jäävad 14 päevaks silma.** Kui tund kolib teise aega, märgitakse
+- **Muudatused jäävad nädalaks silma.** Kui tund kolib teise aega, märgitakse
   ära nii vana koht (läbi kriipsutatult) kui uus.
 - **Rühmavalik.** Kus käib mitu rühma korraga (vene/prantsuse/saksa keel, koorid),
   valib laps korra oma rühma ja see jääb meelde. Teised jäävad hallilt nähtavale.
@@ -107,7 +107,7 @@ Käsitsi saab käivitada GitHubis: Actions → *Uuenda tunniplaan* → *Run work
 | `schedule.js` | Kuupäevaloogika: milline päev näidata, kas on vaheaeg. Ilma DOM-ita, seetõttu testitav. |
 | `app.js` | Kuvamine: kaardid, rühmavalikud, muudatuste märgid. |
 | `data.json` | Kraabitud tunniplaan (46 klassi). Genereeritud — käsitsi ei muuda. |
-| `changes.json` | Viimase 14 päeva muudatused. Genereeritud. |
+| `changes.json` | Viimase nädala muudatused. Genereeritud. |
 | `holidays.json` | Koolivaheajad ja riigipühad. **Käsitsi hooldatav** — vt allpool. |
 | `make-icons.py` | Genereerib ikoonid (`python3 make-icons.py`). |
 | `bus.js` | Suunatuvastus, sõiduaeg, reaalaja parsimine, hommikuste ja kojusõidu väljumiste valik. |
@@ -116,7 +116,7 @@ Käsitsi saab käivitada GitHubis: Actions → *Uuenda tunniplaan* → *Run work
 | `stats.js` | Kasutusstatistika (Umami) saatmine: kestuse vahemikud ja ekraanide lehevaated. Ilma DOM-ita, seetõttu testitav. |
 | `namedays.mjs` | Laeb nimepäevad Statistikaametist -> `namedays.json`. Käsitsi, mitte iga deploy'ga. |
 | `notabledays.json` | Riigipühad, riiklikud tähtpäevad, rahvakalender. Käsitsi hooldatav. |
-| `overrides.json` | Erandpäevad: aktused, klassijuhatajatunnid. **Käsitsi hooldatav** — vt allpool. |
+| `overrides.json` | Erandpäevad: aktused, spordipäev, klassijuhatajatunnid. **Käsitsi hooldatav** — vt allpool. |
 | `clubs.js` | Huviringide parsimine ja liitmine: klassisobivus, ajaveerg, kategooriatesse rühmitamine. Ilma DOM-ita, seetõttu testitav. |
 | `clubs-data.mjs` | Laeb huviringide tabelid kooli lehelt -> `clubs.json`. Ainult võrk ja fail, loogika on `clubs.js`-is. |
 | `clubs.json` | Kraabitud huviringid (37 rida). Genereeritud — käsitsi ei muuda. |
