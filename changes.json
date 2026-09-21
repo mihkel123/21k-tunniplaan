@@ -4,6 +4,80 @@
       "kind": "changed",
       "wasSubject": "Inglise keel, inglise keel, inglise keel",
       "since": "2026-09-18"
+    },
+    "7|3": {
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett, Koolileht Lennuk",
+      "since": "2026-09-21"
+    }
+  },
+  "6C": {
+    "9|2": {
+      "kind": "added",
+      "since": "2026-09-21"
+    }
+  },
+  "9B": {
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "since": "2026-09-21"
+    }
+  },
+  "10A": {
+    "7|3": {
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, hispaania keel",
+      "since": "2026-09-21"
+    }
+  },
+  "10B": {
+    "7|3": {
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika",
+      "since": "2026-09-21"
+    }
+  },
+  "10C": {
+    "7|3": {
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika",
+      "since": "2026-09-21"
+    }
+  },
+  "11A": {
+    "7|3": {
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-09-21"
+    }
+  },
+  "11B": {
+    "7|3": {
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-09-21"
+    }
+  },
+  "11C": {
+    "7|3": {
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-09-21"
+    }
+  },
+  "12A": {
+    "7|3": {
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-09-21"
+    }
+  },
+  "12C": {
+    "7|3": {
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-09-21"
     }
   }
 }
