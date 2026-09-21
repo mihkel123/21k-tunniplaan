@@ -410,6 +410,11 @@ button {
 
 /* Erandpäev: aktus, klassijuhatajatund */
 .card.is-event { --stripe: var(--brand); }
+
+/* Teate kaart: kellaaja asemel on emoji, seega suurem kui tunni number. */
+.card.is-notice { --stripe: var(--accent); background: color-mix(in srgb, var(--accent) 6%, var(--card)); }
+.card.is-notice .when b { font-size: 20px; }
+.card.is-notice .subject { font-weight: 650; }
 .card.is-event .when b { font-size: 15px; font-weight: 700; line-height: 1.2; }
 .banner.special {
   background: color-mix(in srgb, var(--brand) 10%, var(--card));

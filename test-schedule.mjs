@@ -205,6 +205,8 @@ t('kõik klassid on igal erandpäeval kaetud', () => {
   // Kui kool lisab klassi, peab see siin välja tulema, mitte lapse ekraanil.
   const data = JSON.parse(readFileSync(new URL('./data.json', import.meta.url), 'utf8'));
   for (const [kuupäev, day] of Object.entries(OV.days)) {
+    // Teatepäev (streik) ei asenda tunniplaani ega vaja klasside loendit
+    if (!Object.keys(day.classes ?? {}).length) continue;
     const puudu = data.classOrder.filter((k) => !day.classes[k]?.length);
     assert.deepEqual(puudu, [], `${kuupäev}: katmata klassid ${puudu}`);
   }
@@ -227,6 +229,22 @@ t('erandpäeval on pealkiri ja sündmused on ajas järjekorras', () => {
       }
     }
   }
+});
+
+t('teatepäev: riba ja kaardid käivad tunniplaani peale, mitte asemele', () => {
+  const streik = overrideOn(OV, at('2026-09-22T08:00:00'), '7A');
+  assert.ok(streik, 'teatepäev peab kõigile klassidele kehtima');
+  assert.deepEqual(streik.events, [], 'sündmusi pole — tunniplaan jääb kehtima');
+  assert.deepEqual(streik.cancel, [2], '2. tund ei toimu');
+  assert.equal(streik.cards.length, 1);
+  assert.ok(streik.cancelNote);
+  // Teade käib kogu koolile, ka klassile, mida klasside loendis pole
+  assert.ok(overrideOn(OV, at('2026-09-22T08:00:00'), '12C'));
+
+  // Täispäeva erand käitub endiselt vanamoodi: kirjas olemata klass saab
+  // tavalise tunniplaani, mitte riba "tunde ei ole" koos tundidega.
+  assert.equal(overrideOn(OV, at('2026-09-18T08:00:00'), 'puudub'), null);
+  assert.ok(overrideOn(OV, at('2026-09-18T08:00:00'), '7A').events.length);
 });
 
 t('spordipäev: iga klass saab oma astme kava', () => {

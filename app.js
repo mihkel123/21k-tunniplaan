@@ -452,6 +452,41 @@ function ghostCard(period, change) {
   return card;
 }
 
+/* Tund, mis sel korral ära jääb, aga on tunniplaanis edasi. Sama kujundus
+   mis kummituskaardil: läbi kriipsutatud, et pilk libiseks üle. */
+function cancelledCard(period, note) {
+  const card = el('article', 'card is-changed is-ghost');
+  const when = el('div', 'when');
+  when.append(el('b', null, `${period.n}.`), el('span', null, period.start), el('span', null, period.end));
+  card.append(when);
+
+  const what = el('div', 'what');
+  const subject = el('div', 'subject');
+  subject.append(el('span', 'emoji', '🚫'), el('span', null, 'Tund ei toimu'));
+  what.append(subject);
+  if (note) {
+    const c = el('div', 'changed');
+    c.append(el('span', null, '📢'), el('span', null, note));
+    what.append(c);
+  }
+  card.append(what);
+  return card;
+}
+
+/* Teate kaart, mis ei ole tund ega sündmus: kellaaja asemel emoji. */
+function noticeCard(c) {
+  const card = el('section', 'card is-notice');
+  const when = el('div', 'when');
+  when.append(el('b', null, c.emoji ?? '📢'));
+  card.append(when);
+
+  const what = el('div', 'what');
+  what.append(el('div', 'subject', c.title));
+  if (c.text) what.append(el('div', 'meta', c.text));
+  card.append(what);
+  return card;
+}
+
 /** Erandpäeva sündmus: kellaaeg vasakul, pealkiri ja koht paremal. */
 function eventCard(e) {
   const card = el('section', 'card is-event');
@@ -617,8 +652,7 @@ function renderLessons() {
     return;
   }
 
-  // Erandpäev (aktus, klassijuhatajatund): kooli tunniplaanis neid ei ole,
-  // seega tavalised tunnid jäävad ära ja näitame päevakava.
+  // Erandpäev kahes kujus, vt schedule.js overrideOn.
   const special = overrideIn(state.overrides, selected, klass);
   if (special) {
     if (special.notice) {
@@ -626,8 +660,13 @@ function renderLessons() {
       n.append(el('b', null, special.title), el('span', null, special.notice));
       main.append(n);
     }
-    for (const e of special.events) main.append(eventCard(e));
-    return;
+    // Terve päev asendatud (aktus, spordipäev) — tavalisi tunde ei ole.
+    if (special.events.length) {
+      for (const e of special.events) main.append(eventCard(e));
+      return;
+    }
+    // Muidu käib teade tavalise tunniplaani peale ja renderdus läheb edasi.
+    for (const c of special.cards) main.append(noticeCard(c));
   }
 
   const grid = data.classes[klass].grid;
@@ -678,6 +717,20 @@ function renderLessons() {
   periods.forEach((period, i) => {
     const cell = grid[i]?.[day] ?? [];
     const change = changeFor(klass, i, day);
+
+    // Üksik ärajääv tund (streik): ülejäänud päev on tavaline. Tühja pesa
+    // pole mõtet näidata — seal polnudki tundi, mis ära jääks.
+    if (special?.cancel?.includes(period.n)) {
+      if (cell.length) {
+        any = true;
+        putLunchBefore(minutesOf(period.start));
+        // firstStartMin ja lastEndMin jäävad meelega puutumata: last pole sel
+        // tunnil koolis. 17 klassil algab teisipäev just 2. tunniga ja neid
+        // oodatakse alles 3. tunniks — hommikune ilm ja buss käivad selle järgi.
+        put(cancelledCard(period, special.cancelNote));
+      }
+      return;
+    }
 
     // Tühi pesa, kust tund kadus — näita kummituskaarti, muidu jääks muutus märkamata
     if (!cell.length) {

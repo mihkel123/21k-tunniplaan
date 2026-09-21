@@ -116,12 +116,36 @@ Käsitsi saab käivitada GitHubis: Actions → *Uuenda tunniplaan* → *Run work
 | `stats.js` | Kasutusstatistika (Umami) saatmine: kestuse vahemikud ja ekraanide lehevaated. Ilma DOM-ita, seetõttu testitav. |
 | `namedays.mjs` | Laeb nimepäevad Statistikaametist -> `namedays.json`. Käsitsi, mitte iga deploy'ga. |
 | `notabledays.json` | Riigipühad, riiklikud tähtpäevad, rahvakalender. Käsitsi hooldatav. |
-| `overrides.json` | Erandpäevad: aktused, spordipäev, klassijuhatajatunnid. **Käsitsi hooldatav** — vt allpool. |
+| `overrides.json` | Erandpäevad ja teated: aktused, spordipäev, streik. **Käsitsi hooldatav** — vt allpool. |
 | `clubs.js` | Huviringide parsimine ja liitmine: klassisobivus, ajaveerg, kategooriatesse rühmitamine. Ilma DOM-ita, seetõttu testitav. |
 | `clubs-data.mjs` | Laeb huviringide tabelid kooli lehelt -> `clubs.json`. Ainult võrk ja fail, loogika on `clubs.js`-is. |
 | `clubs.json` | Kraabitud huviringid (37 rida). Genereeritud — käsitsi ei muuda. |
 | `clubs-overlay.json` | Ringide nimed, juhendajad, kategooriad ja side tunniplaaniga. **Käsitsi hooldatav** — vt allpool. |
 | `tp.myclubs` (localStorage) | Kasutaja lisatud ringid klassi kaupa. Võti on `id#aeg`, sest sama ring võib nädalas kahel ajal käia. |
+
+## Erandpäevad ja teated
+
+`overrides.json` kannab kaht eri asja ja vahe on oluline:
+
+**Terve päev asendatud.** Päeval on `classes`, kus iga klass saab oma
+sündmuste loendi — aktus, spordipäev. Tavalisi tunde siis ei näidata. Iga
+klass peab kirjas olema; kui mõni puudub, näeb ta tavalist tunniplaani ja
+`test-schedule.mjs` annab sellest teada.
+
+**Teade tunniplaani peale.** `classes` on tühi, aga päeval on `notice`,
+`cancel` või `cards`. Tunniplaan jääb kehtima ja teade käib sellele peale —
+nii on õpetajate hoiatusstreik 22.09, kus ainult 2. tund ei toimunud.
+
+| Väli | Mida teeb |
+|---|---|
+| `title`, `notice` | riba päeva ülal |
+| `cancel: [2]` | need tunnid renderduvad „Tund ei toimu" kaardina |
+| `cancelNote` | põhjus ärajäänud tunni kaardil |
+| `cards` | infokaardid tunniplaani ette (`emoji`, `title`, `text`) |
+
+Ärajäänud tund ei loe päeva alguse ega lõpu hulka: hommikune ilm ja bussikaart
+käivad esimese **toimuva** tunni järgi. Streigi päeval algas 17 klassi
+teisipäev just 2. tunniga ja neid oodati alles 3. tunniks.
 
 ## Huviringide uuendamine
 

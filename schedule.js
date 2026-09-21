@@ -159,14 +159,38 @@ export function notableOn(notable, date) {
 }
 
 /**
- * Erandpäev: aktus, spordipäev vms, mida kooli tunniplaanis ei ole.
- * Tagastab selle klassi sündmused või null, kui päev on tavaline.
+ * Erandpäev, kahes kujus.
+ *
+ * 1. Terve päev asendatud (aktus, spordipäev): `classes[klass]` sisaldab
+ *    sündmusi ja tavalisi tunde ei näidata.
+ * 2. Teade tunniplaani peale (streik, muu teade): sündmusi pole, aga päeval
+ *    on riba, ärajäävad tunnid (`cancel`) või infokaardid (`cards`).
+ *    Tunniplaan jääb kehtima.
+ *
+ * -> { title, notice, events, cancel, cards } või null, kui päev on tavaline.
  */
 export function overrideOn(overrides, date, klass) {
   const day = overrides?.days?.[iso(date)];
-  const events = day?.classes?.[klass];
-  if (!events?.length) return null;
-  return { title: day.title ?? 'Erandpäev', notice: day.notice ?? null, events };
+  if (!day) return null;
+
+  const events = day.classes?.[klass] ?? [];
+  const cancel = day.cancel ?? [];
+  const cards = day.cards ?? [];
+
+  // Kui päev asendab tunniplaani, aga seda klassi kirjas pole, on tegu
+  // andmelüngaga — parem näidata tavalist plaani kui riba "tunde ei ole"
+  // koos tundidega. Teade käib seevastu kogu koolile.
+  if (Object.keys(day.classes ?? {}).length && !events.length) return null;
+  if (!events.length && !cancel.length && !cards.length && !day.notice) return null;
+
+  return {
+    title: day.title ?? 'Erandpäev',
+    notice: day.notice ?? null,
+    cancelNote: day.cancelNote ?? null,
+    events,
+    cancel,
+    cards,
+  };
 }
 
 /** Selle päeva nimepäevad. */
