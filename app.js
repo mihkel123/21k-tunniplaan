@@ -6,7 +6,7 @@ import {
   holidayOn as holidayIn, isSchoolDay as isSchoolDayIn, defaultDate as defaultDateIn,
   relativeLabel, isFreshChange,
   notableOn as notableIn, namesOn as namesIn,
-  overrideOn as overrideIn, parseLunch, eatingHalf,
+  overrideOn as overrideIn, noticesOn as noticesIn, parseLunch, eatingHalf,
   entryKey, choiceKey, cellIsOptional, collectChoices, SKIP,
 } from './schedule.js';
 import {
@@ -639,6 +639,18 @@ function renderLessons() {
     b.append(el('span', 'emoji', '🎭'), el('span', null, ringiTahtaeg.tekst), el('span', 'banner-go', '›'));
     b.addEventListener('click', openClubs);
     main.append(b);
+  }
+
+  // Kooli teated oma ajaaknaga (üldkoosolek vms). Riba käib igal päevavaatel,
+  // mitte ainult sündmuse enda päeval — meeldetuletus on mõttekas ette.
+  for (const teade of noticesIn(state.overrides, state.now)) {
+    const n = el('div', 'banner notice-dated');
+    n.append(el('span', 'emoji', teade.emoji ?? '📌'));
+    const txt = el('div');
+    txt.append(el('b', null, teade.title));
+    if (teade.text) txt.append(el('span', null, teade.text));
+    n.append(txt);
+    main.append(n);
   }
 
   if (holiday) {

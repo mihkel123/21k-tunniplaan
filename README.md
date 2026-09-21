@@ -147,6 +147,22 @@ nii on õpetajate hoiatusstreik 22.09, kus ainult 2. tund ei toimunud.
 käivad esimese **toimuva** tunni järgi. Streigi päeval algas 17 klassi
 teisipäev just 2. tunniga ja neid oodati alles 3. tunniks.
 
+### Teated ajaaknaga
+
+`overrides.json` ülemises otsas on `notices` — ribad, mis ilmuvad päevavaate
+ülaossa kuupäevavahemikus ja kaovad ise ära. Erinevalt erandpäevast pole need
+seotud ühe päevaga: koosolekust tuletatakse meelde nädal ette.
+
+```
+{ "from": "2026-09-26", "to": "2026-10-01",
+  "emoji": "👪", "title": "Lastevanemate üldkoosolek",
+  "text": "Neljapäeval, 1. oktoobril kell 17.00 kooli aulas." }
+```
+
+Mõlemad otsad on kaasa arvatud ja mõlemad võivad puududa (lahtine ots). Kaks
+teadet korraga muudaksid mõlemad märkamatuks, seega tasub aknad järjestikku
+panna — üldkoosoleku oma algab 26.09, kui huviringide avalduse riba kaob.
+
 ## Huviringide uuendamine
 
 Kool avaldab ringide nimekirja kord aastas septembri alguses lehel

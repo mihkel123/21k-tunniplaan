@@ -564,6 +564,21 @@ button {
   padding: 12px 14px;
 }
 .banner.clubs-cta .emoji { font-size: 17px; line-height: 1; flex: none; }
+
+/* Kooli teade oma ajaaknaga. Neutraalne toon: see ei nõua tegevust nagu
+   huviringide tähtaeg, vaid tuletab meelde. */
+.banner.notice-dated {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  background: color-mix(in srgb, var(--brand) 6%, var(--card));
+  border-color: color-mix(in srgb, var(--brand) 22%, var(--line));
+  padding: 12px 14px;
+}
+.banner.notice-dated .emoji { font-size: 17px; line-height: 1.3; flex: none; }
+.banner.notice-dated b { display: block; }
+.banner.notice-dated span { color: var(--ink-soft); }
 .banner.clubs-cta .banner-go { margin-left: auto; color: var(--ink-faint); font-size: 18px; }
 .banner.clubs-cta:active { background: color-mix(in srgb, var(--cta) 20%, var(--card)); }
 

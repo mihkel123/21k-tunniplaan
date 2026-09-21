@@ -1,5 +1,5 @@
 // Päevaloogika testid: node test-schedule.mjs
-import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, parseLunch, eatingHalf, entryKey, choiceKey, cellIsOptional, collectChoices } from './schedule.js';
+import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, noticesOn, parseLunch, eatingHalf, entryKey, choiceKey, cellIsOptional, collectChoices } from './schedule.js';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
@@ -229,6 +229,27 @@ t('erandpäeval on pealkiri ja sündmused on ajas järjekorras', () => {
       }
     }
   }
+});
+
+t('teade ilmub oma aknas ja kaob ise ära', () => {
+  const nimi = (d) => noticesOn(OV, at(`${d}T10:00`)).map((n) => n.title);
+  // Huviringide riba on üleval 25.09-ni — koosoleku oma algab alles pärast,
+  // et kaks teadet korraga ei muudaks mõlemat märkamatuks.
+  assert.deepEqual(nimi('2026-09-25'), []);
+  assert.deepEqual(nimi('2026-09-26'), ['Lastevanemate üldkoosolek']);
+  assert.deepEqual(nimi('2026-10-01'), ['Lastevanemate üldkoosolek'], 'koosoleku päeval veel');
+  assert.deepEqual(nimi('2026-10-02'), [], 'järgmisel päeval kadunud');
+});
+
+t('noticesOn ei kuku läbi puuduvate otste ja vigase sisendiga', () => {
+  const täna = at('2026-10-05T10:00');
+  assert.deepEqual(noticesOn(null, täna), []);
+  assert.deepEqual(noticesOn({}, täna), []);
+  // Lahtine ots kummaski suunas
+  assert.equal(noticesOn({ notices: [{ title: 'X', from: '2026-01-01' }] }, täna).length, 1);
+  assert.equal(noticesOn({ notices: [{ title: 'X', to: '2026-12-31' }] }, täna).length, 1);
+  // Pealkirjata kirje jäetakse vahele, muidu oleks riba tühi
+  assert.deepEqual(noticesOn({ notices: [{ text: 'ilma pealkirjata' }] }, täna), []);
 });
 
 t('teatepäev: riba ja kaardid käivad tunniplaani peale, mitte asemele', () => {

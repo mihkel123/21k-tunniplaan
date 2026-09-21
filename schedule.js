@@ -193,6 +193,21 @@ export function overrideOn(overrides, date, klass) {
   };
 }
 
+/**
+ * Teated, mis sel päeval veel kehtivad — riba päevavaate ülal, sõltumata
+ * sellest, millist päeva parasjagu vaadatakse. Erinevalt erandpäevast ei ole
+ * see seotud ühe kuupäevaga, vaid aknaga: koosolekust tuletatakse meelde
+ * nädal ette, mitte alles koosoleku hommikul.
+ *
+ * `from` ja `to` on mõlemad kaasa arvatud. Puuduv ots tähendab lahtist otsa.
+ */
+export function noticesOn(overrides, today) {
+  const day = iso(startOfDay(today));
+  return (overrides?.notices ?? []).filter(
+    (n) => n?.title && (!n.from || day >= n.from) && (!n.to || day <= n.to),
+  );
+}
+
 /** Selle päeva nimepäevad. */
 export function namesOn(namedays, date) {
   return namedays?.days?.[MD(date)] ?? [];
