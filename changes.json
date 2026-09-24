@@ -71,6 +71,11 @@
       "kind": "changed",
       "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
       "since": "2026-09-21"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "since": "2026-09-24"
     }
   },
   "12C": {
