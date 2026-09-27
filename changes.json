@@ -1,11 +1,4 @@
 {
-  "12B": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett, Koolileht Lennuk",
-      "since": "2026-09-21"
-    }
-  },
   "6C": {
     "9|2": {
       "kind": "removed",
@@ -20,65 +13,11 @@
       "since": "2026-09-25"
     }
   },
-  "10A": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, hispaania keel",
-      "since": "2026-09-21"
-    }
-  },
-  "10B": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika",
-      "since": "2026-09-21"
-    }
-  },
-  "10C": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika",
-      "since": "2026-09-21"
-    }
-  },
-  "11A": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
-      "since": "2026-09-21"
-    }
-  },
-  "11B": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
-      "since": "2026-09-21"
-    }
-  },
-  "11C": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
-      "since": "2026-09-21"
-    }
-  },
   "12A": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
-      "since": "2026-09-21"
-    },
     "2|3": {
       "kind": "changed",
       "wasSubject": "saksa keel, hispaania keel, saksa keel, prantsuse keel",
       "since": "2026-09-25"
-    }
-  },
-  "12C": {
-    "7|3": {
-      "kind": "changed",
-      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
-      "since": "2026-09-21"
     }
   },
   "9C": {
