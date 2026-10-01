@@ -1,39 +1,8 @@
 {
   "6C": {
-    "9|2": {
-      "kind": "removed",
-      "wasSubject": "Koosolek",
-      "since": "2026-09-25"
-    },
     "8|2": {
       "kind": "added",
       "since": "2026-09-28"
-    }
-  },
-  "9B": {
-    "4|0": {
-      "kind": "changed",
-      "wasSubject": "Karjäärinõustamine, füüsika",
-      "since": "2026-09-25"
-    }
-  },
-  "12A": {
-    "2|3": {
-      "kind": "changed",
-      "wasSubject": "saksa keel, hispaania keel, saksa keel, prantsuse keel",
-      "since": "2026-09-25"
-    }
-  },
-  "9C": {
-    "1|2": {
-      "kind": "removed",
-      "wasSubject": "karjäärinõustamine",
-      "since": "2026-09-25"
-    },
-    "2|2": {
-      "kind": "changed",
-      "wasSubject": "karjäärinõustamine, vene keel, prantsuse keel, saksa keel",
-      "since": "2026-09-25"
     }
   },
   "7B": {
