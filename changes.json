@@ -12,5 +12,22 @@
       "wasSubject": "saksa keel, saksa keel",
       "since": "2026-10-02"
     }
+  },
+  "11C": {
+    "0|1": {
+      "kind": "changed",
+      "wasSubject": "õpilasfirmade programm, õpilasfirmade programm",
+      "since": "2026-10-06"
+    },
+    "7|3": {
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-10-06"
+    },
+    "8|3": {
+      "kind": "changed",
+      "wasSubject": "kirjakunst, ansambel",
+      "since": "2026-10-06"
+    }
   }
 }
