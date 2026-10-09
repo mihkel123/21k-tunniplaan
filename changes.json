@@ -1,18 +1,4 @@
 {
-  "6C": {
-    "8|2": {
-      "kind": "removed",
-      "wasSubject": "Klassijuhatamine",
-      "since": "2026-10-02"
-    }
-  },
-  "7B": {
-    "1|2": {
-      "kind": "changed",
-      "wasSubject": "saksa keel, saksa keel",
-      "since": "2026-10-02"
-    }
-  },
   "11C": {
     "0|1": {
       "kind": "changed",
