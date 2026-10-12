@@ -369,8 +369,9 @@ tühi rida.
 
 ### Statistika
 
-[Umami Cloud](https://umami.is/) loeb külastusi, korduvkülastusi (Retention-raport),
-külastuse pikkust ja seadmeid — küpsisteta, isikuandmeteta. Skript
+Ise hostitud [Umami](https://umami.is/) (`stats.kinnif.ee`) loeb külastusi,
+korduvkülastusi (Retention-raport), külastuse pikkust ja seadmeid —
+küpsisteta, isikuandmeteta. Skript
 (`index.html`) on piiratud `data-domains`-iga saidi enda aadressile, seega
 kohalik arendus statistikasse ei satu.
 
