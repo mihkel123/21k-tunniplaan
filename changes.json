@@ -14,6 +14,38 @@
       "kind": "changed",
       "wasSubject": "arenguvestlus, kirjakunst, ansambel",
       "since": "2026-10-09"
+    },
+    "7|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-12"
+    }
+  },
+  "5A": {
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "since": "2026-10-12"
+    }
+  },
+  "5D": {
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "since": "2026-10-12"
+    }
+  },
+  "9D": {
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "since": "2026-10-12"
+    }
+  },
+  "12C": {
+    "7|0": {
+      "kind": "added",
+      "since": "2026-10-12"
     }
   }
 }
