@@ -252,6 +252,29 @@ t('noticesOn ei kuku läbi puuduvate otste ja vigase sisendiga', () => {
   assert.deepEqual(noticesOn({ notices: [{ text: 'ilma pealkirjata' }] }, täna), []);
 });
 
+t('teadete lisainfo on õige kujuga', () => {
+  // overrides.json on käsitsi hooldatav — kirjaviga lingis või details'is
+  // jõuaks muidu otse päris kasutajateni.
+  for (const n of OV.notices ?? []) {
+    if (n.details != null) {
+      assert.ok(Array.isArray(n.details) && n.details.every((p) => typeof p === 'string' && p.trim()),
+        `${n.title}: details peab olema tekstilõikude loend`);
+    }
+    if (n.link != null) {
+      assert.match(n.link.href ?? '', /^https:\/\//, `${n.title}: link.href peab algama https://`);
+      assert.ok(n.link.label?.trim(), `${n.title}: lingil peab olema label`);
+    }
+    if (n.from && n.to) assert.ok(n.from <= n.to, `${n.title}: from on pärast to-d`);
+  }
+});
+
+t('särkide teade on üleval tähtajani', () => {
+  const nimi = (d) => noticesOn(OV, at(`${d}T10:00`)).map((n) => n.title);
+  assert.deepEqual(nimi('2026-10-15'), ['Kunstinädala särgid ja pusad']);
+  assert.deepEqual(nimi('2026-11-10'), ['Kunstinädala särgid ja pusad'], 'tähtaja päeval veel');
+  assert.deepEqual(nimi('2026-11-11'), []);
+});
+
 t('teatepäev: riba ja kaardid käivad tunniplaani peale, mitte asemele', () => {
   const streik = overrideOn(OV, at('2026-09-22T08:00:00'), '7A');
   assert.ok(streik, 'teatepäev peab kõigile klassidele kehtima');

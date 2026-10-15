@@ -643,13 +643,21 @@ function renderLessons() {
 
   // Kooli teated oma ajaaknaga (üldkoosolek vms). Riba käib igal päevavaatel,
   // mitte ainult sündmuse enda päeval — meeldetuletus on mõttekas ette.
+  // Lisainfoga teade on nupp, mis avab akna; ilma selleta lihtne riba.
   for (const teade of noticesIn(state.overrides, state.now)) {
-    const n = el('div', 'banner notice-dated');
+    const more = Boolean(teade.details?.length || teade.link?.href);
+    const n = el(more ? 'button' : 'div', 'banner notice-dated');
     n.append(el('span', 'emoji', teade.emoji ?? '📌'));
     const txt = el('div');
     txt.append(el('b', null, teade.title));
     if (teade.text) txt.append(el('span', null, teade.text));
     n.append(txt);
+    if (more) {
+      n.type = 'button';
+      n.classList.add('has-more');
+      n.append(el('span', 'banner-go', '›'));
+      n.addEventListener('click', () => openNotice(teade));
+    }
     main.append(n);
   }
 
@@ -1627,6 +1635,28 @@ function openSheet() {
   trackScreen('/info');
 }
 
+/** Kooli teate lisainfo aken. Kõik läheb textContent'ina — sisu on käsitsi
+    kirjutatud JSON, mitte HTML. */
+function openNotice(teade) {
+  $('#notice-title').textContent = `${teade.emoji ?? '📌'} ${teade.title}`;
+  const body = $('#notice-body');
+  body.textContent = '';
+  for (const p of teade.details ?? [teade.text].filter(Boolean)) body.append(el('p', null, p));
+
+  const link = $('#notice-link');
+  link.hidden = !teade.link?.href;
+  if (teade.link?.href) {
+    link.href = teade.link.href;
+    link.textContent = teade.link.label || 'Ava';
+  }
+  const src = $('#notice-source');
+  src.hidden = !teade.source;
+  if (teade.source) src.href = teade.source;
+
+  $('#notice').showModal();
+  trackScreen('/teade');
+}
+
 /* ---------- Käivitus ---------- */
 
 async function loadJSON(path, fallback) {
@@ -1701,12 +1731,13 @@ async function init() {
 
   // Taustale vajutamine sulgeb paneeli — telefonis kõige loomulikum liigutus.
   // Sisu peale klõps läheb lapselemendile, seega siia jõuab ainult taust.
-  for (const id of ['#sheet', '#bus-setup', '#install', '#clubs']) {
+  for (const id of ['#sheet', '#bus-setup', '#install', '#clubs', '#notice']) {
     const dlg = $(id);
     dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
   }
   $('#clubs-open').addEventListener('click', () => { $('#sheet').close(); openClubs(); });
   $('#clubs-close').addEventListener('click', () => $('#clubs').close());
+  $('#notice-close').addEventListener('click', () => $('#notice').close());
   for (const b of document.querySelectorAll('#clubs-seg .seg-btn')) {
     b.addEventListener('click', () => { state.clubsScope = b.dataset.scope; renderClubs(); });
   }

@@ -579,6 +579,16 @@ button {
 .banner.notice-dated .emoji { font-size: 17px; line-height: 1.3; flex: none; }
 .banner.notice-dated b { display: block; }
 .banner.notice-dated span { color: var(--ink-soft); }
+/* Lisainfoga teade on nupp — nupu vaikestiilid maha, nool paremale. */
+.banner.notice-dated.has-more { width: 100%; text-align: left; font: inherit; font-size: 14px; color: var(--ink); align-items: center; }
+.banner.notice-dated.has-more .banner-go { margin-left: auto; color: var(--ink-faint); font-size: 18px; }
+.banner.notice-dated.has-more:active { background: color-mix(in srgb, var(--brand) 14%, var(--card)); }
+
+/* Teate aken */
+.notice-body { margin: 0 0 18px; font-size: 15px; line-height: 1.5; }
+.notice-body p { margin: 0 0 10px; }
+#notice .btn { display: block; text-align: center; text-decoration: none; }
+.notice-source { display: block; margin-top: 14px; text-align: center; font-size: 13px; color: var(--ink-soft); }
 .banner.clubs-cta .banner-go { margin-left: auto; color: var(--ink-faint); font-size: 18px; }
 .banner.clubs-cta:active { background: color-mix(in srgb, var(--cta) 20%, var(--card)); }
 

@@ -167,6 +167,20 @@
   </div>
 </dialog>
 
+<!-- Kooli teate lisainfo. Sisu täidab app.js teate järgi (overrides.json ->
+     notices: details, link, source). -->
+<dialog id="notice" class="sheet">
+  <div class="sheet-inner">
+    <h2 id="notice-title"></h2>
+    <div id="notice-body" class="notice-body"></div>
+    <div class="sheet-actions">
+      <a id="notice-link" class="btn" target="_blank" rel="noopener" hidden></a>
+      <button id="notice-close" class="btn btn-quiet" type="button">Sulge</button>
+    </div>
+    <a id="notice-source" class="notice-source" target="_blank" rel="noopener" hidden>Loe kooli lehelt</a>
+  </div>
+</dialog>
+
 <dialog id="bus-setup" class="sheet">
   <div class="sheet-inner">
     <h2>Bussiajad</h2>

@@ -159,6 +159,18 @@ seotud ühe päevaga: koosolekust tuletatakse meelde nädal ette.
   "text": "Neljapäeval, 1. oktoobril kell 17.00 kooli aulas." }
 ```
 
+Kui teatel on `details` või `link`, saab ribast nupp (`›`), mis avab akna:
+
+| Väli | Mida teeb |
+|---|---|
+| `details: ["…", "…"]` | lõigud aknas |
+| `link: { "href": "https://…", "label": "Ava tellimiskeskkond" }` | põhinupp aknas, avaneb uues kaardis |
+| `source` | väike link „Loe kooli lehelt" akna all |
+
+`test-schedule.mjs` kontrollib, et `link.href` algab `https://`-iga, lingil on
+label ja `details` on tekstilõikude loend. Kõik läheb ekraanile tekstina, HTML-i
+siia kirjutada ei saa.
+
 Mõlemad otsad on kaasa arvatud ja mõlemad võivad puududa (lahtine ots). Kaks
 teadet korraga muudaksid mõlemad märkamatuks, seega tasub aknad järjestikku
 panna — üldkoosoleku oma algab 26.09, kui huviringide avalduse riba kaob.
