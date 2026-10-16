@@ -2,40 +2,41 @@
   "11C": {
     "0|1": {
       "kind": "changed",
-      "wasSubject": "õpilasfirmade programm, õpilasfirmade programm",
-      "since": "2026-10-13"
+      "wasSubject": "arenguvestlus, õpilasfirmade programm, õpilasfirmade programm",
+      "since": "2026-10-16"
     },
     "7|0": {
       "kind": "changed",
-      "wasSubject": "inglise keel, inglise keel",
-      "since": "2026-10-12"
+      "wasSubject": "klj tund, inglise keel, inglise keel",
+      "since": "2026-10-16"
     }
   },
   "5A": {
     "2|0": {
       "kind": "changed",
-      "wasSubject": "matemaatika",
-      "since": "2026-10-12"
+      "wasSubject": "matemaatika, matemaatika",
+      "since": "2026-10-16"
     }
   },
   "5D": {
     "5|0": {
       "kind": "changed",
-      "wasSubject": "loodusõpetus",
-      "since": "2026-10-12"
+      "wasSubject": "loodusõpetus, loodusõpetus",
+      "since": "2026-10-16"
     }
   },
   "9D": {
     "3|0": {
       "kind": "changed",
-      "wasSubject": "geograafia",
-      "since": "2026-10-12"
+      "wasSubject": "karjäärinõustamine, geograafia",
+      "since": "2026-10-16"
     }
   },
   "12C": {
     "7|0": {
-      "kind": "added",
-      "since": "2026-10-12"
+      "kind": "removed",
+      "wasSubject": "esitlus",
+      "since": "2026-10-16"
     }
   }
 }
