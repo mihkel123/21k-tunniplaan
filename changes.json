@@ -55,5 +55,12 @@
       "kind": "added",
       "since": "2026-10-19"
     }
+  },
+  "12A": {
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "since": "2026-10-22"
+    }
   }
 }
