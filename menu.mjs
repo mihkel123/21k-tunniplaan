@@ -53,11 +53,23 @@ export function dateFromHeading(heading, today = new Date()) {
 }
 
 /**
- * Roa nimi on täpselt see, mis on <strong> sees — koostis, lisandid, joogid
- * ja leib on samas lahtris tavatekstina ilma <strong>-ita. Seega "ainult roa
- * nimi, ilma lisanditeta" ongi lihtsalt <strong>-ide korjamine.
+ * Roa nimi on paksus kirjas oma real — koostis, lisandid, joogid ja leib on
+ * samas lahtris tavatekstina eraldi ridadel. Lahter jagatakse <br>-ide kaupa
+ * ridadeks ja roog on rida, millel on <strong>-märgis.
+ *
+ * Miks mitte lihtsalt <strong>…</strong> sisu: kooli HTML on käsitsi
+ * tehtud ja vahel katki. 06.11.2026 oli
+ *   Minestronesupp …<strong><br>koostis…<br><br><strong>Kohupiimakreem…</strong>
+ * ehk märgis roa nime järel ja sulgemata — <strong>-sisu korjamine andis
+ * ühe 250-märgise "roa" koos koostisega. Reapõhiselt jääb koostis välja,
+ * sest sellel real märgist pole.
+ *
+ * Lisandite read algavad väiketähega, roa nimi mitte — see on teine valvur.
  * Esimene lahter on tavamenüü, teine taimetoit.
  */
+export const suspiciousDish = (roog) =>
+  roog.length <= 2 || roog.length >= 120 || !/^[A-ZÄÖÜÕŠŽ]/.test(roog);
+
 export function parseMenu(html, today = new Date()) {
   const clean = html.replace(/<script[\s\S]*?<\/script>/gi, '');
   const parts = clean.split(/<h2>([^<]*?\d{1,2}\.\s*[a-zäöüõšž]+[^<]*?)<\/h2>/i);
@@ -68,9 +80,10 @@ export function parseMenu(html, today = new Date()) {
     if (!date) continue;
 
     const cells = [...parts[i + 1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((m) => m[1]);
-    const road = (cell) => [...(cell ?? '').matchAll(/<strong>([\s\S]*?)<\/strong>/gi)]
-      .map((m) => stripTags(m[1]))
-      .filter(Boolean);
+    const road = (cell) => (cell ?? '').split(/<br\s*\/?>/i)
+      .filter((rida) => /<\/?strong>/i.test(rida))
+      .map(stripTags)
+      .filter((roog) => roog && /^[A-ZÄÖÜÕŠŽ]/.test(roog));
 
     const tava = road(cells[0]);
     const taim = road(cells[1]);
@@ -87,6 +100,17 @@ async function main() {
   console.log(`${(html.length / 1024).toFixed(0)} KB`);
 
   const days = parseMenu(html);
+  // Kahtlane nimi tähendab, et kooli HTML läks uuel moel katki. See on
+  // hoiatus, mitte tõrge: varem oli sama kontroll testis ja üks katkine roog
+  // 06.11 menüüs peatas 20.–22.10 kogu tunniplaani avaldamise.
+  for (const d of Object.values(days)) {
+    for (const key of ['tava', 'taim']) {
+      for (const roog of d[key].filter(suspiciousDish)) {
+        console.log(`::warning::Kahtlane roa nimi jäeti välja: ${roog}`);
+      }
+      d[key] = d[key].filter((roog) => !suspiciousDish(roog));
+    }
+  }
   const count = Object.keys(days).length;
   if (!count) throw new Error('Ühtegi menüüpäeva ei leidnud — kas lehe kuju muutus?');
 

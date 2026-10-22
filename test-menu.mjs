@@ -1,6 +1,5 @@
 // Menüü parsimise testid: node test-menu.mjs
-import { parseMenu, dateFromHeading } from './menu.mjs';
-import { readFileSync, existsSync } from 'node:fs';
+import { parseMenu, dateFromHeading, suspiciousDish } from './menu.mjs';
 import assert from 'node:assert/strict';
 
 let pass = 0;
@@ -82,19 +81,23 @@ t('katkine või tühi leht ei viska, annab tühja tulemuse', () => {
   assert.deepEqual(parseMenu('<h2>Kolmapäev, 2. september</h2>', NOW), {}, 'päis ilma lahtriteta');
 });
 
-// --- päris fail ---
-t('menu.json on kehtiv ja sisaldab ainult roa nimesid', () => {
-  if (!existsSync(new URL('./menu.json', import.meta.url))) return;   // pole veel kraabitud
-  const m = JSON.parse(readFileSync(new URL('./menu.json', import.meta.url), 'utf8'));
-  assert.ok(m.days && Object.keys(m.days).length, 'päevi peab olema');
-  for (const [date, d] of Object.entries(m.days)) {
-    assert.match(date, /^\d{4}-\d{2}-\d{2}$/);
-    for (const roog of [...d.tava, ...d.taim]) {
-      assert.ok(roog.length > 2 && roog.length < 120, `kahtlane roa nimi: ${roog}`);
-      // Lisandite read kooli lehel algavad väiketähega; roa nimi mitte.
-      assert.match(roog[0], /[A-ZÄÖÜÕŠŽ]/, `roa nimi peaks algama suurtähega: ${roog}`);
-    }
-  }
+t('katkine <strong> (06.11.2026 päris leht) ei too koostist roa nime sisse', () => {
+  const html = `<h2>Reede, 6. november</h2><table><tr>
+    <td valign='top'>Minestronesupp ubadega, hapukoor (G,L)<strong><br>sea- ja veisehakkliha, porgand, kartul, maitseroheline<br><br><strong>Kohupiimakreem kakaoga (L), moos</strong><br>kohupiimapasta, kakao<br><br>Õun<br>Rukkileib (G), seemneleib (G), sepik (G)</td>
+    <td valign='top'><strong>Köögiviljasupp, hapukoor (L)</strong><br>porgand</td>
+  </tr></table>`;
+  const days = parseMenu(html, new Date(2026, 9, 22));
+  assert.deepEqual(days['2026-11-06'].tava,
+    ['Minestronesupp ubadega, hapukoor (G,L)', 'Kohupiimakreem kakaoga (L), moos']);
+  assert.deepEqual(days['2026-11-06'].taim, ['Köögiviljasupp, hapukoor (L)']);
+});
+
+// menu.json-i sisu siin enam ei kontrollita: kraabitud andmete kontroll
+// testis peatas 20.–22.10 kogu avaldamise. See on nüüd menu.mjs-is hoiatus.
+t('suspiciousDish tunneb ära koostiserea ja liiga pika nime', () => {
+  assert.ok(suspiciousDish('sea- ja veisehakkliha'));
+  assert.ok(suspiciousDish('X'.repeat(130)));
+  assert.ok(!suspiciousDish('Hakkliha-koorekaste'));
 });
 
 console.log(`\n${pass} testi läbitud.`);
