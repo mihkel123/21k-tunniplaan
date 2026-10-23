@@ -2,25 +2,27 @@
   "4D": {
     "3|0": {
       "kind": "changed",
-      "wasSubject": "muusika",
-      "since": "2026-10-19"
+      "wasSubject": "matemaatika, muusika",
+      "since": "2026-10-23"
     }
   },
   "6C": {
     "8|1": {
-      "kind": "added",
-      "since": "2026-10-19"
+      "kind": "removed",
+      "wasSubject": "Koosolek",
+      "since": "2026-10-23"
     },
     "8|3": {
-      "kind": "added",
-      "since": "2026-10-19"
+      "kind": "removed",
+      "wasSubject": "Arenguvestlus",
+      "since": "2026-10-23"
     }
   },
   "12A": {
     "2|3": {
       "kind": "changed",
-      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
-      "since": "2026-10-22"
+      "wasSubject": "saksa keel, hispaania keel, saksa keel, prantsuse keel",
+      "since": "2026-10-23"
     }
   }
 }
