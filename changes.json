@@ -4,6 +4,11 @@
       "kind": "changed",
       "wasSubject": "matemaatika, muusika",
       "since": "2026-10-23"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-26"
     }
   },
   "6C": {
@@ -16,13 +21,8044 @@
       "kind": "removed",
       "wasSubject": "Arenguvestlus",
       "since": "2026-10-23"
+    },
+    "0|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel",
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 5. tund"
+      },
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "E 3. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "T 5. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 2. tund"
+      },
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "E 2. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "E 2. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, saksa keel, hispaania keel",
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "R 2. tund"
+      },
+      "movedFrom": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "robootika, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "E 7. tund"
+      },
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 6. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "ühiskonnaõpetus",
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "K 2. tund"
+      },
+      "movedTo": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "T 3. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 1. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 5. tund"
+      },
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "R 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 6. tund"
+      },
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 6. tund"
+      },
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "changed",
+      "wasSubject": "robootika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "N 4. tund"
+      },
+      "movedTo": {
+        "subject": "robootika",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "removed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "vene keel, saksa keel, hispaania keel",
+      "movedFrom": {
+        "subject": "robootika",
+        "slot": "E 7. tund"
+      },
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "removed",
+      "wasSubject": "loodusõpetus",
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
     }
   },
   "12A": {
     "2|3": {
       "kind": "changed",
-      "wasSubject": "saksa keel, hispaania keel, saksa keel, prantsuse keel",
-      "since": "2026-10-23"
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "since": "2026-10-26"
+    },
+    "0|1": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "R 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 4. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "removed",
+      "wasSubject": "ajalugu ja ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "T 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "majandusmatemaatika",
+      "movedTo": {
+        "subject": "majandusmatemaatika",
+        "slot": "E 6. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "E 5. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "Informaatika, inglise keel",
+      "movedTo": {
+        "subject": "Informaatika",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "E 8. tund"
+      },
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedFrom": {
+        "subject": "eesti keel ja kirjandus",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu ja ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "K 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "ajalugu ja ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "T 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 1. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 5. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel ja kirjandus",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "ajalugu ja ühiskonnaõpetus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 4. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedFrom": {
+        "subject": "Informaatika",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 4. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel ja kirjandus",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedFrom": {
+        "subject": "majandusmatemaatika",
+        "slot": "T 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "Informaatika, inglise keel",
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedTo": {
+        "subject": "eesti keel ja kirjandus",
+        "slot": "R 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "E 3. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "since": "2026-10-26"
+    },
+    "7|0": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "E 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|1": {
+      "kind": "changed",
+      "wasSubject": "ajalugu ja ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "2A": {
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-26"
+    }
+  },
+  "2C": {
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "liikumisõpetus",
+      "movedTo": {
+        "subject": "liikumisõpetus",
+        "slot": "N 6. tund"
+      },
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "liikumisõpetus",
+        "slot": "N 5. tund"
+      },
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "3A": {
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "liikumisõpetus",
+      "since": "2026-10-26"
+    }
+  },
+  "3B": {
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "since": "2026-10-26"
+    }
+  },
+  "3D": {
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-26"
+    }
+  },
+  "4A": {
+    "0|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel",
+      "movedFrom": {
+        "subject": "Informaatika",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "removed",
+      "wasSubject": "Informaatika",
+      "movedTo": {
+        "subject": "Informaatika",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "4B": {
+    "0|2": {
+      "kind": "removed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 1. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "4C": {
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "since": "2026-10-26"
+    }
+  },
+  "5A": {
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "muusika, muusika",
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "E 3. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "N 3. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "K 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "R 3. tund"
+      },
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "E 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "N 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "K 3. tund"
+      },
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 3. tund"
+      },
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "K 6. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "E 4. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "R 3. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "R 4. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "removed",
+      "wasSubject": "muusika, muusika",
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "K 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "5B": {
+    "0|3": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "K 2. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "T 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 1. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "R 6. tund"
+      },
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "N 2. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "R 3. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "E 3. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "E 4. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 6. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "K 7. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "N 5. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "removed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel",
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "5C": {
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 4. tund"
+      },
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 6. tund"
+      },
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "T 3. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "T 4. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "N 3. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 2. tund"
+      },
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "T 2. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "E 3. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "K 4. tund"
+      },
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 2. tund"
+      },
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "T 3. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "T 6. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "5D": {
+    "1|1": {
+      "kind": "removed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 2. tund"
+      },
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 4. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "R 2. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "T 5. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "K 5. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "N 3. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "K 6. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 2. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "T 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 3. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "N 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "huvitav matemaatika",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "N 3. tund"
+      },
+      "movedTo": {
+        "subject": "huvitav matemaatika",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "R 3. tund"
+      },
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "E 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "N 4. tund"
+      },
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "T 4. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "T 6. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "R 4. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "huvitav matemaatika",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "robootika, inglise keel",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "E 7. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "6A": {
+    "0|1": {
+      "kind": "removed",
+      "wasSubject": "hispaania keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "K 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "E 4. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "N 2. tund"
+      },
+      "movedFrom": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "T 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "T 2. tund"
+      },
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "E 5. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "muusika, muusika",
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "N 6. tund"
+      },
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "T 7. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "E 2. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "E 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "N 1. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, hispaania keel",
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "N 2. tund"
+      },
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "muusika, muusika",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "T 1. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "E 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "T 6. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 6. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "R 4. tund"
+      },
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "ühiskonnaõpetus",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "K 5. tund"
+      },
+      "movedTo": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "T 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 5. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, hispaania keel",
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "K 3. tund"
+      },
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "E 5. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "N 6. tund"
+      },
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "K 3. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "6B": {
+    "0|1": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 7. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "removed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 2. tund"
+      },
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "T 6. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "N 2. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "N 1. tund"
+      },
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "R 1. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 4. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "T 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "N 5. tund"
+      },
+      "movedFrom": {
+        "subject": "teamwork",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 4. tund"
+      },
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, hispaania keel",
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "T 5. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "T 7. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "R 4. tund"
+      },
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "R 2. tund"
+      },
+      "movedFrom": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "K 4. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 4. tund"
+      },
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 5. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "E 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "R 2. tund"
+      },
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "K 5. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, hispaania keel",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "E 4. tund"
+      },
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "N 4. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "removed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, hispaania keel",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "E 5. tund"
+      },
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "teamwork",
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "T 7. tund"
+      },
+      "movedTo": {
+        "subject": "teamwork",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "removed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "6D": {
+    "0|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "R 3. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "K 3. tund"
+      },
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "E 2. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "N 2. tund"
+      },
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "robootika, inglise keel",
+      "movedTo": {
+        "subject": "robootika",
+        "slot": "E 7. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "R 5. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "ühiskonnaõpetus",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "K 2. tund"
+      },
+      "movedTo": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "K 2. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, saksa keel, hispaania keel",
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "E 2. tund"
+      },
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 3. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "E 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "K 7. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 3. tund"
+      },
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "K 4. tund"
+      },
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "T 3. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "robootika, inglise keel",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "T 3. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "E 5. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "robootika",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "E 6. tund"
+      },
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 4. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "vene keel, saksa keel, hispaania keel",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 5. tund"
+      },
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedFrom": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "K 3. tund"
+      },
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "7A": {
+    "0|3": {
+      "kind": "removed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "K 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "movedTo": {
+        "subject": "prantsuse keel",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "R 2. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "R 5. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "K 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "prantsuse keel",
+        "slot": "R 1. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "E 2. tund"
+      },
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "muusika, muusika",
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "E 5. tund"
+      },
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "N 3. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "N 1. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "T 3. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 5. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "R 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 6. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "E 3. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "T 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "R 7. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "T 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 3. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "T 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "K 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "E 5. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "T 5. tund"
+      },
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "T 4. tund"
+      },
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "7B": {
+    "0|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "movedTo": {
+        "subject": "prantsuse keel",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "saksa keel",
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "prantsuse keel",
+        "slot": "R 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 4. tund"
+      },
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "N 6. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "E 6. tund"
+      },
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 2. tund"
+      },
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "E 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 4. tund"
+      },
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "T 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "E 4. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "T 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "E 6. tund"
+      },
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "N 3. tund"
+      },
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "E 7. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "7C": {
+    "0|0": {
+      "kind": "changed",
+      "wasSubject": "lastekoor, lastekoor",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "E 1. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, saksa keel, prantsuse keel",
+      "movedTo": {
+        "subject": "saksa keel",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 2. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 2. tund"
+      },
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "R 4. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "K 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "N 4. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "N 1. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "R 2. tund"
+      },
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "E 6. tund"
+      },
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "E 2. tund"
+      },
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "N 3. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "K 2. tund"
+      },
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "R 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 5. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 5. tund"
+      },
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "K 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "N 3. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "E 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "K 7. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "N 4. tund"
+      },
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "N 6. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "T 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "removed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "T 6. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "saksa keel",
+        "slot": "R 1. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "7D": {
+    "0|2": {
+      "kind": "removed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "prantsuse keel, saksa keel",
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "N 2. tund"
+      },
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "K 2. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "N 6. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 5. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "K 6. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "R 2. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "K 4. tund"
+      },
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 3. tund"
+      },
+      "movedFrom": {
+        "subject": "loodusõpetus",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "R 3. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "E 6. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "loodusõpetus",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 1. tund"
+      },
+      "movedTo": {
+        "subject": "loodusõpetus",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "N 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "R 4. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "T 3. tund"
+      },
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "R 2. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "saksa keel",
+      "movedFrom": {
+        "subject": "prantsuse keel",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "N 6. tund"
+      },
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "prantsuse keel",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "R 5. tund"
+      },
+      "movedTo": {
+        "subject": "prantsuse keel",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "8A": {
+    "0|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 3. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "R 5. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "E 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "N 7. tund"
+      },
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "T 1. tund"
+      },
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "R 7. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "E 2. tund"
+      },
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 2. tund"
+      },
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 4. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "T 1. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 3. tund"
+      },
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "K 3. tund"
+      },
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "Informaatika, elektrooniline muusika",
+      "movedTo": {
+        "subject": "Informaatika",
+        "slot": "R 4. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "Informaatika",
+        "slot": "N 4. tund"
+      },
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "N 4. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 6. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "E 2. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 3. tund"
+      },
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "muusika, muusika",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 5. tund"
+      },
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "E 3. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "removed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "T 2. tund"
+      },
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 7. tund"
+      },
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "T 2. tund"
+      },
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "R 2. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|1": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "8B": {
+    "0|1": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "T 2. tund"
+      },
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "K 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|2": {
+      "kind": "removed",
+      "wasSubject": "füüsika",
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "T 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "N 5. tund"
+      },
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "R 2. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "E 4. tund"
+      },
+      "movedFrom": {
+        "subject": "prantsuse keel",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "T 1. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "E 6. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "R 1. tund"
+      },
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "movedTo": {
+        "subject": "prantsuse keel",
+        "slot": "E 2. tund"
+      },
+      "movedFrom": {
+        "subject": "Informaatika",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "E 2. tund"
+      },
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "R 2. tund"
+      },
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "T 2. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "Informaatika, conversation",
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "N 1. tund"
+      },
+      "movedTo": {
+        "subject": "Informaatika",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "R 4. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "K 2. tund"
+      },
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 2. tund"
+      },
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "K 6. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "E 6. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "added",
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "T 5. tund"
+      },
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|2": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "8C": {
+    "0|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 2. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "E 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "R 3. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "K 1. tund"
+      },
+      "movedFrom": {
+        "subject": "saksa keel",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 1. tund"
+      },
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "E 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "E 6. tund"
+      },
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "R 1. tund"
+      },
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "T 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "N 5. tund"
+      },
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "K 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, saksa keel, prantsuse keel",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "R 1. tund"
+      },
+      "movedTo": {
+        "subject": "saksa keel",
+        "slot": "E 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "N 6. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "N 3. tund"
+      },
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 3. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 7. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "ettevõtlusõpe",
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "T 3. tund"
+      },
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 4. tund"
+      },
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "K 2. tund"
+      },
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "E 4. tund"
+      },
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "R 5. tund"
+      },
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "E 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 4. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "N 6. tund"
+      },
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|1": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "8D": {
+    "0|2": {
+      "kind": "changed",
+      "wasSubject": "Informaatika",
+      "movedTo": {
+        "subject": "Informaatika",
+        "slot": "R 1. tund"
+      },
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "inimeseõpetus",
+      "movedTo": {
+        "subject": "inimeseõpetus",
+        "slot": "K 4. tund"
+      },
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "Informaatika",
+        "slot": "K 1. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 4. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 1. tund"
+      },
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "K 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "E 6. tund"
+      },
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "E 2. tund"
+      },
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "N 5. tund"
+      },
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 4. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 2. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 3. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedFrom": {
+        "subject": "inimeseõpetus",
+        "slot": "N 1. tund"
+      },
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "T 6. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "K 4. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "N 2. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "N 2. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "N 4. tund"
+      },
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "E 4. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "T 4. tund"
+      },
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "E 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "T 6. tund"
+      },
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "removed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 7. tund"
+      },
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|3": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 8. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "9A": {
+    "0|1": {
+      "kind": "removed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "E 3. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "T 2. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "E 2. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 2. tund"
+      },
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 2. tund"
+      },
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "R 1. tund"
+      },
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 4. tund"
+      },
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "R 4. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "E 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "T 1. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "ühiskonnaõpetus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 3. tund"
+      },
+      "movedTo": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 3. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "K 3. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "T 2. tund"
+      },
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "R 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "movedFrom": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "T 4. tund"
+      },
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "R 4. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 4. tund"
+      },
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "N 3. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "E 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "K 3. tund"
+      },
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "muusika, muusika",
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "E 6. tund"
+      },
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "E 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|0": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|1": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "E 8. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "9B": {
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 1. tund"
+      },
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "E 6. tund"
+      },
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "E 3. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "N 1. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "R 6. tund"
+      },
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "N 3. tund"
+      },
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 3. tund"
+      },
+      "movedFrom": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "T 5. tund"
+      },
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "N 6. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "K 4. tund"
+      },
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "R 3. tund"
+      },
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "ühiskonnaõpetus",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "K 4. tund"
+      },
+      "movedTo": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 4. tund"
+      },
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 6. tund"
+      },
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 7. tund"
+      },
+      "movedFrom": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 5. tund"
+      },
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "N 4. tund"
+      },
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "ühiskonnaõpetus",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "R 3. tund"
+      },
+      "movedTo": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "R 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "E 5. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "K 6. tund"
+      },
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "removed",
+      "wasSubject": "bioloogia",
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 5. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|4": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "E 7. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "9C": {
+    "0|1": {
+      "kind": "changed",
+      "wasSubject": "ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "N 4. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "removed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "R 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "K 6. tund"
+      },
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "T 5. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "K 2. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 2. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "K 1. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "E 3. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "T 1. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "T 1. tund"
+      },
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "E 4. tund"
+      },
+      "movedFrom": {
+        "subject": "muusika",
+        "slot": "R 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "T 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "K 7. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 3. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 4. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "N 5. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "vene keel, prantsuse keel, saksa keel",
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedFrom": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "E 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "K 5. tund"
+      },
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "N 4. tund"
+      },
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "E 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "R 7. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "K 5. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "E 7. tund"
+      },
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "K 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "E 7. tund"
+      },
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|0": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|2": {
+      "kind": "removed",
+      "wasSubject": "keemia",
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|3": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "E 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|4": {
+      "kind": "removed",
+      "wasSubject": "muusika",
+      "movedTo": {
+        "subject": "muusika",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "9D": {
+    "0|1": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "N 4. tund"
+      },
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 2. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 2. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "K 1. tund"
+      },
+      "movedFrom": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 2. tund"
+      },
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 1. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "kirjandus",
+      "movedTo": {
+        "subject": "kirjandus",
+        "slot": "T 5. tund"
+      },
+      "movedFrom": {
+        "subject": "prantsuse keel",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 1. tund"
+      },
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "T 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "prantsuse keel, saksa keel, vene keel",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 2. tund"
+      },
+      "movedTo": {
+        "subject": "prantsuse keel",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "E 5. tund"
+      },
+      "movedFrom": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 4. tund"
+      },
+      "movedFrom": {
+        "subject": "prantsuse keel",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 4. tund"
+      },
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 3. tund"
+      },
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "E 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 3. tund"
+      },
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "T 1. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "eesti keel",
+        "slot": "N 4. tund"
+      },
+      "movedTo": {
+        "subject": "füüsika",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedFrom": {
+        "subject": "bioloogia",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "keemia",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "prantsuse keel, saksa keel, vene keel",
+      "movedFrom": {
+        "subject": "kirjandus",
+        "slot": "K 2. tund"
+      },
+      "movedTo": {
+        "subject": "prantsuse keel",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "prantsuse keel, saksa keel, vene keel",
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "N 1. tund"
+      },
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "ühiskonnaõpetus",
+      "movedFrom": {
+        "subject": "keemia",
+        "slot": "E 5. tund"
+      },
+      "movedTo": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "R 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "füüsika",
+        "slot": "R 4. tund"
+      },
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "N 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "ühiskonnaõpetus",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "T 2. tund"
+      },
+      "movedTo": {
+        "subject": "ühiskonnaõpetus",
+        "slot": "E 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "removed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "E 7. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "10A": {
+    "0|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "T 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "K 1. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "removed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "majandus",
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "majandus",
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 3. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 6. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "vene keel, vene keel, hispaania keel",
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "R 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "vene keel, vene keel, hispaania keel",
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "E 5. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "R 5. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 6. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "10B": {
+    "0|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "T 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "E 1. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "programmeerimine",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel",
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "programmeerimine",
+      "movedTo": {
+        "subject": "programmeerimine",
+        "slot": "K 2. tund"
+      },
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "digiõpe",
+      "movedTo": {
+        "subject": "digiõpe",
+        "slot": "E 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "vene keel, vene keel, hispaania keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "R 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 3. tund"
+      },
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "K 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "R 5. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "E 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "digiõpe",
+        "slot": "N 3. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "vene keel, vene keel, hispaania keel",
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "N 2. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "N 7. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|4": {
+      "kind": "removed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "10C": {
+    "0|0": {
+      "kind": "changed",
+      "wasSubject": "vene keel, hispaania keel",
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 1. tund"
+      },
+      "movedFrom": {
+        "subject": "graafiline disain",
+        "slot": "E 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "graafiline disain, inglise keel",
+      "movedTo": {
+        "subject": "graafiline disain",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "changed",
+      "wasSubject": "Eesti keel ja meel ridade vahelt",
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "digiõpe",
+      "movedTo": {
+        "subject": "digiõpe",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "Eesti keel ja meel ridade vahelt",
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "removed",
+      "wasSubject": "hispaania keel, vene keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "K 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "E 6. tund"
+      },
+      "movedFrom": {
+        "subject": "meedia ja avalikud suhted",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "meedia ja avalikud suhted",
+      "movedTo": {
+        "subject": "meedia ja avalikud suhted",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "meedia ja avalikud suhted",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "meedia ja avalikud suhted",
+      "movedTo": {
+        "subject": "meedia ja avalikud suhted",
+        "slot": "N 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "N 3. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "Eesti keel ja meel ridade vahelt",
+      "movedFrom": {
+        "subject": "digiõpe",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "E 1. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "Eesti keel ja meel ridade vahelt",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "changed",
+      "wasSubject": "Eesti keel ja meel ridade vahelt",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "graafiline disain, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 5. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "R 2. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "E 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "11A": {
+    "0|0": {
+      "kind": "removed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-26"
+    },
+    "0|2": {
+      "kind": "removed",
+      "wasSubject": "muusika",
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "prantsuse keel, saksa keel",
+      "movedTo": {
+        "subject": "saksa keel",
+        "slot": "R 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "vene keel, vene keel",
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "T 3. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "uurimistöö alused",
+      "movedTo": {
+        "subject": "uurimistöö alused",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "Informaatika, vene keel",
+      "movedTo": {
+        "subject": "Informaatika",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedFrom": {
+        "subject": "uurimistöö alused",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "saksa keel",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "Informaatika",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "muusika",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "Informaatika, vene keel",
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "E 6. tund"
+      },
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "changed",
+      "wasSubject": "keemia",
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "removed",
+      "wasSubject": "muusika",
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "removed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|1": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "T 7. tund"
+      },
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "R 9. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|4": {
+      "kind": "removed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "since": "2026-10-26"
+    },
+    "8|4": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "11B": {
+    "0|0": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|2": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "E 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "vene keel",
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "R 3. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "uurimistöö alused",
+        "slot": "K 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 1. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "T 3. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise ärikeel",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|2": {
+      "kind": "changed",
+      "wasSubject": "uurimistöö alused",
+      "movedTo": {
+        "subject": "uurimistöö alused",
+        "slot": "E 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 6. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "N 1. tund"
+      },
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "R 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 8. tund"
+      },
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "T 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedTo": {
+        "subject": "ajalugu",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "ajalugu",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "since": "2026-10-26"
+    },
+    "7|0": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|1": {
+      "kind": "changed",
+      "wasSubject": "vene keel, inglise ärikeel",
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "T 5. tund"
+      },
+      "movedTo": {
+        "subject": "inglise ärikeel",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|4": {
+      "kind": "removed",
+      "wasSubject": "inglise ärikeel",
+      "since": "2026-10-26"
+    }
+  },
+  "11C": {
+    "0|0": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|2": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "since": "2026-10-26"
+    },
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 1. tund"
+      },
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "K 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "vene keel, vene keel",
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "uurimistöö alused",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "vene keel, vene keel",
+      "movedTo": {
+        "subject": "vene keel",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "produktsioon",
+      "movedTo": {
+        "subject": "produktsioon",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "K 6. tund"
+      },
+      "movedFrom": {
+        "subject": "kunst",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "movedFrom": {
+        "subject": "kultuuriürituste korraldus",
+        "slot": "E 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "E 1. tund"
+      },
+      "movedFrom": {
+        "subject": "kultuuriürituste korraldus",
+        "slot": "R 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "N 2. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "E 8. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "produktsioon",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "K 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|0": {
+      "kind": "changed",
+      "wasSubject": "kultuuriürituste korraldus",
+      "movedTo": {
+        "subject": "kultuuriürituste korraldus",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "uurimistöö alused",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 3. tund"
+      },
+      "movedTo": {
+        "subject": "uurimistöö alused",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "ajalugu",
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "vene keel",
+        "slot": "E 3. tund"
+      },
+      "movedTo": {
+        "subject": "kunst",
+        "slot": "N 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "removed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-26"
+    },
+    "7|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|1": {
+      "kind": "removed",
+      "wasSubject": "füüsika",
+      "since": "2026-10-26"
+    },
+    "7|2": {
+      "kind": "removed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|4": {
+      "kind": "removed",
+      "wasSubject": "kultuuriürituste korraldus",
+      "movedTo": {
+        "subject": "kultuuriürituste korraldus",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "12B": {
+    "0|2": {
+      "kind": "removed",
+      "wasSubject": "klassijuhatajatund",
+      "movedTo": {
+        "subject": "klassijuhatajatund",
+        "slot": "T 9. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|3": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "since": "2026-10-26"
+    },
+    "1|3": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu ja ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "R 1. tund"
+      },
+      "movedFrom": {
+        "subject": "Critical Reading",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "ajalugu ja ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "Critical Reading, Critical Reading",
+      "movedTo": {
+        "subject": "Critical Reading",
+        "slot": "R 2. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel ja kirjandus",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedFrom": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "T 3. tund"
+      },
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 5. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel ja kirjandus",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "N 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "füüsika",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 4. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel ja kirjandus",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "ajalugu ja ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "rahvusvahelised suhted",
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedTo": {
+        "subject": "eesti keel ja kirjandus",
+        "slot": "R 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 6. tund"
+      },
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "rahvusvahelised suhted",
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedFrom": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "T 6. tund"
+      },
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|0": {
+      "kind": "changed",
+      "wasSubject": "Critical Reading, Critical Reading",
+      "since": "2026-10-26"
+    },
+    "8|1": {
+      "kind": "added",
+      "movedFrom": {
+        "subject": "klassijuhatajatund",
+        "slot": "K 1. tund"
+      },
+      "since": "2026-10-26"
+    }
+  },
+  "12C": {
+    "0|1": {
+      "kind": "removed",
+      "wasSubject": "ajalugu ja ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "R 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "0|4": {
+      "kind": "removed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|1": {
+      "kind": "removed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "N 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|2": {
+      "kind": "removed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "E 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "T 1. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|0": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "E 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|1": {
+      "kind": "changed",
+      "wasSubject": "hispaania keel, saksa keel, prantsuse keel",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "R 1. tund"
+      },
+      "movedTo": {
+        "subject": "hispaania keel",
+        "slot": "K 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "2|4": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "eesti keel ja kirjandus",
+        "slot": "R 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|0": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "K 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|1": {
+      "kind": "changed",
+      "wasSubject": "ajalugu ja ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "K 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|2": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "T 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|3": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "T 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "3|4": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "R 5. tund"
+      },
+      "movedFrom": {
+        "subject": "eesti keel ja kirjandus",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "E 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|1": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "N 4. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|2": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "movedTo": {
+        "subject": "inglise keel",
+        "slot": "K 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|3": {
+      "kind": "changed",
+      "wasSubject": "kunst",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "T 2. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "R 4. tund"
+      },
+      "movedTo": {
+        "subject": "eesti keel ja kirjandus",
+        "slot": "R 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|1": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedFrom": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|2": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedFrom": {
+        "subject": "inglise keel",
+        "slot": "K 5. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "5|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "movedTo": {
+        "subject": "eesti keel ja kirjandus",
+        "slot": "R 4. tund"
+      },
+      "movedFrom": {
+        "subject": "matemaatika",
+        "slot": "T 7. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|1": {
+      "kind": "changed",
+      "wasSubject": "matemaatika, matemaatika, matemaatika, matemaatika",
+      "movedTo": {
+        "subject": "matemaatika",
+        "slot": "N 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|2": {
+      "kind": "changed",
+      "wasSubject": "bioloogia",
+      "movedFrom": {
+        "subject": "hispaania keel",
+        "slot": "T 3. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "6|3": {
+      "kind": "changed",
+      "wasSubject": "eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus, eesti keel ja kirjandus",
+      "since": "2026-10-26"
+    },
+    "6|4": {
+      "kind": "changed",
+      "wasSubject": "ajalugu ja ühiskonnaõpetus",
+      "movedTo": {
+        "subject": "ajalugu ja ühiskonnaõpetus",
+        "slot": "T 6. tund"
+      },
+      "since": "2026-10-26"
+    },
+    "7|1": {
+      "kind": "changed",
+      "wasSubject": "klassijuhatajatund",
+      "since": "2026-10-26"
     }
   }
 }
