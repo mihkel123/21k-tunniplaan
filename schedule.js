@@ -3,7 +3,7 @@
 export const DAY_LETTER = ['E', 'T', 'K', 'N', 'R'];
 export const DAY_NAME = ['Esmaspäev', 'Teisipäev', 'Kolmapäev', 'Neljapäev', 'Reede'];
 export const CUTOVER_HOUR = 16;
-export const CHANGE_TTL_DAYS = 7;
+export const CHANGE_TTL_SCHOOL_DAYS = 5;
 
 const MONTHS = ['jaanuar', 'veebruar', 'märts', 'aprill', 'mai', 'juuni',
   'juuli', 'august', 'september', 'oktoober', 'november', 'detsember'];
@@ -88,16 +88,30 @@ export function relativeLabel(selected, now) {
 }
 
 /**
- * Kas muudatus on veel värske? Aken on täpselt üks nädal ja võrdlus on range.
+ * Kas muudatus on veel värske? Aken on üks koolinädal: viis koolipäeva
+ * alates muudatuse päevast, ja võrdlus on range.
  *
- * Muudatuse võti on 'tund|nädalapäev', mitte kuupäev. Seitsmes päev on sama
- * nädalapäev nädal hiljem — see on juba tunni järgmine kordus, kus plaan on
- * ammu paigas ja märk valetaks. Seega 6 päeva näidatakse, 7 mitte.
+ * Muudatuse võti on 'tund|nädalapäev', mitte kuupäev. Kuues koolipäev on
+ * sama nädalapäev nädal hiljem — see on juba tunni järgmine kordus, kus plaan
+ * on ammu paigas ja märk valetaks.
+ *
+ * Koolipäevad, mitte kalendripäevad: 26.10.2026 vaheaja esimesel päeval
+ * avaldatud uus plaan oleks kalendrinädalaga aegunud 2.11 hommikul — just
+ * siis, kui lapsed tagasi tulid ja märke vajasid. Vaheaeg ja riigipüha
+ * aknast ei söö. Ilma holidays-failita loetakse ainult nädalavahetusi.
+ * Klassi ei arvestata (ühine changes.json), seega klassipõhine erand nagu
+ * 12. klassi kevadvaheaeg pikendab märki seal mõne päeva võrra — ohutu suund.
  */
-export function isFreshChange(entry, now) {
+export function isFreshChange(entry, now, holidays = null) {
   const since = fromIso(entry?.since);
   if (!since) return false;
-  return (startOfDay(now) - since) / 86400000 < CHANGE_TTL_DAYS;
+  const today = startOfDay(now);
+  let schoolDays = 0;
+  for (let d = since; d < today; d = addDays(d, 1)) {
+    if (isSchoolDay(holidays, d)) schoolDays++;
+    if (schoolDays >= CHANGE_TTL_SCHOOL_DAYS) return false;
+  }
+  return true;
 }
 
 /* ---------- Riigipühad, tähtpäevad ja nimepäevad ---------- */

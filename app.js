@@ -334,7 +334,7 @@ function changeFor(klass, period, day) {
   // teisipäeva muudatust.
   if (weekOffset() !== 0) return null;
   const entry = state.changes?.[klass]?.[`${period}|${day}`];
-  return isFreshChange(entry, state.now) ? entry : null;
+  return isFreshChange(entry, state.now, state.holidays) ? entry : null;
 }
 
 function dayHasChanges(klass, day) {

@@ -1,5 +1,6 @@
 // Muudatuste tuvastamise testid: node test-diff.mjs
 import { diffClass, mergeLedger } from './scrape.mjs';
+import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
 const P = Array.from({ length: 8 }, (_, i) => ({ n: i + 1, start: '8:00', end: '8:45' }));
@@ -84,6 +85,13 @@ t('ledger: üle nädala vanad kirjed kustuvad, uued jäävad', () => {
   const nädal = mergeLedger({ '7A': { '3|3': { kind: 'added', since: '2026-08-22' } } }, {}, '2026-08-29');
   assert.ok(!nädal['7A']?.['3|3'], '7 päeva vana kirje peaks kustuma');
   assert.equal(merged['7A']['2|2'].since, '2026-08-29', 'uus kirje saab tänase kuupäeva');
+});
+
+t('ledger: vaheajal kraapija märke ei kustuta (sama reegel mis rakenduses)', () => {
+  const hol = JSON.parse(readFileSync(new URL('./holidays.json', import.meta.url), 'utf8'));
+  const prev = { '5D': { '2|1': { kind: 'changed', since: '2026-10-26' } } };
+  assert.ok(mergeLedger(prev, {}, '2026-11-02', hol)['5D']?.['2|1'], 'esimesel koolipäeval alles');
+  assert.ok(!mergeLedger(prev, {}, '2026-11-09', hol)['5D']?.['2|1'], 'koolinädal hiljem kadunud');
 });
 
 t('ledger: täna muutunud pesa kirjutab vana kirje üle', () => {

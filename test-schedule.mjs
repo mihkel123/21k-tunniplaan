@@ -61,7 +61,7 @@ t('sildid Täna/Homme', () => {
   assert.equal(relativeLabel(at('2026-09-03T00:00'), now), 'Homme');
   assert.equal(relativeLabel(at('2026-09-04T00:00'), now), null);
 });
-t('muudatus aegub täpselt nädalaga', () => {
+t('muudatus aegub täpselt koolinädalaga', () => {
   // Kolmapäev. Eelmisel kolmapäeval tehtud muudatus ei tohi siin enam paista:
   // see on sama tunni järgmine kordus, kus plaan on ammu paigas.
   const kolmapäev = at('2026-09-16T10:00');
@@ -80,6 +80,16 @@ t('muudatus aegub täpselt nädalaga', () => {
   assert.equal(isFreshChange({ since: '2026-09-09' }, päevaLõpp), false);
   assert.equal(isFreshChange({ since: '2026-09-10' }, päevaAlgus), true);
   assert.equal(isFreshChange({ since: '2026-09-10' }, päevaLõpp), true);
+});
+t('vaheaeg ei söö muudatuse akent (uus plaan 26.10.2026)', () => {
+  const hol = JSON.parse(readFileSync(new URL('./holidays.json', import.meta.url), 'utf8'));
+  const e = { since: '2026-10-26' };   // sügisvaheaja esimene päev
+  assert.ok(isFreshChange(e, at('2026-11-01T12:00'), hol), 'vaheajal näha');
+  assert.ok(isFreshChange(e, at('2026-11-02T08:00'), hol), 'esimesel koolipäeval näha');
+  assert.ok(isFreshChange(e, at('2026-11-06T08:00'), hol), 'terve esimese koolinädala näha');
+  assert.ok(!isFreshChange(e, at('2026-11-09T08:00'), hol), 'järgmisel esmaspäeval kadunud');
+  // Ilma holidays-failita: ainult nädalavahetused, seega aegub 2.11.
+  assert.ok(!isFreshChange(e, at('2026-11-02T08:00')), 'failita loetakse vaheaeg koolipäevadeks');
 });
 t('nädalapäeva indeks: E=0 … P=6', () => {
   assert.equal(weekdayIndex(at('2026-08-31T00:00')), 0);  // esmaspäev

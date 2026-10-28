@@ -6,12 +6,12 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { isFreshChange } from './schedule.js';
 
 const BASE = 'https://21k.ee/oppetoo/tunniplaan/';
 const DIR = dirname(fileURLToPath(import.meta.url));
 const OUT = join(DIR, 'data.json');
 const CHANGES = join(DIR, 'changes.json');
-const CHANGE_TTL_DAYS = 7;   // sama aken mis schedule.js-is — vt sealset selgitust
 const CONCURRENCY = 6;
 
 const ENTITIES = {
@@ -206,18 +206,17 @@ function diffClass(oldGrid, newGrid, periods) {
   return out;
 }
 
-function mergeLedger(previous, fresh, today) {
-  const cutoff = new Date(today);
-  cutoff.setDate(cutoff.getDate() - CHANGE_TTL_DAYS);
-  const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+function mergeLedger(previous, fresh, today, holidays = null) {
+  const [y, m, d] = today.split('-').map(Number);
+  const now = new Date(y, m - 1, d);
   const merged = {};
 
   // Vanad kirjed, mis pole veel aegunud
   for (const [klass, slots] of Object.entries(previous)) {
     for (const [slot, entry] of Object.entries(slots)) {
-      // Range võrdlus, sama piir mis schedule.js-i isFreshChange'il: täpselt
-      // nädala vanune kirje on juba tunni järgmine kordus ja läheb minema.
-      if (!entry.since || entry.since <= iso(cutoff)) continue;
+      // Täpselt sama reegel mis rakenduses (viis koolipäeva) — muidu
+      // kustutaks kraapija vaheajal märgid enne, kui rakendus neid näitab.
+      if (!isFreshChange(entry, now, holidays)) continue;
       (merged[klass] ??= {})[slot] = entry;
     }
   }
@@ -328,7 +327,8 @@ async function main() {
       const slots = diffClass(before, data[k].grid, payload.periods);
       if (Object.keys(slots).length) fresh[k] = slots;
     }
-    ledger = mergeLedger(previousLedger, fresh, today);
+    const holidays = await readJson(join(DIR, 'holidays.json'), null);
+    ledger = mergeLedger(previousLedger, fresh, today, holidays);
     const n = Object.values(fresh).reduce((a, s) => a + Object.keys(s).length, 0);
     console.log(`Muudatusi eelmisest korrast: ${n}`);
   } else {
