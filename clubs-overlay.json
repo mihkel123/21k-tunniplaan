@@ -36,8 +36,6 @@
 
     "rahvatants-mart-agu-1-klassid": {
       "nimi": "Rahvatants", "juhendaja": "Märt Agu", "kategooria": "tants" },
-    "rahvatants-mart-agu-2-3-klassid": {
-      "nimi": "Rahvatants", "juhendaja": "Märt Agu", "kategooria": "tants" },
     "neidude-rahvatantsuruhm-mart-agu-10-12-klassid": {
       "nimi": "Neidude rahvatantsurühm", "juhendaja": "Märt Agu", "kategooria": "tants" },
     "tantsuline-liikumine-sarasammud-helina-nael-1-2-klassid": {
@@ -84,10 +82,10 @@
       "nimi": "Male", "juhendaja": "Karl Erik Olde", "kategooria": "motlemine" },
     "male-karl-erik-olde-4-12-klassid": {
       "nimi": "Male", "juhendaja": "Karl Erik Olde", "kategooria": "motlemine" },
-    "mottepahklid-svea-sokka-2-3-klassid": {
-      "nimi": "Mõttepähklid", "juhendaja": "Svea Sokka", "kategooria": "motlemine" },
     "vaitlusklubi-karl-pillak-margo-loor-6-9-klassid": {
       "nimi": "Väitlusklubi", "juhendaja": "Karl Pillak, Margo Loor", "kategooria": "motlemine" },
+    "vaitlusklubi-braian-kulp-evs-10-12-klassid": {
+      "nimi": "Väitlusklubi (EVS)", "juhendaja": "Braian Kulp", "kategooria": "motlemine" },
     "ajalooring-ave-vurma-5-9-klassid": {
       "nimi": "Ajalooring", "juhendaja": "Ave Vurma", "kategooria": "motlemine" }
   }
