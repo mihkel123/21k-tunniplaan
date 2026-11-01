@@ -5009,16 +5009,16 @@
     },
     "2|0": {
       "kind": "changed",
-      "wasSubject": "ajalugu",
+      "wasSubject": "bioloogia",
       "movedTo": {
-        "subject": "ajalugu",
-        "slot": "E 6. tund"
+        "subject": "bioloogia",
+        "slot": "K 5. tund"
       },
       "movedFrom": {
-        "subject": "bioloogia",
-        "slot": "T 3. tund"
+        "subject": "geograafia",
+        "slot": "K 5. tund"
       },
-      "since": "2026-10-26"
+      "since": "2026-11-01"
     },
     "2|1": {
       "kind": "changed",
@@ -5157,16 +5157,16 @@
     },
     "4|2": {
       "kind": "changed",
-      "wasSubject": "matemaatika",
-      "movedTo": {
-        "subject": "matemaatika",
-        "slot": "N 4. tund"
-      },
+      "wasSubject": "geograafia",
       "movedFrom": {
-        "subject": "geograafia",
-        "slot": "E 6. tund"
+        "subject": "bioloogia",
+        "slot": "E 3. tund"
       },
-      "since": "2026-10-26"
+      "movedTo": {
+        "subject": "geograafia",
+        "slot": "E 3. tund"
+      },
+      "since": "2026-11-01"
     },
     "4|3": {
       "kind": "changed",
@@ -5616,7 +5616,15 @@
     "6|1": {
       "kind": "changed",
       "wasSubject": "bioloogia",
-      "since": "2026-10-26"
+      "movedTo": {
+        "subject": "bioloogia",
+        "slot": "R 7. tund"
+      },
+      "movedFrom": {
+        "subject": "geograafia",
+        "slot": "R 7. tund"
+      },
+      "since": "2026-11-01"
     },
     "6|2": {
       "kind": "changed",
@@ -5646,16 +5654,16 @@
     },
     "6|4": {
       "kind": "changed",
-      "wasSubject": "kirjandus",
+      "wasSubject": "geograafia",
       "movedFrom": {
-        "subject": "geograafia",
-        "slot": "E 7. tund"
+        "subject": "bioloogia",
+        "slot": "T 7. tund"
       },
       "movedTo": {
-        "subject": "kirjandus",
-        "slot": "N 6. tund"
+        "subject": "geograafia",
+        "slot": "T 7. tund"
       },
-      "since": "2026-10-26"
+      "since": "2026-11-01"
     },
     "7|0": {
       "kind": "removed",
