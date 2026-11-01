@@ -91,6 +91,13 @@ t('vaheaeg ei söö muudatuse akent (uus plaan 26.10.2026)', () => {
   // Ilma holidays-failita: ainult nädalavahetused, seega aegub 2.11.
   assert.ok(!isFreshChange(e, at('2026-11-02T08:00')), 'failita loetakse vaheaeg koolipäevadeks');
 });
+t('classCards käivad ainult oma klassile ja tunde ei asenda', () => {
+  const ov = { days: { '2026-11-02': { classCards: { '4B': [{ emoji: '❓', title: '09:00 · Kuldvillak' }] } } } };
+  const r = overrideOn(ov, at('2026-11-02T08:00'), '4B');
+  assert.deepEqual(r.events, [], 'päev ei ole asendatud');
+  assert.equal(r.cards[0].title, '09:00 · Kuldvillak');
+  assert.equal(overrideOn(ov, at('2026-11-02T08:00'), '4A'), null, 'teisele klassile midagi');
+});
 t('nädalapäeva indeks: E=0 … P=6', () => {
   assert.equal(weekdayIndex(at('2026-08-31T00:00')), 0);  // esmaspäev
   assert.equal(weekdayIndex(at('2026-09-06T00:00')), 6);  // pühapäev

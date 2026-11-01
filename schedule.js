@@ -189,7 +189,10 @@ export function overrideOn(overrides, date, klass) {
 
   const events = day.classes?.[klass] ?? [];
   const cancel = day.cancel ?? [];
-  const cards = day.cards ?? [];
+  // classCards: ühe klassi teated, mis käivad tavalise plaani PEALE (nt
+  // võõrkeelte nädala Kuldvillak 4B-le kell 9). Erinevalt `classes`-ist ei
+  // asenda need päeva — tunnid jäävad alles.
+  const cards = [...(day.cards ?? []), ...(day.classCards?.[klass] ?? [])];
 
   // Kui päev asendab tunniplaani, aga seda klassi kirjas pole, on tegu
   // andmelüngaga — parem näidata tavalist plaani kui riba "tunde ei ole"
