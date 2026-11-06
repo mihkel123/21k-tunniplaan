@@ -1,10 +1,5 @@
 {
   "4D": {
-    "3|0": {
-      "kind": "changed",
-      "wasSubject": "matemaatika, muusika",
-      "since": "2026-10-23"
-    },
     "2|1": {
       "kind": "changed",
       "wasSubject": "inglise keel, inglise keel",
@@ -12,16 +7,6 @@
     }
   },
   "6C": {
-    "8|1": {
-      "kind": "removed",
-      "wasSubject": "Koosolek",
-      "since": "2026-10-23"
-    },
-    "8|3": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-10-23"
-    },
     "0|2": {
       "kind": "changed",
       "wasSubject": "inglise keel",
