@@ -1,0 +1,13 @@
+# Cloudflare Pages projekti "tunniplaan" seaded. `wrangler pages deploy _site`
+# loeb selle faili ja kompileerib functions/ kausta (tagasiside API).
+# Pärast seda faili on siin tõe allikas: dashboardis neid enam muuta ei saa.
+# Saladus FEEDBACK_READ_TOKEN ei ole siin — see on Pages secret
+# (`wrangler pages secret put FEEDBACK_READ_TOKEN --project-name tunniplaan`).
+name = "tunniplaan"
+pages_build_output_dir = "_site"
+compatibility_date = "2026-08-29"
+
+# Tagasiside kirjad (fb:<aeg>:<id>) ja saatmise piirang (rate:<räsi>, 1 h TTL)
+[[kv_namespaces]]
+binding = "FEEDBACK"
+id = "22e5ddb344f843768370da81c044bbf9"

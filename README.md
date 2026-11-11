@@ -219,6 +219,22 @@ Praegu on sees **2026/2027**. Kui õppeaasta vahetub, lisa uus plokk
 `exceptGrades` tähistab erandeid — nt kevadvaheaeg ei kehti 12. klassile,
 suvevaheaeg ei kehti lõpuklassidele.
 
+## Tagasiside
+
+Menüüs on nupp „💬 Tagasiside ja ideed“. Vorm saadab kirja Pages Functionile
+`functions/api/feedback.js`, mis hoiab seda KV-s (`FEEDBACK`, vt `wrangler.toml`).
+Reeglid (pikkus, robotilõks, 5 saatmist tunnis ühelt IP-lt) on failis
+`feedback-core.mjs` ja testid failis `test-feedback.mjs`. IP-d ei salvestata,
+ainult selle räsi piirangu jaoks tunniks.
+
+Lugemiseks on vaja Pages secret'it `FEEDBACK_READ_TOKEN`. Sama token on
+lugeja masinas failis `~/.config/tunniplaan/feedback.json`:
+
+    curl -H "Authorization: Bearer $TOKEN" "https://tunniplaan.pages.dev/api/feedback?since=2026-11-01T00:00:00Z"
+
+Kohapeal: `npx wrangler pages dev _site --binding FEEDBACK_READ_TOKEN=test`
+(pärast `_site` kokkupanekut nagu töövoos).
+
 ## Mida see ei tee
 
 - **Ei näita ärajäänud tunde.** Asendused ja tühistused käivad eKooli kaudu,

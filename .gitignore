@@ -5,3 +5,6 @@ _site/
 
 # Tuletatud bussiandmed — tekivad iga deploy'ga (vt bus-data.mjs)
 bus/
+
+# Wrangleri kohalik olek (pages dev)
+.wrangler/

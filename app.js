@@ -1380,6 +1380,74 @@ function openInstall() {
   trackScreen('/paigalda');
 }
 
+/* ---------- Tagasiside ---------- */
+
+let feedbackKind = 'idee';
+
+function setFeedbackKind(kind) {
+  feedbackKind = kind;
+  for (const b of $('#feedback-kind').querySelectorAll('.seg-btn')) {
+    const on = b.dataset.kind === kind;
+    b.classList.toggle('is-on', on);
+    b.setAttribute('aria-checked', String(on));
+  }
+}
+
+function feedbackStatus(text, ok = false) {
+  const p = $('#feedback-status');
+  p.textContent = text;
+  p.classList.toggle('is-ok', ok);
+}
+
+function openFeedback() {
+  $('#sheet').close();
+  feedbackStatus('');
+  $('#feedback-send').disabled = false;
+  $('#feedback').showModal();
+  trackScreen('/tagasiside');
+}
+
+async function sendFeedback(ev) {
+  ev.preventDefault();
+  const text = $('#feedback-text').value.trim();
+  if (text.length < 3) { feedbackStatus('Kirjuta paar sõna rohkem.'); return; }
+
+  const send = $('#feedback-send');
+  send.disabled = true;
+  feedbackStatus('Saadan…', true);
+  try {
+    const res = await fetch('/api/feedback', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        kind: feedbackKind,
+        text,
+        contact: $('#feedback-contact').value,
+        website: $('#feedback-website').value,
+        klass: state.klass,
+        version: document.querySelector('[data-version]')?.textContent ?? null,
+        ua: navigator.userAgent,
+      }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+  } catch (err) {
+    // Tekst jääb kasti alles, et saaks hiljem uuesti proovida.
+    feedbackStatus(navigator.onLine === false
+      ? 'Pole internetti — proovi hiljem uuesti.'
+      : `Ei saanud saata: ${err.message}`);
+    send.disabled = false;
+    return;
+  }
+
+  window.umami?.track?.('tagasiside', { liik: feedbackKind });   // ainult liik, mitte tekst
+  feedbackStatus('Aitäh! 💛', true);
+  $('#feedback-text').value = '';
+  $('#feedback-contact').value = '';
+  setFeedbackKind('idee');
+  setTimeout(() => $('#feedback').close(), 1500);
+}
+
 /**
  * Klassivaliku peale, kui laps on seal nähtaval oldud (mitte kella järgi
  * ka taustal olles). Esimesel korral 30s, kui see "sessioon" (nähtavaks
@@ -1722,6 +1790,13 @@ async function init() {
   $('#close-sheet').addEventListener('click', () => $('#sheet').close());
   $('#install-open').addEventListener('click', openInstall);
   $('#install-close').addEventListener('click', () => $('#install').close());
+  $('#feedback-open').addEventListener('click', openFeedback);
+  $('#feedback-close').addEventListener('click', () => $('#feedback').close());
+  $('#feedback-form').addEventListener('submit', sendFeedback);
+  $('#feedback-kind').addEventListener('click', (e) => {
+    const b = e.target.closest('.seg-btn');
+    if (b) setFeedbackKind(b.dataset.kind);
+  });
   $('#install-now').addEventListener('click', async () => {
     if (!installPrompt) return;
     $('#install').close();

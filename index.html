@@ -114,6 +114,7 @@
       <button id="change-class" class="btn" type="button">Vaheta klassi</button>
       <button id="clubs-open" class="btn btn-quiet" type="button">🎭 Huviringid</button>
       <button id="bus-setup-open" class="btn btn-quiet" type="button">🚌 Bussiajad</button>
+      <button id="feedback-open" class="btn btn-quiet" type="button">💬 Tagasiside ja ideed</button>
       <button id="install-open" class="btn btn-quiet" type="button">📱 Lisa rakendus avaekraanile</button>
     </div>
 
@@ -145,6 +146,41 @@
       <button id="install-close" class="btn btn-quiet" type="button">Sain aru</button>
     </div>
   </div>
+</dialog>
+
+<!-- Tagasiside: saadetakse functions/api/feedback.js-ile -->
+<dialog id="feedback" class="sheet">
+  <form id="feedback-form" class="sheet-inner" novalidate>
+    <h2>Tagasiside ja ideed</h2>
+    <p class="sheet-lead">Mis on puudu, mis on vale või mida võiks teisiti teha?
+      Loen kõik läbi.</p>
+
+    <div class="seg" id="feedback-kind" role="radiogroup" aria-label="Mis see on">
+      <button type="button" class="seg-btn is-on" data-kind="idee" role="radio" aria-checked="true">💡 Idee</button>
+      <button type="button" class="seg-btn" data-kind="viga" role="radio" aria-checked="false">🐞 Viga</button>
+      <button type="button" class="seg-btn" data-kind="muu" role="radio" aria-checked="false">💬 Muu</button>
+    </div>
+
+    <label class="field">
+      <span>Sinu mõte</span>
+      <textarea id="feedback-text" rows="5" maxlength="2000" required></textarea>
+    </label>
+
+    <label class="field">
+      <span>Kontakt, kui tahad vastust (pole kohustuslik)</span>
+      <input id="feedback-contact" type="text" maxlength="200" autocomplete="email" placeholder="e-post või telefon">
+    </label>
+
+    <!-- Robotilõks: inimene seda välja ei näe ega täida. -->
+    <input id="feedback-website" class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <p id="feedback-status" class="field-error" role="status"></p>
+
+    <div class="sheet-actions">
+      <button id="feedback-send" class="btn" type="submit">Saada</button>
+      <button id="feedback-close" class="btn btn-quiet" type="button">Sulge</button>
+    </div>
+  </form>
 </dialog>
 
 <!-- Bussiaegade seadistamine -->
