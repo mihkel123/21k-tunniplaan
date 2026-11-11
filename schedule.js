@@ -317,8 +317,10 @@ export const entryKey = (e) => `${e.subject}·${e.teacher}`;
 export const choiceKey = (cell) => cell.map(entryKey).sort().join('|');
 
 /* Ained, kus käiakse ainult siis, kui ise soovid. Tugiõpe on vajaduspõhine,
-   ülejäänud on huvitegevus. Kontrollitud, et 82 aine seas vale vastet ei teki. */
-const OPTIONAL = /koor|^(tugiõpe|ansambel|orkestriõpe)$/i;
+   ülejäänud on huvitegevus. Kontrollitud, et 82 aine seas vale vastet ei teki.
+   Arenguvestlus on Untises terve klassi ajana, aga igaüks käib ainult oma
+   kokkulepitud ajal — muidu paistab, nagu koolipäev veniks 16:40-ni. */
+const OPTIONAL = /koor|^(tugiõpe|ansambel|orkestriõpe|arenguvestlus)$/i;
 export const SKIP = '__ei__';
 
 export const isOptional = (e) => OPTIONAL.test(e.subjectFull || e.subject || '');

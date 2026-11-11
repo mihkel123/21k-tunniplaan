@@ -442,6 +442,8 @@ t('choiceKey ei sõltu rühmade järjekorrast lahtris', () => {
 t('cellIsOptional: valikuline ainult siis, kui kõik rühmad on valikulised', () => {
   assert.equal(cellIsOptional([e('tugiõpe', 'Kask')]), true);
   assert.equal(cellIsOptional([e('lastekoor', 'Õmblus'), e('meeskoor', 'Kerge')]), true);
+  // Untis annab arenguvestlusele ainult lühinime (subjectFull on tühi)
+  assert.equal(cellIsOptional([{ subject: 'Arenguvestlus', subjectFull: '', teacher: 'Stahlman' }]), true);
   assert.equal(cellIsOptional([e('inglise keel', 'Mägi'), e('inglise keel', 'Soysal')]), false);
   // Segalahter jääb kohustuslikuks: ühest tunnist pääsu pole.
   assert.equal(cellIsOptional([e('tugiõpe', 'Kask'), e('matemaatika', 'Tamm')]), false);
