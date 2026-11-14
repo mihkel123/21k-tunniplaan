@@ -7,7 +7,7 @@ import {
   relativeLabel, isFreshChange,
   notableOn as notableIn, namesOn as namesIn,
   overrideOn as overrideIn, noticesOn as noticesIn, parseLunch, eatingHalf,
-  entryKey, choiceKey, cellIsOptional, collectChoices, SKIP,
+  entryKey, choiceKey, cellIsOptional, wasOnlyOptional, collectChoices, SKIP,
 } from './schedule.js';
 import {
   DEFAULT_WALK_MIN, TO_SCHOOL, TO_HOME, searchStops, idsByName, matchRoutes, parseSiri,
@@ -752,9 +752,11 @@ function renderLessons() {
       return;
     }
 
-    // Tühi pesa, kust tund kadus — näita kummituskaarti, muidu jääks muutus märkamata
+    // Tühi pesa, kust tund kadus — näita kummituskaarti, muidu jääks muutus märkamata.
+    // Valikulise tunni (arenguvestlus) kadumine pole aga muudatus, mida märgata.
     if (!cell.length) {
-      if (change && (change.kind === 'removed' || change.movedTo)) {
+      const optionalGone = change?.kind === 'removed' && wasOnlyOptional(change.wasSubject);
+      if (change && (change.kind === 'removed' || change.movedTo) && !optionalGone) {
         any = true;
         putLunchBefore(minutesOf(period.start));
         put(ghostCard(period, change));

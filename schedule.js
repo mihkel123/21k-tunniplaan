@@ -326,6 +326,13 @@ export const SKIP = '__ei__';
 export const isOptional = (e) => OPTIONAL.test(e.subjectFull || e.subject || '');
 export const cellIsOptional = (cell) => cell.length > 0 && cell.every(isOptional);
 
+/* Ära jäänud tund, mis oli ainult valikuline — nt arenguvestlused, mille kool
+   pärast vestlusnädalat Untisest korraga eemaldab. Kummituskaarti pole siin
+   mõtet näidata: enamik seal ei käinudki ja „Ei käi“ vastanutele ilmuks peidetud
+   tund tagasi. Mitme rühma puhul on wasSubject komaga kokku pandud. */
+export const wasOnlyOptional = (wasSubject) =>
+  !!wasSubject && wasSubject.split(',').every((s) => OPTIONAL.test(s.trim()));
+
 /**
  * Kõik selle klassi tunniplaani kohad, mis kasutajalt vastust ootavad:
  * mitme rühmaga lahtrid ja valikulised ained. Sama valik kordub tavaliselt

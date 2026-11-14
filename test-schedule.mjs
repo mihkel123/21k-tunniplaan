@@ -1,5 +1,5 @@
 // Päevaloogika testid: node test-schedule.mjs
-import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, noticesOn, parseLunch, eatingHalf, entryKey, choiceKey, cellIsOptional, collectChoices } from './schedule.js';
+import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, noticesOn, parseLunch, eatingHalf, entryKey, choiceKey, cellIsOptional, wasOnlyOptional, collectChoices } from './schedule.js';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
@@ -486,3 +486,12 @@ t('7A: iga valikuline tund on nimekirjast leitav ja võtmed on unikaalsed', () =
 });
 
 console.log(`\n${pass} testi läbitud.`);
+
+t('wasOnlyOptional: ära jäänud arenguvestlus ei vääri kummituskaarti, päris tund väärib', () => {
+  assert.equal(wasOnlyOptional('Arenguvestlus'), true);
+  assert.equal(wasOnlyOptional('Tugiõpe, Arenguvestlus'), true);
+  assert.equal(wasOnlyOptional('Arenguvestlus, õpilasfirmade programm'), false);
+  assert.equal(wasOnlyOptional('Inglise keel'), false);
+  assert.equal(wasOnlyOptional(undefined), false);
+  assert.equal(wasOnlyOptional(''), false);
+});
