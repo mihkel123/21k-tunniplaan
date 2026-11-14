@@ -485,8 +485,6 @@ t('7A: iga valikuline tund on nimekirjast leitav ja võtmed on unikaalsed', () =
   assert.ok(keeled && !keeled.optional);
 });
 
-console.log(`\n${pass} testi läbitud.`);
-
 t('wasOnlyOptional: ära jäänud arenguvestlus ei vääri kummituskaarti, päris tund väärib', () => {
   assert.equal(wasOnlyOptional('Arenguvestlus'), true);
   assert.equal(wasOnlyOptional('Tugiõpe, Arenguvestlus'), true);
@@ -495,3 +493,5 @@ t('wasOnlyOptional: ära jäänud arenguvestlus ei vääri kummituskaarti, päri
   assert.equal(wasOnlyOptional(undefined), false);
   assert.equal(wasOnlyOptional(''), false);
 });
+
+console.log(`\n${pass} testi läbitud.`);
