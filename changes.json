@@ -1,9 +1,8 @@
 {
   "6C": {
     "9|2": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-11-13"
+      "kind": "added",
+      "since": "2026-11-17"
     },
     "9|4": {
       "kind": "removed",
@@ -11,19 +10,16 @@
       "since": "2026-11-13"
     },
     "0|3": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-11-13"
+      "kind": "added",
+      "since": "2026-11-17"
     },
     "8|1": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-11-13"
+      "kind": "added",
+      "since": "2026-11-17"
     },
     "8|3": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-11-13"
+      "kind": "added",
+      "since": "2026-11-17"
     },
     "9|1": {
       "kind": "removed",
@@ -38,9 +34,8 @@
       "since": "2026-11-13"
     },
     "6|1": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-11-13"
+      "kind": "added",
+      "since": "2026-11-17"
     },
     "6|2": {
       "kind": "removed",
@@ -48,19 +43,16 @@
       "since": "2026-11-13"
     },
     "6|3": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-11-13"
+      "kind": "added",
+      "since": "2026-11-17"
     },
     "6|4": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-11-13"
+      "kind": "added",
+      "since": "2026-11-17"
     },
     "7|1": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-11-13"
+      "kind": "added",
+      "since": "2026-11-17"
     },
     "7|2": {
       "kind": "removed",
@@ -88,13 +80,17 @@
   "11C": {
     "1|1": {
       "kind": "changed",
-      "wasSubject": "Arenguvestlus, õpilasfirmade programm, õpilasfirmade programm",
-      "since": "2026-11-13"
+      "wasSubject": "õpilasfirmade programm, õpilasfirmade programm",
+      "since": "2026-11-17"
     },
     "6|4": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-11-13"
+      "kind": "added",
+      "since": "2026-11-17"
+    },
+    "7|3": {
+      "kind": "changed",
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-11-17"
     }
   },
   "12B": {
