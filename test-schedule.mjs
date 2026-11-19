@@ -1,5 +1,5 @@
 // Päevaloogika testid: node test-schedule.mjs
-import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, noticesOn, parseLunch, eatingHalf, entryKey, choiceKey, cellIsOptional, wasOnlyOptional, collectChoices } from './schedule.js';
+import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, noticesOn, parseLunch, eatingHalf, entryKey, choiceKey, cellIsOptional, wasOnlyOptional, collectChoices, isoWeekKey, parseSwimToken, swimAt, swimGroups, swimIssues } from './schedule.js';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
@@ -492,6 +492,83 @@ t('wasOnlyOptional: ära jäänud arenguvestlus ei vääri kummituskaarti, päri
   assert.equal(wasOnlyOptional('Inglise keel'), false);
   assert.equal(wasOnlyOptional(undefined), false);
   assert.equal(wasOnlyOptional(''), false);
+});
+
+t('isoWeekKey: tavaline nädal ja aastavahetus', () => {
+  const w = (s) => isoWeekKey(new Date(`${s}T12:00:00`));
+  assert.equal(w('2026-11-16'), '2026-W47');   // esmaspäev
+  assert.equal(w('2026-11-22'), '2026-W47');   // pühapäev
+  assert.equal(w('2026-11-23'), '2026-W48');
+  assert.equal(w('2026-12-31'), '2026-W53');   // 2026 on 53 nädalaga
+  assert.equal(w('2027-01-01'), '2026-W53');
+  assert.equal(w('2027-01-04'), '2027-W01');
+});
+
+t('parseSwimToken: poisid, tüdrukud, terve klass', () => {
+  assert.deepEqual(parseSwimToken('8DP/b'), { klass: '8D', who: 'P', color: 'b' });
+  assert.deepEqual(parseSwimToken('10BT/r'), { klass: '10B', who: 'T', color: 'r' });
+  assert.deepEqual(parseSwimToken('4C/r'), { klass: '4C', who: null, color: 'r' });
+  assert.equal(parseSwimToken('8DP'), null);
+});
+
+{
+  // Väike tehisandmestik — päris data.json muutub igal ööl ja ei tohi teste murda.
+  const kk = (teacher) => ({ subject: 'KK', subjectFull: 'liikumisõpetus', teacher, room: '118' });
+  const grid = () => Array.from({ length: 9 }, () => Array.from({ length: 5 }, () => []));
+  const data = { classes: { '8D': { grid: grid() }, '4C': { grid: grid() }, '6C': { grid: grid() } } };
+  data.classes['8D'].grid[0][1] = [kk('Raenok'), kk('ArutammAve')];       // T 1. tund
+  data.classes['4C'].grid[0][0] = [kk('ArutammAve')];                     // E 1. tund
+  data.classes['6C'].grid[3][0] = [kk('Liivsoo'), kk('ArutammAve')];      // E 4. tund
+  data.classes['6C'].grid[5][3] = [kk('Liivsoo'), kk('ArutammAve')];      // N 6. tund
+  const empty = () => Array.from({ length: 9 }, () => ['', '', '', '', '']);
+  const odd = empty(); odd[0][1] = '8DP/b'; odd[0][0] = '4C/r';
+  const even = empty(); even[0][1] = '8DT/r'; even[3][0] = '6CP/p'; even[5][3] = '6CP/k';  // N: vale värv
+  const swim = {
+    colors: { r: 'ArutammAve', p: 'Liivsoo', b: 'Raenok', k: 'Vahtra' },
+    plans: [
+      { name: 'paaritu', url: 'u1', weeks: ['2026-W47'], grid: odd },
+      { name: 'paaris', url: 'u2', weeks: ['2026-W48'], grid: even },
+    ],
+  };
+  const on = (s) => new Date(`${s}T09:00:00`);
+
+  t('swimAt: 8D poisid ja tüdrukud käivad ujulas vaheldumisi', () => {
+    assert.deepEqual(swimAt(swim, data, '8D', on('2026-11-17'), 0), { who: 'P', teacher: 'Raenok', url: 'u1' });
+    assert.deepEqual(swimAt(swim, data, '8D', on('2026-11-24'), 0), { who: 'T', teacher: 'ArutammAve', url: 'u2' });
+  });
+
+  t('swimAt: soota lahter = terve klass ujulas', () => {
+    assert.deepEqual(swimAt(swim, data, '4C', on('2026-11-16'), 0), { who: null, teacher: null, url: 'u1' });
+    assert.equal(swimAt(swim, data, '4C', on('2026-11-23'), 0), null);   // paarisnädalal mitte
+  });
+
+  t('swimAt: plaan ei kata nädalat või klass pole ujulas -> null', () => {
+    assert.equal(swimAt(swim, data, '8D', on('2026-12-01'), 0), null);
+    assert.equal(swimAt(swim, data, '8D', on('2026-11-17'), 1), null);
+    assert.equal(swimAt(swim, data, '1B', on('2026-11-17'), 0), null);
+    assert.equal(swimAt(null, data, '8D', on('2026-11-17'), 0), null);
+  });
+
+  t('swimAt: vale värviga lahter võtab õpetaja klassi teistest lahtritest', () => {
+    assert.deepEqual(swimGroups(swim, data, '6C'), { P: 'Liivsoo' });
+    assert.deepEqual(swimAt(swim, data, '6C', on('2026-11-26'), 5), { who: 'P', teacher: 'Liivsoo', url: 'u2' });
+    assert.equal(swimIssues(swim, data).length, 1);
+  });
+
+  t('swimAt: muutunud pilt (stale) -> ainult märge, ainult plaanis olevatele klassidele', () => {
+    const s2 = { ...swim, plans: swim.plans.map((p) => ({ ...p, stale: true })) };
+    assert.deepEqual(swimAt(s2, data, '8D', on('2026-11-17'), 3), { stale: true, url: 'u1' });
+    assert.equal(swimAt(s2, data, '1B', on('2026-11-17'), 0), null);
+  });
+}
+
+t('ujula ülekirjutus vs Untis — hoiatus, mitte viga', () => {
+  const swim = JSON.parse(readFileSync(new URL('./swim.json', import.meta.url), 'utf8'));
+  const data = JSON.parse(readFileSync(new URL('./data.json', import.meta.url), 'utf8'));
+  // Teadlikult ei kuku läbi: Untis muutub igal ööl ja kooli pildil võib olla
+  // värviviga (6CP must). swimAt saab mõlemaga hakkama, deploy ei tohi seisma jääda.
+  for (const v of swimIssues(swim, data)) console.log(`  HOIATUS  ujula: ${v}`);
+  for (const p of swim.plans) assert.equal(p.grid.length, 9, `${p.name}: 9 tunni rida`);
 });
 
 console.log(`\n${pass} testi läbitud.`);

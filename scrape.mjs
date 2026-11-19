@@ -4,6 +4,7 @@
 // Andmed on staatilised — rakendus ise internetti ei vaja.
 
 import { readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { isFreshChange } from './schedule.js';
@@ -12,6 +13,7 @@ const BASE = 'https://21k.ee/oppetoo/tunniplaan/';
 const DIR = dirname(fileURLToPath(import.meta.url));
 const OUT = join(DIR, 'data.json');
 const CHANGES = join(DIR, 'changes.json');
+const SWIM = join(DIR, 'swim.json');
 const CONCURRENCY = 6;
 
 const ENTITIES = {
@@ -353,9 +355,71 @@ async function main() {
   console.log(`\nValmis: ${sorted.length} klassi, ${lessons} tunnikirjet -> data.json`);
   console.log(`Allika ajatempel: ${payload.sourceUpdated ?? 'teadmata'}`);
   if (failures.length) console.warn(`\nEbaõnnestus (${failures.length}):\n  ${failures.join('\n  ')}`);
+
+  // Ujula kontroll ei tohi kunagi tunniplaani avaldamist peatada.
+  try { await checkSwim(index); } catch (err) { console.warn(`  HOIATUS: ujula kontroll ebaõnnestus: ${err.message}`); }
 }
 
-export { diffClass, mergeLedger, parseClassPage, parseCell, splitTopLevelCells, cellSig };
+// --- Ujula plaan ---
+// Pilt on kooli lehel ja swim.json on selle käsitsi ülekirjutus. Siin ainult
+// kontrollime, kas pilt on sama: kui kadus või muutus, märgime plaani
+// stale'iks ja äpp näitab kindla "Ujumine" asemel viidet kooli lehele.
+// Uued (veel üle kirjutamata) pildid annavad ainult hoiatuse.
+
+/** Tunniplaani lehe ujula lingid absoluutsete URL-idena. */
+function swimLinks(html, base = BASE) {
+  return [...new Set([...html.matchAll(/href=["']([^"']*ujula[^"']*\.(?:png|jpe?g|webp|pdf))["']/gi)]
+    .map((m) => new URL(decode(m[1]), base).href))];
+}
+
+/**
+ * -> { swim, changed, warnings }. hashes: { url: sha256 } allalaetud piltidest
+ * (puuduv võti = allalaadimine ebaõnnestus, siis seda plaani ei puututa).
+ */
+function swimStaleUpdate(swim, links, hashes) {
+  const warnings = [];
+  let changed = false;
+  const plans = (swim?.plans ?? []).map((p) => {
+    let stale = p.stale ?? false;
+    if (!links.includes(p.url)) stale = true;
+    else if (hashes[p.url]) stale = hashes[p.url] !== p.sha256;
+    if (stale) warnings.push(`ujula plaan "${p.name}" ${links.includes(p.url) ? 'muutus' : 'kadus kooli lehelt'} — vaja üle kirjutada (swim.json)`);
+    if (stale !== (p.stale ?? false)) changed = true;
+    return { ...p, stale };
+  });
+  const known = new Set(plans.map((p) => p.url));
+  for (const url of links) if (!known.has(url)) warnings.push(`uus ujula plaan kooli lehel: ${url} — vaja üle kirjutada (swim.json)`);
+  return { swim: swim ? { ...swim, plans } : swim, changed, warnings };
+}
+
+async function checkSwim(index) {
+  const swim = await readJson(SWIM, null);
+  if (!swim) return;
+  const links = swimLinks(index);
+  const hashes = {};
+  for (const url of links) {
+    try {
+      const res = await fetch(url, {
+        headers: { 'User-Agent': 'tunniplaan-pwa/1.0 (isiklik kasutus)' },
+        signal: AbortSignal.timeout(30000),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      hashes[url] = createHash('sha256').update(Buffer.from(await res.arrayBuffer())).digest('hex');
+    } catch (err) {
+      console.warn(`  HOIATUS: ujula pilti ei saanud alla laadida (${url}): ${err.message}`);
+    }
+  }
+  const { swim: next, changed, warnings } = swimStaleUpdate(swim, links, hashes);
+  for (const w of warnings) console.warn(`  HOIATUS: ${w}`);
+  if (changed) {
+    await writeFile(SWIM, JSON.stringify(next, null, 2) + '\n', 'utf8');
+    console.log('swim.json: stale-olek muutus.');
+  } else {
+    console.log(`Ujula plaan: ${links.length} pilti, ${warnings.length ? 'vt hoiatusi' : 'muutusteta'}.`);
+  }
+}
+
+export { diffClass, mergeLedger, parseClassPage, parseCell, splitTopLevelCells, cellSig, swimLinks, swimStaleUpdate };
 
 const runDirectly = process.argv[1] && import.meta.url === `file://${process.argv[1]}`;
 if (runDirectly) {

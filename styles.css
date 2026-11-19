@@ -889,3 +889,14 @@ button {
 
 /* Viimane hommikune buss, millega veel kohale jõuab */
 .bus-last { color: var(--accent) !important; font-weight: 650; }
+
+/* Ujumine liikumisõpetuse kaardil (swim.json) */
+.swim-note {
+  display: block;
+  margin-top: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--brand) 75%, var(--ink));
+}
+.swim-note.is-other { font-weight: 500; color: var(--ink-soft); }
+a.swim-note { text-decoration: underline; text-underline-offset: 2px; }

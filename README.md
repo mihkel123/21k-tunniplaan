@@ -219,6 +219,12 @@ Praegu on sees **2026/2027**. Kui õppeaasta vahetub, lisa uus plokk
 `exceptGrades` tähistab erandeid — nt kevadvaheaeg ei kehti 12. klassile,
 suvevaheaeg ei kehti lõpuklassidele.
 
+## Ujula plaan
+
+Osal klassidel on liikumisõpetus vahel ujulas, poisid ja tüdrukud vaheldumisi. Untis seda ei näita, info on ainult kahel pildil tunniplaani lehe all (paaritud ja paarisnädalad). `swim.json` on nende piltide käsitsi ülekirjutus: `grid` read on tunnid 1–9, veerud E–R, lahter `8DP/b` = klass 8D, P poisid / T tüdrukud / tähe puudumisel terve klass, `/b` = teksti värv ehk õpetaja (`colors`). Äpp seob värvi lapse valitud liikumisõpetuse rühmaga: oma rühma kaart muutub „🏊 Ujumine · Ujula · Võta ujumisasjad kaasa“, teine rühm näeb märget, et sel nädalal on poisid/tüdrukud ujulas.
+
+`scrape.mjs` võrdleb igal jooksul piltide räsi `sha256`-ga. Kui pilt muutus või kadus, paneb ta plaanile `"stale": true` ja äpp näitab kindla info asemel linki kooli pildile. Uue perioodi pildi korral: kirjuta `grid` üle, uuenda `url`, `sha256`, `weeks` (ISO nädalad, nt `2027-W02`) ja pane `stale: false`. `node test-schedule.mjs` näitab hoiatusena lahtreid, mis Untisega ei klapi.
+
 ## Tagasiside
 
 Menüüs on nupp „💬 Tagasiside ja ideed“. Vorm saadab kirja Pages Functionile

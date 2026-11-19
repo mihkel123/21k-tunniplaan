@@ -359,3 +359,107 @@ export function collectChoices(data, klass) {
   }
   return [...seen.values()];
 }
+
+/* ---------- Ujumine ---------- */
+
+/* Ujula plaan on kooli lehel pildina, ja sealt (swim.json) on näha, kelle
+   liikumisõpetuse tund on sel nädalal ujulas. Untis seda ei tea: seal on alati
+   "liikumisõpetus", kaks õpetajat ja ruum 118. Poisid ja tüdrukud käivad
+   ujulas vaheldumisi, ja pildi tekstivärv ütleb, kumb õpetaja kaasas on. Laps
+   on oma õpetaja (= rühma) äpis juba valinud, seega sugu küsima ei pea. */
+
+const PE = /liikumisõpetus|kehaline/i;
+export const isPE = (e) => e.subject === 'KK' || PE.test(e.subjectFull || '');
+
+/** ISO nädal kujul '2026-W47' (nädal algab esmaspäeval, nädal 1 sisaldab 4. jaanuari). */
+export function isoWeekKey(d) {
+  const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  t.setUTCDate(t.getUTCDate() + 3 - ((t.getUTCDay() + 6) % 7));   // selle nädala neljapäev
+  const year = t.getUTCFullYear();
+  const week = Math.ceil(((t - Date.UTC(year, 0, 1)) / 86400000 + 1) / 7);
+  return `${year}-W${String(week).padStart(2, '0')}`;
+}
+
+/** '8DP/b' -> { klass: '8D', who: 'P', color: 'b' }; terve klass -> who: null */
+export function parseSwimToken(tok) {
+  const m = /^(\d{1,2}[A-Z])([PT])?\/(\w)$/.exec(tok);
+  return m ? { klass: m[1], who: m[2] ?? null, color: m[3] } : null;
+}
+
+const swimTokens = (plan, day, period) =>
+  String(plan.grid?.[period]?.[day] ?? '').split(/\s+/).map(parseSwimToken).filter(Boolean);
+
+const peTeachers = (data, klass, day, period) =>
+  (data?.classes?.[klass]?.grid?.[period]?.[day] ?? []).filter(isPE).map((e) => e.teacher);
+
+const swimPlanFor = (swim, date) => {
+  const wk = isoWeekKey(date);
+  return swim?.plans?.find((p) => p.weeks?.includes(wk)) ?? null;
+};
+
+/**
+ * Klassi soo ja õpetaja vastavus kõigi ujulatundide põhjal: { P: 'Raenok', T: 'ArutammAve' }.
+ * Arvesse lähevad ainult lahtrid, kus värvi järgi õpetaja on Untises samas
+ * pesas olemas — nii ei riku üksik valesti värvitud lahter (6CP must) kogu klassi.
+ */
+export function swimGroups(swim, data, klass) {
+  const votes = { P: {}, T: {} };
+  for (const plan of swim?.plans ?? []) {
+    plan.grid?.forEach((row, period) => row.forEach((_, day) => {
+      for (const t of swimTokens(plan, day, period)) {
+        if (t.klass !== klass || !t.who) continue;
+        const teacher = swim.colors?.[t.color];
+        if (!peTeachers(data, klass, day, period).includes(teacher)) continue;
+        votes[t.who][teacher] = (votes[t.who][teacher] ?? 0) + 1;
+      }
+    }));
+  }
+  const out = {};
+  for (const who of ['P', 'T']) {
+    const best = Object.entries(votes[who]).sort((a, b) => b[1] - a[1])[0];
+    if (best) out[who] = best[0];
+  }
+  return out;
+}
+
+/**
+ * Kas klassi liikumisõpetus sel päeval ja tunnil on ujulas?
+ * -> null (pole ujulas või plaan ei kata seda nädalat)
+ *  | { stale: true, url }               (pilt muutus kooli lehel, vana ülekirjutus ei kehti)
+ *  | { who: 'P'|'T'|null, teacher, url } (who null = terve klass; teacher = ujulasse minev rühm)
+ */
+export function swimAt(swim, data, klass, date, period) {
+  const plan = swimPlanFor(swim, date);
+  if (!plan) return null;
+  if (plan.stale) {
+    const has = plan.grid?.some((row) => row.some((c) => String(c).split(/\s+/).some((x) => parseSwimToken(x)?.klass === klass)));
+    return has ? { stale: true, url: plan.url } : null;
+  }
+  const day = weekdayIndex(date);
+  const tok = swimTokens(plan, day, period).find((t) => t.klass === klass);
+  if (!tok) return null;
+  if (!tok.who) return { who: null, teacher: null, url: plan.url };
+  const inSlot = peTeachers(data, klass, day, period);
+  const byColor = swim.colors?.[tok.color];
+  const teacher = inSlot.includes(byColor) ? byColor : (swimGroups(swim, data, klass)[tok.who] ?? null);
+  return { who: tok.who, teacher, url: plan.url };
+}
+
+/** Ülekirjutuse vastuolud Untisega — hoiatuseks, mitte veaks. */
+export function swimIssues(swim, data) {
+  const out = [];
+  for (const plan of swim?.plans ?? []) {
+    plan.grid?.forEach((row, period) => row.forEach((cell, day) => {
+      for (const raw of String(cell).split(/\s+/).filter(Boolean)) {
+        const t = parseSwimToken(raw);
+        const where = `${plan.name}, ${['E', 'T', 'K', 'N', 'R'][day]} ${period + 1}. tund`;
+        if (!t) { out.push(`${where}: arusaamatu lahter "${raw}"`); continue; }
+        if (!data?.classes?.[t.klass]) { out.push(`${where}: klassi ${t.klass} pole tunniplaanis`); continue; }
+        const inSlot = peTeachers(data, t.klass, day, period);
+        if (!inSlot.length) out.push(`${where}: ${raw} — Untises pole sel ajal liikumisõpetust`);
+        else if (!inSlot.includes(swim.colors?.[t.color])) out.push(`${where}: ${raw} — värvi järgi ${swim.colors?.[t.color]}, Untises ${inSlot.join(', ')}`);
+      }
+    }));
+  }
+  return out;
+}

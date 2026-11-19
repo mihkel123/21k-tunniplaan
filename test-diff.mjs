@@ -1,5 +1,5 @@
 // Muudatuste tuvastamise testid: node test-diff.mjs
-import { diffClass, mergeLedger } from './scrape.mjs';
+import { diffClass, mergeLedger, swimLinks, swimStaleUpdate } from './scrape.mjs';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
@@ -99,6 +99,28 @@ t('ledger: täna muutunud pesa kirjutab vana kirje üle', () => {
   const merged = mergeLedger(prev, { '7A': { '0|0': { kind: 'removed' } } }, '2026-08-29');
   assert.equal(merged['7A']['0|0'].kind, 'removed');
   assert.equal(merged['7A']['0|0'].since, '2026-08-29');
+});
+
+t('swimLinks: tunniplaani lehe ujula lingid absoluutseks', () => {
+  const html = '<a href="/wp-content/includes/tunniplaan/ujula/ujula-tunniplaan-2026-II-paaritu.png">x</a> <a href="?klass=1A#s">1A</a>';
+  assert.deepEqual(swimLinks(html), ['https://21k.ee/wp-content/includes/tunniplaan/ujula/ujula-tunniplaan-2026-II-paaritu.png']);
+});
+
+t('swimStaleUpdate: sama pilt ok, muutunud või kadunud -> stale, uus -> ainult hoiatus', () => {
+  const swim = { plans: [{ name: 'a', url: 'A', sha256: '1', stale: false }, { name: 'b', url: 'B', sha256: '2', stale: false }] };
+  let r = swimStaleUpdate(swim, ['A', 'B'], { A: '1', B: '2' });
+  assert.equal(r.changed, false);
+  assert.deepEqual(r.warnings, []);
+  r = swimStaleUpdate(swim, ['A', 'C'], { A: '9', C: '3' });
+  assert.equal(r.changed, true);
+  assert.deepEqual(r.swim.plans.map((p) => p.stale), [true, true]);
+  assert.equal(r.warnings.length, 3);
+  // Allalaadimise tõrge ei muuda olekut
+  r = swimStaleUpdate(swim, ['A', 'B'], {});
+  assert.equal(r.changed, false);
+  // Ülekirjutuse järel (uus räsi, stale: true käsitsi jäetud) pöördub tagasi
+  r = swimStaleUpdate({ plans: [{ name: 'a', url: 'A', sha256: '1', stale: true }] }, ['A'], { A: '1' });
+  assert.equal(r.swim.plans[0].stale, false);
 });
 
 console.log(`\n${pass} testi läbitud.`);

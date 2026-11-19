@@ -1,0 +1,58 @@
+{
+  "_comment": "Ujula tunniplaan, käsitsi üle kirjutatud kooli piltidelt (tunniplaani lehe all). grid: read on tunnid 1-9, veerud E-R. Lahter '8DP/b' = klass 8D, P poisid / T tüdrukud / tähe puudumisel terve klass, /b = teksti värv (vt colors). stale-välja kirjutab scrape.mjs: true, kui pilt kooli lehel muutus või kadus. Uue pildi korral kirjuta grid üle, uuenda sha256 ja weeks ning pane stale: false.",
+  "source": "https://21k.ee/oppetoo/tunniplaan/",
+  "colors": {
+    "r": "ArutammAve",
+    "g": "Raidma",
+    "p": "Liivsoo",
+    "b": "Raenok",
+    "k": "Vahtra"
+  },
+  "plans": [
+    {
+      "name": "II periood, paaritud nädalad",
+      "url": "https://21k.ee/wp-content/includes/tunniplaan/ujula/ujula-tunniplaan-2026-II-paaritu.png",
+      "sha256": "35131f52ba44ed0216239051be5b0d88ad2eea82cd91eafe8ee35bdb44e73903",
+      "stale": false,
+      "weeks": [
+        "2026-W45",
+        "2026-W47",
+        "2026-W49",
+        "2026-W51"
+      ],
+      "grid": [
+        ["4C/r", "8DP/b", "6BP/g", "8AP/b", "11AP/k"],
+        ["5CP/r", "8DP/b", "6AP/g", "8AP/b", "4A/p 11AP/k"],
+        ["5DP/k", "6BT/p 10CP/b", "5CT/p 11CP/k", "4AT/p 8BP/b", "9CP/k"],
+        ["6CT/r 7CP/k", "6AT/p 10CP/b", "5AT/p 11CP/k", "5AT/p 8BP/b", "6DT/r 9CP/k"],
+        ["5AT/p 7CP/k", "4D/k 5BP/r", "5BT/g 9DP/k", "5DT/p 12BP/b", "5DT/p 5BP/r"],
+        ["7AP/k", "6DT/r 9AP/k", "8CT/r 9DP/k", "6CT/r 11BP/k", "12CP/b"],
+        ["7AP/k", "4C/r 9AP/k", "8CT/r", "5CT/p 11BP/k", "12AP/b"],
+        ["7DP/k", "9BP/k", "10BT/r", "7BP/k", "10AP/b"],
+        ["7DP/k", "9BP/k", "10BT/r", "7BP/k", "10AP/b"]
+      ]
+    },
+    {
+      "name": "II periood, paarisnädalad",
+      "url": "https://21k.ee/wp-content/includes/tunniplaan/ujula/ujula-tunniplaan-2026-II-paaris.png",
+      "sha256": "ac06164d1e7363ea2996cc9fd1a1a8889e84fea8af6705e3a1c2f68bdc892e8a",
+      "stale": false,
+      "weeks": [
+        "2026-W46",
+        "2026-W48",
+        "2026-W50"
+      ],
+      "grid": [
+        ["", "8DT/r", "6BT/p", "8AT/p", "11AT/g"],
+        ["5CT/p", "8DT/r 4B/g", "4D/k 6AT/p", "4C/r 8AT/p", "11AT/g"],
+        ["4B/g 5DT/p", "10CT/r 6BP/g", "11CT/g 5CP/r", "8BT/g", "9CT/p 4B/g"],
+        ["7CT/g 6CP/p", "10CT/r 6AP/g", "11CT/g 5AP/r", "8BT/g 5AP/r", "9CT/p 6DP/g"],
+        ["7CT/g 5AP/r", "4A/p 5BT/g", "9DT/p 5BP/r", "12BT/r 5DP/k", "5BT/g 5DP/k"],
+        ["7AT/g", "9AT/p 6DP/g", "9DT/p 8CP/b", "11BT/g 6CP/k", "12CT/p"],
+        ["7AT/g", "9AT/p", "8CP/b", "11BT/g 5CP/r", "12AT/r"],
+        ["7DT/g", "9BT/p", "10BP/b", "7BT/g", "10AT/r"],
+        ["7DT/g", "9BT/p", "10BP/b", "7BT/g", "10AT/r"]
+      ]
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import {
   notableOn as notableIn, namesOn as namesIn,
   overrideOn as overrideIn, noticesOn as noticesIn, parseLunch, eatingHalf,
   entryKey, choiceKey, cellIsOptional, wasOnlyOptional, collectChoices, SKIP,
+  isPE, swimAt, swimGroups,
 } from './schedule.js';
 import {
   DEFAULT_WALK_MIN, TO_SCHOOL, TO_HOME, searchStops, idsByName, matchRoutes, parseSiri,
@@ -386,6 +387,26 @@ function splitCell(klass, cell) {
 
 /* ---------- Renderdamine ---------- */
 
+const GENDER = { P: 'poisid', T: 'tüdrukud' };
+
+/* Ujula rida liikumisõpetuse kaardil. Kolm juhtu: oma rühm ujub (asjad kaasa),
+   teine rühm ujub (selgitab, miks pool klassi puudub) või pilt kooli lehel muutus
+   ja vana ülekirjutust ei tohi enam uskuda. */
+function swimLine(swim, swimming) {
+  if (!swim) return null;
+  if (swim.stale) {
+    const a = el('a', 'swim-note', '🏊 Ujula plaan muutus — vaata kooli lehelt');
+    a.href = swim.url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.addEventListener('click', (ev) => ev.stopPropagation());   // valikukaardil ei vali rühma
+    return a;
+  }
+  if (swimming) return el('div', 'swim-note', '🎒 Võta ujumisasjad kaasa');
+  if (swim.who) return el('div', 'swim-note is-other', `🏊 Sel nädalal on ${GENDER[swim.who]} ujulas`);
+  return null;
+}
+
 function lessonCard(entry, period, opts) {
   const card = el('article', 'card');
   if (entry.color) card.style.setProperty('--stripe', entry.color);
@@ -399,12 +420,22 @@ function lessonCard(entry, period, opts) {
 
   const what = el('div', 'what');
   const subject = el('div', 'subject');
-  subject.append(el('span', 'emoji', emojiFor(entry.subjectFull)), el('span', null, entry.subjectFull || entry.subject));
+  // Ujulas on just see rühm (või terve klass) — Untise "liikumisõpetus, ruum 118" ei kehti.
+  const swimming = opts.swim && !opts.swim.stale && (!opts.swim.who || opts.swim.teacher === entry.teacher);
+  if (swimming) card.classList.add('is-swim');
+  subject.append(
+    el('span', 'emoji', swimming ? '🏊' : emojiFor(entry.subjectFull)),
+    el('span', null, swimming ? 'Ujumine' : (entry.subjectFull || entry.subject)),
+  );
   what.append(subject);
 
-  if (entry.teacherFull || entry.teacher) what.append(el('div', 'meta', entry.teacherFull || entry.teacher));
-  if (entry.room) what.append(el('div', 'room', `Ruum ${entry.room}`));
-  const wx = lessonWeather(entry, period);
+  const who = entry.teacherFull || entry.teacher;
+  if (who) what.append(el('div', 'meta', opts.groupLabel ? `${who} · ${opts.groupLabel}` : who));
+  if (swimming) what.append(el('div', 'room', 'Ujula'));
+  else if (entry.room) what.append(el('div', 'room', `Ruum ${entry.room}`));
+  const swimNote = swimLine(opts.swim, swimming);
+  if (swimNote) what.append(swimNote);
+  const wx = swimming ? null : lessonWeather(entry, period);   // ujulas ilm ei loe
   if (wx) what.append(weatherRow(wx));
   if (opts.change) {
     const c = el('div', 'changed');
@@ -546,7 +577,7 @@ function lunchCard(lunch, menu) {
   return card;
 }
 
-function choiceBlock(klass, cell, period, change, { editing = false, chosenKey = null } = {}) {
+function choiceBlock(klass, cell, period, change, { editing = false, chosenKey = null, swim = null } = {}) {
   const box = el('section', 'choice');
   const optional = cellIsOptional(cell);
   const many = cell.length > 1;
@@ -570,8 +601,11 @@ function choiceBlock(klass, cell, period, change, { editing = false, chosenKey =
   }
   box.append(head);
 
+  // Liikumisõpetuse rühmad on soo järgi — sildiga on õiget õpetajat lihtsam valida.
+  const groups = cell.some(isPE) ? swimGroups(state.swim, state.data, klass) : {};
+  const labelFor = (e) => (groups.P === e.teacher ? GENDER.P : groups.T === e.teacher ? GENDER.T : null);
   for (const entry of cell) {
-    const card = lessonCard(entry, period, { change });
+    const card = lessonCard(entry, period, { change, swim, groupLabel: labelFor(entry) });
     card.classList.add('is-choice');
     if (editing && entryKey(entry) === chosenKey) {
       card.classList.add('is-picked');
@@ -772,20 +806,22 @@ function renderLessons() {
     lastEndMin = minutesOf(period.end);
     if (firstStartMin == null) firstStartMin = minutesOf(period.start);
 
+    const swim = cell.some(isPE) ? swimAt(state.swim, data, klass, selected, i) : null;
+
     if (undecided) {
-      put(choiceBlock(klass, cell, period, change));
+      put(choiceBlock(klass, cell, period, change, { swim }));
       return;
     }
 
     if (state.editingChoice === choiceKey(cell)) {
-      put(choiceBlock(klass, cell, period, change, { editing: true, chosenKey: entryKey(chosen) }));
+      put(choiceBlock(klass, cell, period, change, { editing: true, chosenKey: entryKey(chosen), swim }));
       return;
     }
 
     const onSwap = alts.length
       ? () => { state.editingChoice = choiceKey(cell); render(); }
       : null;
-    put(lessonCard(chosen, period, { now: i === nowIdx, next: i === nextIdx, change, onSwap }));
+    put(lessonCard(chosen, period, { now: i === nowIdx, next: i === nextIdx, change, onSwap, swim }));
   });
 
   // Lisatud huviringid käivad tundide järele, oma kaardina. Nad nihutavad ka
@@ -1740,7 +1776,7 @@ async function loadJSON(path, fallback) {
 }
 
 async function init() {
-  const [data, changes, holidays, notable, namedays, overrides, menu, clubs, clubsOverlay] = await Promise.all([
+  const [data, changes, holidays, notable, namedays, overrides, menu, clubs, clubsOverlay, swim] = await Promise.all([
     loadJSON('data.json', null),
     loadJSON('changes.json', {}),
     loadJSON('holidays.json', null),
@@ -1750,6 +1786,7 @@ async function init() {
     loadJSON('menu.json', null),
     loadJSON('clubs.json', null),
     loadJSON('clubs-overlay.json', null),
+    loadJSON('swim.json', null),
   ]);
 
   if (!data) {
@@ -1766,6 +1803,7 @@ async function init() {
   state.menu = menu;
   state.clubs = clubs;
   state.clubsOverlay = clubsOverlay;
+  state.swim = swim;
 
   // Sama võti loeb ka index.html-i sisemine skript, et teema jõuaks kohale
   // enne esimest värvimist. Siin normaliseerime rikutud väärtuse.
