@@ -7,7 +7,7 @@ import {
   relativeLabel, isFreshChange,
   notableOn as notableIn, namesOn as namesIn,
   overrideOn as overrideIn, noticesOn as noticesIn, parseLunch, eatingHalf,
-  entryKey, choiceKey, cellIsOptional, wasOnlyOptional, collectChoices, SKIP,
+  entryKey, choiceKey, cellIsOptional, onlyOptionalGone, collectChoices, SKIP,
   isPE, swimAt, swimGroups,
 } from './schedule.js';
 import {
@@ -335,7 +335,9 @@ function changeFor(klass, period, day) {
   // teisipäeva muudatust.
   if (weekOffset() !== 0) return null;
   const entry = state.changes?.[klass]?.[`${period}|${day}`];
-  return isFreshChange(entry, state.now, state.holidays) ? entry : null;
+  if (!isFreshChange(entry, state.now, state.holidays)) return null;
+  const cell = state.data?.classes?.[klass]?.grid?.[period]?.[day] ?? [];
+  return onlyOptionalGone(entry, cell) ? null : entry;
 }
 
 function dayHasChanges(klass, day) {
@@ -787,10 +789,9 @@ function renderLessons() {
     }
 
     // Tühi pesa, kust tund kadus — näita kummituskaarti, muidu jääks muutus märkamata.
-    // Valikulise tunni (arenguvestlus) kadumine pole aga muudatus, mida märgata.
+    // (Valikulise tunni kadumise filtreerib changeFor juba välja.)
     if (!cell.length) {
-      const optionalGone = change?.kind === 'removed' && wasOnlyOptional(change.wasSubject);
-      if (change && (change.kind === 'removed' || change.movedTo) && !optionalGone) {
+      if (change && (change.kind === 'removed' || change.movedTo)) {
         any = true;
         putLunchBefore(minutesOf(period.start));
         put(ghostCard(period, change));

@@ -326,12 +326,32 @@ export const SKIP = '__ei__';
 export const isOptional = (e) => OPTIONAL.test(e.subjectFull || e.subject || '');
 export const cellIsOptional = (cell) => cell.length > 0 && cell.every(isOptional);
 
-/* Ära jäänud tund, mis oli ainult valikuline — nt arenguvestlused, mille kool
-   pärast vestlusnädalat Untisest korraga eemaldab. Kummituskaarti pole siin
-   mõtet näidata: enamik seal ei käinudki ja „Ei käi“ vastanutele ilmuks peidetud
-   tund tagasi. Mitme rühma puhul on wasSubject komaga kokku pandud. */
-export const wasOnlyOptional = (wasSubject) =>
-  !!wasSubject && wasSubject.split(',').every((s) => OPTIONAL.test(s.trim()));
+/**
+ * Kas muudatus seisneb ainult selles, et pesast kadus valikuline tund? Nt
+ * arenguvestlused, mille kool pärast vestlusnädalat Untisest korraga eemaldab:
+ * tühjas pesas oleks kummituskaart "Tund ära jäetud", jagatud pesas (11C:
+ * arenguvestlus + koorimuusika) "Muudetud" märk — kumbki pole muudatus, mida
+ * laps peaks märkama, ja „Ei käi“ vastanutele ilmuks peidetud tund tagasi.
+ *
+ * wasSubject on vanade ainete nimed ', '-ga kokku, aga ka nimes endas võib olla
+ * koma ("Diplomaatia, protokoll ja etikett"). Seepärast eemaldame praeguse pesa
+ * nimed tekstist ja vaatame, kas järele jäid ainult valikulised. Kahtluse korral
+ * (midagi muud jäi järele) on vastus false ja märk jääb alles.
+ */
+export function onlyOptionalGone(change, cell = []) {
+  if (!change?.wasSubject || change.movedTo || change.movedFrom) return false;
+  if (change.kind !== 'removed' && change.kind !== 'changed') return false;
+  let rest = change.wasSubject;
+  const names = cell.map((e) => e.subjectFull || e.subject).filter(Boolean)
+    .sort((a, b) => b.length - a.length);     // pikem enne, et "eesti keel" ei lõhuks "eesti keel ja kirjandus"
+  for (const n of names) {
+    const i = rest.indexOf(n);
+    if (i < 0) return false;                  // pesas on midagi uut — päris muudatus
+    rest = rest.slice(0, i) + rest.slice(i + n.length);
+  }
+  const left = rest.split(',').map((s) => s.trim()).filter(Boolean);
+  return left.length > 0 && left.every((s) => OPTIONAL.test(s));
+}
 
 /**
  * Kõik selle klassi tunniplaani kohad, mis kasutajalt vastust ootavad:
