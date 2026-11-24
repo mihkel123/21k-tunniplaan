@@ -11,9 +11,8 @@
       "since": "2026-11-20"
     },
     "8|1": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-11-20"
+      "kind": "added",
+      "since": "2026-11-25"
     },
     "8|3": {
       "kind": "removed",
@@ -84,6 +83,42 @@
       "kind": "changed",
       "wasSubject": "inglise keel, inglise keel",
       "since": "2026-11-24"
+    }
+  },
+  "3A": {
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "liikumisõpetus",
+      "since": "2026-11-25"
+    },
+    "4|4": {
+      "kind": "changed",
+      "wasSubject": "liikumisõpetus",
+      "since": "2026-11-25"
+    }
+  },
+  "3B": {
+    "1|0": {
+      "kind": "changed",
+      "wasSubject": "liikumisõpetus",
+      "since": "2026-11-25"
+    },
+    "1|2": {
+      "kind": "changed",
+      "wasSubject": "liikumisõpetus",
+      "since": "2026-11-25"
+    },
+    "1|4": {
+      "kind": "changed",
+      "wasSubject": "liikumisõpetus",
+      "since": "2026-11-25"
+    }
+  },
+  "10B": {
+    "7|1": {
+      "kind": "changed",
+      "wasSubject": "geograafia",
+      "since": "2026-11-25"
     }
   }
 }
