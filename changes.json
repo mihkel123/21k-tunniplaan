@@ -28,41 +28,62 @@
       "since": "2026-11-20"
     },
     "6|3": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-11-20"
+      "kind": "added",
+      "since": "2026-11-24"
     },
     "6|4": {
-      "kind": "removed",
-      "wasSubject": "Arenguvestlus",
-      "since": "2026-11-20"
+      "kind": "added",
+      "since": "2026-11-24"
     },
     "7|1": {
       "kind": "removed",
       "wasSubject": "Arenguvestlus",
       "since": "2026-11-20"
+    },
+    "6|0": {
+      "kind": "added",
+      "since": "2026-11-24"
+    },
+    "7|0": {
+      "kind": "added",
+      "since": "2026-11-24"
+    },
+    "7|3": {
+      "kind": "added",
+      "since": "2026-11-24"
     }
   },
   "11C": {
     "1|1": {
       "kind": "changed",
-      "wasSubject": "Arenguvestlus, õpilasfirmade programm, õpilasfirmade programm",
-      "since": "2026-11-20"
+      "wasSubject": "õpilasfirmade programm, õpilasfirmade programm",
+      "since": "2026-11-24"
     },
     "6|4": {
-      "kind": "removed",
-      "wasSubject": "arenguvestlus",
-      "since": "2026-11-20"
+      "kind": "added",
+      "since": "2026-11-24"
     },
     "7|3": {
       "kind": "changed",
-      "wasSubject": "arenguvestlus, koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
-      "since": "2026-11-20"
+      "wasSubject": "koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett",
+      "since": "2026-11-24"
     },
     "3|3": {
       "kind": "changed",
       "wasSubject": "kultuuriürituste korraldus, kultuuriürituste korraldus",
       "since": "2026-11-20"
+    },
+    "8|3": {
+      "kind": "changed",
+      "wasSubject": "kirjakunst, ansambel",
+      "since": "2026-11-24"
+    }
+  },
+  "12A": {
+    "4|0": {
+      "kind": "changed",
+      "wasSubject": "inglise keel, inglise keel",
+      "since": "2026-11-24"
     }
   }
 }
