@@ -95,6 +95,10 @@
       "kind": "changed",
       "wasSubject": "liikumisõpetus",
       "since": "2026-11-25"
+    },
+    "7|2": {
+      "kind": "added",
+      "since": "2026-11-26"
     }
   },
   "3B": {
