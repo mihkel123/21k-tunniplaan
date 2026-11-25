@@ -1,5 +1,5 @@
 // Päevaloogika testid: node test-schedule.mjs
-import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, noticesOn, parseLunch, eatingHalf, entryKey, choiceKey, cellIsOptional, onlyOptionalGone, collectChoices, isoWeekKey, parseSwimToken, swimAt, swimGroups, swimIssues } from './schedule.js';
+import { defaultDate, holidayOn, isSchoolDay, relativeLabel, isFreshChange, weekdayIndex, iso, easterSunday, nthWeekday, notableOn, namesOn, overrideOn, noticesOn, parseLunch, eatingHalf, entryKey, choiceKey, cellIsOptional, onlyOptionalChanged, collectChoices, isoWeekKey, parseSwimToken, swimAt, swimGroups, swimIssues } from './schedule.js';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
@@ -485,26 +485,36 @@ t('7A: iga valikuline tund on nimekirjast leitav ja võtmed on unikaalsed', () =
   assert.ok(keeled && !keeled.optional);
 });
 
-t('onlyOptionalGone: kadunud arenguvestlus pole muudatus, päris muudatus on', () => {
+t('onlyOptionalChanged: kadunud või lisandunud arenguvestlus pole muudatus, päris muudatus on', () => {
   const e = (subjectFull) => ({ subject: 'X', subjectFull, teacher: 'T' });
   // Tühi pesa (endine kummituskaart)
-  assert.equal(onlyOptionalGone({ kind: 'removed', wasSubject: 'Arenguvestlus' }, []), true);
-  assert.equal(onlyOptionalGone({ kind: 'removed', wasSubject: 'Tugiõpe, Arenguvestlus' }, []), true);
-  assert.equal(onlyOptionalGone({ kind: 'removed', wasSubject: 'Inglise keel' }, []), false);
+  assert.equal(onlyOptionalChanged({ kind: 'removed', wasSubject: 'Arenguvestlus' }, []), true);
+  assert.equal(onlyOptionalChanged({ kind: 'removed', wasSubject: 'Tugiõpe, Arenguvestlus' }, []), true);
+  assert.equal(onlyOptionalChanged({ kind: 'removed', wasSubject: 'Inglise keel' }, []), false);
   // Jagatud pesa, koma ainenimes (11C neljapäev)
   const was = 'arenguvestlus, koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett';
   const now = [e('koorimuusika'), e('koorimuusika'), e('Diplomaatia, protokoll ja etikett')];
-  assert.equal(onlyOptionalGone({ kind: 'changed', wasSubject: was }, now), true);
-  assert.equal(onlyOptionalGone({ kind: 'changed', wasSubject: 'Arenguvestlus, õpilasfirmade programm, õpilasfirmade programm' },
+  assert.equal(onlyOptionalChanged({ kind: 'changed', wasSubject: was }, now), true);
+  assert.equal(onlyOptionalChanged({ kind: 'changed', wasSubject: 'Arenguvestlus, õpilasfirmade programm, õpilasfirmade programm' },
     [e('õpilasfirmade programm'), e('õpilasfirmade programm')]), true);
   // Päris muudatused jäävad
-  assert.equal(onlyOptionalGone({ kind: 'changed', wasSubject: 'kultuuriürituste korraldus, kultuuriürituste korraldus' },
+  assert.equal(onlyOptionalChanged({ kind: 'changed', wasSubject: 'kultuuriürituste korraldus, kultuuriürituste korraldus' },
     [e('kultuuriürituste korraldus')]), false);                                   // rühm kadus
-  assert.equal(onlyOptionalGone({ kind: 'changed', wasSubject: 'Inglise keel' }, [e('Inglise keel')]), false);   // õpetaja/ruum
-  assert.equal(onlyOptionalGone({ kind: 'changed', wasSubject: 'Arenguvestlus' }, [e('matemaatika')]), false);   // uus aine
-  assert.equal(onlyOptionalGone({ kind: 'added' }, [e('Arenguvestlus')]), false);
-  assert.equal(onlyOptionalGone({ kind: 'removed', wasSubject: 'Arenguvestlus', movedTo: { slot: 'T 3. tund' } }, []), false);
-  assert.equal(onlyOptionalGone(null, []), false);
+  assert.equal(onlyOptionalChanged({ kind: 'changed', wasSubject: 'Inglise keel' }, [e('Inglise keel')]), false);   // õpetaja/ruum
+  assert.equal(onlyOptionalChanged({ kind: 'changed', wasSubject: 'Arenguvestlus' }, [e('matemaatika')]), false);   // uus aine
+  // Lisandus ainult valikuline (24.11: arenguvestlus tagasi 11C jagatud pessa)
+  assert.equal(onlyOptionalChanged({ kind: 'changed', wasSubject: 'kirjakunst, ansambel' },
+    [e('Arenguvestlus'), e('kirjakunst'), e('ansambel')]), true);
+  assert.equal(onlyOptionalChanged({ kind: 'changed', wasSubject: 'koorimuusika, koorimuusika, Diplomaatia, protokoll ja etikett' },
+    [e('Arenguvestlus'), e('koorimuusika'), e('koorimuusika'), e('Diplomaatia, protokoll ja etikett')]), true);
+  // Lisandus päris rühm (12A informaatika) — märk jääb
+  assert.equal(onlyOptionalChanged({ kind: 'changed', wasSubject: 'inglise keel, inglise keel' },
+    [e('Informaatika'), e('inglise keel'), e('inglise keel')]), false);
+  // Valikuline tuli, päris kadus — märk jääb
+  assert.equal(onlyOptionalChanged({ kind: 'changed', wasSubject: 'matemaatika' }, [e('Arenguvestlus')]), false);
+  assert.equal(onlyOptionalChanged({ kind: 'added' }, [e('Arenguvestlus')]), false);
+  assert.equal(onlyOptionalChanged({ kind: 'removed', wasSubject: 'Arenguvestlus', movedTo: { slot: 'T 3. tund' } }, []), false);
+  assert.equal(onlyOptionalChanged(null, []), false);
 });
 
 t('isoWeekKey: tavaline nädal ja aastavahetus', () => {

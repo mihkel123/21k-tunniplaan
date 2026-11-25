@@ -7,7 +7,7 @@ import {
   relativeLabel, isFreshChange,
   notableOn as notableIn, namesOn as namesIn,
   overrideOn as overrideIn, noticesOn as noticesIn, parseLunch, eatingHalf,
-  entryKey, choiceKey, cellIsOptional, onlyOptionalGone, collectChoices, SKIP,
+  entryKey, choiceKey, cellIsOptional, onlyOptionalChanged, collectChoices, SKIP,
   isPE, swimAt, swimGroups,
 } from './schedule.js';
 import {
@@ -337,7 +337,7 @@ function changeFor(klass, period, day) {
   const entry = state.changes?.[klass]?.[`${period}|${day}`];
   if (!isFreshChange(entry, state.now, state.holidays)) return null;
   const cell = state.data?.classes?.[klass]?.grid?.[period]?.[day] ?? [];
-  return onlyOptionalGone(entry, cell) ? null : entry;
+  return onlyOptionalChanged(entry, cell) ? null : entry;
 }
 
 function dayHasChanges(klass, day) {
@@ -789,7 +789,7 @@ function renderLessons() {
     }
 
     // Tühi pesa, kust tund kadus — näita kummituskaarti, muidu jääks muutus märkamata.
-    // (Valikulise tunni kadumise filtreerib changeFor juba välja.)
+    // (Valikulise tunni kadumise filtreerib changeFor juba välja — onlyOptionalChanged.)
     if (!cell.length) {
       if (change && (change.kind === 'removed' || change.movedTo)) {
         any = true;

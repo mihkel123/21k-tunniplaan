@@ -327,30 +327,35 @@ export const isOptional = (e) => OPTIONAL.test(e.subjectFull || e.subject || '')
 export const cellIsOptional = (cell) => cell.length > 0 && cell.every(isOptional);
 
 /**
- * Kas muudatus seisneb ainult selles, et pesast kadus valikuline tund? Nt
- * arenguvestlused, mille kool pärast vestlusnädalat Untisest korraga eemaldab:
- * tühjas pesas oleks kummituskaart "Tund ära jäetud", jagatud pesas (11C:
- * arenguvestlus + koorimuusika) "Muudetud" märk — kumbki pole muudatus, mida
- * laps peaks märkama, ja „Ei käi“ vastanutele ilmuks peidetud tund tagasi.
+ * Kas muudatus seisneb ainult selles, et pesast kadus või sinna lisandus
+ * valikuline tund? Kool lisab ja eemaldab arenguvestlusi Untisesse ringide
+ * kaupa: tühjas pesas oleks kummituskaart "Tund ära jäetud", jagatud pesas
+ * (11C: arenguvestlus + koorimuusika) "Muudetud" märk päris tunnil — kumbki
+ * pole muudatus, mida laps peaks märkama, ja „Ei käi“ vastanutele ilmuks
+ * peidetud tund tagasi. Tühja pesa uus valikuline tund ('added') jääb: seal
+ * küsitakse niikuinii „Kas käid?“.
  *
  * wasSubject on vanade ainete nimed ', '-ga kokku, aga ka nimes endas võib olla
  * koma ("Diplomaatia, protokoll ja etikett"). Seepärast eemaldame praeguse pesa
- * nimed tekstist ja vaatame, kas järele jäid ainult valikulised. Kahtluse korral
- * (midagi muud jäi järele) on vastus false ja märk jääb alles.
+ * nimed tekstist: mis tekstist puudus, on uus; mis tekstist järele jäi, kadus.
+ * Kahtluse korral (kumbki pool sisaldab muud kui valikulist) on vastus false
+ * ja märk jääb alles.
  */
-export function onlyOptionalGone(change, cell = []) {
+export function onlyOptionalChanged(change, cell = []) {
   if (!change?.wasSubject || change.movedTo || change.movedFrom) return false;
   if (change.kind !== 'removed' && change.kind !== 'changed') return false;
   let rest = change.wasSubject;
+  const gained = [];
   const names = cell.map((e) => e.subjectFull || e.subject).filter(Boolean)
     .sort((a, b) => b.length - a.length);     // pikem enne, et "eesti keel" ei lõhuks "eesti keel ja kirjandus"
   for (const n of names) {
     const i = rest.indexOf(n);
-    if (i < 0) return false;                  // pesas on midagi uut — päris muudatus
-    rest = rest.slice(0, i) + rest.slice(i + n.length);
+    if (i < 0) gained.push(n);
+    else rest = rest.slice(0, i) + rest.slice(i + n.length);
   }
-  const left = rest.split(',').map((s) => s.trim()).filter(Boolean);
-  return left.length > 0 && left.every((s) => OPTIONAL.test(s));
+  const lost = rest.split(',').map((s) => s.trim()).filter(Boolean);
+  const diff = [...lost, ...gained];
+  return diff.length > 0 && diff.every((s) => OPTIONAL.test(s));
 }
 
 /**
