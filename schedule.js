@@ -319,8 +319,9 @@ export const choiceKey = (cell) => cell.map(entryKey).sort().join('|');
 /* Ained, kus käiakse ainult siis, kui ise soovid. Tugiõpe on vajaduspõhine,
    ülejäänud on huvitegevus. Kontrollitud, et 82 aine seas vale vastet ei teki.
    Arenguvestlus on Untises terve klassi ajana, aga igaüks käib ainult oma
-   kokkulepitud ajal — muidu paistab, nagu koolipäev veniks 16:40-ni. */
-const OPTIONAL = /koor|^(tugiõpe|ansambel|orkestriõpe|arenguvestlus)$/i;
+   kokkulepitud ajal — muidu paistab, nagu koolipäev veniks 16:40-ni. Sama
+   lugu "vestlus vanemaga" (3A, november 2026). */
+const OPTIONAL = /koor|^(tugiõpe|ansambel|orkestriõpe|arenguvestlus|vestlus vanemaga)$/i;
 export const SKIP = '__ei__';
 
 export const isOptional = (e) => OPTIONAL.test(e.subjectFull || e.subject || '');

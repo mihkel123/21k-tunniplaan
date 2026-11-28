@@ -1,5 +1,5 @@
 // Muudatuste tuvastamise testid: node test-diff.mjs
-import { diffClass, mergeLedger, swimLinks, swimStaleUpdate } from './scrape.mjs';
+import { diffClass, mergeLedger, swimLinks, swimStaleUpdate, parseLegend, sourceLacksTeachers, carryOver } from './scrape.mjs';
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
@@ -121,6 +121,40 @@ t('swimStaleUpdate: sama pilt ok, muutunud või kadunud -> stale, uus -> ainult 
   // Ülekirjutuse järel (uus räsi, stale: true käsitsi jäetud) pöördub tagasi
   r = swimStaleUpdate({ plans: [{ name: 'a', url: 'A', sha256: '1', stale: true }] }, ['A'], { A: '1' });
   assert.equal(r.swim.plans[0].stale, false);
+});
+
+t('parseLegend: õpetajad legendist (24.11.2026 kadusid need lahtritest)', () => {
+  const html = "<h3 class='tunniplaan'>Legend</h3><table class='legend'><tr><th>Õppeained</th></tr>\n<tr><td>AJ - ajalugu (Vurma)<br>KK - liikumisõpetus (Raenok, ArutammAve)<br>DIP - Diplomaatia, protokoll ja etikett (Liivandi)<br>XX - märge<br></td></tr></table>";
+  assert.deepEqual(parseLegend(html), {
+    AJ: { full: 'ajalugu', teachers: ['Vurma'] },
+    KK: { full: 'liikumisõpetus', teachers: ['Raenok', 'ArutammAve'] },
+    DIP: { full: 'Diplomaatia, protokoll ja etikett', teachers: ['Liivandi'] },
+    XX: { full: 'märge', teachers: [] },
+  });
+  assert.deepEqual(parseLegend('<p>legendi pole</p>'), {});
+});
+
+t('carryOver: õpetajad ja ruumid eelmisest, muutunud pesas legendist', () => {
+  const e = (subject, teacher = '', room = '', teacherFull = '') => ({ subject, subjectFull: subject, teacher, teacherFull, room, color: '' });
+  const previous = { classes: { '8D': { grid: [[
+    [e('KK', 'Raenok', '118', 'Ivo Raenok'), e('KK', 'ArutammAve', '118', 'Ave Arutamm')],
+    [e('AV', 'Stahlman', '214', 'Kätlin Stahlman'), e('ÕFP', 'Vodja', '301', 'V. Vodja')],
+    [e('MA', 'Valdmets', '405', 'Tiia Valdmets')],
+  ]] } } };
+  const classes = { '8D': { grid: [[
+    [e('KK'), e('KK')],          // sama pesa, sama sisu
+    [e('ÕFP')],                  // arenguvestlus kadus
+    [e('AJ')],                   // uus aine -> legend
+  ]] } };
+  assert.equal(sourceLacksTeachers(classes), true);
+  const st = carryOver(classes, previous, { '8D': { AJ: { full: 'ajalugu', teachers: ['Valdmets'] } } });
+  const row = classes['8D'].grid[0];
+  assert.deepEqual(row[0].map((x) => [x.teacher, x.room]), [['Raenok', '118'], ['ArutammAve', '118']]);
+  assert.deepEqual([row[1][0].teacher, row[1][0].room], ['Vodja', '301']);
+  assert.deepEqual([row[2][0].teacher, row[2][0].teacherFull, row[2][0].room], ['Valdmets', 'Tiia Valdmets', '']);
+  assert.deepEqual(st, { carried: 3, legend: 1, unknown: 0 });
+  // Kui allikas õpetajad on, ei puututa midagi
+  assert.equal(sourceLacksTeachers(previous.classes), false);
 });
 
 console.log(`\n${pass} testi läbitud.`);

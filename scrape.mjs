@@ -152,7 +152,69 @@ function parseClassPage(html, klass) {
   }
   if (!periods.length) return null;
 
-  return { klass, homeroom, homeroomSubject, lunch, periods, grid, days };
+  return { klass, homeroom, homeroomSubject, lunch, periods, grid, days, legend: parseLegend(html) };
+}
+
+/**
+ * Lehe allosa legend: "KK - liikumisõpetus (Raenok, ArutammAve)<br>..." ->
+ * { KK: { full: 'liikumisõpetus', teachers: ['Raenok', 'ArutammAve'] } }.
+ * 24.11.2026 kadusid lahtritest õpetajad ja ruumid — legend jäi ainsaks kohaks,
+ * kus õpetajad on.
+ */
+function parseLegend(html) {
+  const m = /<table class='legend'>[\s\S]*?<td[^>]*>([\s\S]*?)<\/td>/i.exec(html);
+  if (!m) return {};
+  const out = {};
+  for (const line of m[1].split(/<br\s*\/?>/i)) {
+    const t = stripTags(line);
+    const lm = /^(\S+)\s+-\s+(.*?)\s*(?:\(([^()]*)\))?$/.exec(t);
+    if (!lm) continue;
+    out[lm[1]] = { full: lm[2], teachers: (lm[3] ?? '').split(',').map((x) => x.trim()).filter(Boolean) };
+  }
+  return out;
+}
+
+/** Kas kooli lehelt on õpetajad ja ruumid kadunud? (alla 5% kirjetest neid sisaldab) */
+function sourceLacksTeachers(classes) {
+  const all = Object.values(classes).flatMap((c) => c.grid.flat(2));
+  if (!all.length) return false;
+  return all.filter((e) => e.teacher || e.room).length / all.length < 0.05;
+}
+
+/**
+ * Kui allikas õpetajaid ja ruume ei näita, kanna need edasi eelmisest
+ * andmestikust: sama pesa sama aine (järjekorras esimene kasutamata kirje).
+ * Muutunud pesas võta õpetaja legendist, kui klassil on sel ainel ainult üks
+ * õpetaja; ruumi siis ei tea. Muudab classes'i kohapeal, tagastab statistika.
+ */
+function carryOver(classes, previous, legends = {}) {
+  const fullName = {};
+  for (const c of Object.values(previous?.classes ?? {})) {
+    for (const e of c.grid.flat(2)) if (e.teacher && e.teacherFull) fullName[e.teacher] = e.teacherFull;
+  }
+  const stats = { carried: 0, legend: 0, unknown: 0 };
+  for (const [k, c] of Object.entries(classes)) {
+    const prevGrid = previous?.classes?.[k]?.grid ?? [];
+    c.grid.forEach((row, p) => row.forEach((cell, d) => {
+      const prev = [...(prevGrid[p]?.[d] ?? [])];
+      for (const e of cell) {
+        if (e.teacher || e.room) continue;
+        const i = prev.findIndex((x) => x.subject === e.subject);
+        if (i >= 0) {
+          const [src] = prev.splice(i, 1);
+          Object.assign(e, { teacher: src.teacher, teacherFull: src.teacherFull, room: src.room });
+          stats.carried++;
+          continue;
+        }
+        const ts = legends[k]?.[e.subject]?.teachers ?? [];
+        if (ts.length === 1) {
+          Object.assign(e, { teacher: ts[0], teacherFull: fullName[ts[0]] ?? '' });
+          stats.legend++;
+        } else stats.unknown++;
+      }
+    }));
+  }
+  return stats;
 }
 
 // --- Muudatuste tuvastamine: võrdleb uut kraabitud plaani eelmisega ---
@@ -271,6 +333,7 @@ async function main() {
   const notice = /<p style='text-align: center;'>\s*([^<]*koostamisel[^<]*)/i.exec(index);
 
   const data = {};
+  const legends = {};
   let periods = null;
   let days = DAYS_ET;
 
@@ -290,6 +353,7 @@ async function main() {
         }
       }
 
+      legends[klass] = parsed.legend;
       data[klass] = {
         homeroom: parsed.homeroom,
         homeroomSubject: parsed.homeroomSubject,
@@ -303,6 +367,14 @@ async function main() {
   });
 
   if (!Object.keys(data).length) throw new Error('Ühtegi klassi ei õnnestunud lugeda.');
+
+  // Kooli leht näitas 24.11.2026 tunniplaani ilma õpetajate ja ruumideta. Ilma
+  // nendeta lähevad rühmavalikud (õpetaja järgi) ja ujula katki ning iga tund
+  // paistaks "muudetud". Kanname viimased teadaolevad edasi.
+  if (sourceLacksTeachers(data)) {
+    const st = carryOver(data, previousData, legends);
+    console.warn(`  HOIATUS: kooli tunniplaanis pole õpetajaid ega ruume — kasutan viimaseid teadaolevaid (${st.carried} eelmisest, ${st.legend} legendist, ${st.unknown} teadmata).`);
+  }
 
   const sorted = Object.keys(data).sort(
     (a, b) => (parseInt(a) - parseInt(b)) || a.localeCompare(b, 'et')
@@ -419,7 +491,7 @@ async function checkSwim(index) {
   }
 }
 
-export { diffClass, mergeLedger, parseClassPage, parseCell, splitTopLevelCells, cellSig, swimLinks, swimStaleUpdate };
+export { diffClass, mergeLedger, parseClassPage, parseCell, splitTopLevelCells, cellSig, swimLinks, swimStaleUpdate, parseLegend, sourceLacksTeachers, carryOver };
 
 const runDirectly = process.argv[1] && import.meta.url === `file://${process.argv[1]}`;
 if (runDirectly) {
