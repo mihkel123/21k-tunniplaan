@@ -225,6 +225,12 @@ Osal klassidel on liikumisõpetus vahel ujulas, poisid ja tüdrukud vaheldumisi.
 
 `scrape.mjs` võrdleb igal jooksul piltide räsi `sha256`-ga. Kui pilt muutus või kadus, paneb ta plaanile `"stale": true` ja äpp näitab kindla info asemel linki kooli pildile. Uue perioodi pildi korral: kirjuta `grid` üle, uuenda `url`, `sha256`, `weeks` (ISO nädalad, nt `2027-W02`) ja pane `stale: false`. `node test-schedule.mjs` näitab hoiatusena lahtreid, mis Untisega ei klapi.
 
+## Hommikune kontroll
+
+`node health.mjs` vaatab üle viimased uuendused (GitHub Actions) ja live-andmed ning prindib JSON-i. Probleemiks loetakse ainult suur või segane seis: uuendus ebaõnnestus või on üle 30 tunni vana, kooli tunniplaanist kadusid õpetajad, ühe korraga muutus üle 100 tunnipesa, ujula pilt vahetus, live'is on klasse või õpetajaid puudu. Sama probleemist teatatakse uuesti alles nädala pärast (olek: `~/.config/tunniplaan/health-state.json`). Claude desktopi ajastatud ülesanne `tunniplaan-health` käivitab selle igal hommikul ja kirjutab ainult siis, kui midagi on lahti.
+
+**Kui kooli lehelt kaovad õpetajad ja ruumid** (nii juhtus 27.11.2026): `scrape.mjs` kannab viimased teadaolevad edasi eelmisest `data.json`-ist (sama pesa sama aine). Muutunud pesas võetakse õpetaja lehe legendist, kui ta on üheselt teada. Logis on siis igal jooksul `HOIATUS: kooli tunniplaanis pole õpetajaid ega ruume`.
+
 ## Tagasiside
 
 Menüüs on nupp „💬 Tagasiside ja ideed“. Vorm saadab kirja Pages Functionile
